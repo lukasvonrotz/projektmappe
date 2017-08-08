@@ -1,0 +1,31 @@
+<div class="modal fade" id="popup_sure_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Bestätigen</h4>
+      </div>
+      <div class="modal-body">
+        <p>Sind Sie sicher?</p>
+      </div>
+      <div class="modal-footer">
+        <%= link_to 'Löschen', "#", :method => :delete, :class => "btn btn-danger btn-delete",
+                    data: { disable_with: 'Verarbeite...' } %>
+        <button type="button" class="btn btn-info" data-dismiss="modal">Abbrechen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $('#popup_sure_delete').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var item = button.data('itemid') // Extract info from data-* attributes
+        var model = button.data('model') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.btn-delete').attr("href", '/' + model + '/' + item)
+        modal.find('.btn-delete').attr("text", 'Ja')
+    });
+</script>

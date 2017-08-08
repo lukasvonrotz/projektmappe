@@ -1,0 +1,66 @@
+<input type="hidden" id="refresh" value="no">
+<div id="loadingModal" class="modal fade" role="dialog">
+  <div id="loading-modal-dialog" class="modal-dialog">
+
+    <!-- Modal content-->
+    <div id="loading-modal-content" class="modal-content" style="background-color: transparent; border: none;">
+      <%= image_tag('loading.gif', width: '160') %>
+      </br></br>
+      <p style="color: white;"><%= message %></p>
+    </div>
+  </div>
+</div>
+
+<style>
+  #loadingModal {
+    text-align: center;
+  }
+  @media screen and (min-width: 768px) {
+    #loadingModal:before {
+      display: inline-block;
+      vertical-align: middle;
+      content: " ";
+      height: 100%;
+    }
+  }
+  #loading-modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+  }
+  #loading-modal-content{
+    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0);
+    -moz-box-shadow: 0 5px 15px rgba(0,0,0,0);
+    -o-box-shadow: 0 5px 15px rgba(0,0,0,0);
+    box-shadow: 0 5px 15px rgba(0,0,0,0);
+    text-align: center;
+    border: none;
+  }
+  .modal-backdrop{
+    opacity:0.9 !important;
+  }
+</style>
+
+<script>
+    $(document).ready(function() {
+        // In case of using the browser back button! Rails duplicates html-elements when using this button
+        // Hence, do reload page (only once!) by usage of a hidden input field!
+        $('#loadingModal').modal('hide');
+        $("#content").show();
+        var $input = $('#refresh');
+        if ($input.val() == 'yes') {
+            location.reload(true);
+            loading();
+            $("#content").hide();
+        }
+        else {
+            $input.val('yes');
+        }
+    });
+    function loading() {
+        $('#loadingModal').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
+</script>

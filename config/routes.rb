@@ -6,6 +6,9 @@ Rails.application.routes.draw do
                                     sessions: 'users/sessions',
                                     shared: 'users/shared',
                                     unlocks: 'users/unlocks'}
+
+  resources :users
+
   get 'home/index'
 
   root 'home#index'

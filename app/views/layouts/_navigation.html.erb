@@ -12,13 +12,16 @@
       <ul class="nav navbar-nav">
         <% if current_user %>
             <li class="<%= 'active' if current_page? (root_path) %>">
-              <a href="<%= root_path %>"><%= 'Test' %></a>
+              <%= link_to "Home", root_path %>
             </li>
             <li class="">
-              <a href="#">Test</a>
+              <%= link_to "Benutzer", users_path %>
             </li>
             <li class="">
-              <a href="#">Test</a>
+              <a href="#">Projekte</a>
+            </li>
+            <li class="">
+              <a href="#">Kunden</a>
             </li>
         <% end %>
       </ul>
