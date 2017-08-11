@@ -1,0 +1,10 @@
+<h1>Neuen Eintrag erstellen</h1>
+<% if @electrical_installation.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @electrical_installation.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :electrical_installation => @electrical_installation, :context => true  %>
+<%= link_to "Zurück zu Elektroinstallationen", electrical_installations_path %>

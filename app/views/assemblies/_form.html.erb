@@ -1,0 +1,43 @@
+<%= form_for assembly do |assembly| %>
+
+    <div class="field form-group">
+      <%= assembly.label :kennung, 'Kennung' %>
+      <%= assembly.text_field :kennung, :class => "form-control",
+                             placeholder: 'Kennnug für Baugruppe eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= assembly.label :kanaele, 'Anzahl Kanäle' %>
+      <%= assembly.text_field :kanaele, :class => "form-control",
+                              placeholder: 'Anzahl Kanäle für Baugruppe eingeben' %>
+    </div>
+    <div class="field form-group">
+        <%= assembly.label :artikelnr, 'Artikel-Nr.' %>
+        <%= assembly.text_field :artikelnr, :class => "form-control",
+                                placeholder: 'Artikelnummer für Baugruppe eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= assembly.label :bezeichnung, 'Bezeichnung' %>
+      <%= assembly.text_field :bezeichnung, :class => "form-control",
+                              placeholder: 'Bezeichnung für Baugruppe eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= assembly.label :brutto, 'Bruttopreis [EUR]' %>
+      <%= assembly.text_field :brutto, :class => "form-control",
+                              placeholder: 'Bruttopreis (in Euro) für Baugruppe eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= assembly.label :rabatt, 'Rabatt' %>
+      <%= assembly.text_field :rabatt, :class => "form-control",
+                              placeholder: 'Rabatt für Baugruppe eingeben' %>
+    </div>
+
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= assembly.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= assembly.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

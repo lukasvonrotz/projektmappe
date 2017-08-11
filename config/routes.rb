@@ -7,11 +7,14 @@ Rails.application.routes.draw do
                                     shared: 'users/shared',
                                     unlocks: 'users/unlocks'}
 
-  resources :users
-
   get 'home/index'
-
   root 'home#index'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :users
+  resources :projects
+  resources :assemblies
+  resources :drives
+  resources :electrical_installations
+  resources :switchgears
+
 end

@@ -1,0 +1,18 @@
+<h1>Baugruppen-Details</h1>
+<% if @assembly.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @assembly.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @assembly.id %><br>
+Kennung: <%= @assembly.kennung %><br>
+Anzahl Kanäle: <%= @assembly.kanaele %><br>
+Artikelnummer: <%= @assembly.artikelnr %><br>
+Bezeichnung: <%= @assembly.bezeichnung %><br>
+Bruttopreis (EUR): <%= @assembly.brutto %><br>
+Rabatt: <%= @assembly.rabatt %>
+
+<br><br>
+<%= link_to "Zurück zu Baugruppenübersicht", assemblies_path %>

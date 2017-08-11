@@ -14,14 +14,26 @@
             <li class="<%= 'active' if current_page? (root_path) %>">
               <%= link_to "Home", root_path %>
             </li>
-            <li class="">
-              <%= link_to "Benutzer", users_path %>
+            <li class="<%= 'active' if current_page? (projects_path) %>">
+              <%= link_to "Projekte", projects_path %>
             </li>
-            <li class="">
-              <a href="#">Projekte</a>
-            </li>
-            <li class="">
-              <a href="#">Kunden</a>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Kosten
+                <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="<%= 'active' if current_page? (assemblies_path) %>">
+                  <%= link_to "IO-Baugruppen", assemblies_path %>
+                </li>
+                <li class="<%= 'active' if current_page? (drives_path) %>">
+                  <%= link_to "FU's", drives_path %>
+                </li>
+                <li class="<%= 'active' if current_page? (electrical_installations_path) %>">
+                  <%= link_to "Elektroinstallationen", electrical_installations_path %>
+                </li>
+                <li class="<%= 'active' if current_page? (switchgears_path) %>">
+                  <%= link_to "Schaltanlagenbau", switchgears_path %>
+                </li>
+              </ul>
             </li>
         <% end %>
       </ul>
@@ -34,6 +46,9 @@
             <li>link_to 'EN', locale: "en"</li>
           </ul>
         </li> -->
+        <li class="<%= 'active' if current_page? (users_path) %>">
+          <%= link_to "Alle Benutzer", users_path %>
+        </li>
         <% if user_signed_in? %>
             <li class="<%= 'active' if current_page? (edit_user_registration_path) %>">
               <a href="<%=edit_user_registration_path%>">

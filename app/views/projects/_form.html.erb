@@ -1,0 +1,31 @@
+<%= form_for project do |project| %>
+
+    <div class="field form-group">
+      <%= project.label :name, 'Name' %>
+      <%= project.text_field :name, :class => "form-control",
+                             placeholder: 'Name für Projekt eingeben' %>
+    </div>
+
+    <% if !context %>
+      <div class="field form-group">
+        <%= project.label :user_ids, 'Benutzer' %></br>
+        <%= project.select :user_ids,
+                           User.all.map { |u| [u.email, u.id] },
+                           { include_blank: true }, { class: 'chosen-select', multiple: 'true' } %>
+      </div>
+    <% end %>
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= project.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= project.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>
+
+<script>
+    $(".chosen-select").chosen({allow_single_deselect: true, placeholder_text: "Wähle Optionen aus",
+        no_results_text: 'Keine Benutzer gefunden', search_contains: true, width: '500px'});
+</script>

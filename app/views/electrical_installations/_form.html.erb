@@ -1,0 +1,38 @@
+<%= form_for electrical_installation do |electrical_installation| %>
+
+    <div class="field form-group">
+      <%= electrical_installation.label :kennung, 'Kennung' %>
+      <%= electrical_installation.text_field :kennung, :class => "form-control",
+                             placeholder: 'Kennnug für Elektroinstallation eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= electrical_installation.label :leistung, 'Leistung' %>
+      <%= electrical_installation.text_field :leistung, :class => "form-control",
+                              placeholder: 'Leistung für Elektroinstallation eingeben' %>
+    </div>
+    <div class="field form-group">
+        <%= electrical_installation.label :einheit, 'Leistungseinheit' %>
+        <%= electrical_installation.text_field :einheit, :class => "form-control",
+                                placeholder: 'Einheit für Elektroinstallation eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= electrical_installation.label :brutto, 'Bruttopreis [EUR]' %>
+      <%= electrical_installation.text_field :brutto, :class => "form-control",
+                              placeholder: 'Bruttopreis (in CHF) für Elektroinstallation eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= electrical_installation.label :rabatt, 'Rabatt' %>
+      <%= electrical_installation.text_field :rabatt, :class => "form-control",
+                              placeholder: 'Rabatt für Elektroinstallation eingeben' %>
+    </div>
+
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= electrical_installation.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= electrical_installation.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

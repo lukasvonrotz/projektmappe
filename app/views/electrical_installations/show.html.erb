@@ -1,0 +1,17 @@
+<h1>Details</h1>
+<% if @electrical_installation.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @electrical_installation.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @electrical_installation.id %><br>
+Kennung: <%= @electrical_installation.kennung %><br>
+Leistung: <%= @electrical_installation.leistung %><br>
+Einheit: <%= @electrical_installation.einheit %><br>
+Bruttopreis (EUR): <%= @electrical_installation.brutto %><br>
+Rabatt: <%= @electrical_installation.rabatt %>
+
+<br><br>
+<%= link_to "Zurück zu Elektroinstallationen", electrical_installations_path %>

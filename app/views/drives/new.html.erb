@@ -1,0 +1,10 @@
+<h1>Neuen Frequenzumrichter erstellen</h1>
+<% if @drive.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @drive.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :drive => @drive, :context => true  %>
+<%= link_to "Zurück zu FU-Übersicht", drives_path %>

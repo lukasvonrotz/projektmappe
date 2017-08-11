@@ -1,0 +1,17 @@
+<h1>Details</h1>
+<% if @switchgear.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @switchgear.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @switchgear.id %><br>
+Kennung: <%= @switchgear.kennung %><br>
+Leistung: <%= @switchgear.leistung %><br>
+Max. Strom: <%= @switchgear.maxstrom %><br>
+Bruttopreis (EUR): <%= @switchgear.brutto %><br>
+Rabatt: <%= @switchgear.rabatt %>
+
+<br><br>
+<%= link_to "Zurück zu Schaltanlagenbau", switchgears_path %>

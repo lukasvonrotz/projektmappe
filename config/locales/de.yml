@@ -1,4 +1,35 @@
 de:
+  activerecord:
+    attributes:
+      assembly:
+        kennung: "Kennung"
+        kanaele: "Anzahl Kanäle"
+        artikelnr: "Artikel-Nr."
+        bezeichnung: "Bezeichnung"
+        brutto: "Bruttopreis"
+        rabatt: "Rabatt"
+      drive:
+        kennung: "Kennung"
+        artikelnr: "Artikelnummer"
+        bezeichnung: "Bezeichnung"
+        un: "Spannung"
+        in: "Strom"
+        pn: "Leistung"
+        bg: "BG"
+        brutto: "Bruttopreis"
+        rabatt: "Rabatt"
+      electrical_installation:
+        kennung: "Kennung"
+        leistung: "Leistung"
+        einheit: "Leistungseinheit"
+        brutto: "Bruttopreis"
+        rabatt: "Rabatt"
+      switchgear:
+        kennung: "Kennung"
+        leistung: "Leistung"
+        maxstrom: "Maximalstrom"
+        brutto: "Bruttopreis"
+        rabatt: "Rabatt"
   hello: "Hallo Welt"
   popup:
     confirm: "Bestätigen"

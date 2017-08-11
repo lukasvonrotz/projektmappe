@@ -1,0 +1,58 @@
+<%= form_for drive do |drive| %>
+
+    <div class="field form-group">
+      <%= drive.label :kennung, 'Kennung' %>
+      <%= drive.text_field :kennung, :class => "form-control",
+                             placeholder: 'Kennnug für FU eingeben' %>
+    </div>
+    <div class="field form-group">
+        <%= drive.label :artikelnr, 'Artikel-Nr.' %>
+        <%= drive.text_field :artikelnr, :class => "form-control",
+                                placeholder: 'Artikelnummer für FU eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= drive.label :bezeichnung, 'Bezeichnung' %>
+      <%= drive.text_field :bezeichnung, :class => "form-control",
+                              placeholder: 'Bezeichnung für FU eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= drive.label :un, 'Spannung [V]' %>
+      <%= drive.text_field :un, :class => "form-control",
+                           placeholder: 'Spannung für FU eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= drive.label :in, 'Strom [A]' %>
+      <%= drive.text_field :in, :class => "form-control",
+                           placeholder: 'Strom für FU eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= drive.label :pn, 'Leistung [kW]' %>
+      <%= drive.text_field :pn, :class => "form-control",
+                           placeholder: 'Leistung für FU eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= drive.label :bg, 'BG' %>
+      <%= drive.text_field :bg, :class => "form-control",
+                           placeholder: 'BG für FU eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= drive.label :brutto, 'Bruttopreis [CHF]' %>
+      <%= drive.text_field :brutto, :class => "form-control",
+                              placeholder: 'Bruttopreis (in Euro) für FU eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= drive.label :rabatt, 'Rabatt' %>
+      <%= drive.text_field :rabatt, :class => "form-control",
+                              placeholder: 'Rabatt für FU eingeben' %>
+    </div>
+
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= drive.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= drive.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

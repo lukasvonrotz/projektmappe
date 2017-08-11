@@ -1,0 +1,21 @@
+<h1>FU-Details</h1>
+<% if @drive.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @drive.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @drive.id %><br>
+Kennung: <%= @drive.kennung %><br>
+Artikelnummer: <%= @drive.artikelnr %><br>
+Bezeichnung: <%= @drive.bezeichnung %><br>
+Spannung: <%= @drive.un %><br>
+Strom: <%= @drive.in %><br>
+Leistung: <%= @drive.pn %><br>
+BG: <%= @drive.bg %><br>
+Bruttopreis (EUR): <%= @drive.brutto %><br>
+Rabatt: <%= @drive.rabatt %>
+
+<br><br>
+<%= link_to "Zurück zu FU-Übersicht", drives_path %>

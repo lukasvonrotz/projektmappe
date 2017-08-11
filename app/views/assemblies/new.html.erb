@@ -1,0 +1,10 @@
+<h1>Neue IO-Baugruppe erstellen</h1>
+<% if @assembly.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @assembly.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :assembly => @assembly, :context => true  %>
+<%= link_to "Zurück zu Baugruppenübersicht", assemblies_path %>

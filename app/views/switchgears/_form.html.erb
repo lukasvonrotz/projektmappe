@@ -1,0 +1,38 @@
+<%= form_for switchgear do |switchgear| %>
+
+    <div class="field form-group">
+      <%= switchgear.label :kennung, 'Kennung' %>
+      <%= switchgear.text_field :kennung, :class => "form-control",
+                             placeholder: 'Kennnug für Eintrag eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= switchgear.label :leistung, 'Leistung' %>
+      <%= switchgear.text_field :leistung, :class => "form-control",
+                              placeholder: 'Leistung für Eintrag eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= switchgear.label :maxstrom, 'Max. Strom' %>
+      <%= switchgear.text_field :maxstrom, :class => "form-control",
+                                placeholder: 'Max. Strom für Eintrag eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= switchgear.label :brutto, 'Bruttopreis [EUR]' %>
+      <%= switchgear.text_field :brutto, :class => "form-control",
+                              placeholder: 'Bruttopreis (in CHF) für Eintrag eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= switchgear.label :rabatt, 'Rabatt' %>
+      <%= switchgear.text_field :rabatt, :class => "form-control",
+                              placeholder: 'Rabatt für Eintrag eingeben' %>
+    </div>
+
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= switchgear.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= switchgear.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>
