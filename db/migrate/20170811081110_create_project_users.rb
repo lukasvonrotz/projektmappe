@@ -7,6 +7,6 @@ class CreateProjectUsers < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :project_users, [ :project_id, :user_id ], :unique => true, :name => 'by_category_and_post'
+    add_index :project_users, [ :project_id, :user_id ], :unique => true, :name => 'by_project_and_user'
   end
 end

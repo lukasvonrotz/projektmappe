@@ -6,6 +6,14 @@
     </div>
 <% end %>
 
-<%= @project.name %>
+ID: <%= @project.id %><br>
+Name: <%= @project.name %><br>
+Benutzer:
+<ul>
+  <% @project.users.each do |user| %>
+      <li><%= user.email %></li>
+  <% end %>
+</ul>
+
 <br><br>
 <%= link_to "Zurück zu Projektübersicht", projects_path %>

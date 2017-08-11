@@ -16,5 +16,8 @@ Rails.application.routes.draw do
   resources :drives
   resources :electrical_installations
   resources :switchgears
+  resources :wires
+  resources :wiresuppliers
+
 
 end

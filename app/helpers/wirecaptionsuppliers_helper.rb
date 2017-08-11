@@ -1,0 +1,2 @@
+module WirecaptionsuppliersHelper
+end

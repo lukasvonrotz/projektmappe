@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170811105620) do
+ActiveRecord::Schema.define(version: 20170811152401) do
 
   create_table "assemblies", force: :cascade do |t|
     t.string   "kennung"
@@ -90,6 +90,42 @@ ActiveRecord::Schema.define(version: 20170811105620) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "wire_wiresuppliers", force: :cascade do |t|
+    t.integer  "wire_id"
+    t.integer  "wiresupplier_id"
+    t.float    "anschlusstableauseite"
+    t.float    "anschlussgeraeteseite"
+    t.float    "beschriftungkabeleinanschluss"
+    t.float    "beschriftungaderneinanschluss"
+    t.float    "installationhohlboden"
+    t.float    "installationtrasse"
+    t.float    "installationrohr"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  create_table "wirecaptionsuppliers", force: :cascade do |t|
+    t.string   "name"
+    t.float    "kostenkabelmitmontagetraeger"
+    t.float    "kostenadermitmontagehuelse"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "wires", force: :cascade do |t|
+    t.integer  "aderbeschriftung"
+    t.integer  "anzahladern"
+    t.string   "kabeltyp"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "wiresuppliers", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

@@ -17,6 +17,12 @@
             <li class="<%= 'active' if current_page? (projects_path) %>">
               <%= link_to "Projekte", projects_path %>
             </li>
+            <li class="<%= 'active' if current_page? (wires_path) %>">
+              <%= link_to "Kabel", wires_path %>
+            </li>
+            <li class="<%= 'active' if current_page? (wiresuppliers_path) %>">
+              <%= link_to "Kabellieferanten", wiresuppliers_path %>
+            </li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Kosten
                 <span class="caret"></span></a>

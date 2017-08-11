@@ -1,0 +1,2 @@
+class Wirecaptionsupplier < ApplicationRecord
+end
