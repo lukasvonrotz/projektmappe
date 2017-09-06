@@ -1,5 +1,5 @@
 class WiresuppliersController < ApplicationController
   def index
-    @wiresupplier = Wiresupplier.all
+    @wiresuppliers = Wiresupplier.all
   end
 end

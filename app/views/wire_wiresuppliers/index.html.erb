@@ -1,0 +1,57 @@
+<h1>Kabel von <%= @wiresupplier.name %></h1>
+<br>
+<div id="content">
+  <div class="row visible-lg">
+    <div class="col-lg-1"><strong>Kabeltyp</strong></div>
+    <div class="col-lg-1"><strong>Anschluss Tableauseite (CHF)</strong></div>
+    <div class="col-lg-1"><strong>Anschluss Geräteseite (CHF)</strong></div>
+    <div class="col-lg-1"><strong>Beschriftung Kabel 1 Anschluss (CHF)</strong></div>
+    <div class="col-lg-1"><strong>Beschriftung Adern 1 Anschluss (CHF)</strong></div>
+    <div class="col-lg-1"><strong>Installation Hohlboden (CHF)</strong></div>
+    <div class="col-lg-1"><strong>Installation Trasse (CHF)</strong></div>
+    <div class="col-lg-1"><strong>Installation Rohr (CHF)</strong></div>
+    <div class="col-lg-1"><strong>Actions</strong></div>
+  </div>
+  <br>
+  <% @wire_wiresuppliers.each do |wire_wiresupplier| %>
+      <%= render 'form', :wire_wiresupplier => wire_wiresupplier, :wiresupplier => wire_wiresupplier.wiresupplier,
+                 :wire_wiresupplier_kabeltyp => wire_wiresupplier.wire.kabeltyp,
+                 :wire_wiresupplierid => wire_wiresupplier.id %>
+  <% end %>
+</div>
+
+
+
+<script>
+    $(document).ready ( function(){
+        // Disable all input fields and add 'edit'-button, except for first line.
+        <% @wire_wiresuppliers.each_with_index do |wire_wiresupplier, i| %>
+          <% if i != 0 %>
+            $("input.wire_wiresupplier<%=wire_wiresupplier.id %>_fld").attr("disabled", true);
+          <% else %>
+            $("a.wire_wiresupplier<%=wire_wiresupplier.id %>_edit").hide();
+            $("input.wire_wiresupplier<%=wire_wiresupplier.id %>_fld").attr("disabled", false);
+          <% end %>
+        <% end %>
+
+        // In case of using the browser back button! Rails duplicates html-elements when using this button
+        // Hence, do reload page (only once!) by usage of a hidden input field!
+        $('#loadingModal').modal('hide');
+        var $input = $('#refresh');
+        if ($input.val() == 'yes') {
+            location.reload(true);
+            loadingAlgorithm();
+            $(".table-responsive").hide();
+        }
+        else {
+            $input.val('yes');
+        }
+    });
+
+    function editLine(id) {
+        $("input.wire_wiresupplier_fld").attr("disabled", true);
+        $("a.wire_wiresupplier_edit").show();
+        $("a.wire_wiresupplier" + id + "_edit").hide();
+        $("input.wire_wiresupplier" + id + "_fld").attr("disabled", false);
+    }
+</script>

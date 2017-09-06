@@ -1,0 +1,52 @@
+<%= form_for [wiresupplier, wire_wiresupplier] do |wire_wiresupplier| %>
+    <div class="row" style="margin-bottom: 10px;">
+      <div class="col-lg-1">
+        <strong class="hidden-lg">Name<br></strong>
+        <%= wire_wiresupplier_kabeltyp %></br>
+        <strong class="hidden-lg"><br></strong>
+      </div>
+      <div class="col-lg-1">
+        <strong class="hidden-lg">Anschluss Tableauseite<br></strong>
+        <%= wire_wiresupplier.text_field :anschlusstableauseite,
+                                         :class => "form-control wire_wiresupplier_fld wire_wiresupplier" + wire_wiresupplierid.to_s + "_fld" %>
+      </div>
+      <div class="col-lg-1">
+        <strong class="hidden-lg">Anschluss Geräteseite<br></strong>
+        <%= wire_wiresupplier.text_field :anschlussgeraeteseite,
+                                         :class => "form-control wire_wiresupplier_fld wire_wiresupplier" + wire_wiresupplierid.to_s + "_fld" %>
+      </div>
+      <div class="col-lg-1">
+        <strong class="hidden-lg">Beschriftung Kabel 1 Anschluss<br></strong>
+        <%= wire_wiresupplier.text_field :beschriftungkabeleinanschluss,
+                                         :class => "form-control wire_wiresupplier_fld wire_wiresupplier" + wire_wiresupplierid.to_s + "_fld" %>
+      </div>
+      <div class="col-lg-1">
+        <strong class="hidden-lg">Beschriftung Adern 1 Anschluss<br></strong>
+        <%= wire_wiresupplier.text_field :beschriftungaderneinanschluss,
+                                         :class => "form-control wire_wiresupplier_fld wire_wiresupplier" + wire_wiresupplierid.to_s + "_fld" %>
+      </div>
+      <div class="col-lg-1">
+        <strong class="hidden-lg">Installation Hohlboden<br></strong>
+        <%= wire_wiresupplier.text_field :installationhohlboden,
+                                         :class => "form-control wire_wiresupplier_fld wire_wiresupplier" + wire_wiresupplierid.to_s + "_fld" %>
+      </div>
+      <div class="col-lg-1">
+        <strong class="hidden-lg">Installation Trasse<br></strong>
+        <%= wire_wiresupplier.text_field :installationtrasse,
+                                         :class => "form-control wire_wiresupplier_fld wire_wiresupplier" + wire_wiresupplierid.to_s + "_fld" %>
+      </div>
+      <div class="col-lg-1">
+        <strong class="hidden-lg">Installation Rohr<br></strong>
+        <%= wire_wiresupplier.text_field :installationrohr,
+                                         :class => "form-control wire_wiresupplier_fld wire_wiresupplier" + wire_wiresupplierid.to_s + "_fld" %>
+      </div>
+      <div class="col-lg-1">
+        <a class="btn btn-info wire_wiresupplier_edit wire_wiresupplier<%=wire_wiresupplierid.to_s%>_edit"
+           onclick="editLine(<%=wire_wiresupplierid%>);">Edit</a>
+        <%= wire_wiresupplier.submit 'Update',
+                                     class: "btn btn-success wire_wiresupplier_fld wire_wiresupplier" + wire_wiresupplierid.to_s + "_fld",
+                                     data: { disable_with: "Verarbeite..." }  %>
+        <strong class="hidden-lg"><br><br><br><br></strong>
+      </div>
+    </div>
+<% end %>
