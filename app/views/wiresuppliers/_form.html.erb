@@ -1,0 +1,30 @@
+<%= form_for wiresupplier do |wiresupplier| %>
+
+    <div class="field form-group">
+      <%= wiresupplier.label :name, 'Name' %>
+      <%= wiresupplier.text_field :name, :class => "form-control",
+                             placeholder: 'Name von Kabellieferant eingeben' %>
+    </div>
+
+    <div class="field form-group">
+      <%= wiresupplier.label :wire_ids, 'Kabel' %></br>
+      <%= wiresupplier.select :wire_ids,
+                         Wire.all.map { |u| [u.kabeltyp, u.id] },
+                         { include_blank: true }, { class: 'chosen-select', multiple: 'true' } %>
+    </div>
+
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= wiresupplier.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= wiresupplier.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>
+
+<script>
+    $(".chosen-select").chosen({allow_single_deselect: true, placeholder_text: "Wähle Optionen aus",
+        no_results_text: 'Keine Kabeltypen gefunden', search_contains: true, width: '500px'});
+</script>

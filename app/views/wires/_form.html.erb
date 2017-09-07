@@ -1,0 +1,35 @@
+<%= form_for wire do |wire| %>
+
+    <div class="field form-group">
+      <%= wire.label :aderbeschriftung, 'Aderbeschriftung' %>
+      <%= wire.text_field :aderbeschriftung, :class => "form-control",
+                             placeholder: 'Aderbeschriftung eingeben' %>
+    </div>
+
+    <div class="field form-group">
+      <%= wire.label :anzahladern, 'Anzahl Adern' %>
+      <%= wire.text_field :anzahladern, :class => "form-control",
+                          placeholder: 'Anzahl Adern eingeben' %>
+    </div>
+
+    <div class="field form-group">
+      <%= wire.label :kabeltyp, 'Kabeltyp' %>
+      <%= wire.text_field :kabeltyp, :class => "form-control",
+                          placeholder: 'Kabeltyp eingeben' %>
+    </div>
+
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= wire.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= wire.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>
+
+<script>
+    $(".chosen-select").chosen({allow_single_deselect: true, placeholder_text: "Wähle Optionen aus",
+        no_results_text: 'Keine Kabel gefunden', search_contains: true, width: '500px'});
+</script>

@@ -1,0 +1,40 @@
+<h1>Alle Kabelbeschriftungslieferanten</h1>
+<br>
+<a href="<%=new_wirecaptionsupplier_path%>" class="btn btn-success">Neuen Kabellieferanten erstellen</a>
+<br><br><br>
+<div id="content" class="table-responsive">
+  <table id="wirecaptionsupplier_table" class="table table-striped table-bordered data_table" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Kosten Kabel mit Montageträger</th>
+      <th>Kosten Adern mit Montagehülsen</th>
+      <th>Aktionen</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @wirecaptionsuppliers.each do |wirecaptionsupplier| %>
+        <tr>
+          <td><%= wirecaptionsupplier.id %></td>
+          <td><%= wirecaptionsupplier.name %></td>
+          <td><%= wirecaptionsupplier.kostenkabelmitmontagetraeger %></td>
+          <td><%= wirecaptionsupplier.kostenadermitmontagehuelse %></td>
+          <td>
+            <a href="<%= wirecaptionsupplier_path(wirecaptionsupplier.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
+            <a href="<%= edit_wirecaptionsupplier_path(wirecaptionsupplier.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
+            <button type="button" class="btn btn-xs btn-danger btn-index"
+                    data-toggle="modal" data-target="#popup_sure_delete"
+                    data-itemid="<%= wirecaptionsupplier.id %>"
+                    data-model="wirecaptionsuppliers">
+              Kabellieferant löschen
+            </button>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render 'layouts/loading', :message => "Lade Kabellieferanten..." %>
+<%= render 'layouts/popups' %>

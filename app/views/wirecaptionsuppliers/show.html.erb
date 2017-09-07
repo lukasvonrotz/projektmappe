@@ -1,0 +1,14 @@
+<h1>Details Kabelbeschriftungslieferant</h1>
+<br>
+<% if @wirecaptionsupplier.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @wirecaptionsupplier.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @wirecaptionsupplier.id %><br>
+Name: <%= @wirecaptionsupplier.name %><br>
+
+<br><br>
+<%= link_to "Zurück zu Kabellieferantenübersicht", wirecaptionsuppliers_path %>

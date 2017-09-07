@@ -1,0 +1,10 @@
+<h1>Kabelbeschriftungslieferant editieren</h1>
+<% if @wirecaptionsupplier.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @wirecaptionsupplier.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :wirecaptionsupplier => @wirecaptionsupplier, :context => false  %>
+<%= link_to "Zurück zu Kabellieferantenübersicht", wirecaptionsuppliers_path %>

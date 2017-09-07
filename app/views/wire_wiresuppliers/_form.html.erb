@@ -40,11 +40,11 @@
         <%= wire_wiresupplier.text_field :installationrohr,
                                          :class => "form-control wire_wiresupplier_fld wire_wiresupplier" + wire_wiresupplierid.to_s + "_fld" %>
       </div>
-      <div class="col-lg-1">
-        <a class="btn btn-info wire_wiresupplier_edit wire_wiresupplier<%=wire_wiresupplierid.to_s%>_edit"
+      <div class="col-lg-1" style="line-height: 30px;">
+        <a class="btn btn-sm btn-info wire_wiresupplier_edit wire_wiresupplier<%=wire_wiresupplierid.to_s%>_edit"
            onclick="editLine(<%=wire_wiresupplierid%>);">Edit</a>
         <%= wire_wiresupplier.submit 'Update',
-                                     class: "btn btn-success wire_wiresupplier_fld wire_wiresupplier" + wire_wiresupplierid.to_s + "_fld",
+                                     class: "btn btn-sm btn-success wire_wiresupplier_fld wire_wiresupplier" + wire_wiresupplierid.to_s + "_fld",
                                      data: { disable_with: "Verarbeite..." }  %>
         <strong class="hidden-lg"><br><br><br><br></strong>
       </div>

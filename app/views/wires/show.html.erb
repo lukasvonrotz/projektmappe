@@ -1,0 +1,91 @@
+<h1><%= @wire.kabeltyp %></h1>
+<br>
+<% if @wire.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @wire.errors.full_messages.first %>
+    </div>
+<% end %>
+<h2>Infos</h2>
+ID: <%= @wire.id %><br>
+Aderbeschriftung: <%= @wire.aderbeschriftung %><br>
+Anzahl Adern: <%= @wire.anzahladern %><br>
+Kabeltyp: <%= @wire.kabeltyp %>
+<br><br>
+<h2>Preise</h2>
+<div class="row">
+  <% @wire.wiresuppliers.each do |wiresupplier| %>
+    <div class="col-lg-4">
+      <h3><%= wiresupplier.name %></h3>
+      <div class="form-group">
+        <label for="sel1">Beschriftungslieferant</label>
+        <select class="form-control" id="select_wirecaptionsupplier<%= wiresupplier.id %>">
+          <% Wirecaptionsupplier.all.each do |wirecaptionsupplier| %>
+            <option value="<%= wirecaptionsupplier.id %>"><%= wirecaptionsupplier.name %></option>
+          <% end %>
+        </select>
+      </div>
+      <table style="width:100%">
+        <tr>
+          <td>Preis Hohlboden</td>
+          <td id="hohlboden<%=wiresupplier.id%>"><%= WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.installationhohlboden %></td>
+        </tr>
+        <tr>
+          <td>Preis Trasse</td>
+          <td id="trasse<%=wiresupplier.id%>"><%= WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.installationtrasse %></td>
+        </tr>
+        <tr>
+          <td>Preis Rohr</td>
+          <td id="rohr<%=wiresupplier.id%>"><%= WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.installationrohr %></td>
+        </tr>
+        <tr>
+          <td>Beschriftung Kabel 1 Anschluss</td>
+          <td id="kabel1anschluss<%=wiresupplier.id%>"><%= WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss %></td>
+        </tr>
+        <tr>
+          <td>Beschriftung Adern 1 Anschluss</td>
+          <td id="adern1anschluss<%=wiresupplier.id%>"><%= WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.beschriftungaderneinanschluss %></td>
+        </tr>
+        <tr>
+          <td>Beschriftungsschilder für Kabel 1 Anschluss</td>
+          <td id="captionkabel1anschluss<%=wiresupplier.id%>"></td>
+        </tr>
+        <tr>
+          <td>Beschriftungsschilder für Adern 1 Anschluss</td>
+          <td id="captionadern1anschluss<%=wiresupplier.id%>"></td>
+        </tr>
+        <tr>
+          <td>Preis Beschriftung total</td>
+          <td id="beschriftungTotal<%=wiresupplier.id%>"></td>
+        </tr>
+        <tr>
+          <td>Preis Anschlüsse Total</td>
+          <td id="anschluesseTotal<%=wiresupplier.id%>"></td>
+        </tr>
+      </table>
+    </div>
+  <% end %>
+</div>
+
+
+<br><br>
+<%= link_to "Zurück zu Kabelübersicht", wires_path %>
+
+
+<script>
+  var wirecaptionsupplierPrices = {};
+  <% Wirecaptionsupplier.all.each do |wirecaptionsupplier| %>
+    wirecaptionsupplierPrices['captionsupplier<%= wirecaptionsupplier.id %>kabel'] = <%= wirecaptionsupplier.kostenkabelmitmontagetraeger %>;
+    wirecaptionsupplierPrices['captionsupplier<%= wirecaptionsupplier.id %>adern'] = <%= wirecaptionsupplier.kostenadermitmontagehuelse %>;
+  <% end %>
+  <% Wiresupplier.all.each do |wiresupplier| %>
+    $("#select_wirecaptionsupplier<%= wiresupplier.id %>").change(function() {
+        $("#captionkabel1anschluss<%= wiresupplier.id %>").html("" + wirecaptionsupplierPrices['captionsupplier' + $(this).val() + 'kabel']);
+        $("#captionadern1anschluss<%= wiresupplier.id %>").html("" + wirecaptionsupplierPrices['captionsupplier' + $(this).val() + 'adern']);
+        var beschriftungTotal =
+            Number($("#hohlboden<%= wiresupplier.id %>").text()) +
+            Number($("#trasse<%= wiresupplier.id %>").text());
+        $("#beschriftungTotal<%= wiresupplier.id %>").html(beschriftungTotal);
+    }).change();
+  <% end %>
+</script>

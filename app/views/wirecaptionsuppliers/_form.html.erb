@@ -1,0 +1,28 @@
+<%= form_for wirecaptionsupplier do |wirecaptionsupplier| %>
+
+    <div class="field form-group">
+      <%= wirecaptionsupplier.label :name, 'Name' %>
+      <%= wirecaptionsupplier.text_field :name, :class => "form-control",
+                             placeholder: 'Name von Kabelbeschriftungslieferant eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= wirecaptionsupplier.label :kostenkabelmitmontagetraeger, 'Kosten Kabel mit Montageträger' %>
+      <%= wirecaptionsupplier.text_field :kostenkabelmitmontagetraeger, :class => "form-control",
+                                         placeholder: 'Name von Kabelbeschriftungslieferant eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= wirecaptionsupplier.label :kostenadermitmontagehuelse, 'Kosten Adern mit Montagehülsen' %>
+      <%= wirecaptionsupplier.text_field :kostenadermitmontagehuelse, :class => "form-control",
+                                         placeholder: 'Kosten Adern mit Montagehülse eingeben' %>
+    </div>
+
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= wirecaptionsupplier.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= wirecaptionsupplier.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

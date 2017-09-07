@@ -1,0 +1,10 @@
+<h1>Neues Kabel erstellen</h1>
+<% if @wire.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @wire.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :wire => @wire, :context => true  %>
+<%= link_to "Zurück zu Kabelübersicht", wires_path %>

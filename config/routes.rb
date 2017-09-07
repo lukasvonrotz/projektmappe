@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :wiresuppliers do
     resources :wire_wiresuppliers
   end
+  resources :wirecaptionsuppliers
 
 
 end
