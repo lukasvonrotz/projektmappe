@@ -104,8 +104,7 @@ Kabeltyp: <%= @wire.kabeltyp %>
             (2 * Number($("#kabel1anschluss<%=wiresupplier.id%>").text())) +
             (<%= @wire.aderbeschriftung %> * Number($("#adern1anschluss<%=wiresupplier.id%>").text())) +
             (2 * wirecaptionsupplierPrices['captionsupplier<%= wiresupplier.id %>kabel']) +
-            (<%= @wire.aderbeschriftung %> * wirecaptionsupplierPrices['captionsupplier<%= wiresupplier.id %>adern']) +
-        Number($("#trasse<%= wiresupplier.id %>").text());
+            (<%= @wire.aderbeschriftung %> * wirecaptionsupplierPrices['captionsupplier<%= wiresupplier.id %>adern']);
         $("#beschriftungTotal<%= wiresupplier.id %>").html(beschriftungTotal);
     }).change();
   <% end %>
