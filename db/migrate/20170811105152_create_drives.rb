@@ -4,9 +4,9 @@ class CreateDrives < ActiveRecord::Migration[5.0]
       t.string :kennung
       t.string :artikelnr
       t.text :bezeichnung
-      t.float :un
-      t.float :in
-      t.float :pn
+      t.text :un
+      t.text :in
+      t.text :pn
       t.string :bg
       t.float :brutto
       t.float :rabatt
