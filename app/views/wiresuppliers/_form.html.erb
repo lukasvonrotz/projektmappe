@@ -10,7 +10,7 @@
       <%= wiresupplier.label :wire_ids, 'Kabel' %></br>
       <%= wiresupplier.select :wire_ids,
                          Wire.all.map { |u| [u.kabeltyp, u.id] },
-                         { include_blank: true }, { class: 'chosen-select', multiple: 'true' } %>
+                         { include_blank: true }, { class: 'chosen-select', multiple: 'true', disabled: 'true' } %>
     </div>
 
 

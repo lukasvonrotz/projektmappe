@@ -1,6 +1,21 @@
 class WiresController < ApplicationController
   def index
     @wires = Wire.all
+    @wiresuppliers = Wiresupplier.all
+
+    @allPricesEntered = 0
+    @wires.each do |wire|
+      @wiresuppliers.each do |wiresupplier|
+        begin
+          testnumber = WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss
+          if testnumber.nil?
+            @allPricesEntered = WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.wiresupplier_id
+          end
+        rescue
+          @allPricesEntered = wiresupplier.id
+        end
+      end
+    end
   end
 
   # Control logic for create-view
@@ -16,6 +31,14 @@ class WiresController < ApplicationController
     @wire = Wire.new(wire_params)
     # write wire to database
     if @wire.save
+      @wiresuppliers = Wiresupplier.all
+      @wiresuppliers.each do |wiresupplier|
+        wireWiresupplierEntry = WireWiresupplier.new
+        wireWiresupplierEntry.wire_id = @wire.id
+        wireWiresupplierEntry.wiresupplier_id = wiresupplier.id
+        wireWiresupplierEntry.save
+      end
+
       redirect_to wires_path, :notice => 'Kabel erfolgreich erstellt.'
     else
       render 'new'

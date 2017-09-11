@@ -64,13 +64,7 @@ Kabeltyp: <%= @wire.kabeltyp %>
         </tr>
         <tr>
           <td>Preis beide Anschlüsse ohne Beschriftung</td>
-          <td id="anschluesseOhneBeschriftung<%=wiresupplier.id%>">
-            <%=
-              WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.anschlusstableauseite +
-                  WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.anschlussgeraeteseite
-            %>
-
-          </td>
+          <td id="anschluesseOhneBeschriftung<%=wiresupplier.id%>"></td>
         </tr>
         <tr>
           <td>Preis Beschriftung Total</td>
@@ -91,21 +85,37 @@ Kabeltyp: <%= @wire.kabeltyp %>
 
 
 <script>
-  var wirecaptionsupplierPrices = {};
+  var pricesWirecaptionsuppliers = {};
   <% Wirecaptionsupplier.all.each do |wirecaptionsupplier| %>
-    wirecaptionsupplierPrices['captionsupplier<%= wirecaptionsupplier.id %>kabel'] = <%= wirecaptionsupplier.kostenkabelmitmontagetraeger %>;
-    wirecaptionsupplierPrices['captionsupplier<%= wirecaptionsupplier.id %>adern'] = <%= @wire.anzahladern * wirecaptionsupplier.kostenadermitmontagehuelse %>;
+    pricesWirecaptionsuppliers['kostenkabelmitmontagetraeger<%= wirecaptionsupplier.id %>'] = <%= wirecaptionsupplier.kostenkabelmitmontagetraeger %>;
+    pricesWirecaptionsuppliers['kostenadernmitmontagehuelse<%= wirecaptionsupplier.id %>'] = <%= @wire.anzahladern * wirecaptionsupplier.kostenadermitmontagehuelse %>;
   <% end %>
+
+  var pricesWiresuppliers = {};
+  <% Wiresupplier.all.each do |wiresupplier| %>
+    pricesWiresuppliers['beschriftungkabel1anschluss<%= wiresupplier.id %>'] = <%=
+                WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss %>;
+    pricesWiresuppliers['beschriftungadern1anschluss<%= wiresupplier.id %>'] = <%=
+                WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.beschriftungaderneinanschluss %>;
+    pricesWiresuppliers['ohneBeschriftung<%= wiresupplier.id %>'] = <%=
+                WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.anschlusstableauseite +
+                    WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.anschlussgeraeteseite
+            %>;
+  <% end %>
+
   <% Wiresupplier.all.each do |wiresupplier| %>
     $("#select_wirecaptionsupplier<%= wiresupplier.id %>").change(function() {
-        $("#captionkabel<%= wiresupplier.id %>").html("" + wirecaptionsupplierPrices['captionsupplier' + $(this).val() + 'kabel']);
-        $("#captionadern<%= wiresupplier.id %>").html("" + wirecaptionsupplierPrices['captionsupplier' + $(this).val() + 'adern']);
-        var beschriftungTotal =
-            (2 * Number($("#kabel1anschluss<%=wiresupplier.id%>").text())) +
-            (<%= @wire.aderbeschriftung %> * Number($("#adern1anschluss<%=wiresupplier.id%>").text())) +
-            (2 * wirecaptionsupplierPrices['captionsupplier' + $(this).val() + 'kabel']) +
-            (<%= @wire.aderbeschriftung %> * wirecaptionsupplierPrices['captionsupplier' + $(this).val() + 'adern']);
-        var anschluesseTotal = beschriftungTotal + Number($("#anschluesseOhneBeschriftung<%=wiresupplier.id%>").text());
+        $("#captionkabel<%= wiresupplier.id %>").html("" + pricesWirecaptionsuppliers['kostenkabelmitmontagetraeger' + $(this).val()]);
+        $("#captionadern<%= wiresupplier.id %>").html("" + pricesWirecaptionsuppliers['kostenadernmitmontagehuelse' + $(this).val()]);
+
+        var ohneBeschriftung = pricesWiresuppliers["ohneBeschriftung<%= wiresupplier.id %>"];
+        var beschriftungTotal = (2 * pricesWiresuppliers["beschriftungkabel1anschluss<%= wiresupplier.id %>"]) +
+            (<%= @wire.aderbeschriftung %> * pricesWiresuppliers["beschriftungadern1anschluss<%= wiresupplier.id %>"]) +
+            (2 * pricesWirecaptionsuppliers['kostenkabelmitmontagetraeger' + $(this).val()]) +
+        (<%= @wire.aderbeschriftung %> * pricesWirecaptionsuppliers['kostenadernmitmontagehuelse' + $(this).val()]);
+        var anschluesseTotal = ohneBeschriftung + beschriftungTotal;
+
+        $("#anschluesseOhneBeschriftung<%= wiresupplier.id %>").html(ohneBeschriftung);
         $("#beschriftungTotal<%= wiresupplier.id %>").html(beschriftungTotal);
         $("#anschluesseTotal<%= wiresupplier.id %>").html(anschluesseTotal);
     }).change();

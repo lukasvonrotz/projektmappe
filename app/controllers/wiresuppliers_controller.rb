@@ -8,14 +8,19 @@ class WiresuppliersController < ApplicationController
   def new
     # build a 'temporary' post which is written to DB later (create-method)
     @wiresupplier = Wiresupplier.new
+    @wires = Wire.all
+    @wiresupplier.wires = @wires
   end
 
   # Control logic when creating a new wiresupplier
   # POST /wiresuppliers
   def create
     @wiresupplier = Wiresupplier.new(wiresupplier_params)
+    @wires = Wire.all
+    @wiresupplier.wires = @wires
     # write wiresupplier to database
     if @wiresupplier.save
+
       redirect_to wiresuppliers_path, :notice => 'Kabellieferant erfolgreich erstellt.'
     else
       render 'new'
