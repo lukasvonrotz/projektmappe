@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911152401) do
+ActiveRecord::Schema.define(version: 20170912143537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 20170911152401) do
     t.float    "rabatt"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "drives", force: :cascade do |t|
@@ -65,6 +71,22 @@ ActiveRecord::Schema.define(version: 20170911152401) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "subprojects", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "customer_id"
+    t.index ["customer_id"], name: "index_subprojects_on_customer_id", using: :btree
+  end
+
+  create_table "subsystems", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "project_id"
+    t.index ["project_id"], name: "index_subsystems_on_project_id", using: :btree
+  end
+
   create_table "switchgears", force: :cascade do |t|
     t.string   "kennung"
     t.text     "leistung"
@@ -73,6 +95,14 @@ ActiveRecord::Schema.define(version: 20170911152401) do
     t.float    "rabatt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "units", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "subsystem_id"
+    t.index ["subsystem_id"], name: "index_units_on_subsystem_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -133,4 +163,7 @@ ActiveRecord::Schema.define(version: 20170911152401) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "subprojects", "customers"
+  add_foreign_key "subsystems", "projects"
+  add_foreign_key "units", "subsystems"
 end
