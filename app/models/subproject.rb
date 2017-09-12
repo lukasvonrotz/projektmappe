@@ -1,0 +1,2 @@
+class Subproject < ApplicationRecord
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170811152401) do
+ActiveRecord::Schema.define(version: 20170911152401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,8 @@ ActiveRecord::Schema.define(version: 20170811152401) do
     t.integer  "kanaele"
     t.string   "artikelnr"
     t.text     "bezeichnung"
-    t.float    "brutto"
+    t.float    "brutto_eur"
+    t.float    "brutto_chf"
     t.float    "rabatt"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -107,6 +108,7 @@ ActiveRecord::Schema.define(version: 20170811152401) do
     t.float    "installationrohr"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.index ["wire_id", "wiresupplier_id"], name: "index_wire_wiresuppliers_on_wire_id_and_wiresupplier_id", unique: true, using: :btree
   end
 
   create_table "wirecaptionsuppliers", force: :cascade do |t|

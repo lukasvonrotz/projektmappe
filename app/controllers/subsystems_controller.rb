@@ -1,0 +1,2 @@
+class SubsystemsController < ApplicationController
+end

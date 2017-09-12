@@ -5,7 +5,8 @@ class CreateAssemblies < ActiveRecord::Migration[5.0]
       t.integer :kanaele
       t.string :artikelnr
       t.text :bezeichnung
-      t.float :brutto
+      t.float :brutto_eur
+      t.float :brutto_chf
       t.float :rabatt
 
       t.timestamps

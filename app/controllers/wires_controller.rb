@@ -7,8 +7,15 @@ class WiresController < ApplicationController
     @wires.each do |wire|
       @wiresuppliers.each do |wiresupplier|
         begin
-          testnumber = WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss
-          if testnumber.nil?
+          anschlusstableauseite = WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.anschlusstableauseite
+          anschlussgeraeteseite = WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.anschlussgeraeteseite
+          beschriftungkabeleinanschluss = WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss
+          beschriftungaderneinanschluss = WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungaderneinanschluss
+          installationhohlboden = WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.installationhohlboden
+          installationtrasse = WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.installationtrasse
+          installationrohr = WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.installationrohr
+
+          if anschlusstableauseite.nil? or anschlussgeraeteseite.nil? or beschriftungkabeleinanschluss.nil? or beschriftungaderneinanschluss.nil? or installationhohlboden.nil? or installationtrasse.nil? or installationrohr.nil?
             @allPricesEntered = WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.wiresupplier_id
           end
         rescue

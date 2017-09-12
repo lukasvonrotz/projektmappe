@@ -21,9 +21,14 @@
                               placeholder: 'Bezeichnung für Baugruppe eingeben' %>
     </div>
     <div class="field form-group">
-      <%= assembly.label :brutto, 'Bruttopreis [EUR]' %>
-      <%= assembly.text_field :brutto, :class => "form-control",
+      <%= assembly.label :brutto_eur, 'Bruttopreis [EUR]' %>
+      <%= assembly.text_field :brutto_eur, :class => "form-control",
                               placeholder: 'Bruttopreis (in Euro) für Baugruppe eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= assembly.label :brutto_chf, 'Bruttopreis [CHF]' %>
+      <%= assembly.text_field :brutto_chf, :class => "form-control",
+                              placeholder: 'Bruttopreis (in CHF) für Baugruppe eingeben' %>
     </div>
     <div class="field form-group">
       <%= assembly.label :rabatt, 'Rabatt' %>

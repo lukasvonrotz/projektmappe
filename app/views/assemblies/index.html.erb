@@ -272,10 +272,30 @@
           <td><%= assembly.kanaele %></td>
           <td><%= assembly.artikelnr %></td>
           <td><%= truncate(assembly.bezeichnung, :length => 50) %></td>
-          <td><%= assembly.brutto %></td>
-          <td><%= assembly.brutto * 1.15 %></td>
-          <td><%= assembly.rabatt %></td>
-          <td><%= assembly.brutto * 1.15 * (1-assembly.rabatt) %></td>
+          <td id="brutto_eur"><%=
+            if assembly.brutto_eur.nil?
+              if assembly.brutto_chf.nil?
+                ''
+              else
+                assembly.brutto_chf / 1.15
+              end
+            else
+              assembly.brutto_eur
+            end
+          %></td>
+          <td id="bruttoChf<%= assembly.id %>"><%=
+            if assembly.brutto_chf.nil?
+              if assembly.brutto_eur.nil?
+                ''
+              else
+                assembly.brutto_eur * 1.15
+              end
+            else
+              assembly.brutto_chf
+            end
+          %></td>
+          <td id="rabatt<%= assembly.id %>"><%= assembly.rabatt %></td>
+          <td id="nettoChf<%= assembly.id %>"></td>
           <td>
             <a href="<%= assembly_path(assembly.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
             <a href="<%= edit_assembly_path(assembly.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
@@ -298,19 +318,25 @@
 <script>
   $(document).ready(function() {
       updatePrices();
+
+      <% @assemblies.each do |assembly| %>
+        $("#nettoChf<%= assembly.id %>").html($("#bruttoChf<%= assembly.id %>").val() -
+            $("#rabatt<%= assembly.id %>").val() * $("#bruttoChf<%= assembly.id %>").val());
+      <% end %>
   });
     $("#updatePrices").click(function() {
         updatePrices();
     });
 
     var eurokurs = 1.15;
+    <%= eurokurs = 1.15 %>
 
     function updatePrices() {
-        var preisPbStecker = <%= Assembly.where(["kennung = ?", "PB-Stecker"]).first.brutto %> * eurokurs;
-        var preisPbBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP PB"]).first.brutto %> * eurokurs;
-        var preisBase = <%= Assembly.where(["kennung = ?", "ET200SP Base"]).first.brutto %> * eurokurs;
-        var preisBaseUvers = <%= Assembly.where(["kennung = ?", "ET200SP Base mit U-Vers"]).first.brutto %> * eurokurs;
-        var preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP 08DI"]).first.brutto %> * eurokurs;
+        var preisPbStecker = <%= Assembly.where(["kennung = ?", "PB-Stecker"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PB-Stecker"]).first.brutto_chf : Assembly.where(["kennung = ?", "PB-Stecker"]).first.brutto_eur * eurokurs %>;
+        var preisPbBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP PB"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "ET200SP PB"]).first.brutto_chf : Assembly.where(["kennung = ?", "ET200SP PB"]).first.brutto_eur * eurokurs %>;
+        var preisBase = <%= Assembly.where(["kennung = ?", "ET200SP Base"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "ET200SP Base"]).first.brutto_chf : Assembly.where(["kennung = ?", "ET200SP Base"]).first.brutto_eur * eurokurs %>;
+        var preisBaseUvers = <%= Assembly.where(["kennung = ?", "ET200SP Base mit U-Vers"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "ET200SP Base mit U-Vers"]).first.brutto_chf : Assembly.where(["kennung = ?", "ET200SP Base mit U-Vers"]).first.brutto_eur * eurokurs %>;
+        var preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP 08DI"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "ET200SP 08DI"]).first.brutto_chf : Assembly.where(["kennung = ?", "ET200SP 08DI"]).first.brutto_eur * eurokurs %>;
         var anzahlKanaeleBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP 08DI"]).first.kanaele %>;
         var anzahlBaugruppen = $("#anzahlBaugruppenDi").val();
         var reserve = $("#reserveDi").val();
@@ -321,7 +347,7 @@
         $("#bruttoChfDi").html(bruttoChf);
         $("#nettoChfDi").html(nettoChf);
 
-        preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP 08DO"]).first.brutto %> * eurokurs;
+        preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP 08DO"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "ET200SP 08DO"]).first.brutto_chf : Assembly.where(["kennung = ?", "ET200SP 08DO"]).first.brutto_eur * eurokurs %>;
         anzahlKanaeleBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP 08DO"]).first.kanaele %>;
         anzahlBaugruppen = $("#anzahlBaugruppenDo").val();
         reserve = $("#reserveDo").val();
@@ -332,7 +358,7 @@
         $("#bruttoChfDo").html(bruttoChf);
         $("#nettoChfDo").html(nettoChf);
 
-        preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP 02AI"]).first.brutto %> * eurokurs;
+        preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP 02AI"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "ET200SP 02AI"]).first.brutto_chf : Assembly.where(["kennung = ?", "ET200SP 02AI"]).first.brutto_eur * eurokurs %>;
         anzahlKanaeleBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP 02AI"]).first.kanaele %>;
         anzahlBaugruppen = $("#anzahlBaugruppenAi").val();
         reserve = $("#reserveAi").val();
@@ -343,7 +369,7 @@
         $("#bruttoChfAi").html(bruttoChf);
         $("#nettoChfAi").html(nettoChf);
 
-        preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP 02AO"]).first.brutto %> * eurokurs;
+        preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP 02AO"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "ET200SP 02AO"]).first.brutto_chf : Assembly.where(["kennung = ?", "ET200SP 02AO"]).first.brutto_eur * eurokurs %>;
         anzahlKanaeleBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP 02AO"]).first.kanaele %>;
         anzahlBaugruppen = $("#anzahlBaugruppenAo").val();
         reserve = $("#reserveAo").val();
@@ -354,7 +380,7 @@
         $("#bruttoChfAo").html(bruttoChf);
         $("#nettoChfAo").html(nettoChf);
 
-        preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).first.brutto %> * eurokurs;
+        preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).first.brutto_chf : Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).first.brutto_eur * eurokurs %>;
         anzahlKanaeleBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).first.kanaele %>;
         anzahlBaugruppen = $("#anzahlBaugruppenZ").val();
         reserve = $("#reserveZ").val();
@@ -366,7 +392,7 @@
         $("#nettoChfZ").html(nettoChf);
 
 
-        preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).first.brutto %> * eurokurs;
+        preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).first.brutto_chf : Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).first.brutto_eur * eurokurs %>;
         anzahlKanaeleBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).first.kanaele %>;
         anzahlBaugruppen = $("#anzahlBaugruppenInkr").val();
         reserve = $("#reserveInkr").val();
@@ -379,7 +405,7 @@
         $("#bruttoChfZ").html(bruttoChf);
         $("#nettoChfZ").html(nettoChf);
 
-        preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP Enc SSI"]).first.brutto %> * eurokurs;
+        preisIoBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP Enc SSI"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "ET200SP Enc SSI"]).first.brutto_chf : Assembly.where(["kennung = ?", "ET200SP Enc SSI"]).first.brutto_eur * eurokurs %>;
         anzahlKanaeleBaugruppe = <%= Assembly.where(["kennung = ?", "ET200SP Enc SSI"]).first.kanaele %>;
         anzahlBaugruppen = $("#anzahlBaugruppenSsi").val();
         reserve = $("#reserveSsi").val();
@@ -391,14 +417,14 @@
         $("#nettoChfSsi").html(nettoChf);
 
         var anzahlKanaelePnozMulti = <%= Assembly.where(["kennung = ?", "PNOZmulti"]).first.kanaele %>;
-        var preisPnozMulti = <%= Assembly.where(["kennung = ?", "PNOZmulti"]).first.brutto %> * eurokurs;
+        var preisPnozMulti = <%= Assembly.where(["kennung = ?", "PNOZmulti"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti"]).first.brutto_eur * eurokurs %>;
         var anzahlKanaelePnozMultiBaugruppe = <%= Assembly.where(["kennung = ?", "PNOZmulti 08DI"]).first.kanaele %>;
-        var preisPnozMultiBaugruppe = <%= Assembly.where(["kennung = ?", "PNOZmulti 08DI"]).first.brutto %> * eurokurs;
-        var preisPnozMultiChipcard = <%= Assembly.where(["kennung = ?", "PNOZmulti Chipcard"]).first.brutto %> * eurokurs;
-        var preisPnozMultiKlemm = <%= Assembly.where(["kennung = ?", "PNOZmulti Klemm"]).first.brutto %> * eurokurs;
-        var preisPnozMultiSl = <%= Assembly.where(["kennung = ?", "PNOZmulti SL"]).first.brutto %> * eurokurs;
-        var preisPnozMultiSlKlemm = <%= Assembly.where(["kennung = ?", "PNOZmulti SL Klemm"]).first.brutto %> * eurokurs;
-        var preisPnozMultiPb = <%= Assembly.where(["kennung = ?", "PNOZmulti PB"]).first.brutto %> * eurokurs;
+        var preisPnozMultiBaugruppe = <%= Assembly.where(["kennung = ?", "PNOZmulti 08DI"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti 08DI"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti 08DI"]).first.brutto_eur * eurokurs %>;
+        var preisPnozMultiChipcard = <%= Assembly.where(["kennung = ?", "PNOZmulti Chipcard"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti Chipcard"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti Chipcard"]).first.brutto_eur * eurokurs %>;
+        var preisPnozMultiKlemm = <%= Assembly.where(["kennung = ?", "PNOZmulti Klemm"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti Klemm"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti Klemm"]).first.brutto_eur * eurokurs %>;
+        var preisPnozMultiSl = <%= Assembly.where(["kennung = ?", "PNOZmulti SL"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti SL"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti SL"]).first.brutto_eur * eurokurs %>;
+        var preisPnozMultiSlKlemm = <%= Assembly.where(["kennung = ?", "PNOZmulti SL Klemm"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti SL Klemm"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti SL Klemm"]).first.brutto_eur * eurokurs %>;
+        var preisPnozMultiPb = <%= Assembly.where(["kennung = ?", "PNOZmulti PB"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti PB"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti PB"]).first.brutto_eur * eurokurs %>;
         reserve = $("#reserveSdi").val();
         bruttoChf = ((preisPnozMulti + preisPnozMultiChipcard + preisPnozMultiKlemm + 2*preisPnozMultiSl + 2*preisPnozMultiSlKlemm + preisPnozMultiPb + preisPbStecker)/(anzahlKanaelePnozMulti-anzahlKanaelePnozMulti*reserve)) +
             (preisPnozMultiSlKlemm+preisPnozMultiBaugruppe)/(anzahlKanaelePnozMultiBaugruppe-anzahlKanaelePnozMultiBaugruppe*reserve);
@@ -407,7 +433,7 @@
         $("#nettoChfSdi").html(nettoChf);
 
         anzahlKanaelePnozMultiBaugruppe = <%= Assembly.where(["kennung = ?", "PNOZmulti 04DO"]).first.kanaele %>;
-        preisPnozMultiBaugruppe = <%= Assembly.where(["kennung = ?", "PNOZmulti 04DO"]).first.brutto %> * eurokurs;
+        preisPnozMultiBaugruppe = <%= Assembly.where(["kennung = ?", "PNOZmulti 04DO"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti 04DO"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti 04DO"]).first.brutto_eur * eurokurs %>;
         reserve = $("#reserveSdo").val();
         bruttoChf = ((preisPnozMulti + preisPnozMultiChipcard + preisPnozMultiKlemm + 2*preisPnozMultiSl + 2*preisPnozMultiSlKlemm + preisPnozMultiPb + preisPbStecker)/(anzahlKanaelePnozMulti-anzahlKanaelePnozMulti*reserve)) +
             (preisPnozMultiSlKlemm+preisPnozMultiBaugruppe)/(anzahlKanaelePnozMultiBaugruppe-anzahlKanaelePnozMultiBaugruppe*reserve);
@@ -416,7 +442,7 @@
         $("#nettoChfSdo").html(nettoChf);
 
         anzahlKanaelePnozMultiBaugruppe = <%= Assembly.where(["kennung = ?", "PNOZmulti 01AI"]).first.kanaele %>;
-        preisPnozMultiBaugruppe = <%= Assembly.where(["kennung = ?", "PNOZmulti 01AI"]).first.brutto %> * eurokurs;
+        preisPnozMultiBaugruppe = <%= Assembly.where(["kennung = ?", "PNOZmulti 01AI"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti 01AI"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti 01AI"]).first.brutto_eur * eurokurs %>;
         reserve = $("#reserveSai").val();
         bruttoChf = ((preisPnozMulti + preisPnozMultiChipcard + preisPnozMultiKlemm + 2*preisPnozMultiSl + 2*preisPnozMultiSlKlemm + preisPnozMultiPb + preisPbStecker)/(anzahlKanaelePnozMulti-anzahlKanaelePnozMulti*reserve)) +
             (preisPnozMultiSlKlemm+preisPnozMultiBaugruppe)/(anzahlKanaelePnozMultiBaugruppe-anzahlKanaelePnozMultiBaugruppe*reserve);
@@ -425,7 +451,7 @@
         $("#nettoChfSai").html(nettoChf);
 
         anzahlKanaelePnozMultiBaugruppe = <%= Assembly.where(["kennung = ?", "PNOZmulti 01AO"]).first.kanaele %>;
-        preisPnozMultiBaugruppe = <%= Assembly.where(["kennung = ?", "PNOZmulti 01AO"]).first.brutto %> * eurokurs;
+        preisPnozMultiBaugruppe = <%= Assembly.where(["kennung = ?", "PNOZmulti 01AO"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti 01AO"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti 01AO"]).first.brutto_eur * eurokurs %>;
         reserve = $("#reserveSao").val();
         bruttoChf = ((preisPnozMulti + preisPnozMultiChipcard + preisPnozMultiKlemm + 2*preisPnozMultiSl + 2*preisPnozMultiSlKlemm + preisPnozMultiPb + preisPbStecker)/(anzahlKanaelePnozMulti-anzahlKanaelePnozMulti*reserve)) +
             (preisPnozMultiSlKlemm+preisPnozMultiBaugruppe)/(anzahlKanaelePnozMultiBaugruppe-anzahlKanaelePnozMultiBaugruppe*reserve);
