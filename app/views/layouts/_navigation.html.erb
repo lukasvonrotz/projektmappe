@@ -20,20 +20,8 @@
             <li class="<%= 'active' if current_page? (suppliers_path) %>">
               <%= link_to "Lieferanten", suppliers_path %>
             </li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Kabel
-                <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li class="<%= 'active' if current_page? (wires_path) %>">
-                  <%= link_to "Kabel", wires_path %>
-                </li>
-                <li class="<%= 'active' if current_page? (wiresuppliers_path) %>">
-                  <%= link_to "Kabellieferanten", wiresuppliers_path %>
-                </li>
-                <li class="<%= 'active' if current_page? (wirecaptionsuppliers_path) %>">
-                  <%= link_to "Kabelbeschriftungslieferanten", wirecaptionsuppliers_path %>
-                </li>
-              </ul>
+            <li class="<%= 'active' if current_page? (wires_path) %>">
+              <%= link_to "Kabel", wires_path %>
             </li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Kosten

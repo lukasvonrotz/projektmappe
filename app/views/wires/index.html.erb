@@ -5,12 +5,12 @@
 <% if @allPricesEntered == 0 %>
   Preise anzeigen für:
   <select class="form-control" id="select_wiresupplier">
-    <% Wiresupplier.all.each do |wiresupplier| %>
+    <% @wiresuppliers.each do |wiresupplier| %>
         <option value="<%= wiresupplier.id %>"><%= wiresupplier.name %></option>
     <% end %>
   </select><br>
   <select class="form-control" id="select_wirecaptionsupplier">
-    <% Wirecaptionsupplier.all.each do |wirecaptionsupplier| %>
+    <% @wirecaptionsuppliers.each do |wirecaptionsupplier| %>
         <option value="<%= wirecaptionsupplier.id %>"><%= wirecaptionsupplier.name %></option>
     <% end %>
   </select><br>
@@ -74,19 +74,21 @@
       function updatePrices() {
           <% Wire.all.each do |wire| %>
             var pricesWirecaptionsuppliersWire<%= wire.id %> = {};
-            <% Wirecaptionsupplier.all.each do |wirecaptionsupplier| %>
-              pricesWirecaptionsuppliersWire<%= wire.id %>['kostenkabelmitmontagetraeger<%= wirecaptionsupplier.id %>'] = <%= wirecaptionsupplier.kostenkabelmitmontagetraeger %>;
-              pricesWirecaptionsuppliersWire<%= wire.id %>['kostenadernmitmontagehuelse<%= wirecaptionsupplier.id %>'] = <%= wire.anzahladern * wirecaptionsupplier.kostenadermitmontagehuelse %>;
+            <% @wirecaptionsuppliers.each do |wirecaptionsupplier| %>
+              pricesWirecaptionsuppliersWire<%= wire.id %>['kostenkabelmitmontagetraeger<%= wirecaptionsupplier.id %>'] =
+              <%= Wirecaptionprice.where(:supplier => wirecaptionsupplier).first.kostenkabelmitmontagetraeger %>;
+              pricesWirecaptionsuppliersWire<%= wire.id %>['kostenadernmitmontagehuelse<%= wirecaptionsupplier.id %>'] =
+              <%= wire.anzahladern * Wirecaptionprice.where(:supplier => wirecaptionsupplier).first.kostenadermitmontagehuelse %>;
             <% end %>
             var pricesWiresuppliersWire<%= wire.id %> = {};
-            <% Wiresupplier.all.each do |wiresupplier| %>
+            <% @wiresuppliers.each do |wiresupplier| %>
               pricesWiresuppliersWire<%= wire.id %>['beschriftungkabel1anschluss<%= wiresupplier.id %>'] = <%=
-                  WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss %>;
+                  WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss %>;
               pricesWiresuppliersWire<%= wire.id %>['beschriftungadern1anschluss<%= wiresupplier.id %>'] = <%=
-                  WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungaderneinanschluss %>;
+                  WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungaderneinanschluss %>;
               pricesWiresuppliersWire<%= wire.id %>['ohneBeschriftung<%= wiresupplier.id %>'] = <%=
-                  WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.anschlusstableauseite +
-                      WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", wire.id, wiresupplier.id]).first.anschlussgeraeteseite
+                  WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.anschlusstableauseite +
+                      WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.anschlussgeraeteseite
               %>;
             <% end %>
             var ohneBeschriftung = pricesWiresuppliersWire<%= wire.id %>["ohneBeschriftung" + $('#select_wiresupplier').find(":selected").val()];
@@ -103,6 +105,6 @@
   </script>
 <% else %>
     <div class="alert alert-danger">
-      Preise für Kabel nicht komplett! Bitte für Lieferanten alle Kabelpreise eintragen!<br><br><a href="/wiresuppliers/<%= @allPricesEntered %>/wire_wiresuppliers">Gehe zu fehlenden Preisen</a>
+      Preise für Kabel nicht komplett! Bitte für Lieferanten alle Kabelpreise eintragen!<br><br><a href="/suppliers/<%= @allPricesEntered %>/wire_suppliers">Gehe zu fehlenden Preisen</a>
     </div>
 <% end %>

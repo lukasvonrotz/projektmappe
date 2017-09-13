@@ -14,13 +14,13 @@ Kabeltyp: <%= @wire.kabeltyp %>
 <br><br>
 <h2>Preise</h2>
 <div class="row">
-  <% @wire.wiresuppliers.each do |wiresupplier| %>
+  <% @wire.suppliers.each do |wiresupplier| %>
     <div class="col-lg-4">
       <h3><%= wiresupplier.name %></h3>
       <div class="form-group">
         <label for="sel1">Beschriftungslieferant</label>
         <select class="form-control" id="select_wirecaptionsupplier<%= wiresupplier.id %>">
-          <% Wirecaptionsupplier.all.each do |wirecaptionsupplier| %>
+          <% @wirecaptionsuppliers.each do |wirecaptionsupplier| %>
             <option value="<%= wirecaptionsupplier.id %>"><%= wirecaptionsupplier.name %></option>
           <% end %>
         </select>
@@ -28,31 +28,31 @@ Kabeltyp: <%= @wire.kabeltyp %>
       <table style="width:100%">
         <tr>
           <td>CHF/m Anschluss Tableauseite</td>
-          <td id="hohlboden<%=wiresupplier.id%>"><%= WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.anschlusstableauseite %></td>
+          <td id="hohlboden<%=wiresupplier.id%>"><%= WireSupplier.where(["wire_id = ? and supplier_id = ?", @wire.id, wiresupplier.id]).first.anschlusstableauseite %></td>
         </tr>
         <tr>
           <td>CHF/m Anschluss Geraeteseite</td>
-          <td id="hohlboden<%=wiresupplier.id%>"><%= WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.anschlussgeraeteseite %></td>
+          <td id="hohlboden<%=wiresupplier.id%>"><%= WireSupplier.where(["wire_id = ? and supplier_id = ?", @wire.id, wiresupplier.id]).first.anschlussgeraeteseite %></td>
         </tr>
         <tr>
           <td>CHF/m Hohlboden</td>
-          <td id="hohlboden<%=wiresupplier.id%>"><%= WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.installationhohlboden %></td>
+          <td id="hohlboden<%=wiresupplier.id%>"><%= WireSupplier.where(["wire_id = ? and supplier_id = ?", @wire.id, wiresupplier.id]).first.installationhohlboden %></td>
         </tr>
         <tr>
           <td>Preis Trasse</td>
-          <td id="trasse<%=wiresupplier.id%>"><%= WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.installationtrasse %></td>
+          <td id="trasse<%=wiresupplier.id%>"><%= WireSupplier.where(["wire_id = ? and supplier_id = ?", @wire.id, wiresupplier.id]).first.installationtrasse %></td>
         </tr>
         <tr>
           <td>Preis Rohr</td>
-          <td id="rohr<%=wiresupplier.id%>"><%= WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.installationrohr %></td>
+          <td id="rohr<%=wiresupplier.id%>"><%= WireSupplier.where(["wire_id = ? and supplier_id = ?", @wire.id, wiresupplier.id]).first.installationrohr %></td>
         </tr>
         <tr>
           <td>Beschriftung Kabel 1 Anschluss</td>
-          <td id="kabel1anschluss<%=wiresupplier.id%>"><%= WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss %></td>
+          <td id="kabel1anschluss<%=wiresupplier.id%>"><%= WireSupplier.where(["wire_id = ? and supplier_id = ?", @wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss %></td>
         </tr>
         <tr>
           <td>Beschriftung Adern 1 Anschluss</td>
-          <td id="adern1anschluss<%=wiresupplier.id%>"><%= WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.beschriftungaderneinanschluss %></td>
+          <td id="adern1anschluss<%=wiresupplier.id%>"><%= WireSupplier.where(["wire_id = ? and supplier_id = ?", @wire.id, wiresupplier.id]).first.beschriftungaderneinanschluss %></td>
         </tr>
         <tr>
           <td>Beschriftungsschilder für Kabel 1 Anschluss</td>
@@ -86,24 +86,26 @@ Kabeltyp: <%= @wire.kabeltyp %>
 
 <script>
   var pricesWirecaptionsuppliers = {};
-  <% Wirecaptionsupplier.all.each do |wirecaptionsupplier| %>
-    pricesWirecaptionsuppliers['kostenkabelmitmontagetraeger<%= wirecaptionsupplier.id %>'] = <%= wirecaptionsupplier.kostenkabelmitmontagetraeger %>;
-    pricesWirecaptionsuppliers['kostenadernmitmontagehuelse<%= wirecaptionsupplier.id %>'] = <%= @wire.anzahladern * wirecaptionsupplier.kostenadermitmontagehuelse %>;
+  <% @wirecaptionsuppliers.each do |wirecaptionsupplier| %>
+    pricesWirecaptionsuppliers['kostenkabelmitmontagetraeger<%= wirecaptionsupplier.id %>'] =
+    <%= Wirecaptionprice.where(:supplier => wirecaptionsupplier).first.kostenkabelmitmontagetraeger %>;
+    pricesWirecaptionsuppliers['kostenadernmitmontagehuelse<%= wirecaptionsupplier.id %>'] =
+    <%= @wire.anzahladern * Wirecaptionprice.where(:supplier => wirecaptionsupplier).first.kostenadermitmontagehuelse %>;
   <% end %>
 
   var pricesWiresuppliers = {};
-  <% Wiresupplier.all.each do |wiresupplier| %>
+  <% @wiresuppliers.each do |wiresupplier| %>
     pricesWiresuppliers['beschriftungkabel1anschluss<%= wiresupplier.id %>'] = <%=
-                WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss %>;
+                WireSupplier.where(["wire_id = ? and supplier_id = ?", @wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss %>;
     pricesWiresuppliers['beschriftungadern1anschluss<%= wiresupplier.id %>'] = <%=
-                WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.beschriftungaderneinanschluss %>;
+                WireSupplier.where(["wire_id = ? and supplier_id = ?", @wire.id, wiresupplier.id]).first.beschriftungaderneinanschluss %>;
     pricesWiresuppliers['ohneBeschriftung<%= wiresupplier.id %>'] = <%=
-                WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.anschlusstableauseite +
-                    WireWiresupplier.where(["wire_id = ? and wiresupplier_id = ?", @wire.id, wiresupplier.id]).first.anschlussgeraeteseite
+                WireSupplier.where(["wire_id = ? and supplier_id = ?", @wire.id, wiresupplier.id]).first.anschlusstableauseite +
+                      WireSupplier.where(["wire_id = ? and supplier_id = ?", @wire.id, wiresupplier.id]).first.anschlussgeraeteseite
             %>;
   <% end %>
 
-  <% Wiresupplier.all.each do |wiresupplier| %>
+  <% @wiresuppliers.each do |wiresupplier| %>
     $("#select_wirecaptionsupplier<%= wiresupplier.id %>").change(function() {
         $("#captionkabel<%= wiresupplier.id %>").html("" + pricesWirecaptionsuppliers['kostenkabelmitmontagetraeger' + $(this).val()]);
         $("#captionadern<%= wiresupplier.id %>").html("" + pricesWirecaptionsuppliers['kostenadernmitmontagehuelse' + $(this).val()]);

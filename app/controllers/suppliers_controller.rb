@@ -17,12 +17,10 @@ class SuppliersController < ApplicationController
 
       suppliertypeid = Suppliertype.where(name: 'Kabelbeschriftung').first.id
       if supplier_params[:suppliertype_ids].include? suppliertypeid.to_s
-        puts 'lukas'
         wirecaptionprice = Wirecaptionprice.create
         wirecaptionprice.supplier = @supplier
         puts wirecaptionprice.errors.first
         wirecaptionprice.save
-        puts 'erstellt'
       end
 
       # write supplier to database

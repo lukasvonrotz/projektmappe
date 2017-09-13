@@ -11,16 +11,14 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :users
-  resources :projects
+  resources :projects do
+    resources :subprojects
+  end
   resources :assemblies
   resources :drives
   resources :electrical_installations
   resources :switchgears
   resources :wires
-  resources :wiresuppliers do
-    resources :wire_wiresuppliers
-  end
-  resources :wirecaptionsuppliers
 
   resources :suppliers do
     resources :wire_suppliers
