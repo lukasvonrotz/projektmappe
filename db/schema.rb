@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170913060242) do
+ActiveRecord::Schema.define(version: 20170913143945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,9 +73,21 @@ ActiveRecord::Schema.define(version: 20170913060242) do
 
   create_table "subprojects", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "project_id"
+    t.integer  "customer_id"
+    t.index ["customer_id"], name: "index_subprojects_on_customer_id", using: :btree
+    t.index ["project_id"], name: "index_subprojects_on_project_id", using: :btree
+  end
+
+  create_table "subsubprojects", force: :cascade do |t|
+    t.string   "name"
     t.boolean  "master"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "subproject_id"
+    t.index ["subproject_id"], name: "index_subsubprojects_on_subproject_id", using: :btree
   end
 
   create_table "subsystems", force: :cascade do |t|
@@ -206,6 +218,9 @@ ActiveRecord::Schema.define(version: 20170913060242) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "subprojects", "customers"
+  add_foreign_key "subprojects", "projects"
+  add_foreign_key "subsubprojects", "subprojects"
   add_foreign_key "subsystems", "projects"
   add_foreign_key "units", "subsystems"
   add_foreign_key "wirecaptionprices", "suppliers"

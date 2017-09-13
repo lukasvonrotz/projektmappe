@@ -1,6 +1,6 @@
-<h1>Alle Projekte</h1>
+<h1>Alle Anlagen</h1>
 <br>
-<a href="<%=new_project_path%>" class="btn btn-success">Neues Projekt erstellen</a>
+<a href="<%=new_project_path%>" class="btn btn-success">Neue Anlage erstellen</a>
 <br><br><br>
 <div id="content" class="table-responsive">
   <table id="project_table" class="table table-striped table-bordered data_table" cellspacing="0" width="100%">
@@ -8,6 +8,7 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
+      <th>Anlagen</th>
       <th>Benutzer</th>
       <th>Aktionen</th>
     </tr>
@@ -17,6 +18,13 @@
         <tr>
           <td><%= project.id %></td>
           <td><a href="<%= project_path(project.id) %>"><%= project.name %></a></td>
+          <td>
+            <ul style="padding-left: 15px;">
+              <% project.subprojects.each do |subproject| %>
+                  <li><%= subproject.name %></li>
+              <% end %>
+            </ul>
+          </td>
           <td>
             <ul style="padding-left: 15px;">
               <% project.users.each do |user| %>
@@ -31,7 +39,7 @@
                     data-toggle="modal" data-target="#popup_sure_delete"
                     data-itemid="<%= project.id %>"
                     data-model="projects">
-              Projekt löschen
+              Anlage löschen
             </button>
           </td>
         </tr>
@@ -40,5 +48,5 @@
   </table>
 </div>
 
-<%= render 'layouts/loading', :message => "Lade Projekte..." %>
+<%= render 'layouts/loading', :message => "Lade Anlagen..." %>
 <%= render 'layouts/popups' %>

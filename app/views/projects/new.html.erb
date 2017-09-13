@@ -1,4 +1,4 @@
-<h1>Neues Projekt erstellen</h1>
+<h1>Neue Anlage erstellen</h1>
 <% if @project.errors.any? %>
     <div class="alert alert-danger">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -7,4 +7,4 @@
 <% end %>
 
 <%= render 'form', :project => @project, :context => true  %>
-<%= link_to "Zurück zu Projektübersicht", projects_path %>
+<%= link_to "Zurück zu Anlagenübersicht", projects_path %>

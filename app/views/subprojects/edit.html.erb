@@ -1,0 +1,10 @@
+<h1>Projekt bearbeiten</h1>
+<% if @subproject.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @subproject.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :subproject => @subproject, :context => false  %>
+<%= link_to "Zurück zu Projektübersicht", subprojects_path %>

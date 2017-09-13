@@ -1,0 +1,15 @@
+<h1><%= @subsubproject.name %></h1>
+<br>
+<% if @subsubproject.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @subsubproject.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @subsubproject.id %><br>
+Name: <%= @subsubproject.name %><br>
+<br><br>
+<a href="<%=new_subsubproject_subsubsubproject_path(@subsubproject.id)%>" class="btn btn-success">Neue Version erstellen</a>
+<br><br>
+<%= link_to "Zurück zu Versionenübersicht", subsubprojects_path %>

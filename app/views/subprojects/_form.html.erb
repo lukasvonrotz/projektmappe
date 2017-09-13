@@ -1,15 +1,15 @@
-<%= form_for project do |project| %>
+<%= form_for [project, project_subproject] do |project_subproject| %>
 
     <div class="field form-group">
-      <%= project.label :name, 'Name' %>
-      <%= project.text_field :name, :class => "form-control",
-                             placeholder: 'Name für Anlage eingeben' %>
+      <%= project_subproject.label :name, 'Name' %>
+      <%= project_subproject.text_field :name, :class => "form-control",
+                             placeholder: 'Name für Projekt eingeben' %>
     </div>
 
     <% if !context %>
       <div class="field form-group">
-        <%= project.label :user_ids, 'Benutzer' %></br>
-        <%= project.select :user_ids,
+        <%= project_subproject.label :user_ids, 'Benutzer' %></br>
+        <%= project_subproject.select :user_ids,
                            User.all.map { |u| [u.email, u.id] },
                            { include_blank: true }, { class: 'chosen-select', multiple: 'true' } %>
       </div>
@@ -17,9 +17,9 @@
 
     <div class="actions form-group">
       <% if context %>
-          <%= project.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+          <%= project_subproject.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
       <% else %>
-          <%= project.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+          <%= project_subproject.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
       <% end %>
     </div>
 

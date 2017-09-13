@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
   resources :users
   resources :projects do
-    resources :subprojects
+    resources :subprojects do
+      resources :subsubprojects
+    end
   end
   resources :assemblies
   resources :drives

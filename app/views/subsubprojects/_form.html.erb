@@ -1,0 +1,17 @@
+<%= form_for subsubproject do |subsubproject| %>
+
+    <div class="field form-group">
+      <%= subsubproject.label :name, 'Name' %>
+      <%= subsubproject.text_field :name, :class => "form-control",
+                             placeholder: 'Name für Version eingeben' %>
+    </div>
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= subsubproject.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= subsubproject.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

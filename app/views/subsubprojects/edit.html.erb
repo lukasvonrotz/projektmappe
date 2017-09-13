@@ -1,0 +1,10 @@
+<h1>Version bearbeiten</h1>
+<% if @subsubproject.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @subsubproject.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :subsubproject => @subsubproject, :context => false  %>
+<%= link_to "Zurück zu Versionsübersicht", subsubprojects_path %>

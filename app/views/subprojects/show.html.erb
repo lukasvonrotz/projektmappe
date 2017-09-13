@@ -1,0 +1,21 @@
+<h1><%= @subproject.name %></h1>
+<br>
+<% if @subproject.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @subproject.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @subproject.id %><br>
+Name: <%= @subproject.name %><br>
+Benutzer:
+<ul>
+  <% @subproject.users.each do |user| %>
+      <li><%= user.email %></li>
+  <% end %>
+</ul>
+<br><br>
+<a href="<%=new_project_subproject_path(@subproject.id)%>" class="btn btn-success">Neue Version erstellen</a>
+<br><br>
+<%= link_to "Zurück zu Projektübersicht", projects_path %>
