@@ -1,0 +1,50 @@
+<h1>Alle Lieferanten</h1>
+<br>
+<a href="<%=new_supplier_path%>" class="btn btn-success">Neuen Lieferanten erstellen</a>
+<br><br><br>
+<div id="content" class="table-responsive">
+  <table id="supplier_table" class="table table-striped table-bordered data_table" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Lieferant für:</th>
+      <th>Aktionen</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @suppliers.each do |supplier| %>
+        <tr>
+          <td><%= supplier.id %></td>
+          <td><%= supplier.name %></td>
+          <td><ul style="padding-left: 15px;">
+            <% supplier.suppliertypes.each do |suppliertype| %>
+                <li><%= suppliertype.name %></li>
+            <% end %>
+          </ul>
+          </td>
+          <td>
+            <a href="<%= supplier_path(supplier.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
+            <a href="<%= edit_supplier_path(supplier.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
+            <% if supplier.suppliertypes.exists?(name: 'Kabel') %>
+              <a href="<%= supplier_wire_suppliers_path(supplier.id) %>" class="btn btn-xs btn-info btn-index">Kabelpreise bearbeiten</a>
+            <% end %>
+            <% if supplier.suppliertypes.exists?(name: 'Kabelbeschriftung') %>
+                <% wirecaptionprice_id = Wirecaptionprice.where(:supplier_id => supplier.id).first.id %>
+              <a href="<%= edit_wirecaptionprice_path(wirecaptionprice_id) %>" class="btn btn-xs btn-info btn-index">Kabelbeschriftungspreise bearbeiten</a>
+            <% end %>
+            <button type="button" class="btn btn-xs btn-danger btn-index"
+                    data-toggle="modal" data-target="#popup_sure_delete"
+                    data-itemid="<%= supplier.id %>"
+                    data-model="suppliers">
+              Kabellieferant löschen
+            </button>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render 'layouts/loading', :message => "Lade Lieferanten..." %>
+<%= render 'layouts/popups' %>

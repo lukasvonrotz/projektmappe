@@ -1,0 +1,10 @@
+<h1>Kabelbeschriftungspreise editieren</h1>
+<% if @wirecaptionprice.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @wirecaptionprice.errors.full_messages.first %>
+    </div>
+<% end %>
+<br>
+<%= render 'form', :wirecaptionprice => @wirecaptionprice  %>
+<%= link_to "Zurück zu Lieferantenübersicht", suppliers_path %>

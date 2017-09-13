@@ -22,5 +22,9 @@ Rails.application.routes.draw do
   end
   resources :wirecaptionsuppliers
 
+  resources :suppliers do
+    resources :wire_suppliers
+  end
+  resources :wirecaptionprices
 
 end

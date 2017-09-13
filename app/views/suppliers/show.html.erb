@@ -1,0 +1,14 @@
+<h1>Details Lieferant</h1>
+<br>
+<% if @supplier.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @supplier.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @supplier.id %><br>
+Name: <%= @supplier.name %><br>
+
+<br><br>
+<%= link_to "Zurück zu Lieferantenübersicht", suppliers_path %>

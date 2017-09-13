@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912143537) do
+ActiveRecord::Schema.define(version: 20170913060242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,10 +73,9 @@ ActiveRecord::Schema.define(version: 20170912143537) do
 
   create_table "subprojects", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "customer_id"
-    t.index ["customer_id"], name: "index_subprojects_on_customer_id", using: :btree
+    t.boolean  "master"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "subsystems", force: :cascade do |t|
@@ -85,6 +84,26 @@ ActiveRecord::Schema.define(version: 20170912143537) do
     t.datetime "updated_at", null: false
     t.integer  "project_id"
     t.index ["project_id"], name: "index_subsystems_on_project_id", using: :btree
+  end
+
+  create_table "supplier_suppliertypes", force: :cascade do |t|
+    t.integer  "supplier_id"
+    t.integer  "suppliertype_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["supplier_id", "suppliertype_id"], name: "index_supplier_suppliertypes_on_supplier_id_and_suppliertype_id", unique: true, using: :btree
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "suppliertypes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "switchgears", force: :cascade do |t|
@@ -126,6 +145,21 @@ ActiveRecord::Schema.define(version: 20170912143537) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "wire_suppliers", force: :cascade do |t|
+    t.integer  "wire_id"
+    t.integer  "supplier_id"
+    t.float    "anschlusstableauseite"
+    t.float    "anschlussgeraeteseite"
+    t.float    "beschriftungkabeleinanschluss"
+    t.float    "beschriftungaderneinanschluss"
+    t.float    "installationhohlboden"
+    t.float    "installationtrasse"
+    t.float    "installationrohr"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["wire_id", "supplier_id"], name: "index_wire_suppliers_on_wire_id_and_supplier_id", unique: true, using: :btree
+  end
+
   create_table "wire_wiresuppliers", force: :cascade do |t|
     t.integer  "wire_id"
     t.integer  "wiresupplier_id"
@@ -139,6 +173,15 @@ ActiveRecord::Schema.define(version: 20170912143537) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.index ["wire_id", "wiresupplier_id"], name: "index_wire_wiresuppliers_on_wire_id_and_wiresupplier_id", unique: true, using: :btree
+  end
+
+  create_table "wirecaptionprices", force: :cascade do |t|
+    t.float    "kostenkabelmitmontagetraeger"
+    t.float    "kostenadermitmontagehuelse"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "supplier_id"
+    t.index ["supplier_id"], name: "index_wirecaptionprices_on_supplier_id", using: :btree
   end
 
   create_table "wirecaptionsuppliers", force: :cascade do |t|
@@ -163,7 +206,7 @@ ActiveRecord::Schema.define(version: 20170912143537) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "subprojects", "customers"
   add_foreign_key "subsystems", "projects"
   add_foreign_key "units", "subsystems"
+  add_foreign_key "wirecaptionprices", "suppliers"
 end

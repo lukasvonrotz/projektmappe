@@ -1,0 +1,30 @@
+<%= form_for supplier do |supplier| %>
+
+    <div class="field form-group">
+      <%= supplier.label :name, 'Name' %>
+      <%= supplier.text_field :name, :class => "form-control",
+                             placeholder: 'Name von Lieferant eingeben' %>
+    </div>
+
+    <div class="field form-group">
+      <%= supplier.label :suppliertype_ids, 'Typ' %></br>
+      <%= supplier.select :suppliertype_ids,
+                         Suppliertype.all.map { |u| [u.name, u.id] },
+                         { include_blank: true }, { class: 'chosen-select', multiple: 'true' } %>
+    </div>
+
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= supplier.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= supplier.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>
+
+<script>
+    $(".chosen-select").chosen({allow_single_deselect: true, placeholder_text: "Wähle Optionen aus",
+        no_results_text: 'Keine Lieferantentypen gefunden', search_contains: true, width: '500px'});
+</script>
