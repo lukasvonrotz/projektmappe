@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170913143945) do
+ActiveRecord::Schema.define(version: 20170915061841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,14 @@ ActiveRecord::Schema.define(version: 20170913143945) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "subproject_users", force: :cascade do |t|
+    t.integer  "subproject_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["subproject_id", "user_id"], name: "by_subproject_and_user", unique: true, using: :btree
   end
 
   create_table "subprojects", force: :cascade do |t|

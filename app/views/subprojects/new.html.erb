@@ -6,5 +6,5 @@
     </div>
 <% end %>
 
-<%= render 'form', :project => @subproject.project, :project_subproject => @subproject, :context => true  %>
-<%= link_to "Zurück zu Projektübersicht", project_subprojects_path %>
+<%= render 'form', :project => @subproject.project, :project_subproject => @subproject,
+           :customer => Customer.all.first, :context => true  %>

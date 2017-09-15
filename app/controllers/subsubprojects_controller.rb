@@ -1,4 +1,4 @@
-class SubsubsubsubprojectsController < ApplicationController
+class SubsubprojectsController < ApplicationController
   def index
     @subsubprojects = Subsubproject.all
   end
@@ -14,10 +14,9 @@ class SubsubsubsubprojectsController < ApplicationController
   # POST /subsubprojects
   def create
     @subsubproject = Subsubproject.new(subsubproject_params)
-    @subsubproject.users << current_user
     # write subsubproject to database
     if @subsubproject.save
-      redirect_to subsubprojects_path, :notice => 'Version erfolgreich erstellt.'
+      redirect_to project_subproject_path(:project_id => @subsubproject.subproject.project.id, :id => @subsubproject.subproject.id), :notice => 'Version erfolgreich erstellt.'
     else
       render 'new'
     end
@@ -42,7 +41,9 @@ class SubsubsubsubprojectsController < ApplicationController
   def update
     @subsubproject = Subsubproject.find(params[:id])
     if @subsubproject.update(subsubproject_params)
-      redirect_to subsubprojects_path, :notice => 'Version erfolgreich aktualisiert.'
+      redirect_to project_subproject_path(:project_id => @subsubproject.subproject.project.id,
+                                          :id => @subsubproject.subproject.id),
+                  :notice => 'Version erfolgreich aktualisiert.'
     else
       render 'edit'
     end
@@ -52,13 +53,16 @@ class SubsubsubsubprojectsController < ApplicationController
   # DELETE /subsubprojects/:id
   def destroy
     @subsubproject = Subsubproject.find(params[:id])
+    projectid = @subsubproject.subproject.project.id
+    subprojectid = @subsubproject.subproject.id
     @subsubproject.destroy
-    redirect_to subsubprojects_path, :notice => 'Version wurde gelöscht.'
+    redirect_to project_subproject_path(:project_id => projectid,
+                                        :id => subprojectid), :notice => 'Version wurde gelöscht.'
   end
 
   private
   # defines which parameters have to be provided by the form when creating a new subsubproject
   def subsubproject_params
-    params.require(:subsubproject).permit(:name, {:user_ids => []})
+    params.require(:subsubproject).permit(:name, :master, :subproject_id)
   end
 end

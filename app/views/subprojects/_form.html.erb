@@ -6,6 +6,12 @@
                              placeholder: 'Name für Projekt eingeben' %>
     </div>
 
+    <div class="field form-group">
+      <%= project_subproject.label :customer, 'Kunde' %>
+      <%= project_subproject.collection_select :customer_id, Customer.all,:id,:name,
+                                    {:selected => customer.id}, {class:"form-control"} %>
+    </div>
+
     <% if !context %>
       <div class="field form-group">
         <%= project_subproject.label :user_ids, 'Benutzer' %></br>
@@ -14,6 +20,8 @@
                            { include_blank: true }, { class: 'chosen-select', multiple: 'true' } %>
       </div>
     <% end %>
+
+    <%= project_subproject.hidden_field :project_id, :value => 1 %>
 
     <div class="actions form-group">
       <% if context %>

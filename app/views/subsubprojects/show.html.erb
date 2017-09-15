@@ -9,7 +9,7 @@
 
 ID: <%= @subsubproject.id %><br>
 Name: <%= @subsubproject.name %><br>
+
 <br><br>
-<a href="<%=new_subsubproject_subsubsubproject_path(@subsubproject.id)%>" class="btn btn-success">Neue Version erstellen</a>
-<br><br>
-<%= link_to "Zurück zu Versionenübersicht", subsubprojects_path %>
+<%= link_to "Zurück zu Versionenübersicht", project_subproject_path(@subsubproject.subproject.project.id,
+                                                                    @subsubproject.subproject.id) %>

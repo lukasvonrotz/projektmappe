@@ -5,6 +5,12 @@
       <%= subsubproject.text_field :name, :class => "form-control",
                              placeholder: 'Name für Version eingeben' %>
     </div>
+    <div class="field form-group">
+      <%= subsubproject.label :master, 'Ist diese Version Master?' %><br>
+      <%= subsubproject.check_box :master %>
+    </div>
+
+    <%= subsubproject.hidden_field :subproject_id, :value => 3 %>
 
     <div class="actions form-group">
       <% if context %>

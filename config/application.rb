@@ -12,8 +12,7 @@ module Projektmappe
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    I18n.available_locales = [:de]
-    #I18n.available_locales = [:en, :de]
+    I18n.available_locales = [:de, :en]
     config.i18n.load_path += Dir[Rails.root.join('users', 'locales', '*.{rb,yml}').to_s]
     config.time_zone = 'Bern' # set default time zone to "Moscow" (UTC +4)
     config.i18n.default_locale = :de

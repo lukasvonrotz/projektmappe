@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       resources :subsubprojects
     end
   end
+  resources :subprojects
+  resources :subsubprojects
   resources :assemblies
   resources :drives
   resources :electrical_installations

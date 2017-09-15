@@ -8,7 +8,7 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
-      <th>Anlagen</th>
+      <th>Projekte</th>
       <th>Benutzer</th>
       <th>Aktionen</th>
     </tr>
@@ -21,7 +21,7 @@
           <td>
             <ul style="padding-left: 15px;">
               <% project.subprojects.each do |subproject| %>
-                  <li><%= subproject.name %></li>
+                  <li><a href="<%= project_subproject_path(project.id, subproject.id) %>"><%= subproject.name %></a></li>
               <% end %>
             </ul>
           </td>
