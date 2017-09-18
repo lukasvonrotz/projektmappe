@@ -22,7 +22,7 @@
   <% @subproject.subsubprojects.each do |subsubproject| %>
       <tr>
         <td><%= subsubproject.id %></td>
-        <td><a href="<%= project_subproject_subsubproject_path(@project.id, @subproject.id) %>"><%= subsubproject.name %></a></td>
+        <td><a href="<%= project_subproject_subsubproject_path(@project.id, @subproject.id, subsubproject.id) %>"><%= subsubproject.name %></a></td>
         <td><%= subsubproject.master ? 'Ja' : 'Nein' %></td>
         <td>
           <a href="<%= project_subproject_subsubproject_path(@project.id, @subproject.id, subsubproject.id) %>" class="btn btn-xs btn-default btn-index">Info</a>

@@ -26,11 +26,11 @@
       <tr>
         <td><%= subproject.id %></td>
         <td><a href="<%= project_subproject_path(@project.id, subproject.id) %>"><%= subproject.name %></a></td>
-        <td><%= subproject.customer %></td>
+        <td><%= subproject.customer.name %></td>
         <td>
           <ul style="padding-left: 15px;">
             <% subproject.subsubprojects.each do |subsubproject| %>
-                <li><a href="<%= project_subproject_path(@project.id, subproject.id, subsubproject.id) %>"><%= subsubproject.name %></a></li>
+                <li><a href="<%= project_subproject_subsubproject_path(@project.id, subproject.id, subsubproject.id) %>"><%= subsubproject.name %></a></li>
             <% end %>
           </ul>
         </td>

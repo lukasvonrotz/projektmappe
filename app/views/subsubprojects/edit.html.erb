@@ -6,5 +6,5 @@
     </div>
 <% end %>
 
-<%= render 'form', :subsubproject => @subsubproject, :context => false  %>
+<%= render 'form', :subprojectid => @subsubproject.subproject.id, :subsubproject => @subsubproject, :context => false  %>
 <%= link_to "Zurück zu Versionsübersicht", subsubprojects_path %>
