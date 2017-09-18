@@ -9,6 +9,7 @@ class SubprojectsController < ApplicationController
     def new
       # build a 'temporary' post which is written to DB later (create-method)
       @subproject = Subproject.new
+      @projectid = params[:project_id]
     end
 
     # Control logic when creating a new subproject

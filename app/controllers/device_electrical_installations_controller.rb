@@ -1,0 +1,2 @@
+class DeviceElectricalInstallationsController < ApplicationController
+end

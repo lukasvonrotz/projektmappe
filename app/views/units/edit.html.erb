@@ -1,0 +1,10 @@
+<h1>Unit bearbeiten</h1>
+<% if @unit.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @unit.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :subsystemid => @unit.subsystem.id, :unit => @unit, :context => false  %>
+<%= link_to "Zurück zu Teilanlagenübersicht", units_path %>

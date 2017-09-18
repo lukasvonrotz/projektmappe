@@ -12,10 +12,15 @@ Rails.application.routes.draw do
 
   resources :users
   resources :projects do
+    resources :subsystems do
+      resources :units
+    end
     resources :subprojects do
       resources :subsubprojects
     end
   end
+  resources :subsystems
+  resources :units
   resources :subprojects
   resources :subsubprojects
   resources :assemblies

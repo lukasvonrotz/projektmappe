@@ -7,4 +7,4 @@
 <% end %>
 
 <%= render 'form', :project => @subproject.project, :project_subproject => @subproject,
-           :customer => Customer.all.first, :context => true  %>
+           :customer => Customer.all.first, :projectid => @projectid, :context => true  %>

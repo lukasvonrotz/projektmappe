@@ -1,0 +1,19 @@
+<%= form_for unit do |unit| %>
+
+    <div class="field form-group">
+      <%= unit.label :name, 'Name' %>
+      <%= unit.text_field :name, :class => "form-control",
+                             placeholder: 'Name für Unit eingeben' %>
+    </div>
+
+    <%= unit.hidden_field :subsystem_id, :value => subsystemid %>
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= unit.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= unit.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

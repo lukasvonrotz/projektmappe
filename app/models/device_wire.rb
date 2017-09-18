@@ -1,0 +1,2 @@
+class DeviceWire < ApplicationRecord
+end

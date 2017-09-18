@@ -1,0 +1,10 @@
+<h1>Teilanlage bearbeiten</h1>
+<% if @subsystem.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @subsystem.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :project => @subsystem.project, :project_subsystem => @subsystem,
+           :projectid => @subsystem.project.id, :context => false  %>

@@ -1,0 +1,11 @@
+<h1>Neue Unit erstellen</h1>
+<% if @unit.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @unit.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :subsystemid => @subsystemid, :unit => @unit, :context => true  %>
+
+<%= link_to "Zurück zu Unit-Übersicht", units_path %>

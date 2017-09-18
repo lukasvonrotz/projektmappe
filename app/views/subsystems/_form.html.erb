@@ -1,0 +1,19 @@
+<%= form_for [project, project_subsystem] do |project_subsystem| %>
+
+    <div class="field form-group">
+      <%= project_subsystem.label :name, 'Name' %>
+      <%= project_subsystem.text_field :name, :class => "form-control",
+                             placeholder: 'Name für Teilanlage eingeben' %>
+    </div>
+
+    <%= project_subsystem.hidden_field :project_id, :value => projectid %>
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= project_subsystem.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= project_subsystem.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

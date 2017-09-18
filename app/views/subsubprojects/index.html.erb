@@ -1,6 +1,6 @@
 <h1>Alle Versionen</h1>
 <br>
-<a href="<%=new_subsubproject_path%>" class="btn btn-success">Neue Anlage erstellen</a>
+<a href="<%=new_subsubproject_path%>" class="btn btn-success">Neue Version erstellen</a>
 <br><br><br>
 <div id="content" class="table-responsive">
   <table id="subsubproject_table" class="table table-striped table-bordered data_table" cellspacing="0" width="100%">
@@ -8,7 +8,6 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
-      <th>Projekte</th>
       <th>Aktionen</th>
     </tr>
     </thead>
@@ -17,13 +16,6 @@
         <tr>
           <td><%= subsubproject.id %></td>
           <td><a href="<%= subsubproject_path(subsubproject.id) %>"><%= subsubproject.name %></a></td>
-          <td>
-            <ul style="padding-left: 15px;">
-              <% subsubproject.subsubsubprojects.each do |subsubsubproject| %>
-                  <li><%= subsubsubproject.name %></li>
-              <% end %>
-            </ul>
-          </td>
           <td>
             <a href="<%= subsubproject_path(subsubproject.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
             <a href="<%= edit_subsubproject_path(subsubproject.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
@@ -40,5 +32,5 @@
   </table>
 </div>
 
-<%= render 'layouts/loading', :message => "Lade Anlagen..." %>
+<%= render 'layouts/loading', :message => "Lade Versionen..." %>
 <%= render 'layouts/popups' %>

@@ -1,0 +1,2 @@
+class DeviceElectricalInstallation < ApplicationRecord
+end
