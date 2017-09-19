@@ -41,6 +41,9 @@
                 </li>
               </ul>
             </li>
+            <li class="<%= 'active' if current_page? (wires_path) %>">
+              <%= link_to "Geräte", devices_path %>
+            </li>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">

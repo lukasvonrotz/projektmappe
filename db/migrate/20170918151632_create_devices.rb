@@ -15,7 +15,8 @@ class CreateDevices < ActiveRecord::Migration[5.0]
       t.float :eng_signaltest
       t.float :eng_safetytest
       t.float :eng_fkttestkalt
-      t.float :eng_fkttestheisskonformitaet
+      t.float :eng_fkttestheiss
+      t.float :eng_konformitaet
       t.integer :ger_beschriftung
       t.integer :ger_sensor
       t.integer :ger_ventil

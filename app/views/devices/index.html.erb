@@ -1,0 +1,204 @@
+<h1>Alle Geräte</h1>
+<br>
+<a href="<%=new_assembly_path%>" class="btn btn-success">Neues Gerät erstellen</a>
+<br><br><br><br>
+<div id="content" class="table-responsive">
+  <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead class="table-devices-header">
+      <tr>
+        <th><span>Definition</span></th>
+        <th><span>Eng-Admin</span></th>
+        <th class="shorty"><span>Eng-Steuerkonzept</span></th>
+        <th><span>Eng-IO-Liste</span></th>
+        <th><span>Eng-El-Planung</span></th>
+        <th><span>Eng-Fkt-Beschrieb</span></th>
+        <th><span>Eng-Safetymatrix</span></th>
+        <th><span>Eng-SW</span></th>
+        <th><span>Eng-SW-Safety</span></th>
+        <th><span>Eng-Bauleitung</span></th>
+        <th><span>Eng-Parametrierung</span></th>
+        <th><span>Eng-Signaltest</span></th>
+        <th><span>Eng-Safetytest</span></th>
+        <th><span>Eng-Fkt-Test kalt</span></th>
+        <th><span>Eng-Fkt-Test heiss</span></th>
+        <th><span>Eng-Konformität</span></th>
+        <th><span>Ger-Beschriftung</span></th>
+        <th><span>Ger-Sensor</span></th>
+        <th><span>Ger-Ventil</span></th>
+        <th><span>Ger-Heizung</span></th>
+        <th><span>Ger-M1R</span></th>
+        <th><span>Ger-M2R</span></th>
+        <th><span>Ger-MFU</span></th>
+        <th><span>Ger-Wicklung</span></th>
+        <th><span>Ger-Bremse</span></th>
+        <th><span>Ger-Heizung</span></th>
+        <th><span>Ger-Kommunikation</span></th>
+        <th><span>Ger-Safety</span></th>
+        <th><span>Sig-DI</span></th>
+        <th><span>Sig-DO</span></th>
+        <th><span>Sig-AI</span></th>
+        <th><span>Sig-AO</span></th>
+        <th><span>Sig-Z</span></th>
+        <th><span>Sig-Inkr</span></th>
+        <th><span>Sig-SSI</span></th>
+        <th><span>Sig-PB</span></th>
+        <th><span>Sig-sDI</span></th>
+        <th><span>Sig-sDO</span></th>
+        <th><span>Sig-sAI</span></th>
+        <th><span>Sig-sAO</span></th>
+        <th><span>Schaltanlagen Einbau</span></th>
+        <th><span>Schaltanlagen Anzahl</span></th>
+        <th><span>Kabel Steuerung</span></th>
+        <th><span>Kabel Steuerung Länge</span></th>
+        <th><span>Kabel Speisung</span></th>
+        <th><span>Kabel Speisung Länge</span></th>
+        <th><span>Kabel Pot-Ausgl.</span></th>
+        <th><span>Kabel Pot-Ausgl. Länge</span></th>
+        <th><span>Installation Trasse</span></th>
+        <th><span>Installation Trasse Länge</span></th>
+        <th><span>Installation Rohr</span></th>
+        <th><span>Installation Rohr Länge</span></th>
+        <th><span>Montage Geräte</span></th>
+        <th><span>Montage Geräte Anzahl</span></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @devices.each do |device| %>
+      <tr>
+        <td><%= device.definition %></td>
+        <td><%= device.eng_admin %></td>
+        <td><%= device.eng_steuerkonzept %></td>
+        <td><%= device.eng_ioliste %></td>
+        <td><%= device.eng_elplanung %></td>
+        <td><%= device.eng_fktbeschrieb %></td>
+        <td><%= device.eng_safetymatrix %></td>
+        <td><%= device.eng_software %></td>
+        <td><%= device.eng_softwaresafety %></td>
+        <td><%= device.eng_bauleitung %></td>
+        <td><%= device.eng_parametrierung %></td>
+        <td><%= device.eng_signaltest %></td>
+        <td><%= device.eng_safetymatrix %></td>
+        <td><%= device.eng_fkttestkalt %></td>
+        <td><%= device.eng_fkttestheiss %></td>
+        <td><%= device.eng_konformitaet %></td>
+        <td><%= device.ger_beschriftung %></td>
+        <td><%= device.ger_sensor %></td>
+        <td><%= device.ger_ventil %></td>
+        <td><%= device.ger_heizung %></td>
+        <td><%= device.ger_m1r %></td>
+        <td><%= device.ger_m2r %></td>
+        <td><%= device.ger_mfu %></td>
+        <td><%= device.ger_wicklung %></td>
+        <td><%= device.ger_bremse %></td>
+        <td><%= device.ger_heizung %></td>
+        <td><%= device.ger_kommunikation %></td>
+        <td><%= device.ger_safety %></td>
+        <td><%= device.sig_di %></td>
+        <td><%= device.sig_do %></td>
+        <td><%= device.sig_ai %></td>
+        <td><%= device.sig_ao %></td>
+        <td><%= device.sig_z %></td>
+        <td><%= device.sig_inkr %></td>
+        <td><%= device.sig_ssi %></td>
+        <td><%= device.sig_pb %></td>
+        <td><%= device.sig_sdi %></td>
+        <td><%= device.sig_sdo %></td>
+        <td><%= device.sig_sai %></td>
+        <td><%= device.sig_sao %></td>
+        <td><%= device.switchgear.kennung %></td>
+        <td><%= device.sch_anzahl %></td>
+        <% begin %>
+          <% device_wire = DeviceWire.where(:device_id => device.id, :definition => "Kabel Speisung").first %>
+          <% wire = Wire.find(device_wire.wire_id).kabeltyp %>
+          <td><%= wire %></td>
+          <td><%= device_wire.laenge %></td>
+        <% rescue %>
+          <td></td>
+          <td></td>
+        <% end %>
+        <% begin %>
+            <% device_wire = DeviceWire.where(:device_id => device.id, :definition => "Kabel Steuerung").first %>
+            <% wire = Wire.find(device_wire.wire_id).kabeltyp %>
+            <td><%= wire %></td>
+            <td><%= device_wire.laenge %></td>
+        <% rescue %>
+            <td></td>
+            <td></td>
+        <% end %>
+        <% begin %>
+            <% device_wire = DeviceWire.where(:device_id => device.id, :definition => "Kabel Pot-Ausgl.").first %>
+            <% wire = Wire.find(device_wire.wire_id).kabeltyp %>
+            <td><%= wire %></td>
+            <td><%= device_wire.laenge %></td>
+        <% rescue %>
+            <td></td>
+            <td></td>
+        <% end %>
+        <% begin %>
+            <% device_elec = DeviceElectricalInstallation.where(:device_id => device.id, :definition => "Installation Trasse").first %>
+            <% elec_inst = ElectricalInstallation.find(device_elec.electrical_installation_id).kennung %>
+            <td><%= elec_inst %></td>
+            <td><%= device_elec.value %></td>
+        <% rescue %>
+            <td></td>
+            <td></td>
+        <% end %>
+        <% begin %>
+            <% device_elec = DeviceElectricalInstallation.where(:device_id => device.id, :definition => "Installation Rohr").first %>
+            <% elec_inst = ElectricalInstallation.find(device_elec.electrical_installation_id).kennung %>
+            <td><%= elec_inst %></td>
+            <td><%= device_elec.value %></td>
+        <% rescue %>
+            <td></td>
+            <td></td>
+        <% end %>
+        <% begin %>
+            <% device_elec = DeviceElectricalInstallation.where(:device_id => device.id, :definition => "Montage Geraete").first %>
+            <% elec_inst = ElectricalInstallation.find(device_elec.electrical_installation_id).kennung %>
+            <td><%= elec_inst %></td>
+            <td><%= device_elec.value %></td>
+        <% rescue %>
+            <td></td>
+            <td></td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render 'layouts/loading', :message => "Lade IO-Baugruppen..." %>
+<%= render 'layouts/popups' %>
+
+<style>
+  th {
+    height: 200px;
+    min-width: 90px;
+    /*
+      min-width is large enough to stop
+      the longest header text you will have from
+      overlapping when the table is the smallest it will be
+    */
+  }
+
+  th span {
+    display: block;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg) translate(50px, 0px);
+    font-weight: normal;
+    max-width: 200px;
+    /*
+      max-width contains the span and
+      must match the height of the th minus
+      any padding you want
+    */
+  }
+
+  .shorty {
+    min-width: 70px;
+  }
+
+</style>
