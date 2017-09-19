@@ -26,7 +26,7 @@ class CreateDevices < ActiveRecord::Migration[5.0]
       t.integer :ger_mfu
       t.integer :ger_wicklung
       t.integer :ger_bremse
-      t.integer :ger_heizung
+      t.integer :ger_geraeteheizung
       t.integer :ger_kommunikation
       t.integer :ger_safety
       t.integer :sig_di

@@ -1,0 +1,10 @@
+<h1>Gerät editieren</h1>
+<% if @device.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @device.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :device => @device, :context => false  %>
+<%= link_to "Zurück zu Geräteübersicht", devices_path %>

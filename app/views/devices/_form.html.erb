@@ -1,0 +1,214 @@
+<%= form_for device do |device| %>
+
+    <div class="field form-group">
+      <%= device.label :definition, 'Definition' %>
+      <%= device.text_field :definition, :class => "form-control",
+                             placeholder: '' %>
+    </div>
+
+    <div class="field form-group">
+      <%= device.label :eng_admin, 'Admin' %>
+      <%= device.text_field :eng_admin , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_steuerkonzept, 'Steuerkonzept' %>
+      <%= device.text_field :eng_steuerkonzept , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_ioliste, 'IO-Liste' %>
+      <%= device.text_field :eng_ioliste , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_elplanung, 'El-Planung' %>
+      <%= device.text_field :eng_elplanung , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_fktbeschrieb, 'Fkt-Beschreibung/Dok' %>
+      <%= device.text_field :eng_fktbeschrieb , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_safetymatrix, 'Safety-Matrix' %>
+      <%= device.text_field :eng_safetymatrix , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_software, 'Software' %>
+      <%= device.text_field :eng_software , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_softwaresafety, 'Software-Safety' %>
+      <%= device.text_field :eng_softwaresafety , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_bauleitung, 'Bauleitung' %>
+      <%= device.text_field :eng_bauleitung , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_parametrierung, 'Parametrierung' %>
+      <%= device.text_field :eng_parametrierung , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_signaltest, 'Signaltest' %>
+      <%= device.text_field :eng_signaltest , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_safetymatrix, 'Safety-Test' %>
+      <%= device.text_field :eng_safetymatrix , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_fkttestkalt, 'Fkt.-Test kalt' %>
+      <%= device.text_field :eng_fkttestkalt , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_fkttestheiss, 'Fkt.-Test heiss' %>
+      <%= device.text_field :eng_fkttestheiss , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :eng_konformitaet, 'Konformität' %>
+      <%= device.text_field :eng_konformitaet , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :ger_beschriftung, 'Gerätebeschriftung' %>
+      <%= device.text_field :ger_beschriftung , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :ger_sensor, 'Sensor' %>
+      <%= device.text_field :ger_sensor , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :ger_ventil, 'Ventil' %>
+      <%= device.text_field :ger_ventil , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :ger_heizung, 'Heizung' %>
+      <%= device.text_field :ger_heizung , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :ger_m1r, 'M 1Rtg' %>
+      <%= device.text_field :ger_m1r , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :ger_m2r, 'M 2Rtg' %>
+      <%= device.text_field :ger_m2r , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :ger_mfu, 'M FU' %>
+      <%= device.text_field :ger_mfu , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :ger_wicklung, 'Wicklungsüberwachung' %>
+      <%= device.text_field :ger_wicklung , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :ger_bremse, 'Bremse' %>
+      <%= device.text_field :ger_bremse , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :ger_heizung, 'Geräteheizung' %>
+      <%= device.text_field :ger_heizung , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :ger_kommunikation, 'Kommunikation' %>
+      <%= device.text_field :ger_kommunikation , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :ger_safety, 'Safety' %>
+      <%= device.text_field :ger_safety , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :sig_di, 'DI' %>
+      <%= device.text_field :sig_di , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :sig_do, 'DO' %>
+      <%= device.text_field :sig_do , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :sig_ai, 'AI' %>
+      <%= device.text_field :sig_ai , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :sig_ao, 'AO' %>
+      <%= device.text_field :sig_ao , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :sig_z, 'Z' %>
+      <%= device.text_field :sig_z , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :sig_inkr, 'INKR' %>
+      <%= device.text_field :sig_inkr , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :sig_ssi, 'SSI' %>
+      <%= device.text_field :sig_ssi , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :sig_pb, 'PB' %>
+      <%= device.text_field :sig_pb , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :sig_sdi, 'sDI' %>
+      <%= device.text_field :sig_sdi , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :sig_sdo, 'sDO' %>
+      <%= device.text_field :sig_sdo , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :sig_sai, 'sAI' %>
+      <%= device.text_field :sig_sai , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+    <div class="field form-group">
+      <%= device.label :sig_sao, 'sAO' %>
+      <%= device.text_field :sig_sao , :class => "form-control",
+                             placeholder: '' %>
+    </div>
+
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= device.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= device.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

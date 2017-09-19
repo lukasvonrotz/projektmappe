@@ -1,0 +1,13 @@
+<h1>FU-Details</h1>
+<% if @device.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @device.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @device.id %><br>
+Definition: <%= @device.definition %><br>
+
+<br><br>
+<%= link_to "Zurück zu Geräte-Übersicht", devices_path %>
