@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170919091008) do
+ActiveRecord::Schema.define(version: 20170920131121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20170919091008) do
     t.float    "value"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.index ["device_id", "definition"], name: "device_electrical_installations_uniqueness", unique: true, using: :btree
   end
 
   create_table "device_wires", force: :cascade do |t|
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 20170919091008) do
     t.float    "laenge"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["device_id", "definition"], name: "index_device_wires_on_device_id_and_definition", unique: true, using: :btree
   end
 
   create_table "devices", force: :cascade do |t|

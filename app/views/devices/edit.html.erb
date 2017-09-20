@@ -6,5 +6,16 @@
     </div>
 <% end %>
 
-<%= render 'form', :device => @device, :switchgear => @device.switchgear, :context => false  %>
+<% kabel1 = @device.device_wires.find_by(definition: "Kabel Steuerung") %>
+<% kabel2 = @device.device_wires.find_by(definition: "Kabel Speisung") %>
+<% kabel3 = @device.device_wires.find_by(definition: "Kabel Pot-Ausgl.") %>
+
+<%= render 'form', :device => @device,
+           :kabel1 => kabel1.nil? ? 0 : kabel1.wire.id,
+           :kabel2 => kabel2.nil? ? 0 : kabel2.wire.id,
+           :kabel3 => kabel3.nil? ? 0 : kabel3.wire.id,
+           :kabel1laenge => kabel1.nil? ? "" : kabel1.laenge,
+           :kabel2laenge => kabel2.nil? ? "" : kabel2.laenge,
+           :kabel3laenge => kabel3.nil? ? "" : kabel3.laenge,
+           :switchgear => @device.switchgear, :context => false  %>
 <%= link_to "Zurück zu Geräteübersicht", devices_path %>

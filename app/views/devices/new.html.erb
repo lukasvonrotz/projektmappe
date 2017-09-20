@@ -6,5 +6,14 @@
     </div>
 <% end %>
 
-<%= render 'form', :device => @device, :switchgear => nil, :context => true  %>
+
+
+<%= render 'form', :device => @device,
+           :kabel1 => 0,
+           :kabel2 => 0,
+           :kabel3 => 0,
+           :kabel1laenge => "",
+           :kabel2laenge => "",
+           :kabel3laenge => "",
+           :switchgear => nil, :context => true  %>
 <%= link_to "Zurück zu Geräte-Übersicht", devices_path %>

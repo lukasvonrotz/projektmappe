@@ -1,4 +1,4 @@
-<%= form_for device do |device| %>
+<%= semantic_form_for device do |device| %>
 
     <div class="field form-group">
       <%= device.label :definition, 'Definition' %>
@@ -240,8 +240,63 @@
       <div id="tab5" class="tab-pane fade">
         <br>
         <div class="field form-group">
-          <%= device.label :device_wire, 'Kabel Steuerung' %>
-          <%= %>
+          <%= device.label :device_wires1, 'Kabel Steuerung' %><br><br>
+          <%= device.semantic_fields_for :device_wires1 do |device_wire| %>
+            <%= device.label 'Typ' %>
+            <%= device_wire.input :wire_id, :required => false, :as => :select,
+                                  :label => false,
+                                  :collection => options_for_select(Wire.all.map { |w| [w.kabeltyp, w.id] }, kabel1),
+                                  :input_html => {:value => kabel1, :class => 'form-control' }%>
+            <%= device_wire.input :definition, :required => false, :as => :hidden,
+                                  :label => false,
+                                  :input_html => {:value => "Kabel Steuerung",  :class => 'form-control' } %>
+            <br>
+            <%= device.label 'Länge' %>
+            <%= device_wire.input :laenge, :required => false,
+                                  :label => false,
+                                  :input_html => {:value => kabel1laenge,
+                                                  :class => 'form-control' } %>
+          <% end %>
+        </div>
+        <br><br>
+        <div class="field form-group">
+          <%= device.label :device_wires2, 'Kabel Speisung' %><br><br>
+          <%= device.semantic_fields_for :device_wires2 do |device_wire| %>
+              <%= device.label 'Typ' %>
+              <%= device_wire.input :wire_id, :required => false, :as => :select,
+                                    :label => false,
+                                    :collection => options_for_select(Wire.all.map { |w| [w.kabeltyp, w.id] }, kabel2),
+                                    :input_html => { :class => 'form-control' }%>
+              <%= device_wire.input :definition, :required => false, :as => :hidden,
+                                    :label => false,
+                                    :input_html => {:value => "Kabel Speisung",  :class => 'form-control' } %>
+              <br>
+              <%= device.label 'Länge' %>
+              <%= device_wire.input :laenge, :required => false,
+                                    :label => false,
+                                    :input_html => {:value => kabel2laenge,
+                                                    :class => 'form-control' } %>
+          <% end %>
+        </div>
+        <br><br>
+        <div class="field form-group">
+          <%= device.label :device_wires3, 'Kabel Pot-Ausgl.' %><br><br>
+          <%= device.semantic_fields_for :device_wires3 do |device_wire| %>
+              <%= device.label 'Typ' %>
+              <%= device_wire.input :wire_id, :required => false, :as => :select,
+                                    :label => false,
+                                    :collection => options_for_select(Wire.all.map { |w| [w.kabeltyp, w.id] }, kabel3),
+                                    :input_html => { :class => 'form-control' }%>
+              <%= device_wire.input :definition, :required => false, :as => :hidden,
+                                    :label => false,
+                                    :input_html => {:value => "Kabel Pot-Ausgl.",  :class => 'form-control' } %>
+              <br>
+              <%= device.label 'Länge' %>
+              <%= device_wire.input :laenge, :required => false,
+                                    :label => false,
+                                    :input_html => {:value => kabel3laenge,
+                                                    :class => 'form-control' } %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -259,3 +314,9 @@
     </div>
 
 <% end %>
+
+<style>
+  li {
+    list-style: none;
+  }
+</style>

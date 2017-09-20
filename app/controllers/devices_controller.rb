@@ -15,6 +15,39 @@ class DevicesController < ApplicationController
   # POST /devices
   def create
     @device = Device.new(device_params)
+
+    device_wires1 = params[:device][:device_wires1]
+    device_wires2 = params[:device][:device_wires2]
+    device_wires3 = params[:device][:device_wires3]
+
+    if device_wires1["wire_id"] != ""
+      deviceWireEntry = DeviceWire.new
+      deviceWireEntry.device_id = params[:id]
+      deviceWireEntry.wire_id = device_wires1["wire_id"]
+      deviceWireEntry.definition = device_wires1["definition"]
+      deviceWireEntry.laenge = device_wires1["laenge"]
+      deviceWireEntry.save
+    end
+    if device_wires2["wire_id"] != ""
+      deviceWireEntry = DeviceWire.new
+      deviceWireEntry.device_id = params[:id]
+      deviceWireEntry.wire_id = device_wires2["wire_id"]
+      deviceWireEntry.definition = device_wires2["definition"]
+      deviceWireEntry.laenge = device_wires2["laenge"]
+      deviceWireEntry.save
+    endif device_wires3["wire_id"] != ""
+      deviceWireEntry = DeviceWire.new
+      deviceWireEntry.device_id = params[:id]
+      deviceWireEntry.wire_id = device_wires3["wire_id"]
+      deviceWireEntry.definition = device_wires3["definition"]
+      deviceWireEntry.laenge = device_wires3["laenge"]
+      deviceWireEntry.save
+    end
+
+    params[:device].delete :device_wires1
+    params[:device].delete :device_wires2
+    params[:device].delete :device_wires3
+
     # write device to database
     if @device.save
       redirect_to devices_path, :notice => 'Gerät erfolgreich erstellt.'
@@ -41,6 +74,73 @@ class DevicesController < ApplicationController
   # PUT /devices/:id
   def update
     @device = Device.find(params[:id])
+
+    device_wires1 = params[:device][:device_wires1]
+    device_wires2 = params[:device][:device_wires2]
+    device_wires3 = params[:device][:device_wires3]
+
+    deviceWireEntry1 = DeviceWire.where(:device_id => params[:id], :definition => device_wires1["definition"]).first
+    deviceWireEntry2 = DeviceWire.where(:device_id => params[:id], :definition => device_wires2["definition"]).first
+    deviceWireEntry3 = DeviceWire.where(:device_id => params[:id], :definition => device_wires3["definition"]).first
+
+    if deviceWireEntry1.nil?
+      deviceWireEntry = DeviceWire.new
+      deviceWireEntry.device_id = params[:id]
+      deviceWireEntry.wire_id = device_wires1["wire_id"]
+      deviceWireEntry.definition = device_wires1["definition"]
+      deviceWireEntry.laenge = device_wires1["laenge"]
+      deviceWireEntry.save
+    else
+      if device_wires1["wire_id"] == ""
+        entryToDelete = DeviceWire.where(:device_id => params[:id], :definition => device_wires1["definition"]).first
+        entryToDelete.destroy
+      else
+        deviceWireEntry1.wire_id = device_wires1["wire_id"]
+        deviceWireEntry1.laenge = device_wires1["laenge"]
+        deviceWireEntry1.save
+      end
+    end
+
+    if deviceWireEntry2.nil?
+      deviceWireEntry = DeviceWire.new
+      deviceWireEntry.device_id = params[:id]
+      deviceWireEntry.wire_id = device_wires2["wire_id"]
+      deviceWireEntry.definition = device_wires2["definition"]
+      deviceWireEntry.laenge = device_wires2["laenge"]
+      deviceWireEntry.save
+    else
+      if device_wires2["wire_id"] == ""
+        entryToDelete = DeviceWire.where(:device_id => params[:id], :definition => device_wires2["definition"]).first
+        entryToDelete.destroy
+      else
+        deviceWireEntry2.wire_id = device_wires2["wire_id"]
+        deviceWireEntry2.laenge = device_wires2["laenge"]
+        deviceWireEntry2.save
+      end
+    end
+
+    if deviceWireEntry3.nil?
+      deviceWireEntry = DeviceWire.new
+      deviceWireEntry.device_id = params[:id]
+      deviceWireEntry.wire_id = device_wires3["wire_id"]
+      deviceWireEntry.definition = device_wires3["definition"]
+      deviceWireEntry.laenge = device_wires3["laenge"]
+      deviceWireEntry.save
+    else
+      if device_wires3["wire_id"] == ""
+        entryToDelete = DeviceWire.where(:device_id => params[:id], :definition => device_wires3["definition"]).first
+        entryToDelete.destroy
+      else
+        deviceWireEntry3.wire_id = device_wires3["wire_id"]
+        deviceWireEntry3.laenge = device_wires3["laenge"]
+        deviceWireEntry3.save
+      end
+    end
+
+    params[:device].delete :device_wires1
+    params[:device].delete :device_wires2
+    params[:device].delete :device_wires3
+
     if @device.update(device_params)
       redirect_to devices_path, :notice => 'Gerät erfolgreich aktualisiert.'
     else
