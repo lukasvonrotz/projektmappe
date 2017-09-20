@@ -3,49 +3,58 @@
 <a href="<%=new_device_path%>" class="btn btn-success">Neues Gerät erstellen</a>
 <br><br><br><br>
 <div id="content" class="table-responsive">
-  <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+  <table id="devices_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead class="table-devices-header">
       <tr>
-        <th><span>Definition</span></th>
-        <th><span>Eng-Admin</span></th>
-        <th class="shorty"><span>Eng-Steuerkonzept</span></th>
-        <th><span>Eng-IO-Liste</span></th>
-        <th><span>Eng-El-Planung</span></th>
-        <th><span>Eng-Fkt-Beschrieb</span></th>
-        <th><span>Eng-Safetymatrix</span></th>
-        <th><span>Eng-SW</span></th>
-        <th><span>Eng-SW-Safety</span></th>
-        <th><span>Eng-Bauleitung</span></th>
-        <th><span>Eng-Parametrierung</span></th>
-        <th><span>Eng-Signaltest</span></th>
-        <th><span>Eng-Safetytest</span></th>
-        <th><span>Eng-Fkt-Test kalt</span></th>
-        <th><span>Eng-Fkt-Test heiss</span></th>
-        <th><span>Eng-Konformität</span></th>
-        <th><span>Ger-Beschriftung</span></th>
-        <th><span>Ger-Sensor</span></th>
-        <th><span>Ger-Ventil</span></th>
-        <th><span>Ger-Heizung</span></th>
-        <th><span>Ger-M1R</span></th>
-        <th><span>Ger-M2R</span></th>
-        <th><span>Ger-MFU</span></th>
-        <th><span>Ger-Wicklung</span></th>
-        <th><span>Ger-Bremse</span></th>
-        <th><span>Ger-Heizung</span></th>
-        <th><span>Ger-Kommunikation</span></th>
-        <th><span>Ger-Safety</span></th>
-        <th><span>Sig-DI</span></th>
-        <th><span>Sig-DO</span></th>
-        <th><span>Sig-AI</span></th>
-        <th><span>Sig-AO</span></th>
-        <th><span>Sig-Z</span></th>
-        <th><span>Sig-Inkr</span></th>
-        <th><span>Sig-SSI</span></th>
-        <th><span>Sig-PB</span></th>
-        <th><span>Sig-sDI</span></th>
-        <th><span>Sig-sDO</span></th>
-        <th><span>Sig-sAI</span></th>
-        <th><span>Sig-sAO</span></th>
+        <th rowspan="2">ID</th>
+        <th rowspan="2">Definition</th>
+        <th colspan="15">Engineering</th>
+        <th colspan="12">Geräte</th>
+        <th colspan="12">Signale</th>
+        <th colspan="2">Schaltanlagen</th>
+        <th colspan="12">Elektroinstallation</th>
+        <th rowspan="2">Aktionen</th>
+      </tr>
+      <tr>
+        <th><span>Admin</span></th>
+        <th><span>Steuerkonzept</span></th>
+        <th><span>IO-Liste</span></th>
+        <th><span>El-Planung</span></th>
+        <th><span>Fkt-Beschrieb</span></th>
+        <th><span>Safetymatrix</span></th>
+        <th><span>SW</span></th>
+        <th><span>SW-Safety</span></th>
+        <th><span>Bauleitung</span></th>
+        <th><span>Parametrierung</span></th>
+        <th><span>Signaltest</span></th>
+        <th><span>Safetytest</span></th>
+        <th><span>Fkt-Test kalt</span></th>
+        <th><span>Fkt-Test heiss</span></th>
+        <th><span>Konformität</span></th>
+        <th><span>Beschriftung</span></th>
+        <th><span>Sensor</span></th>
+        <th><span>Ventil</span></th>
+        <th><span>Heizung</span></th>
+        <th><span>M1R</span></th>
+        <th><span>M2R</span></th>
+        <th><span>MFU</span></th>
+        <th><span>Wicklung</span></th>
+        <th><span>Bremse</span></th>
+        <th><span>Heizung</span></th>
+        <th><span>Kommunikation</span></th>
+        <th><span>Safety</span></th>
+        <th><span>DI</span></th>
+        <th><span>DO</span></th>
+        <th><span>AI</span></th>
+        <th><span>AO</span></th>
+        <th><span>Z</span></th>
+        <th><span>Inkr</span></th>
+        <th><span>SSI</span></th>
+        <th><span>PB</span></th>
+        <th><span>sDI</span></th>
+        <th><span>sDO</span></th>
+        <th><span>sAI</span></th>
+        <th><span>sAO</span></th>
         <th><span>Schaltanlagen Einbau</span></th>
         <th><span>Schaltanlagen Anzahl</span></th>
         <th><span>Kabel Steuerung</span></th>
@@ -60,12 +69,12 @@
         <th><span>Installation Rohr Länge</span></th>
         <th><span>Montage Geräte</span></th>
         <th><span>Montage Geräte Anzahl</span></th>
-        <th><span>Aktionen</span></th>
       </tr>
     </thead>
     <tbody>
     <% @devices.each do |device| %>
       <tr>
+        <td><%= device.id %></td>
         <td><%= device.definition %></td>
         <td><%= device.eng_admin %></td>
         <td><%= device.eng_steuerkonzept %></td>
@@ -114,7 +123,7 @@
         <% end %>
         <td><%= device.sch_anzahl %></td>
         <% begin %>
-          <% device_wire = DeviceWire.where(:device_id => device.id, :definition => "Kabel Speisung").first %>
+          <% device_wire = DeviceWire.where(:device_id => device.id, :definition => "Kabel Steuerung").first %>
           <% wire = Wire.find(device_wire.wire_id).kabeltyp %>
           <td><%= wire %></td>
           <td><%= device_wire.laenge %></td>
@@ -123,7 +132,7 @@
           <td></td>
         <% end %>
         <% begin %>
-            <% device_wire = DeviceWire.where(:device_id => device.id, :definition => "Kabel Steuerung").first %>
+            <% device_wire = DeviceWire.where(:device_id => device.id, :definition => "Kabel Speisung").first %>
             <% wire = Wire.find(device_wire.wire_id).kabeltyp %>
             <td><%= wire %></td>
             <td><%= device_wire.laenge %></td>
@@ -183,38 +192,32 @@
   </table>
 </div>
 
-<%= render 'layouts/loading', :message => "Lade IO-Baugruppen..." %>
+<%= render 'layouts/loading', :message => "Lade Geräte..." %>
 <%= render 'layouts/popups' %>
 
-<style>
-  th {
-    height: 200px;
-    min-width: 90px;
-    /*
-      min-width is large enough to stop
-      the longest header text you will have from
-      overlapping when the table is the smallest it will be
-    */
-  }
 
-  th span {
-    display: block;
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    transform: rotate(-90deg) translate(50px, 0px);
-    font-weight: normal;
-    max-width: 200px;
-    /*
-      max-width contains the span and
-      must match the height of the th minus
-      any padding you want
-    */
-  }
-
-  .shorty {
-    min-width: 70px;
-  }
-
-</style>
+<script>
+    $(document).ready(function() {
+        $('#devices_table').DataTable({
+            "scrollX": true,
+            "pageLength": 10,
+            "language": {
+                "decimal":        "",
+                "emptyTable":     "Keine Einträge gefunden",
+                "info":           "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
+                "infoEmpty":      "Zeige 0 bis 0 von 0 Einträgen",
+                "infoFiltered":   "(gefiltert aus total _MAX_ Einträgen)",
+                "lengthMenu":     "Zeige _MENU_ Einträge",
+                "loadingRecords": "Lade Daten",
+                "processing":     "Verarbeite...",
+                "search":         "Suche",
+                "zeroRecords":    "0 Einträge",
+                "paginate": {
+                    "first":      "Erster",
+                    "last":       "Letzter",
+                    "next":       "Nächste",
+                    "previous":   "Vorherige"
+                }
+            }});
+    });
+</script>

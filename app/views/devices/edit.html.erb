@@ -6,5 +6,5 @@
     </div>
 <% end %>
 
-<%= render 'form', :device => @device, :context => false  %>
+<%= render 'form', :device => @device, :switchgear => @device.switchgear, :context => false  %>
 <%= link_to "Zurück zu Geräteübersicht", devices_path %>
