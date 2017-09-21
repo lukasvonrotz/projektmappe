@@ -9,13 +9,22 @@
 <% kabel1 = @device.device_wires.find_by(definition: "Kabel Steuerung") %>
 <% kabel2 = @device.device_wires.find_by(definition: "Kabel Speisung") %>
 <% kabel3 = @device.device_wires.find_by(definition: "Kabel Pot-Ausgl.") %>
+<% elinst1 = @device.device_electrical_installations.find_by(definition: "Installation Trasse") %>
+<% elinst2 = @device.device_electrical_installations.find_by(definition: "Installation Rohr") %>
+<% elinst3 = @device.device_electrical_installations.find_by(definition: "Montage Geraete") %>
 
 <%= render 'form', :device => @device,
            :kabel1 => kabel1.nil? ? 0 : kabel1.wire.id,
            :kabel2 => kabel2.nil? ? 0 : kabel2.wire.id,
            :kabel3 => kabel3.nil? ? 0 : kabel3.wire.id,
+           :elinst1 => elinst1.nil? ? 0 : elinst1.electrical_installation.id,
+           :elinst2 => elinst2.nil? ? 0 : elinst2.electrical_installation.id,
+           :elinst3 => elinst3.nil? ? 0 : elinst3.electrical_installation.id,
            :kabel1laenge => kabel1.nil? ? "" : kabel1.laenge,
            :kabel2laenge => kabel2.nil? ? "" : kabel2.laenge,
            :kabel3laenge => kabel3.nil? ? "" : kabel3.laenge,
+           :elinst1value => elinst1.nil? ? "" : elinst1.value,
+           :elinst2value => elinst2.nil? ? "" : elinst2.value,
+           :elinst3value => elinst3.nil? ? "" : elinst3.value,
            :switchgear => @device.switchgear, :context => false  %>
 <%= link_to "Zurück zu Geräteübersicht", devices_path %>
