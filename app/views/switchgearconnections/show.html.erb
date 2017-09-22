@@ -1,0 +1,13 @@
+<h1>Verbindungs-Details</h1>
+<% if @switchgearconnection.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @switchgearconnection.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @switchgearconnection.id %><br>
+Name: <%= @switchgearconnection.name %><br>
+
+<br><br>
+<%= link_to "Zurück zu Verbindungs-Übersicht", switchgearconnections_path %>

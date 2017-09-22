@@ -1,0 +1,29 @@
+<%= form_for switchgearconnection do |switchgearconnection| %>
+
+    <div class="field form-group">
+      <%= switchgearconnection.label :level, 'Name' %>
+      <%= switchgearconnection.text_field :level, :class => "form-control",
+                             placeholder: 'Level für Verbindung eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= switchgearconnection.label :topswitchgear, 'Über-Knoten' %>
+      <%= switchgearconnection.collection_select :topswitchgear_id, Switchgearcombination.all,:id,:name,
+
+                                                  {:selected => topswitchgearid}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= switchgearconnection.label :bottomswitchgear, 'Unter-Knoten' %>
+      <%= switchgearconnection.collection_select :bottomswitchgear_id, Switchgearcombination.all,:id,:name,
+
+                                                 {:selected => bottomswitchgearid}, {class:"form-control"} %>
+    </div>
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= switchgearconnection.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= switchgearconnection.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

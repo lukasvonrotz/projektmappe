@@ -20,7 +20,7 @@ class SubsubprojectsController < ApplicationController
       @subproject.subsubprojects.each do |othersubsubproject|
         if othersubsubproject.master
           othersubsubproject.master = false
-          othersubsubproject.save
+          othersubsubproject.save!
         end
       end
     end
@@ -54,7 +54,7 @@ class SubsubprojectsController < ApplicationController
       @subsubproject.subproject.subsubprojects.each do |othersubsubproject|
         if othersubsubproject.master
           othersubsubproject.master = false
-          othersubsubproject.save
+          othersubsubproject.save!
         end
       end
     end

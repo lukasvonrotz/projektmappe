@@ -1,0 +1,63 @@
+<%= form_for switchgearcombination do |switchgearcombination| %>
+
+    <div class="field form-group">
+      <%= switchgearcombination.label :name, 'Name' %>
+      <%= switchgearcombination.text_field :name, :class => "form-control",
+                             placeholder: 'Name von Schaltgerätekombination eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= switchgearcombination.label :switchgear, 'Typ' %>
+      <%= switchgearcombination.collection_select :switchgear_id, Switchgear.where(:typ => 1),:id,:kennung,
+
+                                    {:selected => switchgearid}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= switchgearcombination.label :iogroup_ids, 'IO-Gruppen' %></br>
+      <%= switchgearcombination.select :iogroup_ids,
+                         Iogroup.all.map { |u| [u.name, u.id] },
+                         { include_blank: true }, { class: 'chosen-select', multiple: 'true' } %>
+    </div>
+    <div class="field form-group">
+      <%= switchgearcombination.label :standort, 'Standort' %>
+      <%= switchgearcombination.text_field :standort, :class => "form-control",
+                                           placeholder: 'Standort von Schaltgerätekombination eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= switchgearcombination.label :u_feed_power, 'Spannung Feed Power' %>
+      <%= switchgearcombination.text_field :u_feed_power, :class => "form-control",
+                                           placeholder: 'Spannung Feed Power von Schaltgerätekombination eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= switchgearcombination.label :u_feed_control, 'Spannung Feed Control' %>
+      <%= switchgearcombination.text_field :u_feed_control, :class => "form-control",
+                                           placeholder: 'Spannung Feed Control von Schaltgerätekombination eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= switchgearcombination.label :u_out_power, 'Spannung Out Power' %>
+      <%= switchgearcombination.text_field :u_out_power, :class => "form-control",
+                                           placeholder: 'Spannung Out Power von Schaltgerätekombination eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= switchgearcombination.label :u_out_control_high, 'Spannung Out Control High' %>
+      <%= switchgearcombination.text_field :u_out_control_high, :class => "form-control",
+                                           placeholder: 'Spannung Out Control High von Schaltgerätekombination eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= switchgearcombination.label :u_out_control_low, 'Spannung Out Control Low' %>
+      <%= switchgearcombination.text_field :u_out_control_low, :class => "form-control",
+                                           placeholder: 'Spannung Out Control Low von Schaltgerätekombination eingeben' %>
+    </div>
+    <div class="actions form-group">
+      <% if context %>
+          <%= switchgearcombination.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= switchgearcombination.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>
+
+<script>
+    $(".chosen-select").chosen({allow_single_deselect: true, placeholder_text: "Wähle Optionen aus",
+        no_results_text: 'Keine IO-Gruppen gefunden', search_contains: true, width: '100%'});
+</script>

@@ -136,7 +136,7 @@ class DevicesController < ApplicationController
       deviceWireEntry.wire_id = device_wires1["wire_id"]
       deviceWireEntry.definition = device_wires1["definition"]
       deviceWireEntry.laenge = device_wires1["laenge"]
-      deviceWireEntry.save
+      deviceWireEntry.save!
     else
       if device_wires1["wire_id"] == ""
         entryToDelete = DeviceWire.where(:device_id => params[:id], :definition => device_wires1["definition"]).first
@@ -144,7 +144,7 @@ class DevicesController < ApplicationController
       else
         deviceWireEntry1.wire_id = device_wires1["wire_id"]
         deviceWireEntry1.laenge = device_wires1["laenge"]
-        deviceWireEntry1.save
+        deviceWireEntry1.save!
       end
     end
 
@@ -154,7 +154,7 @@ class DevicesController < ApplicationController
       deviceWireEntry.wire_id = device_wires2["wire_id"]
       deviceWireEntry.definition = device_wires2["definition"]
       deviceWireEntry.laenge = device_wires2["laenge"]
-      deviceWireEntry.save
+      deviceWireEntry.save!
     else
       if device_wires2["wire_id"] == ""
         entryToDelete = DeviceWire.where(:device_id => params[:id], :definition => device_wires2["definition"]).first
@@ -162,7 +162,7 @@ class DevicesController < ApplicationController
       else
         deviceWireEntry2.wire_id = device_wires2["wire_id"]
         deviceWireEntry2.laenge = device_wires2["laenge"]
-        deviceWireEntry2.save
+        deviceWireEntry2.save!
       end
     end
 
@@ -172,7 +172,7 @@ class DevicesController < ApplicationController
       deviceWireEntry.wire_id = device_wires3["wire_id"]
       deviceWireEntry.definition = device_wires3["definition"]
       deviceWireEntry.laenge = device_wires3["laenge"]
-      deviceWireEntry.save
+      deviceWireEntry.save!
     else
       if device_wires3["wire_id"] == ""
         entryToDelete = DeviceWire.where(:device_id => params[:id], :definition => device_wires3["definition"]).first
@@ -180,7 +180,7 @@ class DevicesController < ApplicationController
       else
         deviceWireEntry3.wire_id = device_wires3["wire_id"]
         deviceWireEntry3.laenge = device_wires3["laenge"]
-        deviceWireEntry3.save
+        deviceWireEntry3.save!
       end
     end
 
@@ -190,7 +190,7 @@ class DevicesController < ApplicationController
       deviceElectricalInstallationEntry.electrical_installation_id = device_electrical_installations1["electrical_installation_id"]
       deviceElectricalInstallationEntry.definition = device_electrical_installations1["definition"]
       deviceElectricalInstallationEntry.value = device_electrical_installations1["value"]
-      deviceElectricalInstallationEntry.save
+      deviceElectricalInstallationEntry.save!
     else
       if device_electrical_installations1["electrical_installation_id"] == ""
         entryToDelete = DeviceElectricalInstallation.where(:device_id => params[:id], :definition => device_electrical_installations1["definition"]).first
@@ -202,7 +202,7 @@ class DevicesController < ApplicationController
         puts 'lukas'
         puts device_electrical_installations1["value"]
         puts deviceElectricalInstallationEntry1.value
-        deviceElectricalInstallationEntry1.save
+        deviceElectricalInstallationEntry1.save!
       end
     end
 
@@ -212,7 +212,7 @@ class DevicesController < ApplicationController
       deviceElectricalInstallationEntry.electrical_installation_id = device_electrical_installations2["electrical_installation_id"]
       deviceElectricalInstallationEntry.definition = device_electrical_installations2["definition"]
       deviceElectricalInstallationEntry.value = device_electrical_installations2["value"]
-      deviceElectricalInstallationEntry.save
+      deviceElectricalInstallationEntry.save!
     else
       if device_electrical_installations2["electrical_installation_id"] == ""
         entryToDelete = DeviceElectricalInstallation.where(:device_id => params[:id], :definition => device_electrical_installations2["definition"]).first
@@ -220,7 +220,7 @@ class DevicesController < ApplicationController
       else
         deviceElectricalInstallationEntry2.electrical_installation_id = device_electrical_installations2["electrical_installation_id"]
         deviceElectricalInstallationEntry2.value = device_electrical_installations2["value"]
-        deviceElectricalInstallationEntry2.save
+        deviceElectricalInstallationEntry2.save!
       end
     end
 
@@ -230,7 +230,7 @@ class DevicesController < ApplicationController
       deviceElectricalInstallationEntry.electrical_installation_id = device_electrical_installations3["electrical_installation_id"]
       deviceElectricalInstallationEntry.definition = device_electrical_installations3["definition"]
       deviceElectricalInstallationEntry.value = device_electrical_installations3["value"]
-      deviceElectricalInstallationEntry.save
+      deviceElectricalInstallationEntry.save!
     else
       if device_electrical_installations3["electrical_installation_id"] == ""
         entryToDelete = DeviceElectricalInstallation.where(:device_id => params[:id], :definition => device_electrical_installations3["definition"]).first
@@ -238,7 +238,7 @@ class DevicesController < ApplicationController
       else
         deviceElectricalInstallationEntry3.electrical_installation_id = device_electrical_installations3["electrical_installation_id"]
         deviceElectricalInstallationEntry3.value = device_electrical_installations3["value"]
-        deviceElectricalInstallationEntry3.save
+        deviceElectricalInstallationEntry3.save!
       end
     end
 

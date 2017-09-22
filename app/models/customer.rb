@@ -1,3 +1,5 @@
 class Customer < ApplicationRecord
-  has_many :subprojects
+
+  #delete association in subprojects if customer is deleted
+  has_many :subprojects, dependent: :nullify
 end

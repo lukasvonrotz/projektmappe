@@ -1,0 +1,14 @@
+<h1>Details Schaltgerätekombination</h1>
+<br>
+<% if @switchgearcombination.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @switchgearcombination.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @switchgearcombination.id %><br>
+Name: <%= @switchgearcombination.name %><br>
+
+<br><br>
+<%= link_to "Zurück zu Schaltgerätekombination-Übersicht", switchgearcombinations_path %>

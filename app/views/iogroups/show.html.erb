@@ -1,0 +1,21 @@
+<h1>Details IO-Gruppe</h1>
+<br>
+<% if @iogroup.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @iogroup.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @iogroup.id %><br>
+Name: <%= @iogroup.name %><br>
+Profibus-Adresse: <%= @iogroup.profibus_address %><br>
+Einbauten:
+<ul>
+  <% @iogroup.assemblies.each do |assembly| %>
+    <li><%= assembly.kennung %></li>
+  <% end %>
+</ul>
+
+<br><br>
+<%= link_to "Zurück zu IO-Gruppen-Übersicht", iogroups_path %>

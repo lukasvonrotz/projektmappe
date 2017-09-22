@@ -20,7 +20,7 @@ class SuppliersController < ApplicationController
         wirecaptionprice = Wirecaptionprice.create
         wirecaptionprice.supplier = @supplier
         puts wirecaptionprice.errors.first
-        wirecaptionprice.save
+        wirecaptionprice.save!
       end
 
       # write supplier to database

@@ -44,7 +44,7 @@ class WiresController < ApplicationController
         wireWiresupplierEntry = WireSupplier.new
         wireWiresupplierEntry.wire_id = @wire.id
         wireWiresupplierEntry.wiresupplier_id = wiresupplier.id
-        wireWiresupplierEntry.save
+        wireWiresupplierEntry.save!
       end
 
       redirect_to wires_path, :notice => 'Kabel erfolgreich erstellt.'

@@ -1,0 +1,13 @@
+<h1>Neue IO-Baugruppe erstellen</h1>
+<% if @switchgearconnection.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @switchgearconnection.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :switchgearconnection => @switchgearconnection,
+           :topswitchgearid => Switchgearcombination.first.id,
+           :bottomswitchgearid => Switchgearcombination.first.id,
+           :context => true  %>
+<%= link_to "Zurück zu Verbindungs-Übersicht", switchgearconnections_path %>

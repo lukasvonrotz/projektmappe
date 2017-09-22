@@ -30,6 +30,11 @@ de:
         maxstrom: "Maximalstrom"
         brutto: "Bruttopreis"
         rabatt: "Rabatt"
+    models:
+      assembly: "Baugruppe"
+      drive: "Frequenzumrichter"
+      electrical_installation: "Elektroinstallation"
+      switchgear: "Schaltschranktyp"
   hello: "Hallo Welt"
   popup:
     confirm: "Bestätigen"

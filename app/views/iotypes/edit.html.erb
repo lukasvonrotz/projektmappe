@@ -1,0 +1,10 @@
+<h1>IO-Gruppentyp editieren</h1>
+<% if @iotype.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @iotype.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :iotype => @iotype, :context => false  %>
+<%= link_to "Zurück zu IO-Gruppentyp-Übersicht", iotypes_path %>

@@ -27,8 +27,14 @@ Rails.application.routes.draw do
   resources :drives
   resources :electrical_installations
   resources :switchgears
+  resources :switchgearcombinations
+  resources :switchgearconnections
   resources :wires
   resources :devices
+  resources :customers
+  resources :iogroups
+  resources :iotypes
+  resources :grobengineerings
 
   resources :suppliers do
     resources :wire_suppliers

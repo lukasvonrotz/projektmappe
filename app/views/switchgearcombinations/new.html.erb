@@ -1,0 +1,10 @@
+<h1>Neuen Schaltgerätekombination erstellen</h1>
+<% if @switchgearcombination.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @switchgearcombination.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :switchgearcombination => @switchgearcombination, :switchgearid => 24, :context => true  %>
+<%= link_to "Zurück zu Schaltgerätekombinationen-Übersicht", switchgearcombinations_path %>

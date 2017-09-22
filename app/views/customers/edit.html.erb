@@ -1,0 +1,10 @@
+<h1>Kunde editieren</h1>
+<% if @customer.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @customer.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :customer => @customer, :context => false  %>
+<%= link_to "Zurück zu Kundenübersicht", customers_path %>

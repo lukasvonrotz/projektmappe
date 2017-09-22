@@ -1,0 +1,46 @@
+<%= form_for iogroup do |iogroup| %>
+
+    <div class="field form-group">
+      <%= iogroup.label :name, 'Name' %>
+      <%= iogroup.text_field :name, :class => "form-control",
+                             placeholder: 'Name von IO-Gruppe eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= iogroup.label :profibus_address, 'Profibus-Adresse' %>
+      <%= iogroup.text_field :profibus_address, :class => "form-control",
+                             placeholder: 'Profibus-Adresse von IO-Gruppe eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= iogroup.label :iotype, 'IO-Gruppentyp' %>
+      <%= iogroup.collection_select :iotype_id, Iotype.all,:id,:name,
+
+                                               {:selected => iotypeid}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= iogroup.label :switchgearcombination, 'Schaltgerätekombination' %>
+      <%= iogroup.collection_select :switchgearcombination_id, Switchgearcombination.all,:id,:name,
+
+                                    {:selected => switchgearcombinationid}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= iogroup.label :assembly_ids, 'Einbauten' %></br>
+      <%= iogroup.select :assembly_ids,
+                                    Assembly.all.map { |u| [u.kennung, u.id] },
+                                    { include_blank: true }, { class: 'chosen-select', multiple: 'true' } %>
+    </div>
+
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= iogroup.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= iogroup.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>
+
+<script>
+    $(".chosen-select").chosen({allow_single_deselect: true, placeholder_text: "Wähle Optionen aus",
+        no_results_text: 'Keine Einbauten gefunden', search_contains: true, width: '100%'});
+</script>

@@ -1,0 +1,11 @@
+<h1>Neue IO-Gruppe erstellen</h1>
+<% if @iogroup.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @iogroup.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :iogroup => @iogroup, :iotypeid => Iotype.first.id,
+           :switchgearcombinationid => Switchgearcombination.first.id, :context => true  %>
+<%= link_to "Zurück zu IO-Gruppen-Übersicht", iogroups_path %>
