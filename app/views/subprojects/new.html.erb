@@ -6,5 +6,12 @@
     </div>
 <% end %>
 
-<%= render 'form', :project => @subproject.project, :project_subproject => @subproject,
-           :customer => Customer.all.first, :projectid => @projectid, :context => true  %>
+<% if Customer.any? %>
+  <%= render 'form', :project => @subproject.project, :project_subproject => @subproject,
+             :customer => Customer.all.first, :projectid => @projectid, :context => true  %>
+<% else %>
+  <div class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    Bevor ein Projekt erstellt werden kann, muss mind. ein Kunde in der Datenbank existieren.
+  </div>
+<% end %>

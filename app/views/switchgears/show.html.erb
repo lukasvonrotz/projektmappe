@@ -11,7 +11,13 @@ Kennung: <%= @switchgear.kennung %><br>
 Leistung: <%= @switchgear.leistung %><br>
 Max. Strom: <%= @switchgear.maxstrom %><br>
 Bruttopreis (EUR): <%= @switchgear.brutto %><br>
-Rabatt: <%= @switchgear.rabatt %>
+Rabatt: <%= @switchgear.rabatt %><br>
+Typ:
+<% if @switchgear.typ == 1 %>
+    Schaltgerätetyp
+<% else %>
+    Sonstiges
+<% end %>
 
 <br><br>
 <%= link_to "Zurück zu Schaltanlagenbau", switchgears_path %>

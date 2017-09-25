@@ -44,58 +44,60 @@
     <br>
     <h3>Übersicht</h3>
     <br>
-    <% top = Switchgearconnection.where(:level => 0).first.topswitchgear %>
-    <a href="<%= switchgearcombination_path(top.id) %>"
-       <% if top.iogroups.any? %>
-       style="color: green;"
-       <% end %>
-    ><%= top.name %></a>
-    <ul>
-      <% Switchgearconnection.where(:topswitchgear => top).each do |switchgearconnection| %>
-          <% top = switchgearconnection.bottomswitchgear %>
-          <li><a href="<%= switchgearcombination_path(top.id) %>"
-          <% if top.iogroups.any? %>
-              style="color: green;"
-          <% end %>
-          ><%= top.name %></a></li>
-          <ul>
-            <% Switchgearconnection.where(:topswitchgear => top).each do |subcon0| %>
-                <% top = subcon0.bottomswitchgear %>
-                <li><a href="<%= switchgearcombination_path(top.id) %>"><%= top.name %></a></li>
-                <ul>
-                  <% Switchgearconnection.where(:topswitchgear => top).each do |subcon1| %>
-                      <% top = subcon1.bottomswitchgear %>
-                      <li><a href="<%= switchgearcombination_path(top.id) %>"
-                             <% if top.iogroups.any? %>
-                             style="color:green;"
-                             <% end %>
-                       ><%= top.name %></a></li>
-                      <ul>
-                        <% Switchgearconnection.where(:topswitchgear => top).each do |subcon2| %>
-                            <% top = subcon2.bottomswitchgear %>
-                            <li><a href="<%= switchgearcombination_path(top.id) %>"
-                                   <% if top.iogroups.any? %>
-                                   style="color: green;"
-                                   <% end %>
-                            ><%= top.name %></a></li>
-                            <ul>
-                              <% Switchgearconnection.where(:topswitchgear => top).each do |subcon3| %>
-                                  <% top = subcon3.bottomswitchgear %>
-                                  <li><a href="<%= switchgearcombination_path(top.id) %>"
-                                         <% if top.iogroups.any? %>
-                                         style="color: green;"
-                                         <% end %>
-                                  ><%= top.name %></a></li>
-                              <% end %>
-                            </ul>
-                        <% end %>
-                      </ul>
-                  <% end %>
-                </ul>
+    <% if Switchgearconnection.where(:level => 0).any? %>
+      <% top = Switchgearconnection.where(:level => 0).first.topswitchgear %>
+      <a href="<%= switchgearcombination_path(top.id) %>"
+         <% if top.iogroups.any? %>
+         style="color: green;"
+         <% end %>
+      ><%= top.name %></a>
+      <ul>
+        <% Switchgearconnection.where(:topswitchgear => top).each do |switchgearconnection| %>
+            <% top = switchgearconnection.bottomswitchgear %>
+            <li><a href="<%= switchgearcombination_path(top.id) %>"
+            <% if top.iogroups.any? %>
+                style="color: green;"
             <% end %>
-          </ul>
-      <% end %>
-    </ul>
+            ><%= top.name %></a></li>
+            <ul>
+              <% Switchgearconnection.where(:topswitchgear => top).each do |subcon0| %>
+                  <% top = subcon0.bottomswitchgear %>
+                  <li><a href="<%= switchgearcombination_path(top.id) %>"><%= top.name %></a></li>
+                  <ul>
+                    <% Switchgearconnection.where(:topswitchgear => top).each do |subcon1| %>
+                        <% top = subcon1.bottomswitchgear %>
+                        <li><a href="<%= switchgearcombination_path(top.id) %>"
+                               <% if top.iogroups.any? %>
+                               style="color:green;"
+                               <% end %>
+                         ><%= top.name %></a></li>
+                        <ul>
+                          <% Switchgearconnection.where(:topswitchgear => top).each do |subcon2| %>
+                              <% top = subcon2.bottomswitchgear %>
+                              <li><a href="<%= switchgearcombination_path(top.id) %>"
+                                     <% if top.iogroups.any? %>
+                                     style="color: green;"
+                                     <% end %>
+                              ><%= top.name %></a></li>
+                              <ul>
+                                <% Switchgearconnection.where(:topswitchgear => top).each do |subcon3| %>
+                                    <% top = subcon3.bottomswitchgear %>
+                                    <li><a href="<%= switchgearcombination_path(top.id) %>"
+                                           <% if top.iogroups.any? %>
+                                           style="color: green;"
+                                           <% end %>
+                                    ><%= top.name %></a></li>
+                                <% end %>
+                              </ul>
+                          <% end %>
+                        </ul>
+                    <% end %>
+                  </ul>
+              <% end %>
+            </ul>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 </div>
 

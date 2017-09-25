@@ -50,7 +50,11 @@ class SubsubprojectsController < ApplicationController
   # PUT /subsubprojects/:id
   def update
     @subsubproject = Subsubproject.find(params[:id])
+    puts 'lukas'
+    puts params
+    puts params[:subsubproject][:master]
     if params[:subsubproject][:master] == "1"
+
       @subsubproject.subproject.subsubprojects.each do |othersubsubproject|
         if othersubsubproject.master
           othersubsubproject.master = false

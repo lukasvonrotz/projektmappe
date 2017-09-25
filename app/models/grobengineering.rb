@@ -1,5 +1,5 @@
 class Grobengineering < ApplicationRecord
-  belongs_to :subsubproject, optional: true
+  belongs_to :subsubproject
 
   #fuer kabel spezifisch
   belongs_to :wire, optional: true

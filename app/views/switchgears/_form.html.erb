@@ -5,6 +5,12 @@
       <%= switchgear.text_field :kennung, :class => "form-control",
                              placeholder: 'Kennnug für Eintrag eingeben' %>
     </div>
+    <% type_array = { 0 => "Schaltgerättyp", 1 => "Sonstige"} %>
+    <div class="field form-group">
+      <%= switchgear.label :typ, 'Typ' %>
+      <%= switchgear.select :typ, [['Sonstige', 0], ['Schaltgerättyp', 1]], {}, { :class => "form-control",
+                                placeholder: 'Typ eingeben'} %>
+    </div>
     <div class="field form-group">
       <%= switchgear.label :leistung, 'Leistung' %>
       <%= switchgear.text_field :leistung, :class => "form-control",

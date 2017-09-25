@@ -15,7 +15,7 @@
       <% @subsubprojects.each do |subsubproject| %>
         <tr>
           <td><%= subsubproject.id %></td>
-          <td><a href="<%= subsubproject_path(subsubproject.id) %>"><%= subsubproject.name %></a></td>
+          <td><a href="<%= project_subproject_subsubproject_path(subsubproject.id) %>"><%= subsubproject.name %></a></td>
           <td>
             <a href="<%= subsubproject_path(subsubproject.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
             <a href="<%= edit_subsubproject_path(subsubproject.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>

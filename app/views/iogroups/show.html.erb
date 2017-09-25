@@ -13,7 +13,7 @@ Profibus-Adresse: <%= @iogroup.profibus_address %><br>
 Einbauten:
 <ul>
   <% @iogroup.assemblies.each do |assembly| %>
-    <li><%= assembly.kennung %></li>
+    <li><a href="<%= assembly_path(assembly.id) %>"><%= assembly.kennung %></a></li>
   <% end %>
 </ul>
 

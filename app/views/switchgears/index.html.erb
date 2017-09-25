@@ -12,6 +12,7 @@
       <th>Max. Strom</th>
       <th>Brutto [CHF]</th>
       <th>Rabatt</th>
+      <th>Typ</th>
       <th>Aktionen</th>
     </tr>
     </thead>
@@ -24,6 +25,13 @@
           <td><%= switchgear.maxstrom %></td>
           <td><%= switchgear.brutto %></td>
           <td><%= switchgear.rabatt %></td>
+          <td>
+            <% if switchgear.typ == 1 %>
+              Schaltgerätetyp
+            <% else %>
+              Sonstiges
+            <% end %>
+          </td>
           <td>
             <a href="<%= switchgear_path(switchgear.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
             <a href="<%= edit_switchgear_path(switchgear.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>

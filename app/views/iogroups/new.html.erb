@@ -6,6 +6,13 @@
     </div>
 <% end %>
 
-<%= render 'form', :iogroup => @iogroup, :iotypeid => Iotype.first.id,
-           :switchgearcombinationid => Switchgearcombination.first.id, :context => true  %>
-<%= link_to "Zurück zu IO-Gruppen-Übersicht", iogroups_path %>
+<% if Iotype.any? && Switchgearcombination.any? %>
+  <%= render 'form', :iogroup => @iogroup, :iotypeid => Iotype.first.id,
+             :switchgearcombinationid => Switchgearcombination.first.id, :context => true  %>
+  <%= link_to "Zurück zu IO-Gruppen-Übersicht", iogroups_path %>
+<% else %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      Mindestens 1 IO-Gruppentyp und/oder Schaltgerätekombination müssen in der Datenbank existieren.
+    </div>
+<% end %>

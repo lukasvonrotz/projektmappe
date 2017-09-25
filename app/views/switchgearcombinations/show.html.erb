@@ -9,6 +9,14 @@
 
 ID: <%= @switchgearcombination.id %><br>
 Name: <%= @switchgearcombination.name %><br>
+Typ: <a href="<%= switchgear_path(@switchgearcombination.switchgear.id) %>"><%= @switchgearcombination.switchgear.kennung %></a>
+<br>
+IO-Gruppen:
+<ul>
+  <% @switchgearcombination.iogroups.each do |iogroup| %>
+      <li><a href="<%= iogroup_path(iogroup.id) %>"><%= iogroup.name %></a></li>
+  <% end %>
+</ul>
 
 <br><br>
 <%= link_to "Zurück zu Schaltgerätekombination-Übersicht", switchgearcombinations_path %>
