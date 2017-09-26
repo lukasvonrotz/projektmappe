@@ -1,0 +1,18 @@
+<h1>Grobengineering-Eintrag editieren</h1>
+<% if @grobengineering.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @grobengineering.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :grobengineering => @grobengineering, :projectid => @grobengineering.subsubproject.subproject.project.id,
+           :deviceid => @grobengineering.device.id,
+           :iogroupid => @grobengineering.iogroup.id,
+           :motorenabgangid => @grobengineering.switchgear_motorenabgang.nil? ? 0 : @grobengineering.switchgear_motorenabgang.id,
+           :futypid => @grobengineering.fu_typ.nil? ? 0 : @grobengineering.fu_typ.id,
+           :wirespez1id => @grobengineering.wire_spez1.nil? ? '' : @grobengineering.wire_spez1.id,
+           :wirespez2id => @grobengineering.wire_spez2.nil? ? '' : @grobengineering.wire_spez2.id,
+           :wirespez3id => @grobengineering.wire_spez3.nil? ? '' : @grobengineering.wire_spez3.id,
+           :context => false  %>
+<%= link_to "Zurück zu Grobengineering", grobengineerings_path %>

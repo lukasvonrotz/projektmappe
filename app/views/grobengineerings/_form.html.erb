@@ -1,0 +1,124 @@
+<%= form_for grobengineering do |grobengineering| %>
+
+    <div class="field form-group">
+      <%= grobengineering.label :offertposition, 'Offertposition' %>
+      <%= grobengineering.text_field :offertposition, :class => "form-control",
+                                     placeholder: 'Offertposition eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :subsystem, 'Teilanlage' %>
+      <%= grobengineering.collection_select :subsystem_id, Subsystem.where(:project_id => projectid),:id,:name,
+
+                                                  {:selected => projectid}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :beschreibung, 'Beschreibung' %>
+      <%= grobengineering.text_field :beschreibung, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :kommentar, 'Kommentar' %>
+      <%= grobengineering.text_field :kommentar, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :device_import, 'Gerät Import' %>
+      <%= grobengineering.text_field :device_import, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :device, 'Gerät' %>
+      <%= grobengineering.collection_select :device_id, Device.all,:id,:definition,
+                                    {:selected => deviceid}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :device_anzahl, 'Geräte Anzahl' %>
+      <%= grobengineering.text_field :device_anzahl, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :update_necessary, 'Update notwendig' %>
+      <%= grobengineering.text_field :update_necessary, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :iogroup, 'IO-Gruppe' %>
+      <%= grobengineering.collection_select :iogroup_id, Iogroup.all,:id,:name,
+
+                                            {:selected => iogroupid}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :tagnr, 'Tag-Nr.' %>
+      <%= grobengineering.text_field :tagnr, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :tagname, 'Tag-Name' %>
+      <%= grobengineering.text_field :tagname, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :bezeichnung, 'Bezeichnung' %>
+      <%= grobengineering.text_field :bezeichnung, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :bemerkung, 'Bemerkung' %>
+      <%= grobengineering.text_field :bemerkung, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :funktion_sw, 'Funktion SW' %>
+      <%= grobengineering.text_field :funktion_sw, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :switchgear_motorenabgang, 'Schaltanlage Motorenabgang' %>
+      <%= grobengineering.collection_select :switchgear_motorenabgang_id, Switchgear.all,:id,:kennung,
+
+                                            {:selected => motorenabgangid, :include_blank => ''}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :fu_typ, 'FU-Typ' %>
+      <%= grobengineering.collection_select :fu_typ_id, Drive.all,:id,:kennung,
+
+                                            {:selected => futypid, :include_blank => ''}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :wire_spez1, 'Kabel Spezifisch 1' %>
+      <%= grobengineering.collection_select :wire_spez1_id, Wire.all,:id,:kabeltyp,
+
+                                            {:selected => wirespez1id, :include_blank => ''}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :wire_spez2, 'Kabel Spezifisch 2' %>
+      <%= grobengineering.collection_select :wire_spez1_id, Wire.all,:id,:kabeltyp,
+
+                                            {:selected => wirespez2id, :include_blank => ''}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :wire_spez3, 'Kabel Spezifisch 3' %>
+      <%= grobengineering.collection_select :wire_spez1_id, Wire.all,:id,:kabeltyp,
+
+                                            {:selected => wirespez3id, :include_blank => ''}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :sicherheitszone, 'Sicherheitszone' %>
+      <%= grobengineering.text_field :sicherheitszone, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :lieferant, 'Lieferant' %>
+      <%= grobengineering.text_field :lieferant, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :spannung, 'Spannung [V]' %>
+      <%= grobengineering.text_field :spannung, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :leistung, 'Leistung [kW]' %>
+      <%= grobengineering.text_field :leistung, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :strom, 'Strom [A]' %>
+      <%= grobengineering.text_field :strom, :class => "form-control" %>
+    </div>
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= grobengineering.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= grobengineering.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

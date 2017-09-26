@@ -1,0 +1,10 @@
+<h1>Neuen Lieferantentypen erstellen</h1>
+<% if @suppliertype.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @suppliertype.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :suppliertype => @suppliertype, :context => true  %>
+<%= link_to "Zurück zu Lieferantentyp-Übersicht", suppliertypes_path %>

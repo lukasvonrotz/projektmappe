@@ -15,11 +15,21 @@ class SuppliersController < ApplicationController
     def create
       @supplier = Supplier.new(supplier_params)
 
+      # Einträge in wire_suppliers für alle Kabel erstellen
+      suppliertypeid = Suppliertype.where(name: 'Kabel').first.id
+      if supplier_params[:suppliertype_ids].include? suppliertypeid.to_s
+        Wire.all.each do |wire|
+          wire_supplier = WireSupplier.create
+          wire_supplier.supplier = @supplier
+          wire_supplier.wire = wire
+          wire_supplier.save!
+        end
+      end
+
       suppliertypeid = Suppliertype.where(name: 'Kabelbeschriftung').first.id
       if supplier_params[:suppliertype_ids].include? suppliertypeid.to_s
         wirecaptionprice = Wirecaptionprice.create
         wirecaptionprice.supplier = @supplier
-        puts wirecaptionprice.errors.first
         wirecaptionprice.save!
       end
 

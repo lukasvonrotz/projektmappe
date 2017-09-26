@@ -85,6 +85,6 @@ class SubsubprojectsController < ApplicationController
   private
   # defines which parameters have to be provided by the form when creating a new subsubproject
   def subsubproject_params
-    params.require(:subsubproject).permit(:name, :master, :subproject_id)
+    params.require(:subsubproject).permit!
   end
 end

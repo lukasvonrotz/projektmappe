@@ -4,24 +4,41 @@ class WiresController < ApplicationController
     @wiresuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'})
     @wirecaptionsuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'})
 
+    # Check whether all prices of all wire suppliers are provided in database
     @allPricesEntered = 0
     @wires.each do |wire|
       @wiresuppliers.each do |wiresupplier|
         begin
-          anschlusstableauseite = WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.anschlusstableauseite
-          anschlussgeraeteseite = WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.anschlussgeraeteseite
-          beschriftungkabeleinanschluss = WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss
-          beschriftungaderneinanschluss = WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungaderneinanschluss
-          installationhohlboden = WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.installationhohlboden
-          installationtrasse = WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.installationtrasse
-          installationrohr = WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.installationrohr
+          wiresupplierEntry = WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first
+          anschlusstableauseite = wiresupplierEntry.anschlusstableauseite
+          anschlussgeraeteseite = wiresupplierEntry.anschlussgeraeteseite
+          beschriftungkabeleinanschluss = wiresupplierEntry.beschriftungkabeleinanschluss
+          beschriftungaderneinanschluss = wiresupplierEntry.beschriftungaderneinanschluss
+          installationhohlboden = wiresupplierEntry.installationhohlboden
+          installationtrasse = wiresupplierEntry.installationtrasse
+          installationrohr = wiresupplierEntry.installationrohr
 
           if anschlusstableauseite.nil? or anschlussgeraeteseite.nil? or beschriftungkabeleinanschluss.nil? or beschriftungaderneinanschluss.nil? or installationhohlboden.nil? or installationtrasse.nil? or installationrohr.nil?
-            @allPricesEntered = WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.wiresupplier_id
+            @allPricesEntered = wiresupplierEntry.wiresupplier_id
           end
         rescue
           @allPricesEntered = wiresupplier.id
         end
+      end
+    end
+
+    # check wether all caption prices are provided in database
+    @captionPricesEntered = 0
+    @wirecaptionsuppliers.each do |wirecaptionsupplier|
+      begin
+        wirecaptionpriceEntry = Wirecaptionprice.where("supplier_id = ?", wirecaptionsupplier.id).first
+        kostenkabelmitmontagetraeger = wirecaptionpriceEntry.kostenkabelmitmontagetraeger
+        kostenadermitmontagehuelse = wirecaptionpriceEntry.kostenadermitmontagehuelse
+        if kostenkabelmitmontagetraeger.nil? or kostenadermitmontagehuelse.nil?
+          @captionPricesEntered = wirecaptionpriceEntry.supplier_id
+        end
+      rescue
+        @captionPricesEntered = wirecaptionsupplier.id
       end
     end
   end
@@ -43,7 +60,7 @@ class WiresController < ApplicationController
       @wiresuppliers.each do |wiresupplier|
         wireWiresupplierEntry = WireSupplier.new
         wireWiresupplierEntry.wire_id = @wire.id
-        wireWiresupplierEntry.wiresupplier_id = wiresupplier.id
+        wireWiresupplierEntry.supplier_id = wiresupplier.id
         wireWiresupplierEntry.save!
       end
 

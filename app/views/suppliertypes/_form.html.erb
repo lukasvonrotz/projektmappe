@@ -1,0 +1,17 @@
+<%= form_for suppliertype do |suppliertype| %>
+
+    <div class="field form-group">
+      <%= suppliertype.label :name, 'Lieferantentyp' %>
+      <%= suppliertype.text_field :name, :class => "form-control",
+                             placeholder: 'Lieferantentyp eingeben' %>
+    </div>
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= suppliertype.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= suppliertype.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

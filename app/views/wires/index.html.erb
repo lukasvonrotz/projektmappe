@@ -2,7 +2,7 @@
 <br>
 <a href="<%=new_wire_path%>" class="btn btn-success">Neues Kabel erstellen</a>
 <br><br><br>
-<% if @allPricesEntered == 0 %>
+<% if @allPricesEntered == 0 && @captionPricesEntered == 0 %>
   Preise anzeigen für:
   <select class="form-control" id="select_wiresupplier">
     <% @wiresuppliers.each do |wiresupplier| %>
@@ -104,7 +104,15 @@
       }
   </script>
 <% else %>
-    <div class="alert alert-danger">
-      Preise für Kabel nicht komplett! Bitte für Lieferanten alle Kabelpreise eintragen!<br><br><a href="/suppliers/<%= @allPricesEntered %>/wire_suppliers">Gehe zu fehlenden Preisen</a>
-    </div>
+    <% if @captionPricesEntered != 0 %>
+        <div class="alert alert-danger">
+          Preise für Kabelbeschriftung nicht komplett! Bitte für Beschriftungslieferanten alle Preise eintragen!<br><br>
+          <% wirecaptionpriceid = Wirecaptionprice.where("supplier_id = ?", @captionPricesEntered).first.id %>
+          <a href="<%= edit_wirecaptionprice_path(wirecaptionpriceid) %>">Gehe zu fehlenden Preisen</a>
+        </div>
+    <% else %>
+      <div class="alert alert-danger">
+        Preise für Kabel nicht komplett! Bitte für Lieferanten alle Kabelpreise eintragen!<br><br><a href="/suppliers/<%= @allPricesEntered %>/wire_suppliers">Gehe zu fehlenden Preisen</a>
+      </div>
+    <% end %>
 <% end %>

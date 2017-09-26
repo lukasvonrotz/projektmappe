@@ -1,0 +1,16 @@
+<h1>Details Grobengineering-Eintrag</h1>
+<br>
+<% if @grobengineering.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @grobengineering.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @grobengineering.id %><br>
+Offertposition: <%= @grobengineering.offertposition %><br>
+Beschreibung: <%= @grobengineering.beschreibung %><br>
+Kommentar: <%= @grobengineering.kommentar %><br>
+
+<br><br>
+<%= link_to "Zurück zu Grobengineering", grobengineerings_path %>

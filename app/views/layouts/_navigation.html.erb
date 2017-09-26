@@ -42,6 +42,9 @@
                 <li class="<%= 'active' if current_page? (suppliers_path) %>">
                   <%= link_to "Lieferanten", suppliers_path %>
                 </li>
+                <li class="<%= 'active' if current_page? (suppliertypes_path) %>">
+                  <%= link_to "Lieferantentypen", suppliertypes_path %>
+                </li>
                 <li class="<%= 'active' if current_page? (customers_path) %>">
                   <%= link_to "Kunden", customers_path %>
                 </li>
@@ -74,6 +77,10 @@
             </li>
             <li class="<%= 'active' if current_page? (devices_path) %>">
               <%= link_to "Geräte", devices_path %>
+            </li>
+
+            <li class="<%= 'active' if current_page? (grobengineerings_path) %>">
+              <%= link_to "Grobengineering", grobengineerings_path %>
             </li>
             
         <% end %>
