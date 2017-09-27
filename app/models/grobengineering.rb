@@ -13,4 +13,5 @@ class Grobengineering < ApplicationRecord
   belongs_to :wire_spez1, :class_name => 'Wire', :foreign_key => 'wire_spez1_id', :optional => true
   belongs_to :wire_spez2, :class_name => 'Wire', :foreign_key => 'wire_spez2_id', :optional => true
   belongs_to :wire_spez3, :class_name => 'Wire', :foreign_key => 'wire_spez3_id', :optional => true
+
 end

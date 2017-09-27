@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170922135435) do
+ActiveRecord::Schema.define(version: 20170926115827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,8 +151,26 @@ ActiveRecord::Schema.define(version: 20170922135435) do
     t.float    "spannung"
     t.float    "leistung"
     t.float    "strom"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "subsubproject_id"
+    t.integer  "device_id"
+    t.integer  "subsystem_id"
+    t.integer  "iogroup_id"
+    t.integer  "switchgear_motorenabgang_id"
+    t.integer  "fu_typ_id"
+    t.integer  "wire_spez1_id"
+    t.integer  "wire_spez2_id"
+    t.integer  "wire_spez3_id"
+    t.index ["device_id"], name: "index_grobengineerings_on_device_id", using: :btree
+    t.index ["fu_typ_id"], name: "index_grobengineerings_on_fu_typ_id", using: :btree
+    t.index ["iogroup_id"], name: "index_grobengineerings_on_iogroup_id", using: :btree
+    t.index ["subsubproject_id"], name: "index_grobengineerings_on_subsubproject_id", using: :btree
+    t.index ["subsystem_id"], name: "index_grobengineerings_on_subsystem_id", using: :btree
+    t.index ["switchgear_motorenabgang_id"], name: "index_grobengineerings_on_switchgear_motorenabgang_id", using: :btree
+    t.index ["wire_spez1_id"], name: "index_grobengineerings_on_wire_spez1_id", using: :btree
+    t.index ["wire_spez2_id"], name: "index_grobengineerings_on_wire_spez2_id", using: :btree
+    t.index ["wire_spez3_id"], name: "index_grobengineerings_on_wire_spez3_id", using: :btree
   end
 
   create_table "iogroups", force: :cascade do |t|
@@ -398,6 +416,15 @@ ActiveRecord::Schema.define(version: 20170922135435) do
   end
 
   add_foreign_key "devices", "switchgears"
+  add_foreign_key "grobengineerings", "devices"
+  add_foreign_key "grobengineerings", "drives", column: "fu_typ_id"
+  add_foreign_key "grobengineerings", "iogroups"
+  add_foreign_key "grobengineerings", "subsubprojects"
+  add_foreign_key "grobengineerings", "subsystems"
+  add_foreign_key "grobengineerings", "switchgears", column: "switchgear_motorenabgang_id"
+  add_foreign_key "grobengineerings", "wires", column: "wire_spez1_id"
+  add_foreign_key "grobengineerings", "wires", column: "wire_spez2_id"
+  add_foreign_key "grobengineerings", "wires", column: "wire_spez3_id"
   add_foreign_key "iogroups", "iotypes"
   add_foreign_key "iogroups", "switchgearcombinations"
   add_foreign_key "subprojects", "customers"
