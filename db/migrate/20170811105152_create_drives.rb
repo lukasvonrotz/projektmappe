@@ -9,7 +9,7 @@ class CreateDrives < ActiveRecord::Migration[5.0]
       t.text :pn
       t.string :bg
       t.float :brutto
-      t.float :rabatt
+      t.float :rabatt, :default => 0
 
       t.timestamps
     end

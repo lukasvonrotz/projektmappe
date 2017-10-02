@@ -37,10 +37,9 @@
             <td><%= wire.aderbeschriftung %></td>
             <td><%= wire.anzahladern %></td>
             <td><%= wire.kabeltyp %></td>
-            <td id="anschluesseOhneBeschriftung<%= wire.id %>">
-            </td>
-            <td id="beschriftungTotal<%= wire.id %>"></td>
-            <td id="anschluesseTotal<%= wire.id %>"></td>
+            <td id="anschluesseOhneBeschriftung<%= wire.id %>"><%= wire.anschluesse_ohne_beschriftung(@wiresuppliers.first) %></td>
+            <td id="beschriftungTotal<%= wire.id %>"><%= wire.beschriftung_total(@wiresuppliers.first, @wirecaptionsuppliers.first) %></td>
+            <td id="anschluesseTotal<%= wire.id %>"><%= wire.anschluesse_total(@wiresuppliers.first, @wirecaptionsuppliers.first) %></td>
             <td>
               <a href="<%= wire_path(wire.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
               <a href="<%= edit_wire_path(wire.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
@@ -62,10 +61,6 @@
 
 
   <script>
-
-      $(document).ready(function() {
-          updatePrices();
-      });
 
       $("#updatePrices").click(function() {
         updatePrices();

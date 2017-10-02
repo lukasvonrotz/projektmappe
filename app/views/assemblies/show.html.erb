@@ -6,13 +6,16 @@
     </div>
 <% end %>
 
+<% eurokurs = 1.2 %>
 ID: <%= @assembly.id %><br>
 Kennung: <%= @assembly.kennung %><br>
-Anzahl Kanäle: <%= @assembly.kanaele %><br>
+Anzahl Kanäle: <%= @assembly.kanaele_total %><br>
 Artikelnummer: <%= @assembly.artikelnr %><br>
 Bezeichnung: <%= @assembly.bezeichnung %><br>
-Bruttopreis (EUR): <%= @assembly.brutto_eur %><br>
-Rabatt: <%= @assembly.rabatt %>
+Bruttopreis (EUR): <%= @assembly.brutto_eur_col(eurokurs) %><br>
+Bruttopreis (CHF): <%= @assembly.brutto_chf_col(eurokurs) %><br>
+Rabatt: <%= @assembly.rabatt %><br>
+Nettopreis: <%= @assembly.netto(eurokurs) %>
 
 <br><br>
 <%= link_to "Zurück zu Baugruppenübersicht", assemblies_path %>

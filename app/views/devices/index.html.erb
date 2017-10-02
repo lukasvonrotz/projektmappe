@@ -115,67 +115,20 @@
         <td><%= device.sig_sdo %></td>
         <td><%= device.sig_sai %></td>
         <td><%= device.sig_sao %></td>
-        <% begin %>
-            <% switchgear = device.switchgear.kennung %>
-            <td><%= switchgear %></td>
-        <% rescue %>
-            <td></td>
-        <% end %>
+        <td><%= device.switchgear_einbau.nil? ? '' : device.switchgear_einbau.kennung %></td>
         <td><%= device.sch_anzahl %></td>
-        <% begin %>
-          <% device_wire = DeviceWire.where(:device_id => device.id, :definition => "Kabel Steuerung").first %>
-          <% wire = Wire.find(device_wire.wire_id).kabeltyp %>
-          <td><%= wire %></td>
-          <td><%= device_wire.laenge %></td>
-        <% rescue %>
-          <td></td>
-          <td></td>
-        <% end %>
-        <% begin %>
-            <% device_wire = DeviceWire.where(:device_id => device.id, :definition => "Kabel Speisung").first %>
-            <% wire = Wire.find(device_wire.wire_id).kabeltyp %>
-            <td><%= wire %></td>
-            <td><%= device_wire.laenge %></td>
-        <% rescue %>
-            <td></td>
-            <td></td>
-        <% end %>
-        <% begin %>
-            <% device_wire = DeviceWire.where(:device_id => device.id, :definition => "Kabel Pot-Ausgl.").first %>
-            <% wire = Wire.find(device_wire.wire_id).kabeltyp %>
-            <td><%= wire %></td>
-            <td><%= device_wire.laenge %></td>
-        <% rescue %>
-            <td></td>
-            <td></td>
-        <% end %>
-        <% begin %>
-            <% device_elec = DeviceElectricalInstallation.where(:device_id => device.id, :definition => "Installation Trasse").first %>
-            <% elec_inst = ElectricalInstallation.find(device_elec.electrical_installation_id).kennung %>
-            <td><%= elec_inst %></td>
-            <td><%= device_elec.value %></td>
-        <% rescue %>
-            <td></td>
-            <td></td>
-        <% end %>
-        <% begin %>
-            <% device_elec = DeviceElectricalInstallation.where(:device_id => device.id, :definition => "Installation Rohr").first %>
-            <% elec_inst = ElectricalInstallation.find(device_elec.electrical_installation_id).kennung %>
-            <td><%= elec_inst %></td>
-            <td><%= device_elec.value %></td>
-        <% rescue %>
-            <td></td>
-            <td></td>
-        <% end %>
-        <% begin %>
-            <% device_elec = DeviceElectricalInstallation.where(:device_id => device.id, :definition => "Montage Geraete").first %>
-            <% elec_inst = ElectricalInstallation.find(device_elec.electrical_installation_id).kennung %>
-            <td><%= elec_inst %></td>
-            <td><%= device_elec.value %></td>
-        <% rescue %>
-            <td></td>
-            <td></td>
-        <% end %>
+        <td><%= device.wire_steuerung.nil? ? '' : device.wire_steuerung.kabeltyp %></td>
+        <td><%= device.kabelsteuerunglaenge %></td>
+        <td><%= device.wire_speisung.nil? ? '' : device.wire_speisung.kabeltyp %></td>
+        <td><%= device.kabelspeisunglaenge %></td>
+        <td><%= device.wire_potausgleich.nil? ? '' : device.wire_potausgleich.kabeltyp %></td>
+        <td><%= device.kabelpotausgleichlaenge %></td>
+        <td><%= device.elinst_trasse.nil? ? '' : device.elinst_trasse.kennung %></td>
+        <td><%= device.installationtrasselaenge %></td>
+        <td><%= device.elinst_rohr.nil? ? '' : device.elinst_rohr.kennung %></td>
+        <td><%= device.installationrohrlaenge %></td>
+        <td><%= device.elinst_geraete.nil? ? '' : device.elinst_geraete.kennung %></td>
+        <td><%= device.installationgeraetelaenge %></td>
         <td>
           <a href="<%= device_path(device.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
           <a href="<%= edit_device_path(device.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>

@@ -9,17 +9,12 @@
 
 
 <%= render 'form', :device => @device,
-           :kabel1 => 0,
-           :kabel2 => 0,
-           :kabel3 => 0,
-           :kabel1laenge => "",
-           :kabel2laenge => "",
-           :kabel3laenge => "",
-           :elinst1 => 0,
-           :elinst2 => 0,
-           :elinst3 => 0,
-           :elinst1value => "",
-           :elinst2value => "",
-           :elinst3value => "",
-           :switchgear => nil, :context => true  %>
+           :switchgear_einbau_id => '',
+           :wire_steuerung_id => '',
+           :wire_speisung_id => '',
+           :wire_potausgleich_id => '',
+           :elinst_trasse_id => '',
+           :elinst_rohr_id => '',
+           :elinst_geraete_id => '',
+           :context => true  %>
 <%= link_to "Zurück zu Geräte-Übersicht", devices_path %>

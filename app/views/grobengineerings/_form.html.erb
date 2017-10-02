@@ -81,16 +81,28 @@
                                             {:selected => wirespez1id, :include_blank => ''}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
+      <%= grobengineering.label :kabel_spez1_laenge, 'Kabel Spezifisch 1 Länge' %>
+      <%= grobengineering.text_field :kabel_spez1_laenge, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
       <%= grobengineering.label :wire_spez2, 'Kabel Spezifisch 2' %>
-      <%= grobengineering.collection_select :wire_spez1_id, Wire.all,:id,:kabeltyp,
+      <%= grobengineering.collection_select :wire_spez2_id, Wire.all,:id,:kabeltyp,
 
                                             {:selected => wirespez2id, :include_blank => ''}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
+      <%= grobengineering.label :kabel_spez2_laenge, 'Kabel Spezifisch 2 Länge' %>
+      <%= grobengineering.text_field :kabel_spez2_laenge, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
       <%= grobengineering.label :wire_spez3, 'Kabel Spezifisch 3' %>
-      <%= grobengineering.collection_select :wire_spez1_id, Wire.all,:id,:kabeltyp,
+      <%= grobengineering.collection_select :wire_spez3_id, Wire.all,:id,:kabeltyp,
 
                                             {:selected => wirespez3id, :include_blank => ''}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :kabel_spez3_laenge, 'Kabel Spezifisch 3 Länge' %>
+      <%= grobengineering.text_field :kabel_spez3_laenge, :class => "form-control" %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :sicherheitszone, 'Sicherheitszone' %>

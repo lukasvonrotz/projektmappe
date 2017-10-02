@@ -17,14 +17,24 @@ ActiveRecord::Schema.define(version: 20170926115827) do
 
   create_table "assemblies", force: :cascade do |t|
     t.string   "kennung"
-    t.integer  "kanaele"
     t.string   "artikelnr"
     t.text     "bezeichnung"
+    t.integer  "di",          default: 0
+    t.integer  "do",          default: 0
+    t.integer  "ai",          default: 0
+    t.integer  "ao",          default: 0
+    t.integer  "z",           default: 0
+    t.integer  "inkr",        default: 0
+    t.integer  "ssi",         default: 0
+    t.integer  "sdi",         default: 0
+    t.integer  "sdo",         default: 0
+    t.integer  "sai",         default: 0
+    t.integer  "sao",         default: 0
     t.float    "brutto_eur"
     t.float    "brutto_chf"
     t.float    "rabatt"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "assemblies_iogroups", id: false, force: :cascade do |t|
@@ -37,26 +47,6 @@ ActiveRecord::Schema.define(version: 20170926115827) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "device_electrical_installations", force: :cascade do |t|
-    t.integer  "device_id"
-    t.integer  "electrical_installation_id"
-    t.string   "definition"
-    t.float    "value"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.index ["device_id", "definition"], name: "device_electrical_installations_uniqueness", unique: true, using: :btree
-  end
-
-  create_table "device_wires", force: :cascade do |t|
-    t.integer  "device_id"
-    t.integer  "wire_id"
-    t.string   "definition"
-    t.float    "laenge"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["device_id", "definition"], name: "index_device_wires_on_device_id_and_definition", unique: true, using: :btree
   end
 
   create_table "devices", force: :cascade do |t|
@@ -88,6 +78,7 @@ ActiveRecord::Schema.define(version: 20170926115827) do
     t.integer  "ger_geraeteheizung"
     t.integer  "ger_kommunikation"
     t.integer  "ger_safety"
+    t.integer  "ger_spsmodul"
     t.integer  "sig_di"
     t.integer  "sig_do"
     t.integer  "sig_ai"
@@ -101,10 +92,28 @@ ActiveRecord::Schema.define(version: 20170926115827) do
     t.integer  "sig_sai"
     t.integer  "sig_sao"
     t.integer  "sch_anzahl"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "switchgear_id"
-    t.index ["switchgear_id"], name: "index_devices_on_switchgear_id", using: :btree
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.float    "kabelsteuerunglaenge"
+    t.float    "kabelspeisunglaenge"
+    t.float    "kabelpotausgleichlaenge"
+    t.float    "installationtrasselaenge"
+    t.float    "installationrohrlaenge"
+    t.float    "installationgeraetelaenge"
+    t.integer  "switchgear_einbau_id"
+    t.integer  "wire_steuerung_id"
+    t.integer  "wire_speisung_id"
+    t.integer  "wire_potausgleich_id"
+    t.integer  "elinst_trasse_id"
+    t.integer  "elinst_rohr_id"
+    t.integer  "elinst_geraete_id"
+    t.index ["elinst_geraete_id"], name: "index_devices_on_elinst_geraete_id", using: :btree
+    t.index ["elinst_rohr_id"], name: "index_devices_on_elinst_rohr_id", using: :btree
+    t.index ["elinst_trasse_id"], name: "index_devices_on_elinst_trasse_id", using: :btree
+    t.index ["switchgear_einbau_id"], name: "index_devices_on_switchgear_einbau_id", using: :btree
+    t.index ["wire_potausgleich_id"], name: "index_devices_on_wire_potausgleich_id", using: :btree
+    t.index ["wire_speisung_id"], name: "index_devices_on_wire_speisung_id", using: :btree
+    t.index ["wire_steuerung_id"], name: "index_devices_on_wire_steuerung_id", using: :btree
   end
 
   create_table "drives", force: :cascade do |t|
@@ -415,8 +424,13 @@ ActiveRecord::Schema.define(version: 20170926115827) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "devices", "switchgears"
-  add_foreign_key "grobengineerings", "devices"
+  add_foreign_key "devices", "electrical_installations", column: "elinst_geraete_id"
+  add_foreign_key "devices", "electrical_installations", column: "elinst_rohr_id"
+  add_foreign_key "devices", "electrical_installations", column: "elinst_trasse_id"
+  add_foreign_key "devices", "switchgears", column: "switchgear_einbau_id"
+  add_foreign_key "devices", "wires", column: "wire_potausgleich_id"
+  add_foreign_key "devices", "wires", column: "wire_speisung_id"
+  add_foreign_key "devices", "wires", column: "wire_steuerung_id"
   add_foreign_key "grobengineerings", "drives", column: "fu_typ_id"
   add_foreign_key "grobengineerings", "iogroups"
   add_foreign_key "grobengineerings", "subsubprojects"

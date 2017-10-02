@@ -6,8 +6,6 @@ class Grobengineering < ApplicationRecord
   belongs_to :drive, optional: true
   belongs_to :device
 
-  belongs_to :subsystem
-
   belongs_to :switchgear_motorenabgang, :class_name => 'Switchgear', :foreign_key => 'switchgear_motorenabgang_id', :optional => true
   belongs_to :fu_typ, :class_name => 'Drive', :foreign_key => 'fu_typ_id', :optional => true
   belongs_to :wire_spez1, :class_name => 'Wire', :foreign_key => 'wire_spez1_id', :optional => true

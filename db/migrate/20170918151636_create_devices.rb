@@ -29,6 +29,7 @@ class CreateDevices < ActiveRecord::Migration[5.0]
       t.integer :ger_geraeteheizung
       t.integer :ger_kommunikation
       t.integer :ger_safety
+      t.integer :ger_spsmodul
       t.integer :sig_di
       t.integer :sig_do
       t.integer :sig_ai

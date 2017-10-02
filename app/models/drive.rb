@@ -7,4 +7,8 @@ class Drive < ApplicationRecord
 
   #delete association in grobengineerings if drive is deleted
   has_many :grobengineerings, dependent: :nullify
+
+  def netto
+    return self.brutto - (self.brutto * self.rabatt)
+  end
 end

@@ -7,8 +7,8 @@
 <% end %>
 
 <%= render 'form', :grobengineering => @grobengineering, :projectid => @grobengineering.subsubproject.subproject.project.id,
-           :deviceid => @grobengineering.device.id,
-           :iogroupid => @grobengineering.iogroup.id,
+           :deviceid => @grobengineering.device.nil? ? '' : @grobengineering.device.id,
+           :iogroupid => @grobengineering.iogroup.nil? ? '' : @grobengineering.iogroup.id,
            :motorenabgangid => @grobengineering.switchgear_motorenabgang.nil? ? 0 : @grobengineering.switchgear_motorenabgang.id,
            :futypid => @grobengineering.fu_typ.nil? ? 0 : @grobengineering.fu_typ.id,
            :wirespez1id => @grobengineering.wire_spez1.nil? ? '' : @grobengineering.wire_spez1.id,

@@ -5,7 +5,7 @@ class CreateSwitchgears < ActiveRecord::Migration[5.0]
       t.text :leistung
       t.float :maxstrom
       t.float :brutto
-      t.float :rabatt
+      t.float :rabatt, :default => 0
 
       t.timestamps
     end

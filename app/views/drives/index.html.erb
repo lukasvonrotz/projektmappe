@@ -16,6 +16,7 @@
       <th>BG</th>
       <th>Brutto [CHF]</th>
       <th>Rabatt</th>
+      <th>Netto [CHF]</th>
       <th>Aktionen</th>
     </tr>
     </thead>
@@ -32,6 +33,7 @@
           <td><%= drive.bg %></td>
           <td><%= drive.brutto %></td>
           <td><%= drive.rabatt %></td>
+          <td><%= drive.netto %></td>
           <td>
             <a href="<%= drife_path(drive.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
             <a href="<%= edit_drife_path(drive.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>

@@ -5,7 +5,7 @@ class CreateElectricalInstallations < ActiveRecord::Migration[5.0]
       t.text :leistung
       t.string :einheit
       t.float :brutto
-      t.float :rabatt
+      t.float :rabatt, :default => 0
 
       t.timestamps
     end

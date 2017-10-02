@@ -12,6 +12,7 @@
       <th>LE</th>
       <th>Brutto [CHF]</th>
       <th>Rabatt</th>
+      <th>Netto [CHF]</th>
       <th>Aktionen</th>
     </tr>
     </thead>
@@ -24,6 +25,7 @@
           <td><%= electrical_installation.einheit %></td>
           <td><%= electrical_installation.brutto %></td>
           <td><%= electrical_installation.rabatt %></td>
+          <td><%= electrical_installation.netto %></td>
           <td>
             <a href="<%= electrical_installation_path(electrical_installation.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
             <a href="<%= edit_electrical_installation_path(electrical_installation.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>

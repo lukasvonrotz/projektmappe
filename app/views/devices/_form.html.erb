@@ -222,14 +222,9 @@
       <div id="tab4" class="tab-pane fade">
         <br>
         <div class="field form-group">
-          <%= device.label :switchgear, 'Schaltanlage Einbau' %>
-          <% if switchgear %>
-              <%= device.collection_select :switchgear_id, Switchgear.all,:id,:kennung,
-                                          {:selected => switchgear.id, :include_blank => 'keine'},  {class:"form-control"} %>
-          <% else %>
-              <%= device.collection_select :switchgear_id, Switchgear.all,:id,:kennung,
-                  {:include_blank => 'keine'}, {class:"form-control"} %>
-          <% end %>
+          <%= device.label :switchgear_einbau, 'Schaltanlage Einbau' %>
+          <%= device.collection_select :switchgear_einbau_id, Switchgear.all,:id,:kennung,
+                                                     {:selected => switchgear_einbau_id, :include_blank => ''}, {class:"form-control"} %>
         </div>
         <div class="field form-group">
           <%= device.label :sch_anzahl, 'Schaltanlagen Anzahl' %>
@@ -240,124 +235,69 @@
       <div id="tab5" class="tab-pane fade">
         <br>
         <div class="field form-group">
-          <%= device.label :device_wires1, 'Kabel Steuerung' %><br><br>
-          <%= device.semantic_fields_for :device_wires1 do |device_wire| %>
-            <%= device.label 'Typ' %>
-            <%= device_wire.input :wire_id, :required => false, :as => :select,
-                                  :label => false,
-                                  :collection => options_for_select(Wire.all.map { |w| [w.kabeltyp, w.id] }, kabel1),
-                                  :input_html => {:value => kabel1, :class => 'form-control' }%>
-            <%= device_wire.input :definition, :required => false, :as => :hidden,
-                                  :label => false,
-                                  :input_html => {:value => "Kabel Steuerung",  :class => 'form-control' } %>
-            <br>
-            <%= device.label 'Länge' %>
-            <%= device_wire.input :laenge, :required => false,
-                                  :label => false,
-                                  :input_html => {:value => kabel1laenge,
-                                                  :class => 'form-control' } %>
-          <% end %>
+          <%= device.label :wire_steuerung, 'Kabel Steuerung' %>
+          <%= device.collection_select :wire_steuerung_id, Wire.all,:id,:kabeltyp,
+                                       {:selected => wire_steuerung_id, :include_blank => ''}, {class:"form-control"} %>
+        </div>
+        <div class="field form-group">
+          <%= device.label :kabelsteuerunglaenge, 'Kabel Steuerung Länge' %>
+          <%= device.text_field :kabelsteuerunglaenge , :class => "form-control",
+                                placeholder: '' %>
         </div>
         <br><br>
         <div class="field form-group">
-          <%= device.label :device_wires2, 'Kabel Speisung' %><br><br>
-          <%= device.semantic_fields_for :device_wires2 do |device_wire| %>
-              <%= device.label 'Typ' %>
-              <%= device_wire.input :wire_id, :required => false, :as => :select,
-                                    :label => false,
-                                    :collection => options_for_select(Wire.all.map { |w| [w.kabeltyp, w.id] }, kabel2),
-                                    :input_html => { :class => 'form-control' }%>
-              <%= device_wire.input :definition, :required => false, :as => :hidden,
-                                    :label => false,
-                                    :input_html => {:value => "Kabel Speisung",  :class => 'form-control' } %>
-              <br>
-              <%= device.label 'Länge' %>
-              <%= device_wire.input :laenge, :required => false,
-                                    :label => false,
-                                    :input_html => {:value => kabel2laenge,
-                                                    :class => 'form-control' } %>
-          <% end %>
+          <%= device.label :wire_speisung, 'Kabel Speisung' %>
+          <%= device.collection_select :wire_speisung_id, Wire.all,:id,:kabeltyp,
+                                       {:selected => wire_speisung_id, :include_blank => ''}, {class:"form-control"} %>
+        </div>
+        <div class="field form-group">
+          <%= device.label :kabelspeisunglaenge, 'Kabel Speisung Länge' %>
+          <%= device.text_field :kabelspeisunglaenge , :class => "form-control",
+                                placeholder: '' %>
         </div>
         <br><br>
         <div class="field form-group">
-          <%= device.label :device_wires3, 'Kabel Pot-Ausgl.' %><br><br>
-          <%= device.semantic_fields_for :device_wires3 do |device_wire| %>
-              <%= device.label 'Typ' %>
-              <%= device_wire.input :wire_id, :required => false, :as => :select,
-                                    :label => false,
-                                    :collection => options_for_select(Wire.all.map { |w| [w.kabeltyp, w.id] }, kabel3),
-                                    :input_html => { :class => 'form-control' }%>
-              <%= device_wire.input :definition, :required => false, :as => :hidden,
-                                    :label => false,
-                                    :input_html => {:value => "Kabel Pot-Ausgl.",  :class => 'form-control' } %>
-              <br>
-              <%= device.label 'Länge' %>
-              <%= device_wire.input :laenge, :required => false,
-                                    :label => false,
-                                    :input_html => {:value => kabel3laenge,
-                                                    :class => 'form-control' } %>
-          <% end %>
+          <%= device.label :wire_potausgleich, 'Kabel Pot.-Ausgleich' %>
+          <%= device.collection_select :wire_potausgleich_id, Wire.all,:id,:kabeltyp,
+                                       {:selected => wire_potausgleich_id, :include_blank => ''}, {class:"form-control"} %>
         </div>
-
-        <br><br>
         <div class="field form-group">
-          <%= device.label :device_electrical_installations1, 'Installation Trasse' %><br><br>
-          <%= device.semantic_fields_for :device_electrical_installations1 do |device_electrical_installation| %>
-              <%= device_electrical_installation.label 'Kennung' %>
-              <%= device_electrical_installation.input :electrical_installation_id, :required => false, :as => :select,
-                                    :label => false,
-                                    :collection => options_for_select(ElectricalInstallation.all.map { |w| [w.kennung, w.id] }, elinst1),
-                                    :input_html => {:value => kabel1, :class => 'form-control' }%>
-              <%= device_electrical_installation.input :definition, :required => false, :as => :hidden,
-                                    :label => false,
-                                    :input_html => {:value => "Installation Trasse",  :class => 'form-control' } %>
-              <br>
-              <%= device_electrical_installation.label 'Länge' %>
-              <%= device_electrical_installation.input :value, :required => false,
-                                    :label => false,
-                                    :input_html => {:value => elinst1value,
-                                                    :class => 'form-control' } %>
-          <% end %>
+          <%= device.label :kabelpotausgleichlaenge, 'Kabel Pot.-Ausgleich Länge' %>
+          <%= device.text_field :kabelpotausgleichlaenge , :class => "form-control",
+                                placeholder: '' %>
         </div>
         <br><br>
         <div class="field form-group">
-          <%= device.label :device_electrical_installations2, 'Installation Rohr' %><br><br>
-          <%= device.semantic_fields_for :device_electrical_installations2 do |device_electrical_installation| %>
-              <%= device_electrical_installation.label 'Kennung' %>
-              <%= device_electrical_installation.input :electrical_installation_id, :required => false, :as => :select,
-                                    :label => false,
-                                    :collection => options_for_select(ElectricalInstallation.all.map { |w| [w.kennung, w.id] }, elinst2),
-                                    :input_html => { :class => 'form-control' }%>
-              <%= device_electrical_installation.input :definition, :required => false, :as => :hidden,
-                                    :label => false,
-                                    :input_html => {:value => "Installation Rohr",  :class => 'form-control' } %>
-              <br>
-              <%= device_electrical_installation.label 'Länge' %>
-              <%= device_electrical_installation.input :value, :required => false,
-                                    :label => false,
-                                    :input_html => {:value => elinst2value,
-                                                    :class => 'form-control' } %>
-          <% end %>
+          <%= device.label :elinst_trasse, 'Installation Trasse' %>
+          <%= device.collection_select :elinst_trasse_id, ElectricalInstallation.all,:id,:kennung,
+                                       {:selected => elinst_trasse_id, :include_blank => ''}, {class:"form-control"} %>
+        </div>
+        <div class="field form-group">
+          <%= device.label :installationtrasselaenge, 'Installation Trasse Länge' %>
+          <%= device.text_field :installationtrasselaenge , :class => "form-control",
+                                placeholder: '' %>
         </div>
         <br><br>
         <div class="field form-group">
-          <%= device.label :device_electrical_installations3, 'Montage Geräte' %><br><br>
-          <%= device.semantic_fields_for :device_electrical_installations3 do |device_electrical_installation| %>
-              <%= device_electrical_installation.label 'Kennung' %>
-              <%= device_electrical_installation.input :electrical_installation_id, :required => false, :as => :select,
-                                    :label => false,
-                                    :collection => options_for_select(ElectricalInstallation.all.map { |w| [w.kennung, w.id] }, elinst3),
-                                    :input_html => { :class => 'form-control' }%>
-              <%= device_electrical_installation.input :definition, :required => false, :as => :hidden,
-                                    :label => false,
-                                    :input_html => {:value => "Montage Geraete",  :class => 'form-control' } %>
-              <br>
-              <%= device_electrical_installation.label 'Anzahl' %>
-              <%= device_electrical_installation.input :value, :required => false,
-                                    :label => false,
-                                    :input_html => {:value => elinst3value,
-                                                    :class => 'form-control' } %>
-          <% end %>
+          <%= device.label :elinst_rohr, 'Installation Rohr' %>
+          <%= device.collection_select :elinst_rohr_id, ElectricalInstallation.all,:id,:kennung,
+                                       {:selected => elinst_rohr_id, :include_blank => ''}, {class:"form-control"} %>
+        </div>
+        <div class="field form-group">
+          <%= device.label :installationrohrlaenge, 'Installation Rohr Länge' %>
+          <%= device.text_field :installationrohrlaenge , :class => "form-control",
+                                placeholder: '' %>
+        </div>
+        <br><br>
+        <div class="field form-group">
+          <%= device.label :elinst_geraete, 'Installation Geräte' %>
+          <%= device.collection_select :elinst_geraete_id, ElectricalInstallation.all,:id,:kennung,
+                                       {:selected => elinst_geraete_id, :include_blank => ''}, {class:"form-control"} %>
+        </div>
+        <div class="field form-group">
+          <%= device.label :installationgeraetelaenge, 'Installation Geräte Länge' %>
+          <%= device.text_field :installationgeraetelaenge , :class => "form-control",
+                                placeholder: '' %>
         </div>
       </div>
     </div>
