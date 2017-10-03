@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926115827) do
+ActiveRecord::Schema.define(version: 20171003122902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -267,7 +267,13 @@ ActiveRecord::Schema.define(version: 20170926115827) do
     t.float    "complexity_fkttestkalt"
     t.float    "complexity_fkttestheiss"
     t.float    "complexity_konformitaet"
+    t.float    "eurokurs"
+    t.boolean  "proiorechnen"
+    t.integer  "wiresupplier_id"
+    t.integer  "wirecaptionsupplier_id"
     t.index ["subproject_id"], name: "index_subsubprojects_on_subproject_id", using: :btree
+    t.index ["wirecaptionsupplier_id"], name: "index_subsubprojects_on_wirecaptionsupplier_id", using: :btree
+    t.index ["wiresupplier_id"], name: "index_subsubprojects_on_wiresupplier_id", using: :btree
   end
 
   create_table "subsystems", force: :cascade do |t|
@@ -444,6 +450,8 @@ ActiveRecord::Schema.define(version: 20170926115827) do
   add_foreign_key "subprojects", "customers"
   add_foreign_key "subprojects", "projects"
   add_foreign_key "subsubprojects", "subprojects"
+  add_foreign_key "subsubprojects", "suppliers", column: "wirecaptionsupplier_id"
+  add_foreign_key "subsubprojects", "suppliers", column: "wiresupplier_id"
   add_foreign_key "subsystems", "projects"
   add_foreign_key "switchgearcombinations", "switchgears"
   add_foreign_key "switchgearconnections", "switchgearcombinations", column: "bottomswitchgear_id"

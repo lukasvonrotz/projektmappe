@@ -1,11 +1,10 @@
 class GrobengineeringsController < ApplicationController
   def index
-    eurokurs = 1.2
-    proiorechnen = false
     @grobengineerings = Grobengineering.all.order(:id)
     @hash = Hash.new
-    sum_sw = Grobengineering.sum(:funktion_sw)
+    @subsubproject = Subsubproject.find(9)
 
+=begin
     @grobengineerings.each_with_index do |grobengineering, index|
       @hash[index] = Hash.new
       if !grobengineering.device_anzahl.nil?
@@ -360,7 +359,7 @@ class GrobengineeringsController < ApplicationController
             @hash[index]["kosten_elinst_total_netto"]
       end
     end
-
+=end
   end
 
   # Control logic for create-view

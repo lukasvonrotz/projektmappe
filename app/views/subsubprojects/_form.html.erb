@@ -9,6 +9,23 @@
       <%= subsubproject.label :master, 'Master?' %><br>
       <%= subsubproject.check_box :master %>
     </div>
+    <div class="field form-group">
+      <%= subsubproject.label :eurokurs, 'Eurokurs' %>
+      <%= subsubproject.text_field :eurokurs, :class => "form-control",
+                                   placeholder: 'Eurokurs für Version eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= subsubproject.label :wiresupplier, 'Kabellieferant' %>
+      <%= subsubproject.collection_select :wiresupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'}),:id,:name,
+
+                                                  {:selected => wiresupplierid}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= subsubproject.label :wirecaptionsupplier, 'Kabelbeschriftungslieferant' %>
+      <%= subsubproject.collection_select :wiresupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}),:id,:name,
+
+                                          {:selected => wirecaptionsupplierid}, {class:"form-control"} %>
+    </div>
 
     <div class="field form-group">
       <%= subsubproject.label :hourrate_admin, 'Stundenansatz Admin' %><br>

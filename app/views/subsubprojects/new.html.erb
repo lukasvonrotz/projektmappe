@@ -6,6 +6,10 @@
     </div>
 <% end %>
 
-<%= render 'form', :subprojectid => @subprojectid, :subsubproject => @subsubproject, :context => true  %>
+<%= render 'form', :subprojectid => @subprojectid,
+           :subsubproject => @subsubproject,
+           :wiresupplierid => '',
+           :wirecaptionsupplierid => '',
+           :context => true  %>
 
 <%= link_to "Zurück zu Versionenübersicht", subsubprojects_path %>
