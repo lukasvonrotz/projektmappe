@@ -1,16 +1,16 @@
 class Assembly < ApplicationRecord
-  validates :di, numericality: {only_integer: true, allow_blank: true}
-  validates :do, numericality: {only_integer: true, allow_blank: true}
-  validates :ai, numericality: {only_integer: true, allow_blank: true}
-  validates :ao, numericality: {only_integer: true, allow_blank: true}
-  validates :z, numericality: {only_integer: true, allow_blank: true}
-  validates :inkr, numericality: {only_integer: true, allow_blank: true}
-  validates :ssi, numericality: {only_integer: true, allow_blank: true}
-  validates :sdi, numericality: {only_integer: true, allow_blank: true}
-  validates :sdo, numericality: {only_integer: true, allow_blank: true}
-  validates :sai, numericality: {only_integer: true, allow_blank: true}
-  validates :sao, numericality: {only_integer: true, allow_blank: true}
-  validates :brutto_eur, presence:true, numericality: {only_float: true}
+  validates :di, numericality: {only_integer: true, :presence => true}
+  validates :do, numericality: {only_integer: true, :presence => true}
+  validates :ai, numericality: {only_integer: true, :presence => true}
+  validates :ao, numericality: {only_integer: true, :presence => true}
+  validates :z, numericality: {only_integer: true, :presence => true}
+  validates :inkr, numericality: {only_integer: true, :presence => true}
+  validates :ssi, numericality: {only_integer: true, :presence => true}
+  validates :sdi, numericality: {only_integer: true, :presence => true}
+  validates :sdo, numericality: {only_integer: true, :presence => true}
+  validates :sai, numericality: {only_integer: true, :presence => true}
+  validates :sao, numericality: {only_integer: true, :presence => true}
+  validates :brutto_eur, numericality: {only_float: true, :presence => true}
   validates :rabatt, numericality: {only_float: true}
 
   has_and_belongs_to_many :iogroups

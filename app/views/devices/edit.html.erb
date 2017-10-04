@@ -7,12 +7,12 @@
 <% end %>
 
 <%= render 'form', :device => @device,
-           :switchgear_einbau_id => @device.switchgear_einbau.nil? ? '' : @device.switchgear_einbau.id ,
+           :switchgear_einbau_id => @device.switchgear_einbau.nil? ? '' : @device.switchgear_einbau.id,
            :wire_steuerung_id => @device.wire_steuerung.nil? ? '' : @device.wire_steuerung.id,
            :wire_speisung_id => @device.wire_speisung.nil? ? '' : @device.wire_speisung.id,
            :wire_potausgleich_id => @device.wire_potausgleich.nil? ? '' : @device.wire_potausgleich.id,
            :elinst_trasse_id => @device.elinst_trasse.nil? ? '' : @device.elinst_trasse.id,
-           :elinst_rohr_id => @device.elinst_trasse.nil? ? '' : @device.elinst_trasse.id,
+           :elinst_rohr_id => @device.elinst_rohr.nil? ? '' : @device.elinst_rohr.id,
            :elinst_geraete_id => @device.elinst_geraete.nil? ? '' : @device.elinst_geraete.id,
            :context => false %>
 <%= link_to "Zurück zu Geräteübersicht", devices_path %>

@@ -8,8 +8,8 @@
 
 <%= render 'form', :subprojectid => @subprojectid,
            :subsubproject => @subsubproject,
-           :wiresupplierid => '',
-           :wirecaptionsupplierid => '',
+           :wiresupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'}).first.id,
+           :wirecaptionsupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}).first.id,
            :context => true  %>
 
 <%= link_to "Zurück zu Versionenübersicht", subsubprojects_path %>

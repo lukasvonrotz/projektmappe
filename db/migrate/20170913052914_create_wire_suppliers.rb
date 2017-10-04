@@ -2,15 +2,15 @@ class CreateWireSuppliers < ActiveRecord::Migration[5.0]
   def change
     create_table :wire_suppliers do |t|
 
-      t.integer :wire_id
-      t.integer :supplier_id
-      t.float :anschlusstableauseite
-      t.float :anschlussgeraeteseite
-      t.float :beschriftungkabeleinanschluss
-      t.float :beschriftungaderneinanschluss
-      t.float :installationhohlboden
-      t.float :installationtrasse
-      t.float :installationrohr
+      t.integer :wire_id, null: false
+      t.integer :supplier_id, null: false
+      t.float :anschlusstableauseite, :default => 0, null: false
+      t.float :anschlussgeraeteseite, :default => 0, null: false
+      t.float :beschriftungkabeleinanschluss, :default => 0, null: false
+      t.float :beschriftungaderneinanschluss, :default => 0, null: false
+      t.float :installationhohlboden, :default => 0, null: false
+      t.float :installationtrasse, :default => 0, null: false
+      t.float :installationrohr, :default => 0, null: false
 
       t.timestamps
     end

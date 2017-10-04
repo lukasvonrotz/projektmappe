@@ -6,6 +6,8 @@
     </div>
 <% end %>
 
-<%= render 'form', :subsystemid => @subsystemid, :unit => @unit, :context => true  %>
+<%= render 'form', :unit => @unit,
+           :subsystemid => @unit.subsystem_id.nil? ? params[:subsystem_id] : @unit.subsystem_id,
+           :context => true  %>
 
 <%= link_to "Zurück zu Unit-Übersicht", units_path %>

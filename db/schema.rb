@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171003122902) do
+ActiveRecord::Schema.define(version: 20171004065047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,7 +145,7 @@ ActiveRecord::Schema.define(version: 20171003122902) do
     t.text     "beschreibung"
     t.text     "kommentar"
     t.text     "device_import"
-    t.integer  "device_anzahl"
+    t.integer  "device_anzahl",               default: 1
     t.boolean  "update_necessary"
     t.string   "tagnr"
     t.string   "tagname"
@@ -160,8 +160,8 @@ ActiveRecord::Schema.define(version: 20171003122902) do
     t.float    "spannung"
     t.float    "leistung"
     t.float    "strom"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.integer  "subsubproject_id"
     t.integer  "device_id"
     t.integer  "subsystem_id"

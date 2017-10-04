@@ -4,17 +4,27 @@ class Grobengineering < ApplicationRecord
   include GrobengineeringsHelper
 
   belongs_to :subsubproject
+  validates :subsubproject, :presence => true
 
   belongs_to :subsystem, optional: true
   belongs_to :iogroup, optional: true
-  belongs_to :drive, optional: true
   belongs_to :device
+  validates :device, :presence => true
 
   belongs_to :switchgear_motorenabgang, :class_name => 'Switchgear', :foreign_key => 'switchgear_motorenabgang_id', :optional => true
   belongs_to :fu_typ, :class_name => 'Drive', :foreign_key => 'fu_typ_id', :optional => true
   belongs_to :wire_spez1, :class_name => 'Wire', :foreign_key => 'wire_spez1_id', :optional => true
   belongs_to :wire_spez2, :class_name => 'Wire', :foreign_key => 'wire_spez2_id', :optional => true
   belongs_to :wire_spez3, :class_name => 'Wire', :foreign_key => 'wire_spez3_id', :optional => true
+
+  validates :device_anzahl, presence:true, numericality: {only_integer: true}
+  validates :funktion_sw, presence:true, numericality: {only_float: true}
+  validates :spannung, presence:true, numericality: {only_float: true}
+  validates :leistung, presence:true, numericality: {only_float: true}
+  validates :strom, presence:true, numericality: {only_float: true}
+  validates :kabel_spez1_laenge, presence:true, numericality: {only_float: true}
+  validates :kabel_spez2_laenge, presence:true, numericality: {only_float: true}
+  validates :kabel_spez3_laenge, presence:true, numericality: {only_float: true}
 
   def strom_total
     return calc_tot(self.device_anzahl, self.strom)
@@ -150,7 +160,7 @@ class Grobengineering < ApplicationRecord
   def sps_beschreibung
     if self.device.ger_spsmodul != 0
       baugruppe = Assembly.where(:kennung => self.device.definition).first
-      return baugruppe.bezeichnung
+      return baugruppe.nil? ? '' : baugruppe.bezeichnung
     else
       return ''
     end
@@ -158,95 +168,95 @@ class Grobengineering < ApplicationRecord
   def sps_artikel
     if self.device.ger_spsmodul != 0
       baugruppe = Assembly.where(:kennung => self.device.definition).first
-      return baugruppe.artikelnr
+      return baugruppe.nil? ? '' : baugruppe.artikelnr
     else
       return ''
     end
   end
   def sps_di
-    if self.device.ger_spsmodul != 0
+    if self.device.ger_spsmodul != 0 && !self.device.ger_spsmodul.nil?
       baugruppe = Assembly.where(:kennung => self.device.definition).first
-      return baugruppe.di
+      return baugruppe.nil? ? 0 : baugruppe.di
     else
       return 0
     end
   end
   def sps_do
-    if self.device.ger_spsmodul != 0
+    if self.device.ger_spsmodul != 0 && !self.device.ger_spsmodul.nil?
       baugruppe = Assembly.where(:kennung => self.device.definition).first
-      return baugruppe.do
+      return baugruppe.nil? ? 0 : baugruppe.do
     else
       return 0
     end
   end
   def sps_ai
-    if self.device.ger_spsmodul != 0
+    if self.device.ger_spsmodul != 0 && !self.device.ger_spsmodul.nil?
       baugruppe = Assembly.where(:kennung => self.device.definition).first
-      return baugruppe.ai
+      return baugruppe.nil? ? 0 : baugruppe.ai
     else
       return 0
     end
   end
   def sps_ao
-    if self.device.ger_spsmodul != 0
+    if self.device.ger_spsmodul != 0 && !self.device.ger_spsmodul.nil?
       baugruppe = Assembly.where(:kennung => self.device.definition).first
-      return baugruppe.ao
+      return baugruppe.nil? ? 0 : baugruppe.ao
     else
       return 0
     end
   end
   def sps_zaehler
-    if self.device.ger_spsmodul != 0
+    if self.device.ger_spsmodul != 0 && !self.device.ger_spsmodul.nil?
       baugruppe = Assembly.where(:kennung => self.device.definition).first
-      return baugruppe.z
+      return baugruppe.nil? ? 0 : baugruppe.z
     else
       return 0
     end
   end
   def sps_inkr
-    if self.device.ger_spsmodul != 0
+    if self.device.ger_spsmodul != 0 && !self.device.ger_spsmodul.nil?
       baugruppe = Assembly.where(:kennung => self.device.definition).first
-      return baugruppe.inkr
+      return baugruppe.nil? ? 0 : baugruppe.inkr
     else
       return 0
     end
   end
   def sps_ssi
-    if self.device.ger_spsmodul != 0
+    if self.device.ger_spsmodul != 0 && !self.device.ger_spsmodul.nil?
       baugruppe = Assembly.where(:kennung => self.device.definition).first
-      return baugruppe.ssi
+      return baugruppe.nil? ? 0 : baugruppe.ssi
     else
       return 0
     end
   end
   def sps_sdi
-    if self.device.ger_spsmodul != 0
+    if self.device.ger_spsmodul != 0 && !self.device.ger_spsmodul.nil?
       baugruppe = Assembly.where(:kennung => self.device.definition).first
-      return baugruppe.sdi
+      return baugruppe.nil? ? 0 : baugruppe.sdi
     else
       return 0
     end
   end
   def sps_sdo
-    if self.device.ger_spsmodul != 0
+    if self.device.ger_spsmodul != 0 && !self.device.ger_spsmodul.nil?
       baugruppe = Assembly.where(:kennung => self.device.definition).first
-      return baugruppe.sdo
+      return baugruppe.nil? ? 0 : baugruppe.sdo
     else
       return 0
     end
   end
   def sps_sai
-    if self.device.ger_spsmodul != 0
+    if self.device.ger_spsmodul != 0 && !self.device.ger_spsmodul.nil?
       baugruppe = Assembly.where(:kennung => self.device.definition).first
-      return baugruppe.sai
+      return baugruppe.nil? ? 0 : baugruppe.sai
     else
       return 0
     end
   end
   def sps_sao
-    if self.device.ger_spsmodul != 0
+    if self.device.ger_spsmodul != 0 && !self.device.ger_spsmodul.nil?
       baugruppe = Assembly.where(:kennung => self.device.definition).first
-      return baugruppe.sao
+      return baugruppe.nil? ? 0 : baugruppe.sao
     else
       return 0
     end
@@ -408,14 +418,16 @@ class Grobengineering < ApplicationRecord
   # Kosten SPS
   def kosten_sps_total_brutto(eurokurs)
     if self.device.ger_spsmodul != 0
-      return Assembly.where(:kennung => self.device.definition).first.brutto_chf_col(eurokurs)
+      baugruppe = Assembly.where(:kennung => self.device.definition).first
+      return baugruppe.nil? ? 0 : baugruppe.brutto_chf_col(eurokurs)
     else
       return 0
     end
   end
   def kosten_sps_total_netto(eurokurs)
     if self.device.ger_spsmodul != 0
-      return Assembly.where(:kennung => self.device.definition).first.netto(eurokurs)
+      baugruppe = Assembly.where(:kennung => self.device.definition).first
+      return baugruppe.nil? ? 0 : baugruppe.netto(eurokurs)
     else
       return 0
     end
@@ -537,6 +549,8 @@ class Grobengineering < ApplicationRecord
   def kosten_wire_steuerung_total(wiresupplier, wirecaptionsupplier)
     if !self.device.wire_steuerung.nil?
       wire = self.device.wire_steuerung
+      puts wire.id
+      puts wiresupplier.id
       wire_trasse = WireSupplier.where(:wire_id => wire.id, :supplier_id => wiresupplier.id).first.installationtrasse
       total = self.wire_steuerung_laenge * wire_trasse +
           self.device_anzahl * wire.anschluesse_total(wiresupplier, wirecaptionsupplier)

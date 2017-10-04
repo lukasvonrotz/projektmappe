@@ -6,15 +6,21 @@
     </div>
 <% end %>
 
-
+<% switchgear_einbau_id = @device.switchgear_einbau_id.nil? ? '' : @device.switchgear_einbau_id %>
+<% wire_steuerung_id = @device.wire_steuerung_id.nil? ? '' : @device.wire_steuerung_id %>
+<% wire_speisung_id = @device.wire_speisung_id.nil? ? '' : @device.wire_speisung_id %>
+<% wire_potausgleich_id = @device.wire_potausgleich_id.nil? ? '' : @device.wire_potausgleich_id %>
+<% elinst_trasse_id = @device.elinst_trasse_id.nil? ? '' : @device.elinst_trasse_id %>
+<% elinst_rohr_id = @device.elinst_rohr_id.nil? ? '' : @device.elinst_rohr_id %>
+<% elinst_geraete_id = @device.elinst_geraete_id.nil? ? '' : @device.elinst_geraete_id %>
 
 <%= render 'form', :device => @device,
-           :switchgear_einbau_id => '',
-           :wire_steuerung_id => '',
-           :wire_speisung_id => '',
-           :wire_potausgleich_id => '',
-           :elinst_trasse_id => '',
-           :elinst_rohr_id => '',
-           :elinst_geraete_id => '',
-           :context => true  %>
+           :switchgear_einbau_id => switchgear_einbau_id,
+           :wire_steuerung_id => wire_steuerung_id,
+           :wire_speisung_id => wire_speisung_id,
+           :wire_potausgleich_id => wire_potausgleich_id,
+           :elinst_trasse_id => elinst_trasse_id,
+           :elinst_rohr_id => elinst_rohr_id,
+           :elinst_geraete_id => elinst_geraete_id,
+           :context => true %>
 <%= link_to "Zurück zu Geräte-Übersicht", devices_path %>

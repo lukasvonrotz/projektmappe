@@ -16,8 +16,7 @@ class SubsubprojectsController < ApplicationController
   def create
     @subsubproject = Subsubproject.new(subsubproject_params)
     if params[:subsubproject][:master] == "1"
-      @subproject = Subproject.find(params[:subsubproject][:subproject_id])
-      @subproject.subsubprojects.each do |othersubsubproject|
+      @subsubproject.subproject.subsubprojects.each do |othersubsubproject|
         if othersubsubproject.master
           othersubsubproject.master = false
           othersubsubproject.save!
@@ -28,6 +27,7 @@ class SubsubprojectsController < ApplicationController
     if @subsubproject.save
       redirect_to project_subproject_path(:project_id => @subsubproject.subproject.project.id, :id => @subsubproject.subproject.id), :notice => 'Version erfolgreich erstellt.'
     else
+      #render new_project_subproject_subsubproject_path(@subsubproject.subproject.project, @subsubproject.subproject, @subsubproject)
       render 'new'
     end
   end

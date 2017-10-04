@@ -7,8 +7,10 @@
 <% end %>
 
 <% if Iotype.any? && Switchgearcombination.any? %>
-  <%= render 'form', :iogroup => @iogroup, :iotypeid => Iotype.first.id,
-             :switchgearcombinationid => Switchgearcombination.first.id, :context => true  %>
+  <%= render 'form', :iogroup => @iogroup,
+             :iotypeid => @iogroup.iotype_id.nil? ? Iotype.first.id : @iogroup.iotype_id,
+             :switchgearcombinationid => @iogroup.switchgearcombination_id.nil? ? Switchgearcombination.first.id : @iogroup.switchgearcombination_id,
+             :context => true  %>
   <%= link_to "Zurück zu IO-Gruppen-Übersicht", iogroups_path %>
 <% else %>
     <div class="alert alert-danger">

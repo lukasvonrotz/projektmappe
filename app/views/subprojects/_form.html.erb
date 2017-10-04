@@ -8,7 +8,7 @@
 
     <div class="field form-group">
       <%= project_subproject.label :customer, 'Kunde' %>
-      <%= project_subproject.collection_select :customer_id, Customer.all,:id,:name,
+      <%= project_subproject.collection_select :customer_id, Customer.all.sort_by {|obj| obj.name},:id,:name,
                                     {:selected => customer.id}, {class:"form-control"} %>
     </div>
 

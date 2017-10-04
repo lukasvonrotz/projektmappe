@@ -16,9 +16,12 @@ Rails.application.routes.draw do
       resources :units
     end
     resources :subprojects do
-      resources :subsubprojects
+      resources :subsubprojects do
+        resources :grobengineerings
+      end
     end
   end
+  resources :grobengineerings
   resources :subsystems
   resources :units
   resources :subprojects
@@ -34,12 +37,15 @@ Rails.application.routes.draw do
   resources :customers
   resources :iogroups
   resources :iotypes
-  resources :grobengineerings
 
   resources :suppliers do
     resources :wire_suppliers
   end
   resources :suppliertypes
   resources :wirecaptionprices
+
+  #match "/copy/:subsubproject_id", to: "grobengineerings#copy", as: :copy, via: [:get]
+  match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/copy/:versiontocopy",
+        to: "grobengineerings#copy", as: :copy, via: [:get]
 
 end

@@ -2,6 +2,8 @@ class Wire < ApplicationRecord
   has_many :wire_suppliers, dependent: :destroy
   has_many :suppliers, :through => :wire_suppliers
 
+  validates :anzahladern, presence:true, numericality: {only_integer: true}
+
   def anschluesse_ohne_beschriftung(wiresupplier)
     wire_ohne_beschriftung = WireSupplier.where(["wire_id = ? and supplier_id = ?", self.id, wiresupplier.id]).first.anschlusstableauseite +
         WireSupplier.where(["wire_id = ? and supplier_id = ?", self.id, wiresupplier.id]).first.anschlussgeraeteseite

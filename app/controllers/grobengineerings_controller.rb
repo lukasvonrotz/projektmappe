@@ -1,8 +1,8 @@
 class GrobengineeringsController < ApplicationController
   def index
-    @grobengineerings = Grobengineering.all.order(:id)
     @hash = Hash.new
-    @subsubproject = Subsubproject.find(9)
+    @subsubproject = Subsubproject.find(params[:subsubproject_id])
+    @grobengineerings = Grobengineering.where(:subsubproject_id => @subsubproject.id).order(:id)
 
 =begin
     @grobengineerings.each_with_index do |grobengineering, index|
@@ -373,10 +373,9 @@ class GrobengineeringsController < ApplicationController
   # POST /grobengineerings
   def create
     @grobengineering = Grobengineering.new(grobengineering_params)
-
     # write grobengineering to database
     if @grobengineering.save
-      redirect_to grobengineerings_path, :notice => 'Eintrag erfolgreich erstellt.'
+      redirect_to project_subproject_subsubproject_grobengineerings_path(@grobengineering.subsubproject.subproject.project.id, @grobengineering.subsubproject.subproject.id, @grobengineering.subsubproject.id), :notice => 'Eintrag erfolgreich erstellt.'
     else
       render 'new'
     end
@@ -399,7 +398,7 @@ class GrobengineeringsController < ApplicationController
   def update
     @grobengineering = Grobengineering.find(params[:id])
     if @grobengineering.update(grobengineering_params)
-      redirect_to grobengineerings_path, :notice => 'Eintrag erfolgreich aktualisiert.'
+      redirect_to project_subproject_subsubproject_grobengineerings_path(@grobengineering.subsubproject.subproject.project.id, @grobengineering.subsubproject.subproject.id, @grobengineering.subsubproject.id), :notice => 'Eintrag erfolgreich aktualisiert.'
     else
       render 'edit'
     end
@@ -410,7 +409,12 @@ class GrobengineeringsController < ApplicationController
   def destroy
     @grobengineering = Grobengineering.find(params[:id])
     @grobengineering.destroy
-    redirect_to grobengineerings_path, :notice => 'Eintrag wurde gelöscht.'
+    redirect_to project_subproject_subsubproject_grobengineerings_path(@grobengineering.subsubproject.subproject.project.id, @grobengineering.subsubproject.subproject.id, @grobengineering.subsubproject.id), :notice => 'Eintrag wurde gelöscht.'
+  end
+
+  def copy
+    puts params
+    redirect_to project_subproject_subsubproject_grobengineerings_path(@grobengineering.subsubproject.subproject.project.id, @grobengineering.subsubproject.subproject.id, @grobengineering.subsubproject.id), :notice => 'Eintrag erfolgreich aktualisiert.'
   end
 
   private

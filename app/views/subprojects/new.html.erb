@@ -7,8 +7,13 @@
 <% end %>
 
 <% if Customer.any? %>
-  <%= render 'form', :project => @subproject.project, :project_subproject => @subproject,
-             :customer => Customer.all.first, :projectid => @projectid, :context => true  %>
+    <% customer = @subproject.customer_id.nil? ? Customer.all.first : @subproject.customer_id %>
+
+  <%= render 'form', :project_subproject => @subproject,
+             :project => @subproject.project,
+             :customer => customer,
+             :projectid => @projectid,
+             :context => true  %>
 <% else %>
   <div class="alert alert-danger">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

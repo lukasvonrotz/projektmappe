@@ -6,8 +6,11 @@
     </div>
 <% end %>
 
-<%= render 'form', :grobengineering => @grobengineering, :projectid => @grobengineering.subsubproject.subproject.project.id,
+<%= render 'form', :grobengineering => @grobengineering,
+           :projectid => @grobengineering.subsubproject.subproject.project.id,
+           :subsubprojectid => @grobengineering.subsubproject.id,
            :deviceid => @grobengineering.device.nil? ? '' : @grobengineering.device.id,
+           :subsystemid => @grobengineering.subsystem.nil? ? '' : @grobengineering.subsystem.id,
            :iogroupid => @grobengineering.iogroup.nil? ? '' : @grobengineering.iogroup.id,
            :motorenabgangid => @grobengineering.switchgear_motorenabgang.nil? ? 0 : @grobengineering.switchgear_motorenabgang.id,
            :futypid => @grobengineering.fu_typ.nil? ? 0 : @grobengineering.fu_typ.id,

@@ -3,11 +3,11 @@ class CreateSwitchgearcombinations < ActiveRecord::Migration[5.0]
     create_table :switchgearcombinations do |t|
       t.string :name
       t.string :standort
-      t.float :u_feed_power
-      t.float :u_feed_control
-      t.float :u_out_power
-      t.float :u_out_control_high
-      t.float :u_out_control_low
+      t.float :u_feed_power, :default => 0, null: false
+      t.float :u_feed_control, :default => 0, null: false
+      t.float :u_out_power, :default => 0, null: false
+      t.float :u_out_control_high, :default => 0, null: false
+      t.float :u_out_control_low, :default => 0, null: false
 
       t.timestamps
     end

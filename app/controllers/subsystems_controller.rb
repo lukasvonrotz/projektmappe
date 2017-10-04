@@ -9,7 +9,6 @@ class SubsystemsController < ApplicationController
   def new
     # build a 'temporary' post which is written to DB later (create-method)
     @subsystem = Subsystem.new
-    @projectid = params[:project_id]
   end
 
   # Control logic when creating a new subsystem

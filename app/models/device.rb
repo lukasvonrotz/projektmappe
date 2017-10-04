@@ -1,4 +1,55 @@
 class Device < ApplicationRecord
+
+  validates :eng_admin, presence:true, numericality: {only_float: true}
+  validates :eng_steuerkonzept, presence:true, numericality: {only_float: true}
+  validates :eng_ioliste, presence:true, numericality: {only_float: true}
+  validates :eng_elplanung, presence:true, numericality: {only_float: true}
+  validates :eng_fktbeschrieb, presence:true, numericality: {only_float: true}
+  validates :eng_safetymatrix, presence:true, numericality: {only_float: true}
+  validates :eng_software, presence:true, numericality: {only_float: true}
+  validates :eng_softwaresafety, presence:true, numericality: {only_float: true}
+  validates :eng_bauleitung, presence:true, numericality: {only_float: true}
+  validates :eng_parametrierung, presence:true, numericality: {only_float: true}
+  validates :eng_signaltest, presence:true, numericality: {only_float: true}
+  validates :eng_safetytest, presence:true, numericality: {only_float: true}
+  validates :eng_fkttestkalt, presence:true, numericality: {only_float: true}
+  validates :eng_fkttestheiss, presence:true, numericality: {only_float: true}
+  validates :eng_konformitaet, presence:true, numericality: {only_float: true}
+  validates :ger_beschriftung, presence:true, numericality: {only_integer: true}
+  validates :ger_sensor, presence:true, numericality: {only_integer: true}
+  validates :ger_ventil, presence:true, numericality: {only_integer: true}
+  validates :ger_heizung, presence:true, numericality: {only_integer: true}
+  validates :ger_m1r, presence:true, numericality: {only_integer: true}
+  validates :ger_m2r, presence:true, numericality: {only_integer: true}
+  validates :ger_mfu, presence:true, numericality: {only_integer: true}
+  validates :ger_wicklung, presence:true, numericality: {only_integer: true}
+  validates :ger_bremse, presence:true, numericality: {only_integer: true}
+  validates :ger_geraeteheizung, presence:true, numericality: {only_integer: true}
+  validates :ger_kommunikation, presence:true, numericality: {only_integer: true}
+  validates :ger_safety, presence:true, numericality: {only_integer: true}
+  validates :ger_spsmodul, presence:true, numericality: {only_integer: true}
+  validates :sig_di, presence:true, numericality: {only_integer: true}
+  validates :sig_do, presence:true, numericality: {only_integer: true}
+  validates :sig_ai, presence:true, numericality: {only_integer: true}
+  validates :sig_ao, presence:true, numericality: {only_integer: true}
+  validates :sig_z, presence:true, numericality: {only_integer: true}
+  validates :sig_inkr, presence:true, numericality: {only_integer: true}
+  validates :sig_ssi, presence:true, numericality: {only_integer: true}
+  validates :sig_pb, presence:true, numericality: {only_integer: true}
+  validates :sig_sdi, presence:true, numericality: {only_integer: true}
+  validates :sig_sdo, presence:true, numericality: {only_integer: true}
+  validates :sig_sai, presence:true, numericality: {only_integer: true}
+  validates :sig_sao, presence:true, numericality: {only_integer: true}
+  validates :sch_anzahl, presence:true, numericality: {only_integer: true}
+  validates :kabelsteuerunglaenge, presence:true, numericality: {only_float: true}
+  validates :kabelspeisunglaenge, presence:true, numericality: {only_float: true}
+  validates :kabelpotausgleichlaenge, presence:true, numericality: {only_float: true}
+  validates :installationtrasselaenge, presence:true, numericality: {only_float: true}
+  validates :installationrohrlaenge, presence:true, numericality: {only_float: true}
+  validates :installationgeraetelaenge, presence:true, numericality: {only_float: true}
+
+
+
   belongs_to :switchgear_einbau, :class_name => 'Switchgear', :foreign_key => 'switchgear_einbau_id', :optional => true
 
   belongs_to :wire_steuerung, :class_name => 'Wire', :foreign_key => 'wire_steuerung_id', :optional => true

@@ -1,5 +1,5 @@
 class AddSubsubprojectToGrobengineerings < ActiveRecord::Migration[5.0]
   def change
-    add_reference :grobengineerings, :subsubproject, index: true, foreign_key: true
+    add_reference :grobengineerings, :subsubproject, index: true, foreign_key: true, null: false
   end
 end

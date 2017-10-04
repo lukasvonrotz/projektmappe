@@ -2,47 +2,47 @@ class CreateDevices < ActiveRecord::Migration[5.0]
   def change
     create_table :devices do |t|
       t.text :definition
-      t.float :eng_admin
-      t.float :eng_steuerkonzept
-      t.float :eng_ioliste
-      t.float :eng_elplanung
-      t.float :eng_fktbeschrieb
-      t.float :eng_safetymatrix
-      t.float :eng_software
-      t.float :eng_softwaresafety
-      t.float :eng_bauleitung
-      t.float :eng_parametrierung
-      t.float :eng_signaltest
-      t.float :eng_safetytest
-      t.float :eng_fkttestkalt
-      t.float :eng_fkttestheiss
-      t.float :eng_konformitaet
-      t.integer :ger_beschriftung
-      t.integer :ger_sensor
-      t.integer :ger_ventil
-      t.integer :ger_heizung
-      t.integer :ger_m1r
-      t.integer :ger_m2r
-      t.integer :ger_mfu
-      t.integer :ger_wicklung
-      t.integer :ger_bremse
-      t.integer :ger_geraeteheizung
-      t.integer :ger_kommunikation
-      t.integer :ger_safety
-      t.integer :ger_spsmodul
-      t.integer :sig_di
-      t.integer :sig_do
-      t.integer :sig_ai
-      t.integer :sig_ao
-      t.integer :sig_z
-      t.integer :sig_inkr
-      t.integer :sig_ssi
-      t.integer :sig_pb
-      t.integer :sig_sdi
-      t.integer :sig_sdo
-      t.integer :sig_sai
-      t.integer :sig_sao
-      t.integer :sch_anzahl
+      t.float :eng_admin, :default => 0, null: false
+      t.float :eng_steuerkonzept, :default => 0, null: false
+      t.float :eng_ioliste, :default => 0, null: false
+      t.float :eng_elplanung, :default => 0, null: false
+      t.float :eng_fktbeschrieb, :default => 0, null: false
+      t.float :eng_safetymatrix, :default => 0, null: false
+      t.float :eng_software, :default => 0, null: false
+      t.float :eng_softwaresafety, :default => 0, null: false
+      t.float :eng_bauleitung, :default => 0, null: false
+      t.float :eng_parametrierung, :default => 0, null: false
+      t.float :eng_signaltest, :default => 0, null: false
+      t.float :eng_safetytest, :default => 0, null: false
+      t.float :eng_fkttestkalt, :default => 0, null: false
+      t.float :eng_fkttestheiss, :default => 0, null: false
+      t.float :eng_konformitaet, :default => 0, null: false
+      t.integer :ger_beschriftung, :default => 0, null: false
+      t.integer :ger_sensor, :default => 0, null: false
+      t.integer :ger_ventil, :default => 0, null: false
+      t.integer :ger_heizung, :default => 0, null: false
+      t.integer :ger_m1r, :default => 0, null: false
+      t.integer :ger_m2r, :default => 0, null: false
+      t.integer :ger_mfu, :default => 0, null: false
+      t.integer :ger_wicklung, :default => 0, null: false
+      t.integer :ger_bremse, :default => 0, null: false
+      t.integer :ger_geraeteheizung, :default => 0, null: false
+      t.integer :ger_kommunikation, :default => 0, null: false
+      t.integer :ger_safety, :default => 0, null: false
+      t.integer :ger_spsmodul, :default => 0, null: false
+      t.integer :sig_di, :default => 0, null: false
+      t.integer :sig_do, :default => 0, null: false
+      t.integer :sig_ai, :default => 0, null: false
+      t.integer :sig_ao, :default => 0, null: false
+      t.integer :sig_z, :default => 0, null: false
+      t.integer :sig_inkr, :default => 0, null: false
+      t.integer :sig_ssi, :default => 0, null: false
+      t.integer :sig_pb, :default => 0, null: false
+      t.integer :sig_sdi, :default => 0, null: false
+      t.integer :sig_sdo, :default => 0, null: false
+      t.integer :sig_sai, :default => 0, null: false
+      t.integer :sig_sao, :default => 0, null: false
+      t.integer :sch_anzahl, :default => 0, null: false
 
       t.timestamps
     end

@@ -8,7 +8,6 @@ class UnitsController < ApplicationController
   def new
     # build a 'temporary' post which is written to DB later (create-method)
     @unit = Unit.new
-    @subsystemid = params[:subsystem_id]
   end
 
   # Control logic when creating a new unit

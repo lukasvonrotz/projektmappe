@@ -7,7 +7,9 @@
 <% end %>
 
 <% if Switchgear.where(["typ = ?", "1"]).any? %>
-    <%= render 'form', :switchgearcombination => @switchgearcombination, :switchgearid => 24, :context => true  %>
+    <%= render 'form', :switchgearcombination => @switchgearcombination,
+               :switchgearid => @switchgearcombination.switchgear_id.nil? ? 24 : @switchgearcombination.switchgear_id,
+               :context => true  %>
     <%= link_to "Zurück zu Schaltgerätekombinationen-Übersicht", switchgearcombinations_path %>
 <% else %>
     <div class="alert alert-danger">

@@ -1,6 +1,11 @@
 <h1>Grobengineering</h1>
 <br>
-<a href="<%=new_grobengineering_path%>" class="btn btn-success">Neuen Eintrag erstellen</a>
+<% if !@grobengineerings.any? %>
+    <% master = Subproject.find(params[:subproject_id]).subsubprojects.where(:master => true).first %>
+    <%= link_to 'Von Master (' + master.name + ') kopieren', copy_path(params[:project_id], params[:subproject_id], params[:subsubproject_id], 4)%>
+    <br><br>
+<% end %>
+<a href="<%= new_project_subproject_subsubproject_grobengineering_path %>" class="btn btn-success">Neuen Eintrag erstellen</a>
 <br><br><br>
 <div id="content" class="table-responsive">
   <table class="table table-striped table-bordered data_table" cellspacing="0" width="100%">
@@ -183,149 +188,149 @@
       <td></td>
       <td></td>
       <td></td>
-      <td><%= Grobengineering.device_anzahl.round(2) %></td>
+      <td><%= Grobengineering.device_anzahl(@subsubproject).round(2) %></td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
-      <td><%= Grobengineering.funktion_sw.round(2) %></td>
+      <td><%= Grobengineering.funktion_sw(@subsubproject).round(2) %></td>
       <td></td>
       <td></td>
       <td></td>
-      <td><%= Grobengineering.kabel_spez1_laenge.round(2) %></td>
+      <td><%= Grobengineering.kabel_spez1_laenge(@subsubproject).round(2) %></td>
       <td></td>
-      <td><%= Grobengineering.kabel_spez2_laenge.round(2) %></td>
+      <td><%= Grobengineering.kabel_spez2_laenge(@subsubproject).round(2) %></td>
       <td></td>
-      <td><%= Grobengineering.kabel_spez3_laenge.round(2) %></td>
-      <td></td>
-      <td></td>
-      <td><%= Grobengineering.leistung.round(2) %></td>
-      <td></td>
-      <td><%= Grobengineering.strom_total.round(2) %></td>
-      <td><%= Grobengineering.eng_admin.round(2).round(2) %></td>
-      <td><%= Grobengineering.eng_steuerkonzept.round(2) %></td>
-      <td><%= Grobengineering.eng_ioliste.round(2) %></td>
-      <td><%= Grobengineering.eng_elplanung.round(2) %></td>
-      <td><%= Grobengineering.eng_fktbeschrieb.round(2) %></td>
-      <td><%= Grobengineering.eng_safetymatrix.round(2) %></td>
-      <td><%= Grobengineering.eng_software.round(2) %></td>
-      <td><%= Grobengineering.eng_softwaresafety.round(2) %></td>
-      <td><%= Grobengineering.eng_bauleitung.round(2) %></td>
-      <td><%= Grobengineering.eng_parametrierung.round(2) %></td>
-      <td><%= Grobengineering.eng_signaltest.round(2) %></td>
-      <td><%= Grobengineering.eng_safetytest.round(2) %></td>
-      <td><%= Grobengineering.eng_fkttestkalt.round(2) %></td>
-      <td><%= Grobengineering.eng_fkttestheiss.round(2) %></td>
-      <td><%= Grobengineering.eng_konformitaet.round(2) %></td>
-      <td><%= Grobengineering.ger_beschriftung.round(2) %></td>
-      <td><%= Grobengineering.ger_sensor.round(2) %></td>
-      <td><%= Grobengineering.ger_ventil.round(2) %></td>
-      <td><%= Grobengineering.ger_heizung.round(2) %></td>
-      <td><%= Grobengineering.ger_m1r.round(2) %></td>
-      <td><%= Grobengineering.ger_m2r.round(2) %></td>
-      <td><%= Grobengineering.ger_mfu.round(2) %></td>
-      <td><%= Grobengineering.ger_wicklung.round(2) %></td>
-      <td><%= Grobengineering.ger_bremse.round(2) %></td>
-      <td><%= Grobengineering.ger_geraeteheizung.round(2) %></td>
-      <td><%= Grobengineering.ger_kommunikation.round(2) %></td>
-      <td><%= Grobengineering.ger_safety.round(2) %></td>
-      <td><%= Grobengineering.ger_spsmodul.round(2) %></td>
-      <td><%= Grobengineering.sig_di.round(2) %></td>
-      <td><%= Grobengineering.sig_do.round(2) %></td>
-      <td><%= Grobengineering.sig_ai.round(2) %></td>
-      <td><%= Grobengineering.sig_ao.round(2) %></td>
-      <td><%= Grobengineering.sig_zaehler.round(2) %></td>
-      <td><%= Grobengineering.sig_inkr.round(2) %></td>
-      <td><%= Grobengineering.sig_ssi.round(2) %></td>
-      <td><%= Grobengineering.sig_pb.round(2) %></td>
-      <td><%= Grobengineering.sig_sdi.round(2) %></td>
-      <td><%= Grobengineering.sig_sdo.round(2) %></td>
-      <td><%= Grobengineering.sig_sai.round(2) %></td>
-      <td><%= Grobengineering.sig_sao.round(2) %></td>
+      <td><%= Grobengineering.kabel_spez3_laenge(@subsubproject).round(2) %></td>
       <td></td>
       <td></td>
-      <td><%= Grobengineering.sps_di.round(2) %></td>
-      <td><%= Grobengineering.sps_do.round(2) %></td>
-      <td><%= Grobengineering.sps_ai.round(2) %></td>
-      <td><%= Grobengineering.sps_ao.round(2) %></td>
-      <td><%= Grobengineering.sps_zaehler.round(2) %></td>
-      <td><%= Grobengineering.sps_inkr.round(2) %></td>
-      <td><%= Grobengineering.sps_ssi.round(2) %></td>
-      <td><%= Grobengineering.sps_sdi.round(2) %></td>
-      <td><%= Grobengineering.sps_sdo.round(2) %></td>
-      <td><%= Grobengineering.sps_sai.round(2) %></td>
-      <td><%= Grobengineering.sps_sao.round(2) %></td>
+      <td><%= Grobengineering.leistung(@subsubproject).round(2) %></td>
       <td></td>
-      <td><%= Grobengineering.sch_einbau_laenge.round(2) %></td>
+      <td><%= Grobengineering.strom_total(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_admin(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_steuerkonzept(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_ioliste(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_elplanung(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_fktbeschrieb(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_safetymatrix(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_software(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_softwaresafety(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_bauleitung(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_parametrierung(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_signaltest(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_safetytest(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_fkttestkalt(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_fkttestheiss(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.eng_konformitaet(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.ger_beschriftung(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.ger_sensor(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.ger_ventil(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.ger_heizung(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.ger_m1r(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.ger_m2r(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.ger_mfu(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.ger_wicklung(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.ger_bremse(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.ger_geraeteheizung(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.ger_kommunikation(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.ger_safety(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.ger_spsmodul(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sig_di(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sig_do(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sig_ai(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sig_ao(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sig_zaehler(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sig_inkr(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sig_ssi(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sig_pb(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sig_sdi(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sig_sdo(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sig_sai(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sig_sao(@subsubproject).round(2) %></td>
       <td></td>
-      <td><%= Grobengineering.wire_steuerung_laenge.round(2) %></td>
       <td></td>
-      <td><%= Grobengineering.wire_speisung_laenge.round(2) %></td>
+      <td><%= Grobengineering.sps_di(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sps_do(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sps_ai(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sps_ao(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sps_zaehler(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sps_inkr(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sps_ssi(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sps_sdi(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sps_sdo(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sps_sai(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.sps_sao(@subsubproject).round(2) %></td>
       <td></td>
-      <td><%= Grobengineering.wire_potausgleich_laenge.round(2) %></td>
-      <td><%= Grobengineering.wire_spez1_laenge_tot.round(2) %></td>
-      <td><%= Grobengineering.wire_spez2_laenge_tot.round(2) %></td>
-      <td><%= Grobengineering.wire_spez3_laenge_tot.round(2) %></td>
+      <td><%= Grobengineering.sch_einbau_laenge(@subsubproject).round(2) %></td>
       <td></td>
-      <td><%= Grobengineering.elinst_trasse_laenge.round(2) %></td>
+      <td><%= Grobengineering.wire_steuerung_laenge(@subsubproject).round(2) %></td>
       <td></td>
-      <td><%= Grobengineering.elinst_rohr_laenge.round(2) %></td>
+      <td><%= Grobengineering.wire_speisung_laenge(@subsubproject).round(2) %></td>
       <td></td>
-      <td><%= Grobengineering.elinst_geraete_laenge.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_admin.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_steuerkonzept.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_ioliste.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_elplanung.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_fktbeschrieb.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_safetymatrix.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_software.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_softwaresafety.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_bauleitung.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_parametrierung.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_signaltest.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_safetytest.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_fkttestkalt.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_fkttestheiss.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_konformitaet.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_elplanung_total.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_planung_sw_total.round(2) %></td>
-      <td><%= Grobengineering.kosten_eng_ibn_bauleitung_total.round(2) %></td>
-      <td><%= Grobengineering.kosten_sps_total_brutto(@subsubproject.eurokurs).round(2) %></td>
-      <td><%= Grobengineering.kosten_sps_total_netto(@subsubproject.eurokurs) %></td>
-      <td><%= Grobengineering.kosten_io_et_total_brutto(@subsubproject.proiorechnen, @subsubproject.eurokurs) %></td>
-      <td><%= Grobengineering.kosten_io_et_total_netto(@subsubproject.proiorechnen, @subsubproject.eurokurs) %></td>
-      <td><%= Grobengineering.kosten_io_pilz_total_netto(@subsubproject.proiorechnen, @subsubproject.eurokurs) %></td>
-      <td><%= Grobengineering.kosten_io_pilz_total_netto(@subsubproject.proiorechnen, @subsubproject.eurokurs) %></td>
-      <td><%= Grobengineering.kosten_fu_einzel_brutto.round(2) %></td>
-      <td><%= Grobengineering.kosten_fu_einzel_netto.round(2) %></td>
-      <td><%= Grobengineering.kosten_fu_total_brutto.round(2) %></td>
-      <td><%= Grobengineering.kosten_fu_total_netto.round(2) %></td>
-      <td><%= Grobengineering.kosten_sch_abgaenge_brutto.round(2) %></td>
-      <td><%= Grobengineering.kosten_sch_abgaenge_netto.round(2) %></td>
-      <td><%= Grobengineering.kosten_sch_einbau_brutto.round(2) %></td>
-      <td><%= Grobengineering.kosten_sch_einbau_netto.round(2) %></td>
-      <td><%= Grobengineering.kosten_sch_total_brutto.round(2) %></td>
-      <td><%= Grobengineering.kosten_sch_total_netto.round(2) %></td>
-      <td><%= Grobengineering.kosten_wire_steuerung_total(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier).round(2) %></td>
-      <td><%= Grobengineering.kosten_wire_speisung_total(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier).round(2) %></td>
-      <td><%= Grobengineering.kosten_wire_potausgleich_total(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier).round(2) %></td>
-      <td><%= Grobengineering.kosten_wire_spez1_total(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier).round(2) %></td>
-      <td><%= Grobengineering.kosten_wire_spez2_total(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier).round(2) %></td>
-      <td><%= Grobengineering.kosten_wire_spez3_total(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier).round(2) %></td>
-      <td><%= Grobengineering.kosten_elinst_trasse_total_brutto.round(2) %></td>
-      <td><%= Grobengineering.kosten_elinst_trasse_total_netto.round(2) %></td>
-      <td><%= Grobengineering.kosten_elinst_rohr_total_brutto.round(2) %></td>
-      <td><%= Grobengineering.kosten_elinst_rohr_total_netto.round(2) %></td>
-      <td><%= Grobengineering.kosten_elinst_geraete_total_brutto.round(2) %></td>
-      <td><%= Grobengineering.kosten_elinst_geraete_total_netto.round(2) %></td>
-      <td><%= Grobengineering.kosten_geraetebeschriftung_total_brutto.round(2) %></td>
-      <td><%= Grobengineering.kosten_geraetebeschriftung_total_netto.round(2) %></td>
-      <td><%= Grobengineering.kosten_elinst_total_brutto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier) %></td>
-      <td><%= Grobengineering.kosten_elinst_total_netto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier) %></td>
-      <td><%= Grobengineering.kosten_total_brutto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier, @subsubproject.proiorechnen, @subsubproject.eurokurs) %></td>
-      <td><%= Grobengineering.kosten_total_netto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier, @subsubproject.proiorechnen, @subsubproject.eurokurs) %></td>
+      <td><%= Grobengineering.wire_potausgleich_laenge(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.wire_spez1_laenge_tot(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.wire_spez2_laenge_tot(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.wire_spez3_laenge_tot(@subsubproject).round(2) %></td>
+      <td></td>
+      <td><%= Grobengineering.elinst_trasse_laenge(@subsubproject).round(2) %></td>
+      <td></td>
+      <td><%= Grobengineering.elinst_rohr_laenge(@subsubproject).round(2) %></td>
+      <td></td>
+      <td><%= Grobengineering.elinst_geraete_laenge(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_admin(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_steuerkonzept(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_ioliste(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_elplanung(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_fktbeschrieb(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_safetymatrix(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_software(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_softwaresafety(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_bauleitung(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_parametrierung(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_signaltest(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_safetytest(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_fkttestkalt(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_fkttestheiss(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_konformitaet(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_elplanung_total(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_planung_sw_total(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_eng_ibn_bauleitung_total(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_sps_total_brutto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_sps_total_netto(@subsubproject) %></td>
+      <td><%= Grobengineering.kosten_io_et_total_brutto(@subsubproject) %></td>
+      <td><%= Grobengineering.kosten_io_et_total_netto(@subsubproject) %></td>
+      <td><%= Grobengineering.kosten_io_pilz_total_netto(@subsubproject) %></td>
+      <td><%= Grobengineering.kosten_io_pilz_total_netto(@subsubproject) %></td>
+      <td><%= Grobengineering.kosten_fu_einzel_brutto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_fu_einzel_netto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_fu_total_brutto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_fu_total_netto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_sch_abgaenge_brutto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_sch_abgaenge_netto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_sch_einbau_brutto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_sch_einbau_netto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_sch_total_brutto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_sch_total_netto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_wire_steuerung_total(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_wire_speisung_total(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_wire_potausgleich_total(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_wire_spez1_total(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_wire_spez2_total(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_wire_spez3_total(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_elinst_trasse_total_brutto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_elinst_trasse_total_netto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_elinst_rohr_total_brutto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_elinst_rohr_total_netto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_elinst_geraete_total_brutto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_elinst_geraete_total_netto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_geraetebeschriftung_total_brutto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_geraetebeschriftung_total_netto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_elinst_total_brutto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_elinst_total_netto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_total_brutto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_total_netto(@subsubproject).round(2) %></td>
       <td></td>
     </tr>
     <% @grobengineerings.each_with_index do |grobengineering, i| %>

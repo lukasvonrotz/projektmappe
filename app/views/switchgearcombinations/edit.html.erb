@@ -7,5 +7,6 @@
 <% end %>
 
 <%= render 'form', :switchgearcombination => @switchgearcombination,
-           :switchgearid => @switchgearcombination.switchgear.id, :context => false  %>
+           :switchgearid => @switchgearcombination.switchgear.id,
+           :context => false  %>
 <%= link_to "Zurück zu Schaltgerätekombinationen-Übersicht", switchgearcombinations_path %>

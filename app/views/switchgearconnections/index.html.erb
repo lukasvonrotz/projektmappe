@@ -1,6 +1,13 @@
 <h1>Alle Schaltgeräte-Verbindungen</h1>
 <br>
-<a href="<%=new_switchgearconnection_path%>" class="btn btn-success">Neue Verbindung erstellen</a>
+<% if Switchgearcombination.any? %>
+    <a href="<%=new_switchgearconnection_path%>" class="btn btn-success">Neue Verbindung erstellen</a>
+<% else %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      Zuerst Schaltgerätekombinationen erstellen, bevor eine Verbindung erstellt werden kann.
+    </div>
+<% end %>
 <br><br><br>
 <div id="content">
 
