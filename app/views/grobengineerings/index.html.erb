@@ -5,7 +5,9 @@
     <% if master.nil? %>
         Keine Daten zum kopieren verfügbar, da kein Master definiert!
     <% else %>
-      <%= link_to 'Von Master (' + master.name + ') kopieren', copy_path(params[:project_id], params[:subproject_id], params[:subsubproject_id], 4)%>
+        <% if master.id.to_i != params[:subsubproject_id].to_i %>
+          <%= link_to 'Von Master (' + master.name + ') kopieren', copy_path(params[:project_id], params[:subproject_id], params[:subsubproject_id], master.id)%>
+        <% end %>
     <% end %>
     <br><br>
 <% end %>
@@ -29,7 +31,7 @@
       <th rowspan="2">Tag-Name</th>
       <th rowspan="2">Bezeichnung</th>
       <th rowspan="2">Bemerkung</th>
-      <th rowspan="2">Funktion SW [h]<br><%= Grobengineering.sum(:funktion_sw) %></th>
+      <th rowspan="2">Funktion SW [h]</th>
       <th rowspan="2">Schaltanlagen Motorenabgang</th>
       <th rowspan="2">FU-Typ</th>
       <th colspan="6">Kabel Spezifisch</th>

@@ -3,6 +3,98 @@ class GrobengineeringsController < ApplicationController
     @hash = Hash.new
     @subsubproject = Subsubproject.find(params[:subsubproject_id])
     @grobengineerings = Grobengineering.where(:subsubproject_id => @subsubproject.id).order(:id)
+  end
+
+  # Control logic for create-view
+  # GET /grobengineerings/new
+  def new
+    # build a 'temporary' post which is written to DB later (create-method)
+    @grobengineering = Grobengineering.new
+  end
+
+  # Control logic when creating a new grobengineering
+  # POST /grobengineerings
+  def create
+    @grobengineering = Grobengineering.new(grobengineering_params)
+    # write grobengineering to database
+    if @grobengineering.save
+      redirect_to project_subproject_subsubproject_grobengineerings_path(@grobengineering.subsubproject.subproject.project.id, @grobengineering.subsubproject.subproject.id, @grobengineering.subsubproject.id), :notice => 'Eintrag erfolgreich erstellt.'
+    else
+      render 'new'
+    end
+  end
+
+  # Control logic for show-view
+  # GET /grobengineerings/:id
+  def show
+    @grobengineering = Grobengineering.find(params[:id])
+  end
+
+  # Control logic for edit-view
+  # GET /grobengineerings/:id/edit
+  def edit
+    @grobengineering = Grobengineering.find(params[:id])
+  end
+
+  # Save an updated grobengineering
+  # PUT /grobengineerings/:id
+  def update
+    @grobengineering = Grobengineering.find(params[:id])
+    if @grobengineering.update(grobengineering_params)
+      redirect_to project_subproject_subsubproject_grobengineerings_path(@grobengineering.subsubproject.subproject.project.id, @grobengineering.subsubproject.subproject.id, @grobengineering.subsubproject.id), :notice => 'Eintrag erfolgreich aktualisiert.'
+    else
+      render 'edit'
+    end
+  end
+
+  # Delete a grobengineering
+  # DELETE /grobengineerings/:id
+  def destroy
+    @grobengineering = Grobengineering.find(params[:id])
+    @grobengineering.destroy
+    redirect_to project_subproject_subsubproject_grobengineerings_path(@grobengineering.subsubproject.subproject.project.id, @grobengineering.subsubproject.subproject.id, @grobengineering.subsubproject.id), :notice => 'Eintrag wurde gelöscht.'
+  end
+
+  def copy
+    projectid = params[:project_id]
+    subprojectid = params[:subproject_id]
+    subsubprojectid = params[:subsubproject_id]
+    versiontocopy = params[:versiontocopy]
+    @grobengineerings_to_copy = Grobengineering.where(:subsubproject_id => versiontocopy)
+    newid = Grobengineering.all.length + 1
+    @grobengineerings_to_copy.each do |grobengineering|
+      new_record = grobengineering.dup
+      new_record.id = newid
+      new_record.subsubproject_id = subsubprojectid
+      new_record.save!
+      newid += 1
+    end
+
+    redirect_to project_subproject_subsubproject_grobengineerings_path(projectid, subprojectid, subsubprojectid),
+                :notice => 'Einträge erfolgreich kopiert'
+  end
+
+  private
+  # defines which parameters have to be provided by the form when creating a new grobengineering
+  def grobengineering_params
+    params.require(:grobengineering).permit!
+  end
+
+  def calc_tot(anz_devices, attribute)
+    if attribute.nil?
+      return ''
+    else
+      return anz_devices * attribute.to_f
+    end
+  end
+  def calc_kosten_tot(hourrate, single)
+    if single.nil? or hourrate.nil?
+      return ''
+    else
+      return hourrate.to_f * single.to_f
+    end
+  end
+end
 
 =begin
     @grobengineerings.each_with_index do |grobengineering, index|
@@ -360,81 +452,3 @@ class GrobengineeringsController < ApplicationController
       end
     end
 =end
-  end
-
-  # Control logic for create-view
-  # GET /grobengineerings/new
-  def new
-    # build a 'temporary' post which is written to DB later (create-method)
-    @grobengineering = Grobengineering.new
-  end
-
-  # Control logic when creating a new grobengineering
-  # POST /grobengineerings
-  def create
-    @grobengineering = Grobengineering.new(grobengineering_params)
-    # write grobengineering to database
-    if @grobengineering.save
-      redirect_to project_subproject_subsubproject_grobengineerings_path(@grobengineering.subsubproject.subproject.project.id, @grobengineering.subsubproject.subproject.id, @grobengineering.subsubproject.id), :notice => 'Eintrag erfolgreich erstellt.'
-    else
-      render 'new'
-    end
-  end
-
-  # Control logic for show-view
-  # GET /grobengineerings/:id
-  def show
-    @grobengineering = Grobengineering.find(params[:id])
-  end
-
-  # Control logic for edit-view
-  # GET /grobengineerings/:id/edit
-  def edit
-    @grobengineering = Grobengineering.find(params[:id])
-  end
-
-  # Save an updated grobengineering
-  # PUT /grobengineerings/:id
-  def update
-    @grobengineering = Grobengineering.find(params[:id])
-    if @grobengineering.update(grobengineering_params)
-      redirect_to project_subproject_subsubproject_grobengineerings_path(@grobengineering.subsubproject.subproject.project.id, @grobengineering.subsubproject.subproject.id, @grobengineering.subsubproject.id), :notice => 'Eintrag erfolgreich aktualisiert.'
-    else
-      render 'edit'
-    end
-  end
-
-  # Delete a grobengineering
-  # DELETE /grobengineerings/:id
-  def destroy
-    @grobengineering = Grobengineering.find(params[:id])
-    @grobengineering.destroy
-    redirect_to project_subproject_subsubproject_grobengineerings_path(@grobengineering.subsubproject.subproject.project.id, @grobengineering.subsubproject.subproject.id, @grobengineering.subsubproject.id), :notice => 'Eintrag wurde gelöscht.'
-  end
-
-  def copy
-    puts params
-    redirect_to project_subproject_subsubproject_grobengineerings_path(@grobengineering.subsubproject.subproject.project.id, @grobengineering.subsubproject.subproject.id, @grobengineering.subsubproject.id), :notice => 'Eintrag erfolgreich aktualisiert.'
-  end
-
-  private
-  # defines which parameters have to be provided by the form when creating a new grobengineering
-  def grobengineering_params
-    params.require(:grobengineering).permit!
-  end
-
-  def calc_tot(anz_devices, attribute)
-    if attribute.nil?
-      return ''
-    else
-      return anz_devices * attribute.to_f
-    end
-  end
-  def calc_kosten_tot(hourrate, single)
-    if single.nil? or hourrate.nil?
-      return ''
-    else
-      return hourrate.to_f * single.to_f
-    end
-  end
-end
