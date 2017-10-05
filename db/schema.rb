@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004135822) do
+ActiveRecord::Schema.define(version: 20171005113959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,6 +202,14 @@ ActiveRecord::Schema.define(version: 20171004135822) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "offertpositions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "subsubproject_id", null: false
+    t.index ["subsubproject_id"], name: "index_offertpositions_on_subsubproject_id", using: :btree
   end
 
   create_table "project_users", force: :cascade do |t|
@@ -423,6 +431,7 @@ ActiveRecord::Schema.define(version: 20171004135822) do
   add_foreign_key "grobengineerings", "wires", column: "wire_spez3_id"
   add_foreign_key "iogroups", "iotypes"
   add_foreign_key "iogroups", "switchgearcombinations"
+  add_foreign_key "offertpositions", "subsubprojects"
   add_foreign_key "subprojects", "customers"
   add_foreign_key "subprojects", "projects"
   add_foreign_key "subsubprojects", "subprojects"

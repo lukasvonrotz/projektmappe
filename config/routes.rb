@@ -18,10 +18,12 @@ Rails.application.routes.draw do
     resources :subprojects do
       resources :subsubprojects do
         resources :grobengineerings
+        resources :offertpositions
       end
     end
   end
   resources :grobengineerings
+  resources :offertpositions
   resources :subsystems
   resources :units
   resources :subprojects

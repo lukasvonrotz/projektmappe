@@ -1,0 +1,12 @@
+<h1>Offertposition editieren</h1>
+<% if @offertposition.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @offertposition.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :offertposition => @offertposition,
+           :subsubprojectid => @offertposition.subsubproject_id,
+           :context => false  %>
+<%= link_to "Zurück zu Offertpositionsübersicht", project_subproject_subsubproject_offertpositions_path %>

@@ -1,0 +1,14 @@
+<h1>Neue Offertposition erstellen</h1>
+<% if @offertposition.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @offertposition.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<% subsubproject = @offertposition.subsubproject_id.nil? ? Subsubproject.find(params[:subsubproject_id]) : Subsubproject.find(@offertposition.subsubproject_id) %>
+
+<%= render 'form', :offertposition => @offertposition,
+           :subsubprojectid => subsubproject.id,
+           :context => true  %>
+<%= link_to "Zurück zu Offertpositionen-Übersicht", project_subproject_subsubproject_offertpositions_path(subsubproject.subproject.project.id, subsubproject.subproject.id, subsubproject.id) %>

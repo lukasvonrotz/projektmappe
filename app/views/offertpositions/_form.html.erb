@@ -1,0 +1,18 @@
+<%= form_for offertposition do |offertposition| %>
+
+    <div class="field form-group">
+      <%= offertposition.label :name, 'Name' %>
+      <%= offertposition.text_field :name, :class => "form-control",
+                             placeholder: 'Name von Offertposition eingeben' %>
+    </div>
+    <%= offertposition.hidden_field :subsubproject_id, :value => subsubprojectid %>
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= offertposition.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= offertposition.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

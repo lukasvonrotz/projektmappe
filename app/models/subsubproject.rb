@@ -42,4 +42,6 @@ class Subsubproject < ApplicationRecord
   validates :eurokurs, presence:true, numericality: {only_float: true}
 
   has_many :grobengineerings, dependent: :destroy
+
+  has_many :offertpositions, dependent: :destroy
 end
