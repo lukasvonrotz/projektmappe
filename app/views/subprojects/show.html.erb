@@ -29,6 +29,7 @@
           <a href="<%= edit_project_subproject_subsubproject_path(@project.id, @subproject.id, subsubproject.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
           <a href="<%= project_subproject_subsubproject_offertpositions_path(@project.id, @subproject.id, subsubproject.id) %>" class="btn btn-xs btn-default btn-index">Offertpositionen bearbeiten</a>
           <a href="<%= project_subproject_subsubproject_grobengineerings_path(@project.id, @subproject.id, subsubproject.id) %>" class="btn btn-xs btn-default btn-index">Grobengineering</a>
+          <a href="/projects/<%= @project.id %>/subprojects/<%= @subproject.id %>/subsubprojects/<%= subsubproject.id %>/offerte" class="btn btn-xs btn-default btn-index">Offerte</a>
           <button type="button" class="btn btn-xs btn-danger btn-index"
                   data-toggle="modal" data-target="#popup_sure_delete"
                   data-itemid="<%= subsubproject.id %>"
