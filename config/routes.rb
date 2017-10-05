@@ -47,5 +47,7 @@ Rails.application.routes.draw do
   #match "/copy/:subsubproject_id", to: "grobengineerings#copy", as: :copy, via: [:get]
   match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/copy/:versiontocopy",
         to: "grobengineerings#copy", as: :copy, via: [:get]
+  match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offerte",
+        to: "grobengineerings#offerte", as: :offerte, via: [:get]
 
 end

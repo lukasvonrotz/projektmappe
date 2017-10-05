@@ -74,6 +74,97 @@ class GrobengineeringsController < ApplicationController
                 :notice => 'Einträge erfolgreich kopiert'
   end
 
+  def offerte
+    @subsubproject = Subsubproject.find(params[:subsubproject_id])
+    @grobengineerings = Grobengineering.where(:subsubproject_id => @subsubproject.id).order(:id)
+
+    @total_geraeteanzahl = 0
+    @total_elplanung = 0
+    @total_planung_sw = 0
+    @total_ibn_bauleitung = 0
+    @total_sps_brutto = 0
+    @total_sps_netto = 0
+    @total_sch_brutto = 0
+    @total_sch_netto = 0
+    @total_elinst_brutto = 0
+    @total_elinst_netto = 0
+    @total_brutto = 0
+    @total_netto = 0
+
+    @zusammenfassung = Hash.new
+    @grobengineerings.group_by(&:offertposition).each do |offertposition, grobengineerings|
+      @zusammenfassung[offertposition] = Hash.new
+      @zusammenfassung[offertposition]["device_anzahl"] = 0
+      @zusammenfassung[offertposition]["kosten_eng_elplanung_total"] = 0
+      @zusammenfassung[offertposition]["kosten_eng_planung_sw_total"] = 0
+      @zusammenfassung[offertposition]["kosten_eng_ibn_bauleitung_total"] = 0
+      @zusammenfassung[offertposition]["kosten_sps_total_brutto"] = 0
+      @zusammenfassung[offertposition]["kosten_sps_total_netto"] = 0
+      @zusammenfassung[offertposition]["kosten_sch_total_brutto"] = 0
+      @zusammenfassung[offertposition]["kosten_sch_total_netto"] = 0
+      @zusammenfassung[offertposition]["kosten_elinst_total_brutto"] = 0
+      @zusammenfassung[offertposition]["kosten_elinst_total_netto"] = 0
+      @zusammenfassung[offertposition]["kosten_total_brutto"] = 0
+      @zusammenfassung[offertposition]["kosten_total_netto"] = 0
+      @zusammenfassung[offertposition]["devices"] = Hash.new
+      grobengineerings.group_by(&:device_id).each do |device_id, lines|
+        @zusammenfassung[offertposition]["devices"][device_id] = Hash.new
+        @zusammenfassung[offertposition]["devices"][device_id]["device_anzahl"] = 0
+        @zusammenfassung[offertposition]["devices"][device_id]["kosten_eng_elplanung_total"] = 0
+        @zusammenfassung[offertposition]["devices"][device_id]["kosten_eng_planung_sw_total"] = 0
+        @zusammenfassung[offertposition]["devices"][device_id]["kosten_eng_ibn_bauleitung_total"] = 0
+        @zusammenfassung[offertposition]["devices"][device_id]["kosten_sps_total_brutto"] = 0
+        @zusammenfassung[offertposition]["devices"][device_id]["kosten_sps_total_netto"] = 0
+        @zusammenfassung[offertposition]["devices"][device_id]["kosten_sch_total_brutto"] = 0
+        @zusammenfassung[offertposition]["devices"][device_id]["kosten_sch_total_netto"] = 0
+        @zusammenfassung[offertposition]["devices"][device_id]["kosten_elinst_total_brutto"] = 0
+        @zusammenfassung[offertposition]["devices"][device_id]["kosten_elinst_total_netto"] = 0
+        @zusammenfassung[offertposition]["devices"][device_id]["kosten_total_brutto"] = 0
+        @zusammenfassung[offertposition]["devices"][device_id]["kosten_total_netto"] = 0
+        lines.each do |line|
+          @zusammenfassung[offertposition]["devices"][device_id]["device_anzahl"] += line.device_anzahl
+          @zusammenfassung[offertposition]["devices"][device_id]["kosten_eng_elplanung_total"] += line.kosten_eng_elplanung_total
+          @zusammenfassung[offertposition]["devices"][device_id]["kosten_eng_planung_sw_total"] += line.kosten_eng_planung_sw_total
+          @zusammenfassung[offertposition]["devices"][device_id]["kosten_eng_ibn_bauleitung_total"] += line.kosten_eng_ibn_bauleitung_total
+          @zusammenfassung[offertposition]["devices"][device_id]["kosten_sps_total_brutto"] += line.kosten_sps_total_brutto(@subsubproject.eurokurs)
+          @zusammenfassung[offertposition]["devices"][device_id]["kosten_sps_total_netto"] += line.kosten_sps_total_netto(@subsubproject.eurokurs)
+          @zusammenfassung[offertposition]["devices"][device_id]["kosten_sch_total_brutto"] += line.kosten_sch_total_brutto
+          @zusammenfassung[offertposition]["devices"][device_id]["kosten_sch_total_netto"] += line.kosten_sch_total_netto
+          @zusammenfassung[offertposition]["devices"][device_id]["kosten_elinst_total_brutto"] += line.kosten_elinst_total_brutto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier)
+          @zusammenfassung[offertposition]["devices"][device_id]["kosten_elinst_total_netto"] += line.kosten_elinst_total_netto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier)
+          @zusammenfassung[offertposition]["devices"][device_id]["kosten_total_brutto"] += line.kosten_total_brutto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier, @subsubproject.proiorechnen, @subsubproject.eurokurs)
+          @zusammenfassung[offertposition]["devices"][device_id]["kosten_total_netto"] += line.kosten_total_netto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier, @subsubproject.proiorechnen, @subsubproject.eurokurs)
+
+          @zusammenfassung[offertposition]["device_anzahl"] += line.device_anzahl
+          @zusammenfassung[offertposition]["kosten_eng_elplanung_total"] += line.kosten_eng_elplanung_total
+          @zusammenfassung[offertposition]["kosten_eng_planung_sw_total"] += line.kosten_eng_planung_sw_total
+          @zusammenfassung[offertposition]["kosten_eng_ibn_bauleitung_total"] += line.kosten_eng_ibn_bauleitung_total
+          @zusammenfassung[offertposition]["kosten_sps_total_brutto"] += line.kosten_sps_total_brutto(@subsubproject.eurokurs)
+          @zusammenfassung[offertposition]["kosten_sps_total_netto"] += line.kosten_sps_total_netto(@subsubproject.eurokurs)
+          @zusammenfassung[offertposition]["kosten_sch_total_brutto"] += line.kosten_sch_total_brutto
+          @zusammenfassung[offertposition]["kosten_sch_total_netto"] += line.kosten_sch_total_netto
+          @zusammenfassung[offertposition]["kosten_elinst_total_brutto"] += line.kosten_elinst_total_brutto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier)
+          @zusammenfassung[offertposition]["kosten_elinst_total_netto"] += line.kosten_elinst_total_netto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier)
+          @zusammenfassung[offertposition]["kosten_total_brutto"] += line.kosten_total_brutto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier, @subsubproject.proiorechnen, @subsubproject.eurokurs)
+          @zusammenfassung[offertposition]["kosten_total_netto"] += line.kosten_total_netto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier, @subsubproject.proiorechnen, @subsubproject.eurokurs)
+        end
+      end
+      @total_geraeteanzahl += @zusammenfassung[offertposition]["device_anzahl"]
+      @total_elplanung += @zusammenfassung[offertposition]["kosten_eng_elplanung_total"]
+      @total_planung_sw += @zusammenfassung[offertposition]["kosten_eng_planung_sw_total"]
+      @total_ibn_bauleitung += @zusammenfassung[offertposition]["kosten_eng_ibn_bauleitung_total"]
+      @total_sps_brutto += @zusammenfassung[offertposition]["kosten_sps_total_brutto"]
+      @total_sps_netto += @zusammenfassung[offertposition]["kosten_sps_total_netto"]
+      @total_sch_brutto += @zusammenfassung[offertposition]["kosten_sch_total_brutto"]
+      @total_sch_netto += @zusammenfassung[offertposition]["kosten_sch_total_netto"]
+      @total_elinst_brutto += @zusammenfassung[offertposition]["kosten_elinst_total_brutto"]
+      @total_elinst_netto += @zusammenfassung[offertposition]["kosten_elinst_total_netto"]
+      @total_brutto += @zusammenfassung[offertposition]["kosten_total_brutto"]
+      @total_netto += @zusammenfassung[offertposition]["kosten_total_netto"]
+    end
+
+  end
+
   private
   # defines which parameters have to be provided by the form when creating a new grobengineering
   def grobengineering_params

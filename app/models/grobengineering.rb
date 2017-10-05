@@ -549,8 +549,6 @@ class Grobengineering < ApplicationRecord
   def kosten_wire_steuerung_total(wiresupplier, wirecaptionsupplier)
     if !self.device.wire_steuerung.nil?
       wire = self.device.wire_steuerung
-      puts wire.id
-      puts wiresupplier.id
       wire_trasse = WireSupplier.where(:wire_id => wire.id, :supplier_id => wiresupplier.id).first.installationtrasse
       total = self.wire_steuerung_laenge * wire_trasse +
           self.device_anzahl * wire.anschluesse_total(wiresupplier, wirecaptionsupplier)
