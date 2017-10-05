@@ -16,10 +16,12 @@ class SubsubprojectsController < ApplicationController
   def create
     @subsubproject = Subsubproject.new(subsubproject_params)
     if params[:subsubproject][:master] == "1"
-      @subsubproject.subproject.subsubprojects.each do |othersubsubproject|
-        if othersubsubproject.master
-          othersubsubproject.master = false
-          othersubsubproject.save!
+      if @subsubproject.subproject.subsubprojects.any?
+        @subsubproject.subproject.subsubprojects.each do |othersubsubproject|
+          if othersubsubproject.master
+            othersubsubproject.master = false
+            othersubsubproject.save!
+          end
         end
       end
     end
@@ -50,9 +52,6 @@ class SubsubprojectsController < ApplicationController
   # PUT /subsubprojects/:id
   def update
     @subsubproject = Subsubproject.find(params[:id])
-    puts 'lukas'
-    puts params
-    puts params[:subsubproject][:master]
     if params[:subsubproject][:master] == "1"
 
       @subsubproject.subproject.subsubprojects.each do |othersubsubproject|

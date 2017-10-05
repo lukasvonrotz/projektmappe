@@ -7,12 +7,13 @@
 <% end %>
 
 <% if Customer.any? %>
-    <% customer = @subproject.customer_id.nil? ? Customer.all.first : @subproject.customer_id %>
+    <% projectid = @subproject.project_id.nil? ? params[:project_id] : @subproject.project_id %>
+    <% customerid = @subproject.customer_id.nil? ? Customer.all.first : @subproject.customer_id %>
 
   <%= render 'form', :project_subproject => @subproject,
              :project => @subproject.project,
-             :customer => customer,
-             :projectid => @projectid,
+             :projectid => projectid,
+             :customerid => customerid,
              :context => true  %>
 <% else %>
   <div class="alert alert-danger">

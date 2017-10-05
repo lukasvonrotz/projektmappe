@@ -5,5 +5,6 @@ class CreateUnits < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_reference :units, :subsystem, index: true, foreign_key: true, null: false
   end
 end

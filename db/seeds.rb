@@ -8,3 +8,5 @@
 
 
 User.create(id: '1', email: 'admin@prola.ch', password: "projektmappe", password_confirmation: "projektmappe")
+Suppliertype.create(id: '1', name: 'Kabel')
+Suppliertype.create(id: '2', name: 'Kabelbeschriftung')

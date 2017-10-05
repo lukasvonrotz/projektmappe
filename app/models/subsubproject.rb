@@ -40,7 +40,6 @@ class Subsubproject < ApplicationRecord
   validates :complexity_konformitaet, presence:true, numericality: {only_float: true}
 
   validates :eurokurs, presence:true, numericality: {only_float: true}
-  validates :proiorechnen, presence:true
 
   has_many :grobengineerings, dependent: :destroy
 end

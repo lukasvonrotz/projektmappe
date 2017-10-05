@@ -16,7 +16,6 @@ class CreateAssemblies < ActiveRecord::Migration[5.0]
       t.integer :sai, :default => 0, null: false
       t.integer :sao, :default => 0, null: false
       t.float :brutto_eur, :default => 0, null: false
-      t.float :brutto_chf, :default => 0, null: false
       t.float :rabatt, :default => 0, null: false
 
       t.timestamps

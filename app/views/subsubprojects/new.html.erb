@@ -6,10 +6,20 @@
     </div>
 <% end %>
 
-<%= render 'form', :subprojectid => @subprojectid,
-           :subsubproject => @subsubproject,
-           :wiresupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'}).first.id,
-           :wirecaptionsupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}).first.id,
-           :context => true  %>
+
+<% if Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'}).any? &&
+    Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}).any? %>
+  <%= render 'form', :subprojectid => @subprojectid,
+             :subsubproject => @subsubproject,
+             :wiresupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'}).first.id,
+             :wirecaptionsupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}).first.id,
+             :context => true  %>
+
+<% else %>
+  <div class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      Mindestens 1 Kabellieferant und 1 Kabelbeschriftungslieferant müssen in der Datenbank existieren.
+  </div>
+<% end %>
 
 <%= link_to "Zurück zu Versionenübersicht", subsubprojects_path %>

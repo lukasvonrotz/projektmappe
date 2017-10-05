@@ -143,27 +143,11 @@ class Assembly < ApplicationRecord
   end
 
   def brutto_eur_col(eurokurs)
-    if self.brutto_eur.nil?
-      if self.brutto_chf.nil?
-        return ''
-      else
-        return self.brutto_chf / eurokurs
-      end
-    else
       return self.brutto_eur
-    end
   end
 
   def brutto_chf_col(eurokurs)
-    if self.brutto_chf.nil?
-      if self.brutto_eur.nil?
-        return ''
-      else
-        return self.brutto_eur * eurokurs
-      end
-    else
-      return  self.brutto_chf
-    end
+      return self.brutto_eur * eurokurs
   end
 
   def netto(eurokurs)

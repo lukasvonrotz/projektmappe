@@ -6,5 +6,6 @@ class CreateIogroups < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_reference :iogroups, :switchgearcombination, index: true, foreign_key: true, null: false
   end
 end

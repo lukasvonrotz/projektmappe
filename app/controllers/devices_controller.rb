@@ -18,13 +18,9 @@ class DevicesController < ApplicationController
     device_wires2 = params[:device][:device_wires2]
     device_wires3 = params[:device][:device_wires3]
 
-    puts params[:device][:device_wires1]
-
     device_electrical_installations1 = params[:device][:device_electrical_installations1]
     device_electrical_installations2 = params[:device][:device_electrical_installations2]
     device_electrical_installations3 = params[:device][:device_electrical_installations3]
-
-    puts params[:device][:device_electrical_installations1]
 
     params[:device].delete :device_wires1
     params[:device].delete :device_wires2

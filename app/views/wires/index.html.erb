@@ -70,10 +70,8 @@
           <% Wire.all.each do |wire| %>
             var pricesWirecaptionsuppliersWire<%= wire.id %> = {};
             <% @wirecaptionsuppliers.each do |wirecaptionsupplier| %>
-              pricesWirecaptionsuppliersWire<%= wire.id %>['kostenkabelmitmontagetraeger<%= wirecaptionsupplier.id %>'] =
-              <%= Wirecaptionprice.where(:supplier => wirecaptionsupplier).first.kostenkabelmitmontagetraeger %>;
-              pricesWirecaptionsuppliersWire<%= wire.id %>['kostenadernmitmontagehuelse<%= wirecaptionsupplier.id %>'] =
-              <%= wire.anzahladern * Wirecaptionprice.where(:supplier => wirecaptionsupplier).first.kostenadermitmontagehuelse %>;
+              pricesWirecaptionsuppliersWire<%= wire.id %>['kostenkabelmitmontagetraeger<%= wirecaptionsupplier.id %>'] = <%= Wirecaptionprice.where(:supplier => wirecaptionsupplier).first.kostenkabelmitmontagetraeger %>;
+              pricesWirecaptionsuppliersWire<%= wire.id %>['kostenadernmitmontagehuelse<%= wirecaptionsupplier.id %>'] = <%= wire.anzahladern * Wirecaptionprice.where(:supplier => wirecaptionsupplier).first.kostenadermitmontagehuelse %>;
             <% end %>
             var pricesWiresuppliersWire<%= wire.id %> = {};
             <% @wiresuppliers.each do |wiresupplier| %>
@@ -87,10 +85,11 @@
               %>;
             <% end %>
             var ohneBeschriftung = pricesWiresuppliersWire<%= wire.id %>["ohneBeschriftung" + $('#select_wiresupplier').find(":selected").val()];
-            var beschriftungTotal = (2 * pricesWiresuppliersWire<%= wire.id %>["beschriftungkabel1anschluss" + $('#select_wiresupplier').find(":selected").val()]) +
-                (<%= wire.aderbeschriftung %> * pricesWiresuppliersWire<%= wire.id %>["beschriftungadern1anschluss" + $('#select_wiresupplier').find(":selected").val()]) +
-                (2 * pricesWirecaptionsuppliersWire<%= wire.id %>['kostenkabelmitmontagetraeger' + $('#select_wirecaptionsupplier').find(":selected").val()]) +
-            (<%= wire.aderbeschriftung %> * pricesWirecaptionsuppliersWire<%= wire.id %>['kostenadernmitmontagehuelse' + $('#select_wirecaptionsupplier').find(":selected").val()]);
+            var beschriftungTotal_1 = 2 * pricesWiresuppliersWire<%= wire.id %>["beschriftungkabel1anschluss" + $('#select_wiresupplier').find(":selected").val()];
+            var beschriftungTotal_2 = <%= wire.aderbeschriftung %> * pricesWiresuppliersWire<%= wire.id %>["beschriftungadern1anschluss" + $('#select_wiresupplier').find(":selected").val()];
+            var beschriftungTotal_3 = 2 * pricesWirecaptionsuppliersWire<%= wire.id %>['kostenkabelmitmontagetraeger' + $('#select_wirecaptionsupplier').find(":selected").val()]
+            var beschriftungTotal_4 = <%= wire.aderbeschriftung %> * pricesWirecaptionsuppliersWire<%= wire.id %>['kostenadernmitmontagehuelse' + $('#select_wirecaptionsupplier').find(":selected").val()];
+            var beschriftungTotal = beschriftungTotal_1 + beschriftungTotal_2 + beschriftungTotal_3 + beschriftungTotal_4;
             var anschluesseTotal = ohneBeschriftung + beschriftungTotal;
             $("#anschluesseOhneBeschriftung<%= wire.id %>").html(ohneBeschriftung);
             $("#beschriftungTotal<%= wire.id %>").html(beschriftungTotal);

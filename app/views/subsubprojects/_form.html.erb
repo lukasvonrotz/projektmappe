@@ -10,6 +10,10 @@
       <%= subsubproject.check_box :master %>
     </div>
     <div class="field form-group">
+      <%= subsubproject.label :proiorechnen, 'Pro IO-Rechnen' %><br>
+      <%= subsubproject.check_box :proiorechnen, {}, "true", "false" %>
+    </div>
+    <div class="field form-group">
       <%= subsubproject.label :eurokurs, 'Eurokurs' %>
       <%= subsubproject.text_field :eurokurs, :class => "form-control",
                                    placeholder: 'Eurokurs für Version eingeben' %>
@@ -25,11 +29,6 @@
       <%= subsubproject.collection_select :wirecaptionsupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}),:id,:name,
 
                                           {:selected => wirecaptionsupplierid}, {class:"form-control"} %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :subproject, 'Projekt' %>
-      <%= subsubproject.collection_select :subproject_id, Subproject.all,:id,:name,
-                                          {:selected => subprojectid}, {class:"form-control"} %>
     </div>
 
     <div class="field form-group">
@@ -166,6 +165,8 @@
       <%= subsubproject.label :complexity_konformitaet, 'Komplexitätsfaktor Konformität' %><br>
       <%= subsubproject.text_field :complexity_konformitaet, :class => "form-control" %>
     </div>
+
+    <%= subsubproject.hidden_field :subproject_id, :value => subprojectid %>
 
     <div class="actions form-group">
       <% if context %>

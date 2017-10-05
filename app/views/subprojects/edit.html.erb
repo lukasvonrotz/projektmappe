@@ -6,5 +6,8 @@
     </div>
 <% end %>
 
-<%= render 'form', :projectid => @subproject.project.id, :project => @subproject.project, :project_subproject => @subproject,
-           :customer => @subproject.customer, :context => false  %>
+<%= render 'form', :project_subproject => @subproject,
+           :project => @subproject.project,
+           :projectid => @subproject.project.id,
+           :customerid => @subproject.customer.id,
+           :context => false  %>

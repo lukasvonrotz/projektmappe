@@ -2,7 +2,11 @@
 <br>
 <% if !@grobengineerings.any? %>
     <% master = Subproject.find(params[:subproject_id]).subsubprojects.where(:master => true).first %>
-    <%= link_to 'Von Master (' + master.name + ') kopieren', copy_path(params[:project_id], params[:subproject_id], params[:subsubproject_id], 4)%>
+    <% if master.nil? %>
+        Keine Daten zum kopieren verfügbar, da kein Master definiert!
+    <% else %>
+      <%= link_to 'Von Master (' + master.name + ') kopieren', copy_path(params[:project_id], params[:subproject_id], params[:subsubproject_id], 4)%>
+    <% end %>
     <br><br>
 <% end %>
 <a href="<%= new_project_subproject_subsubproject_grobengineering_path %>" class="btn btn-success">Neuen Eintrag erstellen</a>
