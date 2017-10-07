@@ -51,6 +51,13 @@
     </table>
     <br><br>
     <a href="<%=new_project_subproject_subsubproject_path(@subproject.project.id, @subproject.id)%>" class="btn btn-success">Neue Version erstellen</a>
+    <% master = @subproject.subsubprojects.where(:master => true).first %>
+    <% if master.nil? %>
+        Keine Daten zum kopieren verfügbar, da kein Master definiert!
+    <% else %>
+        <br> <br>
+        <%= link_to 'Neue Kopie (von Master ' + master.name + ') erstellen', copy_path(@subproject.project.id, @subproject.id, master.id), :class => "btn btn-default" %>
+    <% end %>
   </div>
 
   <div id="info" class="tab-pane fade">
@@ -112,7 +119,7 @@
                       data-toggle="modal" data-target="#popup_sure_delete"
                       data-itemid="<%= history.id %>"
                       data-model="histories">
-                History löschen
+                Eintrag löschen
               </button>
             </td>
           </tr>

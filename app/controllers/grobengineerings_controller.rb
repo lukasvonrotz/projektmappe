@@ -55,23 +55,22 @@ class GrobengineeringsController < ApplicationController
     redirect_to project_subproject_subsubproject_grobengineerings_path(@grobengineering.subsubproject.subproject.project.id, @grobengineering.subsubproject.subproject.id, @grobengineering.subsubproject.id), :notice => 'Eintrag wurde gelöscht.'
   end
 
-  def copy
+  def import
+    status = Grobengineering.import(params[:file], params[:subsubproject_id])
     projectid = params[:project_id]
     subprojectid = params[:subproject_id]
     subsubprojectid = params[:subsubproject_id]
-    versiontocopy = params[:versiontocopy]
-    @grobengineerings_to_copy = Grobengineering.where(:subsubproject_id => versiontocopy)
-    newid = Grobengineering.all.length + 1
-    @grobengineerings_to_copy.each do |grobengineering|
-      new_record = grobengineering.dup
-      new_record.id = newid
-      new_record.subsubproject_id = subsubprojectid
-      new_record.save!
-      newid += 1
-    end
-
     redirect_to project_subproject_subsubproject_grobengineerings_path(projectid, subprojectid, subsubprojectid),
-                :notice => 'Einträge erfolgreich kopiert'
+                :notice => status
+  end
+
+  def delete_all
+    projectid = params[:project_id]
+    subprojectid = params[:subproject_id]
+    subsubprojectid = params[:subsubproject_id]
+    Grobengineering.where(:subsubproject_id => subsubprojectid).delete_all
+    redirect_to project_subproject_subsubproject_grobengineerings_path(projectid, subprojectid, subsubprojectid),
+                :notice => 'Einträge erfolgreich gelöscht'
   end
 
   def offerte

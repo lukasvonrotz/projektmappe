@@ -19,14 +19,14 @@ Rails.application.routes.draw do
       resources :infos
       resources :histories
       resources :subsubprojects do
-        resources :grobengineerings
+        resources :grobengineerings do
+          collection { post :import}
+        end
         resources :offertpositions
       end
     end
   end
   resources :grobengineerings
-  resources :infos
-  resources :histories
   resources :offertpositions
   resources :subsystems
   resources :units
@@ -50,10 +50,11 @@ Rails.application.routes.draw do
   resources :suppliertypes
   resources :wirecaptionprices
 
-  #match "/copy/:subsubproject_id", to: "grobengineerings#copy", as: :copy, via: [:get]
-  match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/copy/:versiontocopy",
-        to: "grobengineerings#copy", as: :copy, via: [:get]
+  match "/projects/:project_id/subprojects/:subproject_id/copy/:versiontocopy",
+        to: "subprojects#copy", as: :copy, via: [:get]
   match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offerte",
         to: "grobengineerings#offerte", as: :offerte, via: [:get]
+  match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/grobengineering/delete_all",
+        to: "grobengineerings#delete_all", as: :delete_all, via: [:get]
 
 end

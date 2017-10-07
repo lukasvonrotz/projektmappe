@@ -1,5 +1,7 @@
 class Grobengineering < ApplicationRecord
 
+  require 'csv'
+
   #include helper where class methods are defined
   include GrobengineeringsHelper
 
@@ -12,7 +14,6 @@ class Grobengineering < ApplicationRecord
   validates :device, :presence => true
 
   belongs_to :offertposition
-  validates :offertposition, :presence => true
 
   belongs_to :switchgear_motorenabgang, :class_name => 'Switchgear', :foreign_key => 'switchgear_motorenabgang_id', :optional => true
   belongs_to :fu_typ, :class_name => 'Drive', :foreign_key => 'fu_typ_id', :optional => true
@@ -28,6 +29,19 @@ class Grobengineering < ApplicationRecord
   validates :kabel_spez1_laenge, presence:true, numericality: {only_float: true}
   validates :kabel_spez2_laenge, presence:true, numericality: {only_float: true}
   validates :kabel_spez3_laenge, presence:true, numericality: {only_float: true}
+
+  def self.import(file, subsubprojectid)
+    new_id = Grobengineering.count + 1
+    CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
+      begin
+        new_record = row.to_hash
+        new_record[:subsubproject_id] = subsubprojectid
+        Grobengineering.create! new_record
+      rescue Exception => ex
+        return ex
+      end
+    end
+  end
 
   def strom_total
     return calc_tot(self.device_anzahl, self.strom)
@@ -438,7 +452,7 @@ class Grobengineering < ApplicationRecord
 
   # Kosten IO
   def kosten_io_et_total_brutto(pro_io_rechnen, eurokurs)
-    if !pro_io_rechnen
+    if pro_io_rechnen
       total = (self.sig_di * Assembly.di_brutto_chf(eurokurs)) +
         (self.sig_do * Assembly.do_brutto_chf(eurokurs)) +
         (self.sig_ai * Assembly.ai_brutto_chf(eurokurs)) +
@@ -452,7 +466,7 @@ class Grobengineering < ApplicationRecord
     end
   end
   def kosten_io_et_total_netto(pro_io_rechnen, eurokurs)
-    if !pro_io_rechnen
+    if pro_io_rechnen
       total = (self.sig_di * Assembly.di_netto_chf(eurokurs)) +
         (self.sig_do * Assembly.do_netto_chf(eurokurs)) +
         (self.sig_ai * Assembly.ai_netto_chf(eurokurs)) +
@@ -466,7 +480,7 @@ class Grobengineering < ApplicationRecord
     end
   end
   def kosten_io_pilz_total_brutto(pro_io_rechnen, eurokurs)
-    if !pro_io_rechnen
+    if pro_io_rechnen
       total = (self.sig_sdi * Assembly.sdi_brutto_chf(eurokurs)) +
           (self.sig_sdo * Assembly.sdo_brutto_chf(eurokurs)) +
           (self.sig_sai * Assembly.sai_brutto_chf(eurokurs)) +
@@ -477,7 +491,7 @@ class Grobengineering < ApplicationRecord
     end
   end
   def kosten_io_pilz_total_netto(pro_io_rechnen, eurokurs)
-    if !pro_io_rechnen
+    if pro_io_rechnen
       total = (self.sig_sdi * Assembly.sdi_netto_chf(eurokurs)) +
         (self.sig_sdo * Assembly.sdo_netto_chf(eurokurs)) +
         (self.sig_sai * Assembly.sai_netto_chf(eurokurs)) +

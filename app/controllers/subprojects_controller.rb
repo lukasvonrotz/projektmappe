@@ -59,6 +59,41 @@ class SubprojectsController < ApplicationController
       redirect_to project_subprojects_path(:project_id => projectid), :notice => 'Projekt wurde gelöscht.'
     end
 
+    def copy
+      projectid = params[:project_id]
+      subprojectid = params[:subproject_id]
+      versiontocopy = params[:versiontocopy]
+      subsubproject_to_copy = Subsubproject.find(versiontocopy)
+      new_subsubproject = Subsubproject.find(versiontocopy).dup
+      new_subsubproject.name = new_subsubproject.name +  ' (neu)'
+      new_subsubproject.master = false
+      new_subsubproject.save!
+
+      # copy offertpositions
+      subsubproject_to_copy.offertpositions.each do |offertposition|
+        new_offertposition = offertposition.dup
+        new_offertposition.subsubproject_id = new_subsubproject.id
+        new_offertposition.save!
+      end
+
+      # copy grobengineerings
+
+      grobengineerings_to_copy = Grobengineering.where(:subsubproject_id => versiontocopy).order(:id)
+      grobengineerings_to_copy.each do |grobengineering|
+        new_record = grobengineering.dup
+        new_record.subsubproject_id = new_subsubproject.id
+        offertposition = Offertposition.where(:subsubproject_id => new_subsubproject.id, :name => grobengineering.offertposition.name).first
+        if !offertposition.nil?
+          new_record.offertposition_id = offertposition.id
+        end
+        new_record.save!
+      end
+
+      redirect_to project_subproject_path(projectid, subprojectid),
+                  :notice => 'Version erfolgreich kopiert'
+
+    end
+
     private
     # defines which parameters have to be provided by the form when creating a new subproject
     def subproject_params
