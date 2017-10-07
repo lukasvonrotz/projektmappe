@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171005113959) do
+ActiveRecord::Schema.define(version: 20171007072153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,9 +170,11 @@ ActiveRecord::Schema.define(version: 20171005113959) do
     t.integer  "wire_spez1_id"
     t.integer  "wire_spez2_id"
     t.integer  "wire_spez3_id"
+    t.integer  "offertposition_id"
     t.index ["device_id"], name: "index_grobengineerings_on_device_id", using: :btree
     t.index ["fu_typ_id"], name: "index_grobengineerings_on_fu_typ_id", using: :btree
     t.index ["iogroup_id"], name: "index_grobengineerings_on_iogroup_id", using: :btree
+    t.index ["offertposition_id"], name: "index_grobengineerings_on_offertposition_id", using: :btree
     t.index ["subsubproject_id"], name: "index_grobengineerings_on_subsubproject_id", using: :btree
     t.index ["subsystem_id"], name: "index_grobengineerings_on_subsystem_id", using: :btree
     t.index ["switchgear_motorenabgang_id"], name: "index_grobengineerings_on_switchgear_motorenabgang_id", using: :btree
@@ -424,6 +426,7 @@ ActiveRecord::Schema.define(version: 20171005113959) do
   add_foreign_key "grobengineerings", "devices"
   add_foreign_key "grobengineerings", "drives", column: "fu_typ_id"
   add_foreign_key "grobengineerings", "iogroups"
+  add_foreign_key "grobengineerings", "offertpositions"
   add_foreign_key "grobengineerings", "subsystems"
   add_foreign_key "grobengineerings", "switchgears", column: "switchgear_motorenabgang_id"
   add_foreign_key "grobengineerings", "wires", column: "wire_spez1_id"

@@ -9,6 +9,7 @@
 <% if Device.any? %>
   <% subsubprojectid = @grobengineering.subsubproject_id.nil? ? params[:subsubproject_id] : @grobengineering.subsubproject_id %>
   <% projectid = Subsubproject.find(subsubprojectid).subproject.project.id %>
+  <% offertpositionid = @grobengineering.offertposition_id.nil? ? Subsubproject.find(subsubprojectid).offertpositions.first.id : @grobengineering.offertposition_id %>
   <% deviceid = @grobengineering.device_id.nil? ? Device.first.id : @grobengineering.device_id %>
   <% subsystemid = @grobengineering.subsystem_id.nil? ? '' : @grobengineering.subsystem_id %>
   <% iogroupid = @grobengineering.iogroup_id.nil? ? '' : @grobengineering.iogroup_id %>
@@ -21,6 +22,7 @@
   <%= render 'form', :grobengineering => @grobengineering,
              :projectid => projectid,
              :subsubprojectid => subsubprojectid,
+             :offertpositionid => offertpositionid,
              :deviceid => deviceid,
              :subsystemid => subsystemid,
              :iogroupid => iogroupid,

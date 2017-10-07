@@ -342,7 +342,7 @@
     <% @grobengineerings.each_with_index do |grobengineering, i| %>
         <tr>
           <td><%= grobengineering.id %></td>
-          <td><%= grobengineering.offertposition %></td>
+          <td><%= grobengineering.offertposition.name %></td>
           <td><%= grobengineering.subsystem.nil? ? '' : grobengineering.subsystem.name %></td>
           <td><%= grobengineering.beschreibung %></td>
           <td><%= grobengineering.kommentar %></td>

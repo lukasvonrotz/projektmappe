@@ -8,6 +8,7 @@
 
 <%= render 'form', :grobengineering => @grobengineering,
            :projectid => @grobengineering.subsubproject.subproject.project.id,
+           :offertpositionid => @grobengineering.offertposition.id,
            :subsubprojectid => @grobengineering.subsubproject.id,
            :deviceid => @grobengineering.device.nil? ? '' : @grobengineering.device.id,
            :subsystemid => @grobengineering.subsystem.nil? ? '' : @grobengineering.subsystem.id,

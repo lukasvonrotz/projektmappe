@@ -2,8 +2,8 @@
 
     <div class="field form-group">
       <%= grobengineering.label :offertposition, 'Offertposition' %>
-      <%= grobengineering.text_field :offertposition, :class => "form-control",
-                                     placeholder: 'Offertposition eingeben' %>
+      <%= grobengineering.collection_select :offertposition_id, Subsubproject.find(subsubprojectid).offertpositions,:id,:name,
+                                            {:selected => offertpositionid}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :subsystem, 'Teilanlage' %>
