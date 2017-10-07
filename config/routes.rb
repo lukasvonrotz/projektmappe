@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       resources :units
     end
     resources :subprojects do
+      resources :infos
+      resources :histories
       resources :subsubprojects do
         resources :grobengineerings
         resources :offertpositions
@@ -23,6 +25,8 @@ Rails.application.routes.draw do
     end
   end
   resources :grobengineerings
+  resources :infos
+  resources :histories
   resources :offertpositions
   resources :subsystems
   resources :units

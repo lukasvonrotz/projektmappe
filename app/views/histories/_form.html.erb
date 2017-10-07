@@ -1,0 +1,22 @@
+<%= form_for history do |history| %>
+
+    <div class="field form-group">
+      <%= history.label :datum, 'Datum' %><br>
+      <%= history.datetime_select :datum, {}, { class: '' } %>
+    </div>
+    <div class="field form-group">
+      <%= history.label :ereignis, 'Ereignis' %>
+      <%= history.text_field :ereignis, :class => "form-control"%>
+    </div>
+
+    <%= history.hidden_field :subproject_id, :value => subprojectid %>
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= history.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= history.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

@@ -35,49 +35,49 @@ class Grobengineering < ApplicationRecord
 
   # Engineering
   def eng_admin
-    return calc_tot(self.device_anzahl, self.device.eng_admin)
+    return self.subsubproject.complexity_admin.to_f * calc_tot(self.device_anzahl, self.device.eng_admin)
   end
   def eng_steuerkonzept
-    return calc_tot(self.device_anzahl, self.device.eng_steuerkonzept)
+    return self.subsubproject.complexity_steuerkonzept.to_f * calc_tot(self.device_anzahl, self.device.eng_steuerkonzept)
   end
   def eng_ioliste
-    return calc_tot(self.device_anzahl, self.device.eng_ioliste)
+    return self.subsubproject.complexity_ioliste.to_f * calc_tot(self.device_anzahl, self.device.eng_ioliste)
   end
   def eng_elplanung
-    return calc_tot(self.device_anzahl, self.device.eng_elplanung)
+    return self.subsubproject.complexity_elplanung.to_f * calc_tot(self.device_anzahl, self.device.eng_elplanung)
   end
   def eng_fktbeschrieb
-    return calc_tot(self.device_anzahl, self.device.eng_fktbeschrieb)
+    return self.subsubproject.complexity_fktbeschrieb.to_f * calc_tot(self.device_anzahl, self.device.eng_fktbeschrieb)
   end
   def eng_safetymatrix
-    return calc_tot(self.device_anzahl, self.device.eng_safetymatrix)
+    return self.subsubproject.complexity_safetymatrix.to_f * calc_tot(self.device_anzahl, self.device.eng_safetymatrix)
   end
   def eng_software
-    return calc_tot(self.device_anzahl, self.device.eng_software) + self.funktion_sw.to_f
+    return self.subsubproject.complexity_software.to_f * calc_tot(self.device_anzahl, self.device.eng_software) + self.funktion_sw.to_f
   end
   def eng_softwaresafety
-    return calc_tot(self.device_anzahl, self.device.eng_softwaresafety)
+    return self.subsubproject.complexity_softwaresafety.to_f * calc_tot(self.device_anzahl, self.device.eng_softwaresafety)
   end
   def eng_bauleitung
-    return calc_tot(self.device_anzahl, self.device.eng_bauleitung)
+    return self.subsubproject.complexity_bauleitung.to_f * calc_tot(self.device_anzahl, self.device.eng_bauleitung)
   end
   def eng_parametrierung
-    return calc_tot(self.device_anzahl, self.device.eng_parametrierung)
+    return self.subsubproject.complexity_parametrierung.to_f * calc_tot(self.device_anzahl, self.device.eng_parametrierung)
   end
   def eng_signaltest
-    return calc_tot(self.device_anzahl, self.device.eng_signaltest)
+    return self.subsubproject.complexity_signaltest.to_f * calc_tot(self.device_anzahl, self.device.eng_signaltest)
   end
   def eng_safetytest
-    return calc_tot(self.device_anzahl, self.device.eng_safetytest)
+    return self.subsubproject.complexity_safetytest.to_f * calc_tot(self.device_anzahl, self.device.eng_safetytest)
   end
   def eng_fkttestkalt
-    return calc_tot(self.device_anzahl, self.device.eng_fkttestkalt)
+    return self.subsubproject.complexity_fkttestkalt.to_f * calc_tot(self.device_anzahl, self.device.eng_fkttestkalt)
   end
   def eng_fkttestheiss
-    return calc_tot(self.device_anzahl, self.device.eng_fkttestheiss) + (0.3*self.funktion_sw.to_f)
+    return self.subsubproject.complexity_fkttestheiss.to_f * calc_tot(self.device_anzahl, self.device.eng_fkttestheiss) + (0.3*self.funktion_sw.to_f)
   end
   def eng_konformitaet
-    return calc_tot(self.device_anzahl, self.device.eng_konformitaet)
+    return self.subsubproject.complexity_konformitaet.to_f * calc_tot(self.device_anzahl, self.device.eng_konformitaet)
   end
 
   # Geräte

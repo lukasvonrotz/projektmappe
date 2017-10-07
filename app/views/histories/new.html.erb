@@ -1,0 +1,11 @@
+<h1>Neuer Eintrag erstellen</h1>
+<% if @history.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @history.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :history => @history,
+           :subprojectid => @history.subproject_id.nil? ? params[:subproject_id] : @history.subproject_id,
+           :context => true  %>

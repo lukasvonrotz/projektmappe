@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171007072153) do
+ActiveRecord::Schema.define(version: 20171007095940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,7 +140,6 @@ ActiveRecord::Schema.define(version: 20171007072153) do
   end
 
   create_table "grobengineerings", force: :cascade do |t|
-    t.string   "offertposition"
     t.text     "beschreibung"
     t.text     "kommentar"
     t.text     "device_import"
@@ -181,6 +180,26 @@ ActiveRecord::Schema.define(version: 20171007072153) do
     t.index ["wire_spez1_id"], name: "index_grobengineerings_on_wire_spez1_id", using: :btree
     t.index ["wire_spez2_id"], name: "index_grobengineerings_on_wire_spez2_id", using: :btree
     t.index ["wire_spez3_id"], name: "index_grobengineerings_on_wire_spez3_id", using: :btree
+  end
+
+  create_table "histories", force: :cascade do |t|
+    t.datetime "datum"
+    t.text     "ereignis"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "subproject_id", null: false
+    t.index ["subproject_id"], name: "index_histories_on_subproject_id", using: :btree
+  end
+
+  create_table "infos", force: :cascade do |t|
+    t.datetime "datum"
+    t.text     "quelle"
+    t.text     "info"
+    t.text     "querverweis"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "subproject_id", null: false
+    t.index ["subproject_id"], name: "index_infos_on_subproject_id", using: :btree
   end
 
   create_table "iogroups", force: :cascade do |t|
@@ -432,6 +451,8 @@ ActiveRecord::Schema.define(version: 20171007072153) do
   add_foreign_key "grobengineerings", "wires", column: "wire_spez1_id"
   add_foreign_key "grobengineerings", "wires", column: "wire_spez2_id"
   add_foreign_key "grobengineerings", "wires", column: "wire_spez3_id"
+  add_foreign_key "histories", "subprojects"
+  add_foreign_key "infos", "subprojects"
   add_foreign_key "iogroups", "iotypes"
   add_foreign_key "iogroups", "switchgearcombinations"
   add_foreign_key "offertpositions", "subsubprojects"

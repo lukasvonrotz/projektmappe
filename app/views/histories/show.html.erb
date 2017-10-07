@@ -1,0 +1,17 @@
+<h1>Details über Eintrag</h1>
+<br>
+<% if @history.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @history.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @history.id %><br>
+Datum: <%= @history.datum %><br>
+Quelle: <%= @history.quelle %><br>
+Info: <%= @history.history %><br>
+Querverweis: <%= @history.querverweis %><br>
+
+<br><br>
+<%= link_to "Zurück zu Projektübersicht", project_subproject_path(@history.subproject.project.id, @history.subproject.id) %>

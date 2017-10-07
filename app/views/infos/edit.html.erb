@@ -1,0 +1,12 @@
+<h1>Info editieren</h1>
+<% if @info.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @info.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :info => @info,
+           :subprojectid => @info.subproject_id,
+           :context => false  %>
+<%= link_to "Zurück zu Projektübersicht", project_subproject_path(@info.subproject.project.id, @info.subproject.id) %>

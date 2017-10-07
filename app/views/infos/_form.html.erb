@@ -1,0 +1,30 @@
+<%= form_for info do |info| %>
+
+    <div class="field form-group">
+      <%= info.label :datum, 'Datum' %><br>
+      <%= info.datetime_select :datum, {}, { class: '' } %>
+    </div>
+    <div class="field form-group">
+      <%= info.label :quelle, 'Quelle' %>
+      <%= info.text_field :quelle, :class => "form-control"%>
+    </div>
+    <div class="field form-group">
+      <%= info.label :info, 'Info' %>
+      <%= info.text_field :info, :class => "form-control"%>
+    </div>
+    <div class="field form-group">
+      <%= info.label :querverweis, 'Querverweis' %>
+      <%= info.text_field :querverweis, :class => "form-control"%>
+    </div>
+
+    <%= info.hidden_field :subproject_id, :value => subprojectid %>
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= info.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= info.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

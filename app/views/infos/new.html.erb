@@ -1,0 +1,11 @@
+<h1>Neue Info erstellen</h1>
+<% if @info.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @info.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :info => @info,
+           :subprojectid => @info.subproject_id.nil? ? params[:subproject_id] : @info.subproject_id,
+           :context => true  %>
