@@ -14,6 +14,6 @@ class CreateWireSuppliers < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :wire_suppliers, [:wire_id, :supplier_id], :unique => true
+    add_index :wire_suppliers, [:wire_id, :supplier_id], :unique => true, :name => 'wire_supplier_unique'
   end
 end

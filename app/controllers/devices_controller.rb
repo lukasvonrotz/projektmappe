@@ -2,6 +2,11 @@ class DevicesController < ApplicationController
   
   def index
     @devices = Device.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @devices.to_csv, filename: "devices-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view
@@ -14,21 +19,6 @@ class DevicesController < ApplicationController
   # Control logic when creating a new device
   # POST /devices
   def create
-    device_wires1 = params[:device][:device_wires1]
-    device_wires2 = params[:device][:device_wires2]
-    device_wires3 = params[:device][:device_wires3]
-
-    device_electrical_installations1 = params[:device][:device_electrical_installations1]
-    device_electrical_installations2 = params[:device][:device_electrical_installations2]
-    device_electrical_installations3 = params[:device][:device_electrical_installations3]
-
-    params[:device].delete :device_wires1
-    params[:device].delete :device_wires2
-    params[:device].delete :device_wires3
-    params[:device].delete :device_electrical_installations1
-    params[:device].delete :device_electrical_installations2
-    params[:device].delete :device_electrical_installations3
-
     @device = Device.new(device_params)
 
     # write device to database
@@ -71,6 +61,15 @@ class DevicesController < ApplicationController
     @device = Device.find(params[:id])
     @device.destroy
     redirect_to devices_path, :notice => 'Gerät wurde gelöscht.'
+  end
+
+  def import
+    status = Device.import(params[:file])
+    if !status.nil?
+      redirect_to devices_path, :notice => status
+    else
+      redirect_to devices_path, :notice => 'Geräteliste erfolgreich aktualisiert.'
+    end
   end
 
   private

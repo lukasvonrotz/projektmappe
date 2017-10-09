@@ -7,6 +7,6 @@ class CreateSupplierSuppliertypes < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :supplier_suppliertypes, [:supplier_id, :suppliertype_id], :unique => true
+    add_index :supplier_suppliertypes, [:supplier_id, :suppliertype_id], :unique => true, :name => 'supplier_suppliertype_unique'
   end
 end

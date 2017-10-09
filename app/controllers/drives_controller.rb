@@ -1,6 +1,11 @@
 class DrivesController < ApplicationController
   def index
     @drives = Drive.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @drives.to_csv, filename: "drives-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view
@@ -53,6 +58,15 @@ class DrivesController < ApplicationController
     @drive = Drive.find(params[:id])
     @drive.destroy
     redirect_to drives_path, :notice => 'Frequenzumrichter wurde gelöscht.'
+  end
+
+  def import
+    status = Drive.import(params[:file])
+    if !status.nil?
+      redirect_to drives_path, :notice => status
+    else
+      redirect_to drives_path, :notice => 'FU-Liste erfolgreich aktualisiert.'
+    end
   end
 
   private

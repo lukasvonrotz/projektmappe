@@ -4,6 +4,11 @@ class WiresController < ApplicationController
     @wiresuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'})
     @wirecaptionsuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'})
 
+    respond_to do |format|
+      format.html
+      format.csv { send_data @wires.to_csv, filename: "wires-#{Date.today}.csv" }
+    end
+
     # Check whether all prices of all wire suppliers are provided in database
     @allPricesEntered = 0
     @wires.each do |wire|
@@ -101,6 +106,15 @@ class WiresController < ApplicationController
     @wire = Wire.find(params[:id])
     @wire.destroy
     redirect_to wires_path, :notice => 'Kabel wurde gelöscht.'
+  end
+
+  def import
+    status = Wire.import(params[:file])
+    if !status.nil?
+      redirect_to wires_path, :notice => status
+    else
+      redirect_to wires_path, :notice => 'Kabel erfolgreich aktualisiert.'
+    end
   end
 
   private

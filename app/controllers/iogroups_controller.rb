@@ -1,6 +1,11 @@
 class IogroupsController < ApplicationController
   def index
     @iogroups = Iogroup.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @iogroups.to_csv, filename: "iogroups-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view

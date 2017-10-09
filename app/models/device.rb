@@ -1,5 +1,7 @@
 class Device < ApplicationRecord
 
+  require 'csv'
+
   validates :eng_admin, presence:true, numericality: {only_float: true}
   validates :eng_steuerkonzept, presence:true, numericality: {only_float: true}
   validates :eng_ioliste, presence:true, numericality: {only_float: true}
@@ -62,5 +64,40 @@ class Device < ApplicationRecord
 
   #delete association in grobengineerings if device is deleted
   has_many :grobengineerings, dependent: :destroy
+
+  def self.import(file)
+    CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
+      begin
+        new_record = row.to_hash
+        if Device.where(:definition => new_record[:definition]).any?
+          # if this device already exists, only update existing entry
+          existing_record = Device.where(:definition => new_record[:definition]).first
+          existing_record.update_attributes(new_record)
+          existing_record.save!
+        else
+          Device.create! new_record
+        end
+      rescue Exception => ex
+        return ex
+      end
+    end
+  end
+
+  def self.to_csv
+    exclude_columns = ['id']
+    attributes = column_names - exclude_columns
+
+    CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|
+      csv << attributes
+
+      all.each do |user|
+        csv << attributes.map{ |attr| user.send(attr) }
+      end
+    end
+  end
+
+  def select_without columns
+    select(column_names - columns.map(&:to_s))
+  end
 
 end

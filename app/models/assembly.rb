@@ -1,4 +1,8 @@
 class Assembly < ApplicationRecord
+
+  require 'csv'
+
+
   validates :di, numericality: {only_integer: true, :presence => true}
   validates :do, numericality: {only_integer: true, :presence => true}
   validates :ai, numericality: {only_integer: true, :presence => true}
@@ -45,6 +49,37 @@ class Assembly < ApplicationRecord
   @@sai_rabatt = 0.05
   @@sao_reserve = 0
   @@sao_rabatt = 0.05
+
+  def self.to_csv
+    exclude_columns = ['id']
+    attributes = column_names - exclude_columns
+
+    CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|
+      csv << attributes
+
+      all.each do |entry|
+        csv << attributes.map{ |attr| entry.send(attr) }
+      end
+    end
+  end
+
+  def self.import(file)
+    CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
+      begin
+        new_record = row.to_hash
+        if Assembly.where(:kennung => new_record[:kennung]).any?
+          # if this device already exists, only update existing entry
+          existing_record = Assembly.where(:kennung => new_record[:kennung]).first
+          existing_record.update_attributes(new_record)
+          existing_record.save!
+        else
+          Assembly.create! new_record
+        end
+      rescue Exception => ex
+        return ex
+      end
+    end
+  end
 
   def self.di_anz_bg
     return @@di_anz_bg

@@ -31,7 +31,6 @@ class Grobengineering < ApplicationRecord
   validates :kabel_spez3_laenge, presence:true, numericality: {only_float: true}
 
   def self.import(file, subsubprojectid)
-    new_id = Grobengineering.count + 1
     CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
       begin
         new_record = row.to_hash
@@ -39,6 +38,18 @@ class Grobengineering < ApplicationRecord
         Grobengineering.create! new_record
       rescue Exception => ex
         return ex
+      end
+    end
+  end
+
+  def self.to_csv
+    attributes = %w{beschreibung kommentar device_import device_anzahl update_necessary tagnr tagname bezeichnung bemerkung funktion_sw kabel_spez1_laenge kabel_spez2_laenge kabel_spez3_laenge sicherheitszone lieferant spannung leistung strom created_at updated_at subsubproject_id device_id subsystem_id iogroup_id switchgear_motorenabgang_id fu_typ_id wire_spez1_id wire_spez2_id wire_spez3_id offertposition_id}
+
+    CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|
+      csv << attributes
+
+      all.each do |entry|
+        csv << attributes.map{ |attr| entry.send(attr) }
       end
     end
   end

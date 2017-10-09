@@ -2,6 +2,11 @@ class SubsystemsController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
     @subsystems = @project.subsystems
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @subsystems.to_csv, filename: "subsystems-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view

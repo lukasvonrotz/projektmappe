@@ -7,8 +7,8 @@ Rails.application.routes.draw do
                                     shared: 'users/shared',
                                     unlocks: 'users/unlocks'}
 
-  get 'home/index'
-  root 'home#index'
+  #get 'home/index'
+  root 'projects#index'
 
   resources :users
   resources :projects do
@@ -32,14 +32,26 @@ Rails.application.routes.draw do
   resources :units
   resources :subprojects
   resources :subsubprojects
-  resources :assemblies
-  resources :drives
-  resources :electrical_installations
-  resources :switchgears
+  resources :assemblies do
+    collection { post :import}
+  end
+  resources :drives do
+    collection { post :import}
+  end
+  resources :electrical_installations do
+    collection { post :import}
+  end
+  resources :switchgears do
+    collection { post :import}
+  end
   resources :switchgearcombinations
   resources :switchgearconnections
-  resources :wires
-  resources :devices
+  resources :wires do
+    collection { post :import}
+  end
+  resources :devices do
+    collection { post :import}
+  end
   resources :customers
   resources :iogroups
   resources :iotypes

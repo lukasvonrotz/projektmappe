@@ -1,6 +1,12 @@
 class SwitchgearsController < ApplicationController
   def index
     @switchgears = Switchgear.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @switchgears.to_csv, filename: "switchgears-#{Date.today}.csv" }
+    end
+
   end
 
   # Control logic for create-view
@@ -53,6 +59,15 @@ class SwitchgearsController < ApplicationController
     @switchgear = Switchgear.find(params[:id])
     @switchgear.destroy
     redirect_to switchgears_path, :notice => 'Eintrag wurde gelöscht.'
+  end
+
+  def import
+    status = Switchgear.import(params[:file])
+    if !status.nil?
+      redirect_to switchgears_path, :notice => status
+    else
+      redirect_to switchgears_path, :notice => 'Schaltanlagenbau erfolgreich aktualisiert.'
+    end
   end
 
   private

@@ -9,7 +9,8 @@ default: &default
   pool: 5
   timeout: 5000
   encoding: unicode
-  host: localhost
+  host: \\PROLANB02
+  port: 5432
   database: projektmappe_db
   username: postgres
   password: <%= ENV["POSTGRES_PW"] %>

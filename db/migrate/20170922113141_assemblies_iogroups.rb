@@ -4,6 +4,6 @@ class AssembliesIogroups < ActiveRecord::Migration[5.0]
       t.integer :assembly_id
       t.integer :iogroup_id
     end
-    add_index :assemblies_iogroups, [ :assembly_id, :iogroup_id ], :unique => true
+    add_index :assemblies_iogroups, [ :assembly_id, :iogroup_id ], :unique => true, :name => 'assemblies_iogroups_unique'
   end
 end

@@ -1,6 +1,11 @@
 class AssembliesController < ApplicationController
   def index
     @assemblies = Assembly.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @assemblies.to_csv, filename: "assemblies-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view
@@ -53,6 +58,15 @@ class AssembliesController < ApplicationController
     @assembly = Assembly.find(params[:id])
     @assembly.destroy
     redirect_to assemblies_path, :notice => 'Baugruppe wurde gelöscht.'
+  end
+
+  def import
+    status = Assembly.import(params[:file])
+    if !status.nil?
+      redirect_to assemblies_path, :notice => status
+    else
+      redirect_to assemblies_path, :notice => 'IO-Baugruppen erfolgreich aktualisiert.'
+    end
   end
 
   private

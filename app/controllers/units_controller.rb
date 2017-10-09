@@ -1,6 +1,11 @@
 class UnitsController < ApplicationController
   def index
     @units = Unit.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @units.to_csv, filename: "units-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view

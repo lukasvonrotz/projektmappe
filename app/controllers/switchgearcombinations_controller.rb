@@ -2,6 +2,11 @@ class SwitchgearcombinationsController < ApplicationController
 
   def index
     @switchgearcombinations = Switchgearcombination.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @switchgearcombinations.to_csv, filename: "switchgearcombinations-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view

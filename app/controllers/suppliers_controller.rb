@@ -1,6 +1,11 @@
 class SuppliersController < ApplicationController
     def index
       @suppliers = Supplier.all
+
+      respond_to do |format|
+        format.html
+        format.csv { send_data @suppliers.to_csv, filename: "suppliers-#{Date.today}.csv" }
+      end
     end
 
     # Control logic for create-view

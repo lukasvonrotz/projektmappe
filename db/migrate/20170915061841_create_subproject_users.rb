@@ -6,6 +6,6 @@ class CreateSubprojectUsers < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :subproject_users, [ :subproject_id, :user_id ], :unique => true, :name => 'by_subproject_and_user'
+    add_index :subproject_users, [ :subproject_id, :user_id ], :unique => true, :name => 'subproject_users_unique'
   end
 end

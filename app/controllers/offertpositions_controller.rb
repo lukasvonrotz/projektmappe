@@ -2,6 +2,11 @@ class OffertpositionsController < ApplicationController
   def index
     @offertpositions = Offertposition.where(:subsubproject_id => params[:subsubproject_id])
     @subsubproject = Subsubproject.find(params[:subsubproject_id])
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @offertpositions.to_csv, filename: "offertpositions-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view

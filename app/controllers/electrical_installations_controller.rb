@@ -1,6 +1,11 @@
 class ElectricalInstallationsController < ApplicationController
   def index
     @electrical_installations = ElectricalInstallation.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @electrical_installations.to_csv, filename: "electricalinstallations-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view
@@ -53,6 +58,15 @@ class ElectricalInstallationsController < ApplicationController
     @electrical_installation = ElectricalInstallation.find(params[:id])
     @electrical_installation.destroy
     redirect_to electrical_installations_path, :notice => 'Eintrag wurde gelöscht.'
+  end
+
+  def import
+    status = ElectricalInstallation.import(params[:file])
+    if !status.nil?
+      redirect_to electrical_installations_path, :notice => status
+    else
+      redirect_to electrical_installations_path, :notice => 'Elektoinstallationen erfolgreich aktualisiert.'
+    end
   end
 
   private

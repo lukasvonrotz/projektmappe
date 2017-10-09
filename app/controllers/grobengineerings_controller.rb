@@ -3,6 +3,11 @@ class GrobengineeringsController < ApplicationController
     @hash = Hash.new
     @subsubproject = Subsubproject.find(params[:subsubproject_id])
     @grobengineerings = Grobengineering.where(:subsubproject_id => @subsubproject.id).order(:id)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @grobengineerings.to_csv, filename: "grobengineerings-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view

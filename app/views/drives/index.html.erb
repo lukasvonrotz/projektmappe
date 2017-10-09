@@ -2,6 +2,13 @@
 <br>
 <a href="<%=new_drife_path%>" class="btn btn-success">Neuen FU erstellen</a>
 <br><br><br>
+<h4>Import from CSV</h4>
+<%= form_tag import_drives_path, multipart: true do %>
+    <div class="actions form-group">
+      <%= file_field_tag :file, class: 'form-control' %><br>
+      <%= submit_tag "Import CSV", class: "btn btn-success" %>
+    </div>
+<% end %><br>
 <div id="content" class="table-responsive">
   <table id="drive_table" class="table table-striped table-bordered data_table" cellspacing="0" width="100%">
     <thead>
