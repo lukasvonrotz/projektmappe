@@ -132,8 +132,8 @@ class GrobengineeringsController < ApplicationController
           @zusammenfassung[offertposition.name]["devices"][device_id]["kosten_eng_ibn_bauleitung_total"] += line.kosten_eng_ibn_bauleitung_total
           @zusammenfassung[offertposition.name]["devices"][device_id]["kosten_sps_total_brutto"] += line.kosten_sps_total_brutto(@subsubproject.eurokurs)
           @zusammenfassung[offertposition.name]["devices"][device_id]["kosten_sps_total_netto"] += line.kosten_sps_total_netto(@subsubproject.eurokurs)
-          @zusammenfassung[offertposition.name]["devices"][device_id]["kosten_sch_total_brutto"] += line.kosten_sch_total_brutto
-          @zusammenfassung[offertposition.name]["devices"][device_id]["kosten_sch_total_netto"] += line.kosten_sch_total_netto
+          @zusammenfassung[offertposition.name]["devices"][device_id]["kosten_sch_total_brutto"] += line.kosten_sch_total_brutto(@subsubproject.eurokurs)
+          @zusammenfassung[offertposition.name]["devices"][device_id]["kosten_sch_total_netto"] += line.kosten_sch_total_netto(@subsubproject.eurokurs)
           @zusammenfassung[offertposition.name]["devices"][device_id]["kosten_elinst_total_brutto"] += line.kosten_elinst_total_brutto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier)
           @zusammenfassung[offertposition.name]["devices"][device_id]["kosten_elinst_total_netto"] += line.kosten_elinst_total_netto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier)
           @zusammenfassung[offertposition.name]["devices"][device_id]["kosten_total_brutto"] += line.kosten_total_brutto(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier, @subsubproject.proiorechnen, @subsubproject.eurokurs)

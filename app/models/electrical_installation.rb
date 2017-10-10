@@ -7,7 +7,7 @@ class ElectricalInstallation < ApplicationRecord
   validates :rabatt, presence:true, numericality: {only_float: true}
 
   def netto
-    return self.brutto - (self.brutto * self.rabatt)
+    self.brutto - (self.brutto * self.rabatt)
   end
 
   def self.geraetebeschriftung_brutto

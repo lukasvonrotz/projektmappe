@@ -13,5 +13,6 @@ class CreateDrives < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index :drives, :kennung, :unique => true, :name => 'drives_kennung_unique'
   end
 end

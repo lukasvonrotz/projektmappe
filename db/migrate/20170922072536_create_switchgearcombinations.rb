@@ -12,5 +12,6 @@ class CreateSwitchgearcombinations < ActiveRecord::Migration[5.0]
       t.timestamps
     end
     add_reference :switchgearcombinations, :switchgear, index: true, foreign_key: true, null: false
+    add_index :switchgearcombinations, :name, :unique => true, :name => 'switchgearcombinations_name_unique'
   end
 end

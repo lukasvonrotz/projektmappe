@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171007095940) do
+ActiveRecord::Schema.define(version: 20171010044110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,25 +143,25 @@ ActiveRecord::Schema.define(version: 20171007095940) do
     t.text     "beschreibung"
     t.text     "kommentar"
     t.text     "device_import"
-    t.integer  "device_anzahl",               default: 1,   null: false
+    t.integer  "device_anzahl",                    default: 1,   null: false
     t.boolean  "update_necessary"
     t.string   "tagnr"
     t.string   "tagname"
     t.text     "bezeichnung"
     t.text     "bemerkung"
-    t.float    "funktion_sw",                 default: 0.0, null: false
-    t.float    "kabel_spez1_laenge",          default: 0.0, null: false
-    t.float    "kabel_spez2_laenge",          default: 0.0, null: false
-    t.float    "kabel_spez3_laenge",          default: 0.0, null: false
+    t.float    "funktion_sw",                      default: 0.0, null: false
+    t.float    "kabel_spez1_laenge",               default: 0.0, null: false
+    t.float    "kabel_spez2_laenge",               default: 0.0, null: false
+    t.float    "kabel_spez3_laenge",               default: 0.0, null: false
     t.string   "sicherheitszone"
     t.string   "lieferant"
-    t.float    "spannung",                    default: 0.0, null: false
-    t.float    "leistung",                    default: 0.0, null: false
-    t.float    "strom",                       default: 0.0, null: false
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.integer  "subsubproject_id",                          null: false
-    t.integer  "device_id",                                 null: false
+    t.float    "spannung",                         default: 0.0, null: false
+    t.float    "leistung",                         default: 0.0, null: false
+    t.float    "strom",                            default: 0.0, null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.integer  "subsubproject_id",                               null: false
+    t.integer  "device_id",                                      null: false
     t.integer  "subsystem_id"
     t.integer  "iogroup_id"
     t.integer  "switchgear_motorenabgang_id"
@@ -170,10 +170,12 @@ ActiveRecord::Schema.define(version: 20171007095940) do
     t.integer  "wire_spez2_id"
     t.integer  "wire_spez3_id"
     t.integer  "offertposition_id"
+    t.integer  "schaltschrank_preisberechnung_id"
     t.index ["device_id"], name: "index_grobengineerings_on_device_id", using: :btree
     t.index ["fu_typ_id"], name: "index_grobengineerings_on_fu_typ_id", using: :btree
     t.index ["iogroup_id"], name: "index_grobengineerings_on_iogroup_id", using: :btree
     t.index ["offertposition_id"], name: "index_grobengineerings_on_offertposition_id", using: :btree
+    t.index ["schaltschrank_preisberechnung_id"], name: "index_grobengineerings_on_schaltschrank_preisberechnung_id", using: :btree
     t.index ["subsubproject_id"], name: "index_grobengineerings_on_subsubproject_id", using: :btree
     t.index ["subsystem_id"], name: "index_grobengineerings_on_subsystem_id", using: :btree
     t.index ["switchgear_motorenabgang_id"], name: "index_grobengineerings_on_switchgear_motorenabgang_id", using: :btree
@@ -447,6 +449,7 @@ ActiveRecord::Schema.define(version: 20171007095940) do
   add_foreign_key "grobengineerings", "iogroups"
   add_foreign_key "grobengineerings", "offertpositions"
   add_foreign_key "grobengineerings", "subsystems"
+  add_foreign_key "grobengineerings", "switchgearcombinations", column: "schaltschrank_preisberechnung_id"
   add_foreign_key "grobengineerings", "switchgears", column: "switchgear_motorenabgang_id"
   add_foreign_key "grobengineerings", "wires", column: "wire_spez1_id"
   add_foreign_key "grobengineerings", "wires", column: "wire_spez2_id"

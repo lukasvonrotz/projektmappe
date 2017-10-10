@@ -11,6 +11,7 @@
   <% projectid = Subsubproject.find(subsubprojectid).subproject.project.id %>
   <% offertpositionid = @grobengineering.offertposition_id.nil? ? Subsubproject.find(subsubprojectid).offertpositions.first.id : @grobengineering.offertposition_id %>
   <% deviceid = @grobengineering.device_id.nil? ? Device.first.id : @grobengineering.device_id %>
+  <% schaltschrankpreisberechnungid = @grobengineering.schaltschrank_preisberechnung_id.nil? ? '' : @grobengineering.schaltschrank_preisberechnung_id %>
   <% subsystemid = @grobengineering.subsystem_id.nil? ? '' : @grobengineering.subsystem_id %>
   <% iogroupid = @grobengineering.iogroup_id.nil? ? '' : @grobengineering.iogroup_id %>
   <% motorenabgangid = @grobengineering.switchgear_motorenabgang_id.nil? ? '' : @grobengineering.switchgear_motorenabgang_id %>
@@ -24,6 +25,7 @@
              :subsubprojectid => subsubprojectid,
              :offertpositionid => offertpositionid,
              :deviceid => deviceid,
+             :schaltschrankpreisberechnungid => schaltschrankpreisberechnungid,
              :subsystemid => subsystemid,
              :iogroupid => iogroupid,
              :motorenabgangid => motorenabgangid,

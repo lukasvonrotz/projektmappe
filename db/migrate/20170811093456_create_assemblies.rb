@@ -20,5 +20,6 @@ class CreateAssemblies < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index :assemblies, :kennung, :unique => true, :name => 'assemblies_kennung_unique'
   end
 end

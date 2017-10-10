@@ -7,5 +7,6 @@ class CreateWires < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index :wires, :kabeltyp, :unique => true, :name => 'wires_kabeltyp_unique'
   end
 end

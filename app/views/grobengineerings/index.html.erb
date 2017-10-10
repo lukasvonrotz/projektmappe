@@ -27,7 +27,8 @@
       <th rowspan="2">Gerät Import</th>
       <th rowspan="2">Gerät</th>
       <th rowspan="2">Geräte Anzahl</th>
-      <th rowspan="2">Cluster / Schaltschrank</th>
+      <th rowspan="2">Schaltschrank für Preisberechnung</th>
+      <th rowspan="2">Cluster/Schaltschrank zu IO-Gruppe</th>
       <th rowspan="2">IO-Gruppe</th>
       <th rowspan="2">Tag-Nr.</th>
       <th rowspan="2">Tag-Name</th>
@@ -52,7 +53,7 @@
       <th colspan="2">Kosten SPS</th>
       <th colspan="4">Kosten IO</th>
       <th colspan="4">Kosten FU</th>
-      <th colspan="6">Kosten Schaltanlagen</th>
+      <th colspan="8">Kosten Schaltanlagen</th>
       <th colspan="16">Kosten Elektroinstallation</th>
       <th rowspan="2">Kosten Total Brutto</th>
       <th rowspan="2">Kosten Total Netto</th>
@@ -167,6 +168,8 @@
       <th>Abgänge Netto</th>
       <th>Einbau Brutto</th>
       <th>Einbau Netto</th>
+      <th>Preisberechnung Schaltschrank Brutto</th>
+      <th>Preisberechnung Schaltschrank Netto</th>
       <th>Total Brutto</th>
       <th>Total Netto</th>
       <th>Kabel Steuerung Total</th>
@@ -188,7 +191,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
+    <tr class="success">
       <td></td>
       <td></td>
       <td></td>
@@ -197,6 +200,7 @@
       <td></td>
       <td></td>
       <td><%= Grobengineering.device_anzahl(@subsubproject).round(2) %></td>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>
@@ -319,6 +323,8 @@
       <td><%= Grobengineering.kosten_sch_abgaenge_netto(@subsubproject).round(2) %></td>
       <td><%= Grobengineering.kosten_sch_einbau_brutto(@subsubproject).round(2) %></td>
       <td><%= Grobengineering.kosten_sch_einbau_netto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_sch_preisberechnung_brutto(@subsubproject).round(2) %></td>
+      <td><%= Grobengineering.kosten_sch_preisberechnung_netto(@subsubproject).round(2) %></td>
       <td><%= Grobengineering.kosten_sch_total_brutto(@subsubproject).round(2) %></td>
       <td><%= Grobengineering.kosten_sch_total_netto(@subsubproject).round(2) %></td>
       <td><%= Grobengineering.kosten_wire_steuerung_total(@subsubproject).round(2) %></td>
@@ -351,6 +357,7 @@
           <td><%= grobengineering.device_import %></td>
           <td><%= grobengineering.device.definition %></td>
           <td><%= grobengineering.device_anzahl %></td>
+          <td><%= grobengineering.schaltschrank_preisberechnung.nil? ? '' : grobengineering.schaltschrank_preisberechnung.name %></td>
           <td><%= grobengineering.iogroup.nil? ? '' : grobengineering.iogroup.switchgearcombination.name %></td>
           <td><%= grobengineering.iogroup.nil? ? '' : grobengineering.iogroup.name %></td>
           <td><%= grobengineering.tagnr %></td>
@@ -473,8 +480,10 @@
           <td><%= grobengineering.kosten_sch_abgaenge_netto %></td>
           <td><%= grobengineering.kosten_sch_einbau_brutto %></td>
           <td><%= grobengineering.kosten_sch_einbau_netto %></td>
-          <td><%= grobengineering.kosten_sch_total_brutto %></td>
-          <td><%= grobengineering.kosten_sch_total_netto %></td>
+          <td><%= grobengineering.kosten_sch_preisberechnung_brutto(@subsubproject.eurokurs) %></td>
+          <td><%= grobengineering.kosten_sch_preisberechnung_netto(@subsubproject.eurokurs) %></td>
+          <td><%= grobengineering.kosten_sch_total_brutto(@subsubproject.eurokurs) %></td>
+          <td><%= grobengineering.kosten_sch_total_netto(@subsubproject.eurokurs) %></td>
           <td><%= grobengineering.kosten_wire_steuerung_total(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier) %></td>
           <td><%= grobengineering.kosten_wire_speisung_total(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier) %></td>
           <td><%= grobengineering.kosten_wire_potausgleich_total(@subsubproject.wiresupplier, @subsubproject.wirecaptionsupplier) %></td>

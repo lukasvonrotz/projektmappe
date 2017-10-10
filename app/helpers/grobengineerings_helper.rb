@@ -518,14 +518,24 @@ module GrobengineeringsHelper
     Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_einbau_netto end
     return sum
   end
+  def Grobengineering.kosten_sch_preisberechnung_brutto(subsubproject)
+    sum = 0
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_preisberechnung_brutto(subsubproject.eurokurs) end
+    return sum
+  end
+  def Grobengineering.kosten_sch_preisberechnung_netto(subsubproject)
+    sum = 0
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_preisberechnung_netto(subsubproject.eurokurs) end
+    return sum
+  end
   def Grobengineering.kosten_sch_total_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_total_brutto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_total_brutto(subsubproject.eurokurs) end
     return sum
   end
   def Grobengineering.kosten_sch_total_netto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_total_netto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_total_netto(subsubproject.eurokurs) end
     return sum
   end
   def Grobengineering.kosten_wire_steuerung_total(subsubproject)

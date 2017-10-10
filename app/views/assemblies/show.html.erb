@@ -12,8 +12,8 @@ Kennung: <%= @assembly.kennung %><br>
 Anzahl Kanäle: <%= @assembly.kanaele_total %><br>
 Artikelnummer: <%= @assembly.artikelnr %><br>
 Bezeichnung: <%= @assembly.bezeichnung %><br>
-Bruttopreis (EUR): <%= @assembly.brutto_eur_col(eurokurs) %><br>
-Bruttopreis (CHF): <%= @assembly.brutto_chf_col(eurokurs) %><br>
+Bruttopreis (EUR): <%= @assembly.brutto_eur %><br>
+Bruttopreis (CHF): <%= @assembly.brutto_chf(eurokurs) %><br>
 Rabatt: <%= @assembly.rabatt %><br>
 Nettopreis: <%= @assembly.netto(eurokurs) %>
 

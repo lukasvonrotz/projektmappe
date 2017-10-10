@@ -11,7 +11,7 @@ class Switchgear < ApplicationRecord
   has_many :switchgearcombinations, dependent: :destroy
 
   def netto
-    return self.brutto - (self.brutto * self.rabatt)
+    self.brutto - (self.brutto * self.rabatt)
   end
 
   def self.to_csv

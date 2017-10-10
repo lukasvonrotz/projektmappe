@@ -10,5 +10,6 @@ class CreateSwitchgears < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index :switchgears, :kennung, :unique => true, :name => 'switchgears_kennung_unique'
   end
 end

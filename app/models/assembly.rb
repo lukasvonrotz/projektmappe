@@ -174,19 +174,15 @@ class Assembly < ApplicationRecord
 
 
   def kanaele_total
-    return self.di + self.do + self.ai + self.ao + self.z + self.inkr + self.ssi + self.sdi + self.sdo + self.sai + self.sao
+    self.di + self.do + self.ai + self.ao + self.z + self.inkr + self.ssi + self.sdi + self.sdo + self.sai + self.sao
   end
 
-  def brutto_eur_col(eurokurs)
-      return self.brutto_eur
-  end
-
-  def brutto_chf_col(eurokurs)
-      return self.brutto_eur * eurokurs
+  def brutto_chf(eurokurs)
+    self.brutto_eur * eurokurs
   end
 
   def netto(eurokurs)
-    return self.brutto_chf_col(eurokurs) - (self.brutto_chf_col(eurokurs) * self.rabatt)
+    self.brutto_chf(eurokurs) - (self.brutto_chf(eurokurs) * self.rabatt)
   end
 
 
@@ -194,19 +190,19 @@ class Assembly < ApplicationRecord
 
 
   def self.preisPbStecker(eurokurs)
-    return Assembly.where(["kennung = ?", "PB-Stecker"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PB-Stecker"]).first.brutto_chf : Assembly.where(["kennung = ?", "PB-Stecker"]).first.brutto_eur * eurokurs
+    Assembly.where(["kennung = ?", "PB-Stecker"]).first.brutto_chf(eurokurs)
   end
   def self.preisPbBaugruppe(eurokurs)
-    return Assembly.where(["kennung = ?", "ET200SP PB"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "ET200SP PB"]).first.brutto_chf : Assembly.where(["kennung = ?", "ET200SP PB"]).first.brutto_eur * eurokurs
+    Assembly.where(["kennung = ?", "ET200SP PB"]).first.brutto_chf(eurokurs)
   end
   def self.preisBase(eurokurs)
-    return Assembly.where(["kennung = ?", "ET200SP Base"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "ET200SP Base"]).first.brutto_chf : Assembly.where(["kennung = ?", "ET200SP Base"]).first.brutto_eur * eurokurs
+    Assembly.where(["kennung = ?", "ET200SP Base"]).first.brutto_chf(eurokurs)
   end
   def self.preisBaseUvers(eurokurs)
-    return Assembly.where(["kennung = ?", "ET200SP Base mit U-Vers"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "ET200SP Base mit U-Vers"]).first.brutto_chf : Assembly.where(["kennung = ?", "ET200SP Base mit U-Vers"]).first.brutto_eur * eurokurs
+    Assembly.where(["kennung = ?", "ET200SP Base mit U-Vers"]).first.brutto_chf(eurokurs)
   end
   def self.preisIoBaugruppe(eurokurs, baugruppe)
-    return Assembly.where(["kennung = ?", baugruppe]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", baugruppe]).first.brutto_chf : Assembly.where(["kennung = ?", baugruppe]).first.brutto_eur * eurokurs
+    Assembly.where(["kennung = ?", baugruppe]).first.brutto_chf(eurokurs)
   end
   def self.anzahlKanaeleBaugruppe(baugruppe)
     return Assembly.where(["kennung = ?", baugruppe]).first.kanaele_total
@@ -288,28 +284,28 @@ class Assembly < ApplicationRecord
     return Assembly.where(["kennung = ?", "PNOZmulti"]).first.kanaele_total;
   end
   def self.preisPnozMulti(eurokurs)
-    return Assembly.where(["kennung = ?", "PNOZmulti"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti"]).first.brutto_eur * eurokurs
+    Assembly.where(["kennung = ?", "PNOZmulti"]).first.brutto_chf(eurokurs)
   end
   def self.anzahlKanaelePnozMultiBaugruppe(baugruppe)
     return Assembly.where(["kennung = ?", baugruppe]).first.kanaele_total;
   end
   def self.preisPnozMultiBaugruppe(eurokurs, baugruppe)
-    return Assembly.where(["kennung = ?", baugruppe]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", baugruppe]).first.brutto_chf : Assembly.where(["kennung = ?", baugruppe]).first.brutto_eur * eurokurs
+    Assembly.where(["kennung = ?", baugruppe]).first.brutto_chf(eurokurs)
   end
   def self.preisPnozMultiChipcard(eurokurs)
-    return Assembly.where(["kennung = ?", "PNOZmulti Chipcard"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti Chipcard"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti Chipcard"]).first.brutto_eur * eurokurs
+    Assembly.where(["kennung = ?", "PNOZmulti Chipcard"]).first.brutto_chf(eurokurs)
   end
   def self.preisPnozMultiKlemm(eurokurs)
-    return Assembly.where(["kennung = ?", "PNOZmulti Klemm"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti Klemm"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti Klemm"]).first.brutto_eur * eurokurs
+    Assembly.where(["kennung = ?", "PNOZmulti Klemm"]).first.brutto_chf(eurokurs)
   end
   def self.preisPnozMultiSl(eurokurs)
-    return Assembly.where(["kennung = ?", "PNOZmulti SL"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti SL"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti SL"]).first.brutto_eur * eurokurs
+    Assembly.where(["kennung = ?", "PNOZmulti SL"]).first.brutto_chf(eurokurs)
   end
   def self.preisPnozMultiSlKlemm(eurokurs)
-    return Assembly.where(["kennung = ?", "PNOZmulti SL Klemm"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti SL Klemm"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti SL Klemm"]).first.brutto_eur * eurokurs
+    Assembly.where(["kennung = ?", "PNOZmulti SL Klemm"]).first.brutto_chf(eurokurs)
   end
   def self.preisPnozMultiPb(eurokurs)
-    return Assembly.where(["kennung = ?", "PNOZmulti PB"]).first.brutto_eur.nil? ? Assembly.where(["kennung = ?", "PNOZmulti PB"]).first.brutto_chf : Assembly.where(["kennung = ?", "PNOZmulti PB"]).first.brutto_eur * eurokurs
+    Assembly.where(["kennung = ?", "PNOZmulti PB"]).first.brutto_chf(eurokurs)
   end
 
   def self.sdi_brutto_chf(eurokurs)

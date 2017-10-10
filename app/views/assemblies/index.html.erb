@@ -10,6 +10,11 @@
     </div>
 <% end %><br>
 
+Eurokurs:<br>
+<input type="number" name="eurokurs" value="1.2" class="form-control" id="eurokurs"><br>
+<button id="updatePrices" class="btn btn-success">Preise aktualisieren</button>
+<br><br><br>
+
 <div id="content" class="table-responsive">
   <% if Assembly.any? %>
     <table class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -30,9 +35,9 @@
           <td>DI</td>
           <td>1</td>
           <td>Digitaler Eingang auf ET200SP</td>
-          <td><%= Assembly.di_brutto_chf(eurokurs) %></td>
-          <td><%= Assembly.di_rabatt %></td>
-          <td><%= Assembly.di_netto_chf(eurokurs) %></td>
+          <td id="di_brutto_chf"><%= Assembly.di_brutto_chf(eurokurs).round(2) %></td>
+          <td id="di_rabatt"><%= Assembly.di_rabatt %></td>
+          <td id="di_netto_chf"><%= Assembly.di_netto_chf(eurokurs).round(2) %></td>
           <td><%= Assembly.di_anz_bg %></td>
           <td><%= Assembly.di_reserve %></td>
         </tr>
@@ -40,9 +45,9 @@
           <td>DO</td>
           <td>1</td>
           <td>Digitaler Ausgang auf ET200SP</td>
-          <td><%= Assembly.do_brutto_chf(eurokurs) %></td>
-          <td><%= Assembly.do_rabatt %></td>
-          <td><%= Assembly.do_netto_chf(eurokurs) %></td>
+          <td id="do_brutto_chf"><%= Assembly.do_brutto_chf(eurokurs).round(2) %></td>
+          <td id="do_rabatt"><%= Assembly.do_rabatt %></td>
+          <td id="do_netto_chf"><%= Assembly.do_netto_chf(eurokurs).round(2) %></td>
           <td><%= Assembly.do_anz_bg %></td>
           <td><%= Assembly.do_reserve %></td>
         </tr>
@@ -50,9 +55,9 @@
           <td>AI</td>
           <td>1</td>
           <td>Analoger Eingang auf ET200SP</td>
-          <td><%= Assembly.ai_brutto_chf(eurokurs) %></td>
-          <td><%= Assembly.ai_rabatt %></td>
-          <td><%= Assembly.ai_netto_chf(eurokurs) %></td>
+          <td id="ai_brutto_chf"><%= Assembly.ai_brutto_chf(eurokurs).round(2) %></td>
+          <td id="ai_rabatt"><%= Assembly.ai_rabatt %></td>
+          <td id="ai_netto_chf"><%= Assembly.ai_netto_chf(eurokurs).round(2) %></td>
           <td><%= Assembly.ai_anz_bg %></td>
           <td><%= Assembly.ai_reserve %></td>
         </tr>
@@ -60,9 +65,9 @@
           <td>AO</td>
           <td>1</td>
           <td>Analoger Ausgang auf ET200SP</td>
-          <td><%= Assembly.ao_brutto_chf(eurokurs) %></td>
-          <td><%= Assembly.ao_rabatt %></td>
-          <td><%= Assembly.ao_netto_chf(eurokurs) %></td>
+          <td id="ao_brutto_chf"><%= Assembly.ao_brutto_chf(eurokurs).round(2) %></td>
+          <td id="ao_rabatt"><%= Assembly.ao_rabatt %></td>
+          <td id="ao_netto_chf"><%= Assembly.ao_netto_chf(eurokurs).round(2) %></td>
           <td><%= Assembly.ao_anz_bg %></td>
           <td><%= Assembly.ao_reserve %></td>
         </tr>
@@ -70,9 +75,9 @@
           <td>Z</td>
           <td>1</td>
           <td>Encoder Inkremental auf ET200SP</td>
-          <td><%= Assembly.z_brutto_chf(eurokurs) %></td>
-          <td><%= Assembly.z_rabatt %></td>
-          <td><%= Assembly.z_netto_chf(eurokurs) %></td>
+          <td id="z_brutto_chf"><%= Assembly.z_brutto_chf(eurokurs).round(2) %></td>
+          <td id="z_rabatt"><%= Assembly.z_rabatt %></td>
+          <td id="z_netto_chf"><%= Assembly.z_netto_chf(eurokurs).round(2) %></td>
           <td><%= Assembly.z_anz_bg %></td>
           <td><%= Assembly.z_reserve %></td>
         </tr>
@@ -80,9 +85,9 @@
           <td>INKR</td>
           <td>1</td>
           <td>Encoder Inkremental auf ET200SP</td>
-          <td><%= Assembly.inkr_brutto_chf(eurokurs) %></td>
-          <td><%= Assembly.inkr_rabatt %></td>
-          <td><%= Assembly.inkr_netto_chf(eurokurs) %></td>
+          <td id="inkr_brutto_chf"><%= Assembly.inkr_brutto_chf(eurokurs).round(2) %></td>
+          <td id="inkr_rabatt"><%= Assembly.inkr_rabatt %></td>
+          <td id="inkr_netto_chf"><%= Assembly.inkr_netto_chf(eurokurs).round(2) %></td>
           <td><%= Assembly.inkr_anz_bg %></td>
           <td><%= Assembly.inkr_reserve %></td>
         </tr>
@@ -90,9 +95,9 @@
           <td>SSI</td>
           <td>1</td>
           <td>Encoder SSI auf ET200SP</td>
-          <td><%= Assembly.ssi_brutto_chf(eurokurs) %></td>
-          <td><%= Assembly.ssi_rabatt %></td>
-          <td><%= Assembly.ssi_netto_chf(eurokurs) %></td>
+          <td id="ssi_brutto_chf"><%= Assembly.ssi_brutto_chf(eurokurs).round(2) %></td>
+          <td id="ssi_rabatt"><%= Assembly.ssi_rabatt %></td>
+          <td id="ssi_netto_chf"><%= Assembly.ssi_netto_chf(eurokurs).round(2) %></td>
           <td><%= Assembly.ssi_anz_bg %></td>
           <td><%= Assembly.ssi_reserve %></td>
         </tr>
@@ -100,9 +105,9 @@
           <td>sDI</td>
           <td>1</td>
           <td>Digitaler Eingang auf PNOZmulti</td>
-          <td><%= Assembly.sdi_brutto_chf(eurokurs) %></td>
-          <td><%= Assembly.sdi_rabatt %></td>
-          <td><%= Assembly.sdi_netto_chf(eurokurs) %></td>
+          <td id="sdi_brutto_chf"><%= Assembly.sdi_brutto_chf(eurokurs).round(2) %></td>
+          <td id="sdi_rabatt"><%= Assembly.sdi_rabatt %></td>
+          <td id="sdi_netto_chf"><%= Assembly.sdi_netto_chf(eurokurs).round(2) %></td>
           <td></td>
           <td><%= Assembly.sdi_reserve %></td>
         </tr>
@@ -110,9 +115,9 @@
           <td>sDO</td>
           <td>1</td>
           <td>Digitaler Ausgang auf PNOZmulti</td>
-          <td><%= Assembly.sdo_brutto_chf(eurokurs) %></td>
-          <td><%= Assembly.sdo_rabatt %></td>
-          <td><%= Assembly.sdo_netto_chf(eurokurs) %></td>
+          <td id="sdo_brutto_chf"><%= Assembly.sdo_brutto_chf(eurokurs).round(2) %></td>
+          <td id="sdo_rabatt"><%= Assembly.sdo_rabatt %></td>
+          <td id="sdo_netto_chf"><%= Assembly.sdo_netto_chf(eurokurs).round(2) %></td>
           <td></td>
           <td><%= Assembly.sdo_reserve %></td>
         </tr>
@@ -120,9 +125,9 @@
           <td>sAI</td>
           <td>1</td>
           <td>Analoger Eingang auf PNOZmulti</td>
-          <td><%= Assembly.sai_brutto_chf(eurokurs) %></td>
-          <td><%= Assembly.sai_rabatt %></td>
-          <td><%= Assembly.sai_netto_chf(eurokurs) %></td>
+          <td id="sai_brutto_chf"><%= Assembly.sai_brutto_chf(eurokurs).round(2) %></td>
+          <td id="sai_rabatt"><%= Assembly.sai_rabatt %></td>
+          <td id="sai_netto_chf"><%= Assembly.sai_netto_chf(eurokurs).round(2) %></td>
           <td></td>
           <td><%= Assembly.sai_reserve %></td>
         </tr>
@@ -130,9 +135,9 @@
           <td>sAO</td>
           <td>1</td>
           <td>Analoger Ausgang auf PNOZmulti</td>
-          <td><%= Assembly.sao_brutto_chf(eurokurs) %></td>
-          <td><%= Assembly.sao_rabatt %></td>
-          <td><%= Assembly.sao_netto_chf(eurokurs) %></td>
+          <td id="sao_brutto_chf"><%= Assembly.sao_brutto_chf(eurokurs).round(2) %></td>
+          <td id="sao_rabatt"><%= Assembly.sao_rabatt %></td>
+          <td id="sao_netto_chf"><%= Assembly.sao_netto_chf(eurokurs).round(2) %></td>
           <td></td>
           <td><%= Assembly.sao_reserve %></td>
         </tr>
@@ -186,10 +191,10 @@
             <td><%= assembly.sdo %></td>
             <td><%= assembly.sai %></td>
             <td><%= assembly.sao %></td>
-            <td><%= assembly.brutto_eur_col(eurokurs) %></td>
-            <td><%= assembly.brutto_chf_col(eurokurs) %></td>
-            <td><%= assembly.rabatt %></td>
-            <td><%= assembly.netto(eurokurs) %></td>
+            <td><%= assembly.brutto_eur.round(2) %></td>
+            <td id="assembly<%=assembly.id%>_brutto_chf"><%= assembly.brutto_chf(eurokurs).round(2) %></td>
+            <td id="assembly<%=assembly.id%>_rabatt"><%= assembly.rabatt %></td>
+            <td id="assembly<%=assembly.id%>_netto_chf"><%= assembly.netto(eurokurs).round(2) %></td>
             <td>
               <a href="<%= assembly_path(assembly.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
               <a href="<%= edit_assembly_path(assembly.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
@@ -211,3 +216,67 @@
 
 <%= render 'layouts/loading', :message => "Lade IO-Baugruppen..." %>
 <%= render 'layouts/popups' %>
+
+
+<script>
+
+    $("#updatePrices").click(function() {
+        updatePrices();
+    });
+
+    di_brutto_initial = $("#di_brutto_chf").html();
+    do_brutto_initial = $("#do_brutto_chf").html();
+    ai_brutto_initial = $("#ai_brutto_chf").html();
+    ao_brutto_initial = $("#ao_brutto_chf").html();
+    z_brutto_initial = $("#z_brutto_chf").html();
+    inkr_brutto_initial = $("#inkr_brutto_chf").html();
+    ssi_brutto_initial = $("#ssi_brutto_chf").html();
+    sdi_brutto_initial = $("#sdi_brutto_chf").html();
+    sdo_brutto_initial = $("#sdo_brutto_chf").html();
+    sai_brutto_initial = $("#sai_brutto_chf").html();
+    sao_brutto_initial = $("#sao_brutto_chf").html();
+
+    assembly_prices = []
+    <% @assemblies.each do |assembly| %>
+      assembly_prices[<%= assembly.id %>] = $("#assembly<%=assembly.id%>_brutto_chf").html();
+    <% end %>
+
+    function updatePrices() {
+      $("#di_brutto_chf").html(brutto_chf(di_brutto_initial));
+      $("#di_netto_chf").html(netto_chf($("#di_brutto_chf").html(), $("#di_rabatt").html()));
+      $("#do_brutto_chf").html(brutto_chf(do_brutto_initial));
+      $("#do_netto_chf").html(netto_chf($("#do_brutto_chf").html(), $("#do_rabatt").html()));
+      $("#ai_brutto_chf").html(brutto_chf(ai_brutto_initial));
+      $("#ai_netto_chf").html(netto_chf($("#ai_brutto_chf").html(), $("#ai_rabatt").html()));
+      $("#ao_brutto_chf").html(brutto_chf(ao_brutto_initial));
+      $("#ao_netto_chf").html(netto_chf($("#ao_brutto_chf").html(), $("#ao_rabatt").html()));
+      $("#z_brutto_chf").html(brutto_chf(z_brutto_initial));
+      $("#z_netto_chf").html(netto_chf($("#z_brutto_chf").html(), $("#z_rabatt").html()));
+      $("#inkr_brutto_chf").html(brutto_chf(inkr_brutto_initial));
+      $("#inkr_netto_chf").html(netto_chf($("#inkr_brutto_chf").html(), $("#inkr_rabatt").html()));
+      $("#ssi_brutto_chf").html(brutto_chf(ssi_brutto_initial));
+      $("#ssi_netto_chf").html(netto_chf($("#ssi_brutto_chf").html(), $("#ssi_rabatt").html()));
+      $("#sdi_brutto_chf").html(brutto_chf(sdi_brutto_initial));
+      $("#sdi_netto_chf").html(netto_chf($("#sdi_brutto_chf").html(), $("#sdi_rabatt").html()));
+      $("#sdo_brutto_chf").html(brutto_chf(sdo_brutto_initial));
+      $("#sdo_netto_chf").html(netto_chf($("#sdo_brutto_chf").html(), $("#sdo_rabatt").html()));
+      $("#sai_brutto_chf").html(brutto_chf(sai_brutto_initial));
+      $("#sai_netto_chf").html(netto_chf($("#sai_brutto_chf").html(), $("#sai_rabatt").html()));
+      $("#sao_brutto_chf").html(brutto_chf(sao_brutto_initial));
+      $("#sao_netto_chf").html(netto_chf($("#sao_brutto_chf").html(), $("#sao_rabatt").html()));
+
+      <% @assemblies.each do |assembly| %>
+        $("#assembly<%=assembly.id%>_brutto_chf").html(brutto_chf(assembly_prices[<%= assembly.id %>]));
+        $("#assembly<%=assembly.id%>_netto_chf").html(netto_chf($("#assembly<%=assembly.id%>_brutto_chf").html(), $("#assembly<%=assembly.id%>_rabatt").html()));
+      <% end %>
+
+          $('.data_table').DataTable().columns.adjust();
+          $('.data_table').DataTable().columns.adjust();
+    }
+    function brutto_chf(value) {
+      return parseFloat(value / <%= eurokurs %> * $("#eurokurs").val()).toFixed(2);
+    }
+    function netto_chf(value, rabatt) {
+        return parseFloat(value - (value * rabatt)).toFixed(2);
+    }
+</script>

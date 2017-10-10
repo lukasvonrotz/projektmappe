@@ -61,6 +61,11 @@
       <%= grobengineering.text_field :funktion_sw, :class => "form-control" %>
     </div>
     <div class="field form-group">
+      <%= grobengineering.label :schaltschrank_preisberechnung, 'Schaltschrank für Preisberechnung' %>
+      <%= grobengineering.collection_select :schaltschrank_preisberechnung_id, Switchgearcombination.all,:id,:name,
+                                            {:selected => schaltschrankpreisberechnungid, :include_blank => ''}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
       <%= grobengineering.label :switchgear_motorenabgang, 'Schaltanlage Motorenabgang' %>
       <%= grobengineering.collection_select :switchgear_motorenabgang_id, Switchgear.all,:id,:kennung,
                                             {:selected => motorenabgangid, :include_blank => ''}, {class:"form-control"} %>
