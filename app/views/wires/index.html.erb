@@ -1,120 +1,127 @@
 <h1>Alle Kabel</h1>
 <br>
-<a href="<%=new_wire_path%>" class="btn btn-success">Neues Kabel erstellen</a>
-<a href="<%=wires_path%>.csv" class="btn btn-default">CSV-Export</a>
-<br><br><br>
-<h4>Import von CSV</h4>
-<%= form_tag import_wires_path, multipart: true do %>
-    <div class="actions form-group">
-      <%= file_field_tag :file, class: 'form-control' %><br>
-      <%= submit_tag "Import CSV", class: "btn btn-success" %>
-    </div>
-<% end %><br>
-<% if @allPricesEntered == 0 && @captionPricesEntered == 0 %>
-  Preise anzeigen für:
-  <select class="form-control" id="select_wiresupplier">
-    <% @wiresuppliers.each do |wiresupplier| %>
-        <option value="<%= wiresupplier.id %>"><%= wiresupplier.name %></option>
-    <% end %>
-  </select><br>
-  <select class="form-control" id="select_wirecaptionsupplier">
-    <% @wirecaptionsuppliers.each do |wirecaptionsupplier| %>
-        <option value="<%= wirecaptionsupplier.id %>"><%= wirecaptionsupplier.name %></option>
-    <% end %>
-  </select><br>
-  <button id="updatePrices" class="btn btn-success">Preise aktualisieren</button>
+<% if @wiresuppliers.any? && @wirecaptionsuppliers.any? %>
+  <a href="<%=new_wire_path%>" class="btn btn-success">Neues Kabel erstellen</a>
+  <a href="<%=wires_path%>.csv" class="btn btn-default">CSV-Export</a>
   <br><br><br>
-  <div id="content" class="table-responsive">
-    <table id="wiresupplier_table" class="table table-striped table-bordered data_table" cellspacing="0" width="100%">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Aderbeschriftung</th>
-        <th>Anzahl Adern</th>
-        <th>Kabeltyp</th>
-        <th>Preis beide Anschlüsse ohne Beschriftung</th>
-        <th>Preis Beschriftung Total</th>
-        <th>Preis Anschlüsse Total</th>
-        <th>Aktionen</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @wires.each do |wire| %>
-          <tr>
-            <td><%= wire.id %></td>
-            <td><%= wire.aderbeschriftung %></td>
-            <td><%= wire.anzahladern %></td>
-            <td><%= wire.kabeltyp %></td>
-            <td id="anschluesseOhneBeschriftung<%= wire.id %>"><%= wire.anschluesse_ohne_beschriftung(@wiresuppliers.first) %></td>
-            <td id="beschriftungTotal<%= wire.id %>"><%= wire.beschriftung_total(@wiresuppliers.first, @wirecaptionsuppliers.first) %></td>
-            <td id="anschluesseTotal<%= wire.id %>"><%= wire.anschluesse_total(@wiresuppliers.first, @wirecaptionsuppliers.first) %></td>
-            <td>
-              <a href="<%= wire_path(wire.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
-              <a href="<%= edit_wire_path(wire.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
-              <button type="button" class="btn btn-xs btn-danger btn-index"
-                      data-toggle="modal" data-target="#popup_sure_delete"
-                      data-itemid="<%= wire.id %>"
-                      data-model="wires">
-                Kabel löschen
-              </button>
-            </td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-
-  <%= render 'layouts/loading', :message => "Lade Kabel..." %>
-  <%= render 'layouts/popups' %>
-
-
-  <script>
-
-      $("#updatePrices").click(function() {
-        updatePrices();
-      });
-
-      function updatePrices() {
-          <% Wire.all.each do |wire| %>
-            var pricesWirecaptionsuppliersWire<%= wire.id %> = {};
-            <% @wirecaptionsuppliers.each do |wirecaptionsupplier| %>
-              pricesWirecaptionsuppliersWire<%= wire.id %>['kostenkabelmitmontagetraeger<%= wirecaptionsupplier.id %>'] = <%= Wirecaptionprice.where(:supplier => wirecaptionsupplier).first.kostenkabelmitmontagetraeger %>;
-              pricesWirecaptionsuppliersWire<%= wire.id %>['kostenadernmitmontagehuelse<%= wirecaptionsupplier.id %>'] = <%= wire.anzahladern * Wirecaptionprice.where(:supplier => wirecaptionsupplier).first.kostenadermitmontagehuelse %>;
-            <% end %>
-            var pricesWiresuppliersWire<%= wire.id %> = {};
-            <% @wiresuppliers.each do |wiresupplier| %>
-              pricesWiresuppliersWire<%= wire.id %>['beschriftungkabel1anschluss<%= wiresupplier.id %>'] = <%=
-                  WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss %>;
-              pricesWiresuppliersWire<%= wire.id %>['beschriftungadern1anschluss<%= wiresupplier.id %>'] = <%=
-                  WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungaderneinanschluss %>;
-              pricesWiresuppliersWire<%= wire.id %>['ohneBeschriftung<%= wiresupplier.id %>'] = <%=
-                  WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.anschlusstableauseite +
-                      WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.anschlussgeraeteseite
-              %>;
-            <% end %>
-            var ohneBeschriftung = pricesWiresuppliersWire<%= wire.id %>["ohneBeschriftung" + $('#select_wiresupplier').find(":selected").val()];
-            var beschriftungTotal_1 = 2 * pricesWiresuppliersWire<%= wire.id %>["beschriftungkabel1anschluss" + $('#select_wiresupplier').find(":selected").val()];
-            var beschriftungTotal_2 = <%= wire.aderbeschriftung %> * pricesWiresuppliersWire<%= wire.id %>["beschriftungadern1anschluss" + $('#select_wiresupplier').find(":selected").val()];
-            var beschriftungTotal_3 = 2 * pricesWirecaptionsuppliersWire<%= wire.id %>['kostenkabelmitmontagetraeger' + $('#select_wirecaptionsupplier').find(":selected").val()]
-            var beschriftungTotal_4 = <%= wire.aderbeschriftung %> * pricesWirecaptionsuppliersWire<%= wire.id %>['kostenadernmitmontagehuelse' + $('#select_wirecaptionsupplier').find(":selected").val()];
-            var beschriftungTotal = beschriftungTotal_1 + beschriftungTotal_2 + beschriftungTotal_3 + beschriftungTotal_4;
-            var anschluesseTotal = ohneBeschriftung + beschriftungTotal;
-            $("#anschluesseOhneBeschriftung<%= wire.id %>").html(ohneBeschriftung);
-            $("#beschriftungTotal<%= wire.id %>").html(beschriftungTotal);
-            $("#anschluesseTotal<%= wire.id %>").html(anschluesseTotal);
-          <% end %>
-      }
-  </script>
-<% else %>
-    <% if @captionPricesEntered != 0 %>
-        <div class="alert alert-danger">
-          Preise für Kabelbeschriftung nicht komplett! Bitte für Beschriftungslieferanten alle Preise eintragen!<br><br>
-          <% wirecaptionpriceid = Wirecaptionprice.where("supplier_id = ?", @captionPricesEntered).first.id %>
-          <a href="<%= edit_wirecaptionprice_path(wirecaptionpriceid) %>">Gehe zu fehlenden Preisen</a>
-        </div>
-    <% else %>
-      <div class="alert alert-danger">
-        Preise für Kabel nicht komplett! Bitte für Lieferanten alle Kabelpreise eintragen!<br><br><a href="/suppliers/<%= @allPricesEntered %>/wire_suppliers">Gehe zu fehlenden Preisen</a>
+  <h4>Import von CSV</h4>
+  <%= form_tag import_wires_path, multipart: true do %>
+      <div class="actions form-group">
+        <%= file_field_tag :file, class: 'form-control' %><br>
+        <%= submit_tag "Import CSV", class: "btn btn-success" %>
       </div>
-    <% end %>
+  <% end %><br>
+  <% if @allPricesEntered == 0 && @captionPricesEntered == 0 %>
+    Preise anzeigen für:
+    <select class="form-control" id="select_wiresupplier">
+      <% @wiresuppliers.each do |wiresupplier| %>
+          <option value="<%= wiresupplier.id %>"><%= wiresupplier.name %></option>
+      <% end %>
+    </select><br>
+    <select class="form-control" id="select_wirecaptionsupplier">
+      <% @wirecaptionsuppliers.each do |wirecaptionsupplier| %>
+          <option value="<%= wirecaptionsupplier.id %>"><%= wirecaptionsupplier.name %></option>
+      <% end %>
+    </select><br>
+    <button id="updatePrices" class="btn btn-success">Preise aktualisieren</button>
+    <br><br><br>
+    <div id="content" class="table-responsive">
+      <table id="wiresupplier_table" class="table table-striped table-bordered data_table" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Aderbeschriftung</th>
+          <th>Anzahl Adern</th>
+          <th>Kabeltyp</th>
+          <th>Preis beide Anschlüsse ohne Beschriftung</th>
+          <th>Preis Beschriftung Total</th>
+          <th>Preis Anschlüsse Total</th>
+          <th>Aktionen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @wires.each do |wire| %>
+            <tr>
+              <td><%= wire.id %></td>
+              <td><%= wire.aderbeschriftung %></td>
+              <td><%= wire.anzahladern %></td>
+              <td><%= wire.kabeltyp %></td>
+              <td id="anschluesseOhneBeschriftung<%= wire.id %>"><%= wire.anschluesse_ohne_beschriftung(@wiresuppliers.first) %></td>
+              <td id="beschriftungTotal<%= wire.id %>"><%= wire.beschriftung_total(@wiresuppliers.first, @wirecaptionsuppliers.first) %></td>
+              <td id="anschluesseTotal<%= wire.id %>"><%= wire.anschluesse_total(@wiresuppliers.first, @wirecaptionsuppliers.first) %></td>
+              <td>
+                <a href="<%= wire_path(wire.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
+                <a href="<%= edit_wire_path(wire.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
+                <button type="button" class="btn btn-xs btn-danger btn-index"
+                        data-toggle="modal" data-target="#popup_sure_delete"
+                        data-itemid="<%= wire.id %>"
+                        data-model="wires">
+                  Kabel löschen
+                </button>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <%= render 'layouts/loading', :message => "Lade Kabel..." %>
+    <%= render 'layouts/popups' %>
+
+
+    <script>
+
+        $("#updatePrices").click(function() {
+          updatePrices();
+        });
+
+        function updatePrices() {
+            <% Wire.all.each do |wire| %>
+              var pricesWirecaptionsuppliersWire<%= wire.id %> = {};
+              <% @wirecaptionsuppliers.each do |wirecaptionsupplier| %>
+                pricesWirecaptionsuppliersWire<%= wire.id %>['kostenkabelmitmontagetraeger<%= wirecaptionsupplier.id %>'] = <%= Wirecaptionprice.where(:supplier => wirecaptionsupplier).first.kostenkabelmitmontagetraeger %>;
+                pricesWirecaptionsuppliersWire<%= wire.id %>['kostenadernmitmontagehuelse<%= wirecaptionsupplier.id %>'] = <%= wire.anzahladern * Wirecaptionprice.where(:supplier => wirecaptionsupplier).first.kostenadermitmontagehuelse %>;
+              <% end %>
+              var pricesWiresuppliersWire<%= wire.id %> = {};
+              <% @wiresuppliers.each do |wiresupplier| %>
+                pricesWiresuppliersWire<%= wire.id %>['beschriftungkabel1anschluss<%= wiresupplier.id %>'] = <%=
+                    WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungkabeleinanschluss %>;
+                pricesWiresuppliersWire<%= wire.id %>['beschriftungadern1anschluss<%= wiresupplier.id %>'] = <%=
+                    WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.beschriftungaderneinanschluss %>;
+                pricesWiresuppliersWire<%= wire.id %>['ohneBeschriftung<%= wiresupplier.id %>'] = <%=
+                    WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.anschlusstableauseite +
+                        WireSupplier.where(["wire_id = ? and supplier_id = ?", wire.id, wiresupplier.id]).first.anschlussgeraeteseite
+                %>;
+              <% end %>
+              var ohneBeschriftung = pricesWiresuppliersWire<%= wire.id %>["ohneBeschriftung" + $('#select_wiresupplier').find(":selected").val()];
+              var beschriftungTotal_1 = 2 * pricesWiresuppliersWire<%= wire.id %>["beschriftungkabel1anschluss" + $('#select_wiresupplier').find(":selected").val()];
+              var beschriftungTotal_2 = <%= wire.aderbeschriftung %> * pricesWiresuppliersWire<%= wire.id %>["beschriftungadern1anschluss" + $('#select_wiresupplier').find(":selected").val()];
+              var beschriftungTotal_3 = 2 * pricesWirecaptionsuppliersWire<%= wire.id %>['kostenkabelmitmontagetraeger' + $('#select_wirecaptionsupplier').find(":selected").val()]
+              var beschriftungTotal_4 = <%= wire.aderbeschriftung %> * pricesWirecaptionsuppliersWire<%= wire.id %>['kostenadernmitmontagehuelse' + $('#select_wirecaptionsupplier').find(":selected").val()];
+              var beschriftungTotal = beschriftungTotal_1 + beschriftungTotal_2 + beschriftungTotal_3 + beschriftungTotal_4;
+              var anschluesseTotal = ohneBeschriftung + beschriftungTotal;
+              $("#anschluesseOhneBeschriftung<%= wire.id %>").html(ohneBeschriftung);
+              $("#beschriftungTotal<%= wire.id %>").html(beschriftungTotal);
+              $("#anschluesseTotal<%= wire.id %>").html(anschluesseTotal);
+            <% end %>
+        }
+    </script>
+  <% else %>
+      <% if @captionPricesEntered != 0 %>
+          <div class="alert alert-danger">
+            Preise für Kabelbeschriftung nicht komplett! Bitte für Beschriftungslieferanten alle Preise eintragen!<br><br>
+            <% wirecaptionpriceid = Wirecaptionprice.where("supplier_id = ?", @captionPricesEntered).first.id %>
+            <a href="<%= edit_wirecaptionprice_path(wirecaptionpriceid) %>">Gehe zu fehlenden Preisen</a>
+          </div>
+      <% else %>
+        <div class="alert alert-danger">
+          Preise für Kabel nicht komplett! Bitte für Lieferanten alle Kabelpreise eintragen!<br><br><a href="/suppliers/<%= @allPricesEntered %>/wire_suppliers">Gehe zu fehlenden Preisen</a>
+        </div>
+      <% end %>
+  <% end %>
+<% else %>
+  <div class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    Mindestens 1 Kabellieferant und 1 Kabelbeschriftungslieferant muss in Datenbank existieren!
+  </div>
 <% end %>

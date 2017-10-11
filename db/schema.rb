@@ -34,12 +34,13 @@ ActiveRecord::Schema.define(version: 20171010093814) do
     t.float    "rabatt",      default: 0.0, null: false
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.index ["kennung"], name: "assemblies_kennung_unique", unique: true, using: :btree
   end
 
   create_table "assemblies_iogroups", id: false, force: :cascade do |t|
     t.integer "assembly_id"
     t.integer "iogroup_id"
-    t.index ["assembly_id", "iogroup_id"], name: "index_assemblies_iogroups_on_assembly_id_and_iogroup_id", unique: true, using: :btree
+    t.index ["assembly_id", "iogroup_id"], name: "assemblies_iogroups_unique", unique: true, using: :btree
   end
 
   create_table "customers", force: :cascade do |t|
@@ -127,6 +128,7 @@ ActiveRecord::Schema.define(version: 20171010093814) do
     t.float    "rabatt",      default: 0.0, null: false
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.index ["kennung"], name: "drives_kennung_unique", unique: true, using: :btree
   end
 
   create_table "electrical_installations", force: :cascade do |t|
@@ -137,9 +139,11 @@ ActiveRecord::Schema.define(version: 20171010093814) do
     t.float    "rabatt",     default: 0.0, null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.index ["kennung"], name: "electrical_installations_kennung_unique", unique: true, using: :btree
   end
 
   create_table "grobengineerings", force: :cascade do |t|
+    t.string   "offertposition"
     t.text     "beschreibung"
     t.text     "kommentar"
     t.text     "device_import"
@@ -218,7 +222,7 @@ ActiveRecord::Schema.define(version: 20171010093814) do
   create_table "iogroups_assemblies", id: false, force: :cascade do |t|
     t.integer "iogroup_id"
     t.integer "assembly_id"
-    t.index ["iogroup_id", "assembly_id"], name: "index_iogroups_assemblies_on_iogroup_id_and_assembly_id", unique: true, using: :btree
+    t.index ["iogroup_id", "assembly_id"], name: "iogroups_assemblies_unique", unique: true, using: :btree
   end
 
   create_table "iotypes", force: :cascade do |t|
@@ -283,7 +287,7 @@ ActiveRecord::Schema.define(version: 20171010093814) do
     t.integer  "user_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["subproject_id", "user_id"], name: "by_subproject_and_user", unique: true, using: :btree
+    t.index ["subproject_id", "user_id"], name: "subproject_users_unique", unique: true, using: :btree
   end
 
   create_table "subprojects", force: :cascade do |t|
@@ -354,7 +358,7 @@ ActiveRecord::Schema.define(version: 20171010093814) do
     t.integer  "suppliertype_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["supplier_id", "suppliertype_id"], name: "index_supplier_suppliertypes_on_supplier_id_and_suppliertype_id", unique: true, using: :btree
+    t.index ["supplier_id", "suppliertype_id"], name: "supplier_suppliertype_unique", unique: true, using: :btree
   end
 
   create_table "suppliers", force: :cascade do |t|
@@ -380,6 +384,7 @@ ActiveRecord::Schema.define(version: 20171010093814) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.integer  "switchgear_id",                    null: false
+    t.index ["name"], name: "switchgearcombinations_name_unique", unique: true, using: :btree
     t.index ["switchgear_id"], name: "index_switchgearcombinations_on_switchgear_id", using: :btree
   end
 
@@ -403,6 +408,7 @@ ActiveRecord::Schema.define(version: 20171010093814) do
     t.integer  "typ",        default: 0,   null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.index ["kennung"], name: "switchgears_kennung_unique", unique: true, using: :btree
   end
 
   create_table "units", force: :cascade do |t|
@@ -446,7 +452,7 @@ ActiveRecord::Schema.define(version: 20171010093814) do
     t.float    "installationrohr",              default: 0.0, null: false
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
-    t.index ["wire_id", "supplier_id"], name: "index_wire_suppliers_on_wire_id_and_supplier_id", unique: true, using: :btree
+    t.index ["wire_id", "supplier_id"], name: "wire_supplier_unique", unique: true, using: :btree
   end
 
   create_table "wirecaptionprices", force: :cascade do |t|
@@ -464,6 +470,7 @@ ActiveRecord::Schema.define(version: 20171010093814) do
     t.string   "kabeltyp"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.index ["kabeltyp"], name: "wires_kabeltyp_unique", unique: true, using: :btree
   end
 
   add_foreign_key "devices", "electrical_installations", column: "elinst_geraete_id"
@@ -477,6 +484,7 @@ ActiveRecord::Schema.define(version: 20171010093814) do
   add_foreign_key "grobengineerings", "drives", column: "fu_typ_id"
   add_foreign_key "grobengineerings", "iogroups"
   add_foreign_key "grobengineerings", "offertpositions"
+  add_foreign_key "grobengineerings", "subsubprojects"
   add_foreign_key "grobengineerings", "subsystems"
   add_foreign_key "grobengineerings", "switchgearcombinations", column: "schaltschrank_preisberechnung_id"
   add_foreign_key "grobengineerings", "switchgears", column: "switchgear_motorenabgang_id"

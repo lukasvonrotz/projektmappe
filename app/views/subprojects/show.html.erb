@@ -53,7 +53,11 @@
     <a href="<%=new_project_subproject_subsubproject_path(@subproject.project.id, @subproject.id)%>" class="btn btn-success">Neue Version erstellen</a>
     <% master = @subproject.subsubprojects.where(:master => true).first %>
     <% if master.nil? %>
-        Keine Daten zum kopieren verfügbar, da kein Master definiert!
+        <br><br>
+        <div class="alert alert-info fade in">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          Keine Daten zum kopieren verfügbar, da kein Master definiert!
+        </div>
     <% else %>
         <br> <br>
         <%= link_to 'Neue Kopie (von Master ' + master.name + ') erstellen', copy_path(@subproject.project.id, @subproject.id, master.id), :class => "btn btn-default" %>
