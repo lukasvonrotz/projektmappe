@@ -1,6 +1,7 @@
 <h1>Alle Kabel</h1>
 <br>
 <a href="<%=new_wire_path%>" class="btn btn-success">Neues Kabel erstellen</a>
+<a href="<%=wires_path%>.csv" class="btn btn-default">CSV-Export</a>
 <br><br><br>
 <h4>Import from CSV</h4>
 <%= form_tag import_wires_path, multipart: true do %>

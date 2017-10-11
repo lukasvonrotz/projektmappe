@@ -59,6 +59,15 @@ class IogroupsController < ApplicationController
     redirect_to iogroups_path, :notice => 'IO-Gruppe wurde gelöscht.'
   end
 
+  def import
+    status = Iogroup.import(params[:file])
+    if !status.nil?
+      redirect_to iogroups_path, :notice => status
+    else
+      redirect_to iogroups_path, :notice => 'IO-Gruppen erfolgreich aktualisiert.'
+    end
+  end
+
   private
   # defines which parameters have to be provided by the form when creating a new iogroup
   def iogroup_params

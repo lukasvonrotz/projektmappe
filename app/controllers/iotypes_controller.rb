@@ -1,6 +1,11 @@
 class IotypesController < ApplicationController
   def index
     @iotypes = Iotype.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @iotypes.to_csv, filename: "iotypes-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view
@@ -52,6 +57,15 @@ class IotypesController < ApplicationController
     @iotype = Iotype.find(params[:id])
     @iotype.destroy
     redirect_to iotypes_path, :notice => 'IO-Gruppentyp wurde gelöscht.'
+  end
+
+  def import
+    status = Iotype.import(params[:file])
+    if !status.nil?
+      redirect_to iotypes_path, :notice => status
+    else
+      redirect_to iotypes_path, :notice => 'IO-Typen-Liste erfolgreich aktualisiert.'
+    end
   end
 
   private

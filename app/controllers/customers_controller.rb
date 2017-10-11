@@ -1,6 +1,11 @@
 class CustomersController < ApplicationController
   def index
     @customers = Customer.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @customers.to_csv, filename: "customers-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view
@@ -52,6 +57,16 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @customer.destroy
     redirect_to customers_path, :notice => 'Kunde wurde gelöscht.'
+  end
+
+
+  def import
+    status = Customer.import(params[:file])
+    if !status.nil?
+      redirect_to customers_path, :notice => status
+    else
+      redirect_to customers_path, :notice => 'Kundenliste erfolgreich aktualisiert.'
+    end
   end
 
   private

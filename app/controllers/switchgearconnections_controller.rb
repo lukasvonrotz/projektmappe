@@ -2,6 +2,11 @@ class SwitchgearconnectionsController < ApplicationController
 
   def index
     @switchgearconnections = Switchgearconnection.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @switchgearconnections.to_csv, filename: "switchgearconnections-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view
@@ -53,6 +58,16 @@ class SwitchgearconnectionsController < ApplicationController
     @switchgearconnection = Switchgearconnection.find(params[:id])
     @switchgearconnection.destroy
     redirect_to switchgearconnections_path, :notice => 'Schaltgerätekombination wurde gelöscht.'
+  end
+
+
+  def import
+    status = Switchgearconnection.import(params[:file])
+    if !status.nil?
+      redirect_to switchgearconnections_path, :notice => status
+    else
+      redirect_to switchgearconnections_path, :notice => 'Verbindungen erfolgreich aktualisiert.'
+    end
   end
 
   private

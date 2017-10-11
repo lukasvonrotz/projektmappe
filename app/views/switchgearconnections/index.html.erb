@@ -2,6 +2,7 @@
 <br>
 <% if Switchgearcombination.any? %>
     <a href="<%=new_switchgearconnection_path%>" class="btn btn-success">Neue Verbindung erstellen</a>
+    <a href="<%=switchgearconnections_path%>.csv" class="btn btn-default">CSV-Export</a>
 <% else %>
     <div class="alert alert-danger">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -9,6 +10,13 @@
     </div>
 <% end %>
 <br><br><br>
+<h4>Import from CSV</h4>
+<%= form_tag import_switchgearconnections_path, multipart: true do %>
+    <div class="actions form-group">
+      <%= file_field_tag :file, class: 'form-control' %><br>
+      <%= submit_tag "Import CSV", class: "btn btn-success" %>
+    </div>
+<% end %><br>
 <div id="content">
 
   <div class="col-lg-8">

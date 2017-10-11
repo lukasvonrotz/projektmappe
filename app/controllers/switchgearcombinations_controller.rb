@@ -60,6 +60,15 @@ class SwitchgearcombinationsController < ApplicationController
     redirect_to switchgearcombinations_path, :notice => 'Schaltgerätekombination wurde gelöscht.'
   end
 
+  def import
+    status = Switchgearcombination.import(params[:file])
+    if !status.nil?
+      redirect_to switchgearcombinations_path, :notice => status
+    else
+      redirect_to switchgearcombinations_path, :notice => 'Schaltschrankkombinationen erfolgreich aktualisiert.'
+    end
+  end
+
   private
   # defines which parameters have to be provided by the form when creating a new switchgearcombination
   def switchgearcombination_params

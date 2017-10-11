@@ -1,6 +1,7 @@
 <h1>Elektroinstallationen</h1>
 <br>
 <a href="<%=new_electrical_installation_path%>" class="btn btn-success">Neuen Eintrag erstellen</a>
+<a href="<%=electrical_installations_path%>.csv" class="btn btn-default">CSV-Export</a>
 <br><br><br>
 <h4>Import from CSV</h4>
 <%= form_tag import_electrical_installations_path, multipart: true do %>

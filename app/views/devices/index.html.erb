@@ -1,6 +1,7 @@
 <h1>Alle Geräte</h1>
 <br>
 <a href="<%=new_device_path%>" class="btn btn-success">Neues Gerät erstellen</a>
+<a href="<%=devices_path%>.csv" class="btn btn-default">CSV-Export</a>
 <br><br><br><br>
 <h4>Import from CSV</h4>
 <%= form_tag import_devices_path, multipart: true do %>

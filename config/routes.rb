@@ -49,19 +49,30 @@ Rails.application.routes.draw do
   resources :switchgears do
     collection { post :import}
   end
-  resources :switchgearcombinations
-  resources :switchgearconnections
+  resources :switchgearcombinations do
+    collection { post :import}
+  end
+  resources :switchgearconnections do
+    collection { post :import}
+  end
   resources :wires do
     collection { post :import}
   end
   resources :devices do
     collection { post :import}
   end
-  resources :customers
-  resources :iogroups
-  resources :iotypes
+  resources :customers do
+    collection { post :import}
+  end
+  resources :iogroups do
+    collection { post :import}
+  end
+  resources :iotypes do
+    collection { post :import}
+  end
 
   resources :suppliers do
+    collection { post :import}
     resources :wire_suppliers
   end
   resources :suppliertypes
@@ -73,5 +84,8 @@ Rails.application.routes.draw do
         to: "grobengineerings#offerte", as: :offerte, via: [:get]
   match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/grobengineering/delete_all",
         to: "grobengineerings#delete_all", as: :delete_all, via: [:get]
+
+  match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offers/:offer_id/csvexport",
+        to: "offers#csvexport", as: :csvexport, via: [:get]
 
 end

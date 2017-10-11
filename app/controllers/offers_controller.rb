@@ -50,6 +50,9 @@ class OffersController < ApplicationController
   # GET /offers/:id
   def show
     @offer = Offer.find(params[:id])
+    @subsubproject = @offer.subsubproject
+    @subproject = @subsubproject.subproject
+    @project = @subproject.project
   end
 
   # Control logic for edit-view
@@ -97,6 +100,35 @@ class OffersController < ApplicationController
     redirect_to offerte_path(:project_id => projectid,
                              :subproject_id => subprojectid,
                              :subsubproject_id => subsubprojectid), :notice => 'Offerte wurde gelöscht.'
+  end
+
+  def csvexport
+    @offer = Offer.find(params[:offer_id])
+    projectid = @offer.subsubproject.subproject.project.id
+    subprojectid = @offer.subsubproject.subproject.id
+    subsubprojectid = @offer.subsubproject.id
+
+
+
+    CSV.open("offerte#{Time.now.strftime("%Y-%m-%d-%H-%M")}.csv", "wb", {:headers => true, :encoding => "utf-8", :col_sep => ";"}) do |csv|
+      csv << ['Offertposition', 'Geraeteanzahl',
+              'Eng Elektroplanung', 'Eng Planung/SW', 'Eng IBN/Bauleitung',
+              'SPS Total Brutto', 'SPS Total Netto',
+              'Schaltanlagen Total Brutto', 'Schaltanlagen Total Netto',
+              'Elektroinstallation Total Brutto', 'Elektroinstallation Total Netto',
+              'Total Brutto', 'Total Netto']
+      csv << ['Total', @offer.total_geraeteanzahl, @offer.total_eng_elplanung, @offer.total_eng_planung_sw,
+              @offer.total_eng_ibn_bauleitung, @offer.total_sps_total_brutto, @offer.total_sps_total_netto,
+              @offer.total_sch_total_brutto, @offer.total_sch_total_netto,
+              @offer.total_elinst_total_brutto, @offer.total_elinst_total_netto,
+              @offer.total_total_brutto, @offer.total_total_netto]
+
+      @offer.offer_offertpositions.each do |offer_offertposition|
+      end
+    end
+
+    redirect_to project_subproject_subsubproject_offer_path(projectid, subprojectid, subsubprojectid, @offer.id),
+                :notice => "Offerte wurde unter " + Rails.root.to_s + "/ abgelegt!"
   end
 
   private

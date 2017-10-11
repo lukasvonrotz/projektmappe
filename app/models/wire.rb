@@ -29,8 +29,7 @@ class Wire < ApplicationRecord
   end
 
   def self.to_csv
-    exclude_columns = ['id']
-    attributes = column_names - exclude_columns
+    attributes = column_names
 
     CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|
       csv << attributes
@@ -44,7 +43,7 @@ class Wire < ApplicationRecord
   def self.import(file)
     CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
       begin
-        new_record = row.to_hash
+        new_record = row.to_hash.except(:id)
         if Wire.where(:kabeltyp => new_record[:kabeltyp]).any?
           # if this device already exists, only update existing entry
           existing_record = Wire.where(:kabeltyp => new_record[:kabeltyp]).first

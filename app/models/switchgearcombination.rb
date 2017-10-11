@@ -23,4 +23,22 @@ class Switchgearcombination < ApplicationRecord
       end
     end
   end
+
+  def self.import(file)
+    CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
+      begin
+        new_record = row.to_hash.except(:id)
+        if Switchgearcombination.where(:name => new_record[:name]).any?
+          # if this device already exists, only update existing entry
+          existing_record = Switchgearcombination.where(:name => new_record[:name]).first
+          existing_record.update_attributes(new_record)
+          existing_record.save!
+        else
+          Switchgearcombination.create! new_record
+        end
+      rescue Exception => ex
+        return ex
+      end
+    end
+  end
 end

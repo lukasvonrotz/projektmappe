@@ -62,6 +62,24 @@ class SuppliersController < ApplicationController
     # PUT /suppliers/:id
     def update
       @supplier = Supplier.find(params[:id])
+
+      # Einträge in wire_suppliers für alle Kabel erstellen
+      suppliertypeid = Suppliertype.where(name: 'Kabel').first.id
+      if (supplier_params[:suppliertype_ids].include? suppliertypeid.to_s) && !WireSupplier.where(:supplier_id => @supplier.id).any?
+        Wire.all.each do |wire|
+          wire_supplier = WireSupplier.create
+          wire_supplier.supplier = @supplier
+          wire_supplier.wire = wire
+          wire_supplier.save!
+        end
+      end
+      suppliertypeid = Suppliertype.where(name: 'Kabelbeschriftung').first.id
+      if (supplier_params[:suppliertype_ids].include? suppliertypeid.to_s) && !Wirecaptionprice.where(:supplier_id => @supplier.id).any?
+        wirecaptionprice = Wirecaptionprice.create
+        wirecaptionprice.supplier = @supplier
+        wirecaptionprice.save!
+      end
+
       if @supplier.update(supplier_params)
         redirect_to suppliers_path, :notice => 'Lieferant erfolgreich aktualisiert.'
       else
@@ -75,6 +93,15 @@ class SuppliersController < ApplicationController
       @supplier = Supplier.find(params[:id])
       @supplier.destroy
       redirect_to suppliers_path, :notice => 'Lieferant wurde gelöscht.'
+    end
+
+    def import
+      status = Supplier.import(params[:file])
+      if !status.nil?
+        redirect_to suppliers_path, :notice => status
+      else
+        redirect_to suppliers_path, :notice => 'Lieferanten-Liste erfolgreich aktualisiert.'
+      end
     end
 
     private

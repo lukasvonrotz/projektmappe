@@ -11,6 +11,7 @@
     <br><br>
 <% end %>
 <a href="<%= new_project_subproject_subsubproject_grobengineering_path %>" class="btn btn-success">Neuen Eintrag erstellen</a><br><br>
+<a href="<%=project_subproject_subsubproject_grobengineerings_path%>.csv" class="btn btn-default">CSV-Export</a>
 <a href="<%= delete_all_path(@subsubproject.subproject.project.id, @subsubproject.subproject.id, @subsubproject.id) %>"
    onclick="return confirm_click();"
    class="btn btn-danger">Alle Einträge löschen</a>
