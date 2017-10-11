@@ -84,7 +84,7 @@ class Device < ApplicationRecord
   end
 
   def self.to_csv
-    exclude_columns = ['id']
+    exclude_columns = ['']
     attributes = column_names - exclude_columns
 
     CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|

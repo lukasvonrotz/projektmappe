@@ -1,0 +1,65 @@
+<h1>Details zu <%= @offer.beschreibung %></h1>
+<% if @offer.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @offer.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Offertposition</th>
+    <th>Geräteanzahl</th>
+    <th>Eng Elektroplanung</th>
+    <th>Eng Planung/SW</th>
+    <th>Eng IBN/Bauleitung</th>
+    <th>SPS Total Brutto</th>
+    <th>SPS Total Netto</th>
+    <th>Schaltanlagen Total Brutto</th>
+    <th>Schaltanlagen Total Netto</th>
+    <th>Elektroinstallation Total Brutto</th>
+    <th>Elektroinstallation Total Netto</th>
+    <th>Total Brutto</th>
+    <th>Total Netto</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr class="success" style="font-weight: bold;">
+      <td>TOTAL</td>
+      <td><%= @offer.total_geraeteanzahl %></td>
+      <td><%= @offer.total_eng_elplanung.to_f.round(1) %></td>
+      <td><%= @offer.total_eng_planung_sw.to_f.round(1) %></td>
+      <td><%= @offer.total_eng_ibn_bauleitung.to_f.round(1) %></td>
+      <td><%= @offer.total_sps_total_brutto.to_f.round(1) %></td>
+      <td><%= @offer.total_sps_total_netto.to_f.round(1) %></td>
+      <td><%= @offer.total_sch_total_brutto.to_f.round(1) %></td>
+      <td><%= @offer.total_sch_total_netto.to_f.round(1) %></td>
+      <td><%= @offer.total_elinst_total_brutto.to_f.round(1) %></td>
+      <td><%= @offer.total_elinst_total_netto.to_f.round(1) %></td>
+      <td><%= @offer.total_total_brutto.to_f.round(1) %></td>
+      <td><%= @offer.total_total_netto.to_f.round(1) %></td>
+    </tr>
+    <% @offer.offer_offertpositions.each do |offer_offertpositions| %>
+      <tr>
+        <td><%= offer_offertpositions.offertposition.name %></td>
+        <td><%= offer_offertpositions.device_anzahl.to_f.round(1) %></td>
+        <td><%= offer_offertpositions.eng_elplanung.to_f.round(1) %></td>
+        <td><%= offer_offertpositions.eng_planung_sw.to_f.round(1) %></td>
+        <td><%= offer_offertpositions.eng_ibn_bauleitung.to_f.round(1) %></td>
+        <td><%= offer_offertpositions.sps_total_brutto.to_f.round(1) %></td>
+        <td><%= offer_offertpositions.sps_total_netto.to_f.round(1) %></td>
+        <td><%= offer_offertpositions.sch_total_brutto.to_f.round(1) %></td>
+        <td><%= offer_offertpositions.sch_total_netto.to_f.round(1) %></td>
+        <td><%= offer_offertpositions.elinst_total_brutto.to_f.round(1) %></td>
+        <td><%= offer_offertpositions.elinst_total_netto.to_f.round(1) %></td>
+        <td><strong><%= offer_offertpositions.total_brutto.to_f.round(1) %></strong></td>
+        <td><strong><%= offer_offertpositions.total_netto.to_f.round(1) %></strong></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<a href="<%= offer_offer_offertpositions_path(@offer.id) %>" class="btn btn-info btn-index">Preise bearbeiten</a>
+<br><br>
+<a href="/projects/<%= @offer.subsubproject.subproject.project.id %>/subprojects/<%= @offer.subsubproject.subproject.id %>/subsubprojects/<%= @offer.subsubproject.id %>/offerte">Zurück zu Offertberechnung</a>

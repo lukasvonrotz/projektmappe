@@ -1,0 +1,14 @@
+<h1>Offerte editieren</h1>
+<% if @offer.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @offer.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :offer => @offer,
+           :subsubprojectid => @offer.subsubproject.id,
+           :userid => current_user.id,
+           :context => false %>
+
+<a href="/projects/<%= @offer.subsubproject.subproject.project.id %>/subprojects/<%= @offer.subsubproject.subproject.id %>/subsubprojects/<%= @offer.subsubproject.id %>/offerte">Zurück zu Offertberechnung</a>

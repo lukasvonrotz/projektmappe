@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171010044110) do
+ActiveRecord::Schema.define(version: 20171010093814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -225,6 +225,35 @@ ActiveRecord::Schema.define(version: 20171010044110) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "offer_offertpositions", force: :cascade do |t|
+    t.integer  "offer_id",                          null: false
+    t.integer  "offertposition_id",                 null: false
+    t.float    "device_anzahl",       default: 0.0, null: false
+    t.float    "eng_elplanung",       default: 0.0, null: false
+    t.float    "eng_planung_sw",      default: 0.0, null: false
+    t.float    "eng_ibn_bauleitung",  default: 0.0, null: false
+    t.float    "sps_total_brutto",    default: 0.0, null: false
+    t.float    "sps_total_netto",     default: 0.0, null: false
+    t.float    "sch_total_brutto",    default: 0.0, null: false
+    t.float    "sch_total_netto",     default: 0.0, null: false
+    t.float    "elinst_total_brutto", default: 0.0, null: false
+    t.float    "elinst_total_netto",  default: 0.0, null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.index ["offer_id", "offertposition_id"], name: "offer_offertposition_unique", unique: true, using: :btree
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.datetime "datum"
+    t.text     "beschreibung"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "subsubproject_id", null: false
+    t.integer  "user_id",          null: false
+    t.index ["subsubproject_id"], name: "index_offers_on_subsubproject_id", using: :btree
+    t.index ["user_id"], name: "index_offers_on_user_id", using: :btree
   end
 
   create_table "offertpositions", force: :cascade do |t|
@@ -458,6 +487,8 @@ ActiveRecord::Schema.define(version: 20171010044110) do
   add_foreign_key "infos", "subprojects"
   add_foreign_key "iogroups", "iotypes"
   add_foreign_key "iogroups", "switchgearcombinations"
+  add_foreign_key "offers", "subsubprojects"
+  add_foreign_key "offers", "users"
   add_foreign_key "offertpositions", "subsubprojects"
   add_foreign_key "subprojects", "customers"
   add_foreign_key "subprojects", "projects"

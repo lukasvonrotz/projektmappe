@@ -1,0 +1,28 @@
+<%= form_for offer do |offer| %>
+
+    <div class="field form-group">
+      <%= offer.label :datum, 'Datum' %><br>
+      <%= offer.datetime_select :datum, {}, { class: '' } %>
+    </div>
+
+    <div class="field form-group">
+      <%= offer.label :beschreibung, 'Beschreibung' %>
+      <%= offer.text_field :beschreibung, :class => "form-control",
+                             placeholder: 'Beschreibung für Offerte eingeben' %>
+    </div>
+
+    <%= offer.hidden_field :subsubproject_id, :value => subsubprojectid %>
+    <%= offer.hidden_field :user_id, :value => userid %>
+
+    <%= offer.hidden_field :user_id, :value => userid %>
+
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= offer.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= offer.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

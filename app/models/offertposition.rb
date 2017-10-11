@@ -2,6 +2,8 @@ class Offertposition < ApplicationRecord
 
   require 'csv'
 
+  has_many :offer_offertpositions, dependent: :destroy
+  has_many :offers, :through => :offer_offertpositions
 
   belongs_to :subsubproject
   validates :subsubproject, :presence => true

@@ -23,11 +23,16 @@ Rails.application.routes.draw do
           collection { post :import}
         end
         resources :offertpositions
+        resources :offers
       end
     end
   end
   resources :grobengineerings
   resources :offertpositions
+  resources :offers do
+    resources :offer_offertpositions
+  end
+  resources :offer_offertpositions
   resources :subsystems
   resources :units
   resources :subprojects

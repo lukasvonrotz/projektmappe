@@ -1,0 +1,68 @@
+<h1>Preise von <%= @offer.beschreibung %></h1>
+<br>
+<div id="content">
+  <% if @offer_offertpositions.length == 0 %>
+      Keine Offertpositionen zu dieser Offerte vorhanden
+  <% else %>
+    <div class="row visible-lg">
+      <div class="col-lg-1"><strong>Offertposition</strong></div>
+      <div class="col-lg-1"><strong>Geräteanzahl</strong></div>
+      <div class="col-lg-1"><strong>Eng Elektroplanung</strong></div>
+      <div class="col-lg-1"><strong>Eng Planung/SW</strong></div>
+      <div class="col-lg-1"><strong>Eng IBN/Bauleitung</strong></div>
+      <div class="col-lg-1"><strong>SPS Total Brutto</strong></div>
+      <div class="col-lg-1"><strong>SPS Total Netto</strong></div>
+      <div class="col-lg-1"><strong>Schaltanlagen Total Brutto</strong></div>
+      <div class="col-lg-1"><strong>Schaltanlagen Total Netto</strong></div>
+      <div class="col-lg-1"><strong>Elektroinstallation Total Brutto</strong></div>
+      <div class="col-lg-1"><strong>Elektroinstallation Total Brutto</strong></div>
+      <div class="col-lg-1"><strong>Actions</strong></div>
+    </div>
+    <br>
+    <% @offer_offertpositions.each do |offer_offertposition| %>
+        <%= render 'form', :offer_offertposition => offer_offertposition,
+                   :offer => offer_offertposition.offer,
+                   :offertposition_name => offer_offertposition.offertposition.name,
+                   :offer_offertpositionid => offer_offertposition.id %>
+    <% end %>
+  <% end %>
+</div>
+<br><br>
+<a href="/projects/<%= @offer.subsubproject.subproject.project.id %>/subprojects/<%= @offer.subsubproject.subproject.id %>/subsubprojects/<%= @offer.subsubproject.id %>/offers/<%= @offer.id %>">Zurück zu Offerte</a>
+
+
+
+
+<script>
+    $(document).ready ( function(){
+        // Disable all input fields and add 'edit'-button, except for first line.
+        <% @offer_offertpositions.each_with_index do |offer_offertposition, i| %>
+          <% if i != 0 %>
+            $("input.offer_offertposition<%=offer_offertposition.id %>_fld").attr("disabled", true);
+          <% else %>
+            $("a.offer_offertposition<%=offer_offertposition.id %>_edit").hide();
+            $("input.offer_offertposition<%=offer_offertposition.id %>_fld").attr("disabled", false);
+          <% end %>
+        <% end %>
+
+        // In case of using the browser back button! Rails duplicates html-elements when using this button
+        // Hence, do reload page (only once!) by usage of a hidden input field!
+        $('#loadingModal').modal('hide');
+        var $input = $('#refresh');
+        if ($input.val() == 'yes') {
+            location.reload(true);
+            loadingAlgorithm();
+            $(".table-responsive").hide();
+        }
+        else {
+            $input.val('yes');
+        }
+    });
+
+    function editLine(id) {
+        $("input.offer_offertposition_fld").attr("disabled", true);
+        $("a.offer_offertposition_edit").show();
+        $("a.offer_offertposition" + id + "_edit").hide();
+        $("input.offer_offertposition" + id + "_fld").attr("disabled", false);
+    }
+</script>

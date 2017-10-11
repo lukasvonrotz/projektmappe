@@ -1,0 +1,17 @@
+<h1>Neue Offerte erstellen</h1>
+<% if @offer.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @offer.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<%= render 'form', :offer => @offer,
+           :subsubprojectid => @offer.subsubproject_id.nil? ? params[:subsubproject_id] : @offer.subsubproject.id,
+           :offertpositions => params[:offertpositions],
+           :device_anzahl => 0,
+           :userid => current_user.id,
+           :context => true %>
+
+
+<a href="/projects/<%= 1 %>/subprojects/<%= 1 %>/subsubprojects/<%= 22 %>/offerte">Zurück zu Offertberechnung</a>

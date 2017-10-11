@@ -55,6 +55,72 @@ class Grobengineering < ApplicationRecord
     end
   end
 
+
+  def self.offert_hash(subsubproject)
+    grobengineerings = Grobengineering.where(:subsubproject_id => subsubproject.id)
+    subsubproject = Subsubproject.find(subsubproject.id)
+    offert_hash = Hash.new
+    grobengineerings.group_by(&:offertposition).each do |offertposition, grobengineerings|
+      offert_hash[offertposition.id] = Hash.new
+      offert_hash[offertposition.id]["device_anzahl"] = 0
+      offert_hash[offertposition.id]["kosten_eng_elplanung_total"] = 0
+      offert_hash[offertposition.id]["kosten_eng_planung_sw_total"] = 0
+      offert_hash[offertposition.id]["kosten_eng_ibn_bauleitung_total"] = 0
+      offert_hash[offertposition.id]["kosten_sps_total_brutto"] = 0
+      offert_hash[offertposition.id]["kosten_sps_total_netto"] = 0
+      offert_hash[offertposition.id]["kosten_sch_total_brutto"] = 0
+      offert_hash[offertposition.id]["kosten_sch_total_netto"] = 0
+      offert_hash[offertposition.id]["kosten_elinst_total_brutto"] = 0
+      offert_hash[offertposition.id]["kosten_elinst_total_netto"] = 0
+      offert_hash[offertposition.id]["kosten_total_brutto"] = 0
+      offert_hash[offertposition.id]["kosten_total_netto"] = 0
+      offert_hash[offertposition.id]["devices"] = Hash.new
+      grobengineerings.group_by(&:device_id).each do |device_id, lines|
+        offert_hash[offertposition.id]["devices"][device_id] = Hash.new
+        offert_hash[offertposition.id]["devices"][device_id]["device_anzahl"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_eng_elplanung_total"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_eng_planung_sw_total"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_eng_ibn_bauleitung_total"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_sps_total_brutto"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_sps_total_netto"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_sch_total_brutto"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_sch_total_netto"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_elinst_total_brutto"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_elinst_total_netto"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_total_brutto"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_total_netto"] = 0
+        lines.each do |line|
+          offert_hash[offertposition.id]["devices"][device_id]["device_anzahl"] += line.device_anzahl
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_eng_elplanung_total"] += line.kosten_eng_elplanung_total
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_eng_planung_sw_total"] += line.kosten_eng_planung_sw_total
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_eng_ibn_bauleitung_total"] += line.kosten_eng_ibn_bauleitung_total
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_sps_total_brutto"] += line.kosten_sps_total_brutto(subsubproject.eurokurs)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_sps_total_netto"] += line.kosten_sps_total_netto(subsubproject.eurokurs)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_sch_total_brutto"] += line.kosten_sch_total_brutto(subsubproject.eurokurs)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_sch_total_netto"] += line.kosten_sch_total_netto(subsubproject.eurokurs)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_elinst_total_brutto"] += line.kosten_elinst_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_elinst_total_netto"] += line.kosten_elinst_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_total_brutto"] += line.kosten_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_total_netto"] += line.kosten_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs)
+
+          offert_hash[offertposition.id]["device_anzahl"] += line.device_anzahl
+          offert_hash[offertposition.id]["kosten_eng_elplanung_total"] += line.kosten_eng_elplanung_total
+          offert_hash[offertposition.id]["kosten_eng_planung_sw_total"] += line.kosten_eng_planung_sw_total
+          offert_hash[offertposition.id]["kosten_eng_ibn_bauleitung_total"] += line.kosten_eng_ibn_bauleitung_total
+          offert_hash[offertposition.id]["kosten_sps_total_brutto"] += line.kosten_sps_total_brutto(subsubproject.eurokurs)
+          offert_hash[offertposition.id]["kosten_sps_total_netto"] += line.kosten_sps_total_netto(subsubproject.eurokurs)
+          offert_hash[offertposition.id]["kosten_sch_total_brutto"] += line.kosten_sch_total_brutto(subsubproject.eurokurs)
+          offert_hash[offertposition.id]["kosten_sch_total_netto"] += line.kosten_sch_total_netto(subsubproject.eurokurs)
+          offert_hash[offertposition.id]["kosten_elinst_total_brutto"] += line.kosten_elinst_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier)
+          offert_hash[offertposition.id]["kosten_elinst_total_netto"] += line.kosten_elinst_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier)
+          offert_hash[offertposition.id]["kosten_total_brutto"] += line.kosten_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs)
+          offert_hash[offertposition.id]["kosten_total_netto"] += line.kosten_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs)
+        end
+      end
+    end
+    return offert_hash
+  end
+
   def strom_total
     calc_tot(self.device_anzahl, self.strom)
   end

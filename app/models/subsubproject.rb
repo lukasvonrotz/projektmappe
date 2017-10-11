@@ -44,4 +44,6 @@ class Subsubproject < ApplicationRecord
   has_many :grobengineerings, dependent: :destroy
 
   has_many :offertpositions, dependent: :destroy
+
+  has_many :offers, dependent: :destroy
 end
