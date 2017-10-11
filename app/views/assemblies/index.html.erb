@@ -3,7 +3,7 @@
 <br>
 <a href="<%=new_assembly_path%>" class="btn btn-success">Neue IO-Baugruppe erstellen</a>
 <a href="<%=assemblies_path%>.csv" class="btn btn-default">CSV-Export</a>
-<br><br><br><br><h4>Import from CSV</h4>
+<br><br><br><br><h4>Import von CSV</h4>
 <%= form_tag import_assemblies_path, multipart: true do %>
     <div class="actions form-group">
       <%= file_field_tag :file, class: 'form-control' %><br>

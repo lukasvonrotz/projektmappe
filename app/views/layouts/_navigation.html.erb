@@ -105,6 +105,9 @@
                 <li class="<%= 'active' if current_page? (customers_path) %>">
                   <%= link_to "Kunden", customers_path %>
                 </li>
+                <li class="<%= 'active' if current_page? (home_index_path) %>">
+                  <%= link_to "Import Kabel-Kabellieferanten", wire_suppliers_path %>
+                </li>
               </ul>
             </li>
 

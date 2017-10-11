@@ -1,10 +1,17 @@
 class WireSuppliersController < ApplicationController
   def index
-    if supplier = Supplier.find(params[:supplier_id])
+    begin
+      supplier = Supplier.find(params[:supplier_id])
       @wire_suppliers = supplier.wire_suppliers
       @supplier = supplier
-    else
+      @formview = true
+    rescue
       @wire_suppliers = WireSupplier.all
+      @formview = false
+      respond_to do |format|
+        format.html
+        format.csv { send_data @wire_suppliers.to_csv, filename: "wire_suppliers-#{Date.today}.csv" }
+      end
     end
   end
 
@@ -14,6 +21,15 @@ class WireSuppliersController < ApplicationController
       redirect_to supplier_wire_suppliers_path, :notice => 'Kabelpreise erfolgreich aktualisiert!'
     else
       render 'edit'
+    end
+  end
+
+  def import
+    status = WireSupplier.import(params[:file])
+    if !status.nil?
+      redirect_to wire_suppliers_path, :notice => status
+    else
+      redirect_to wire_suppliers_path, :notice => 'Kabel-Lieferantenpreise erfolgreich aktualisiert.'
     end
   end
 

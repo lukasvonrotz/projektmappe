@@ -7,7 +7,7 @@ Rails.application.routes.draw do
                                     shared: 'users/shared',
                                     unlocks: 'users/unlocks'}
 
-  #get 'home/index'
+  get 'home/index'
   root 'projects#index'
 
   resources :users
@@ -74,6 +74,9 @@ Rails.application.routes.draw do
   resources :suppliers do
     collection { post :import}
     resources :wire_suppliers
+  end
+  resources :wire_suppliers do
+    collection { post :import}
   end
   resources :suppliertypes
   resources :wirecaptionprices

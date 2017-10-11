@@ -1,29 +1,41 @@
-<h1>Kabel von <%= @supplier.name %></h1>
-<br>
-<div id="content">
-  <% if @wire_suppliers.length == 0 %>
-      Keine Kabel von diesem Lieferanten vorhanden
-  <% else %>
-    <div class="row visible-lg">
-      <div class="col-lg-3"><strong>Kabeltyp</strong></div>
-      <div class="col-lg-1"><strong>Anschluss Tableauseite (CHF)</strong></div>
-      <div class="col-lg-1"><strong>Anschluss Geräteseite (CHF)</strong></div>
-      <div class="col-lg-1"><strong>Beschriftung Kabel 1 Anschluss (CHF)</strong></div>
-      <div class="col-lg-1"><strong>Beschriftung Adern 1 Anschluss (CHF)</strong></div>
-      <div class="col-lg-1"><strong>Installation Hohlboden (CHF)</strong></div>
-      <div class="col-lg-1"><strong>Installation Trasse (CHF)</strong></div>
-      <div class="col-lg-1"><strong>Installation Rohr (CHF)</strong></div>
-      <div class="col-lg-2"><strong>Actions</strong></div>
-    </div>
-    <br>
-    <% @wire_suppliers.each do |wire_supplier| %>
-        <%= render 'form', :wire_supplier => wire_supplier, :supplier => wire_supplier.supplier,
-                   :wire_supplier_kabeltyp => wire_supplier.wire.kabeltyp,
-                   :wire_supplierid => wire_supplier.id %>
+<% if @formview %>
+  <h1>Kabel von <%= @supplier.name %></h1>
+  <br>
+  <div id="content">
+    <% if @wire_suppliers.length == 0 %>
+        Keine Kabel von diesem Lieferanten vorhanden
+    <% else %>
+      <div class="row visible-lg">
+        <div class="col-lg-3"><strong>Kabeltyp</strong></div>
+        <div class="col-lg-1"><strong>Anschluss Tableauseite (CHF)</strong></div>
+        <div class="col-lg-1"><strong>Anschluss Geräteseite (CHF)</strong></div>
+        <div class="col-lg-1"><strong>Beschriftung Kabel 1 Anschluss (CHF)</strong></div>
+        <div class="col-lg-1"><strong>Beschriftung Adern 1 Anschluss (CHF)</strong></div>
+        <div class="col-lg-1"><strong>Installation Hohlboden (CHF)</strong></div>
+        <div class="col-lg-1"><strong>Installation Trasse (CHF)</strong></div>
+        <div class="col-lg-1"><strong>Installation Rohr (CHF)</strong></div>
+        <div class="col-lg-2"><strong>Actions</strong></div>
+      </div>
+      <br>
+      <% @wire_suppliers.each do |wire_supplier| %>
+          <%= render 'form', :wire_supplier => wire_supplier, :supplier => wire_supplier.supplier,
+                     :wire_supplier_kabeltyp => wire_supplier.wire.kabeltyp,
+                     :wire_supplierid => wire_supplier.id %>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
-
+  </div>
+<% else %>
+  <h1>Kabel/Lieferanten-Preise Import/Export</h1>
+  <br>
+  <a href="<%=wire_suppliers_path%>.csv" class="btn btn-default">CSV-Export</a><br><br>
+  <h4>Import von CSV</h4>
+  <%= form_tag import_wire_suppliers_path, multipart: true do %>
+      <div class="actions form-group">
+        <%= file_field_tag :file, class: 'form-control' %><br>
+        <%= submit_tag "Import CSV", class: "btn btn-success" %>
+      </div>
+  <% end %><br>
+<% end %>
 
 
 <script>

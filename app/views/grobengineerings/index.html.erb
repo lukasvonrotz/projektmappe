@@ -1,7 +1,7 @@
 <h1>Grobengineering</h1>
 <br>
 <% if !@grobengineerings.any? %>
-    <h4>Import from CSV</h4>
+    <h4>Import von CSV</h4>
     <%= form_tag import_project_subproject_subsubproject_grobengineerings_path, multipart: true do %>
         <div class="actions form-group">
           <%= file_field_tag :file, class: 'form-control' %><br>
