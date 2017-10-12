@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   end
   resources :grobengineerings
   resources :offertpositions
+  resources :infos
+  resources :histories
   resources :offers do
     resources :offer_offertpositions
   end
