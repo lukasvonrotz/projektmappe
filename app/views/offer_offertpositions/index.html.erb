@@ -4,26 +4,15 @@
   <% if @offer_offertpositions.length == 0 %>
       Keine Offertpositionen zu dieser Offerte vorhanden
   <% else %>
-    <div class="row visible-lg">
-      <div class="col-lg-1"><strong>Offertposition</strong></div>
-      <div class="col-lg-1"><strong>Geräteanzahl</strong></div>
-      <div class="col-lg-1"><strong>Eng Elektroplanung</strong></div>
-      <div class="col-lg-1"><strong>Eng Planung/SW</strong></div>
-      <div class="col-lg-1"><strong>Eng IBN/Bauleitung</strong></div>
-      <div class="col-lg-1"><strong>SPS Total Brutto</strong></div>
-      <div class="col-lg-1"><strong>SPS Total Netto</strong></div>
-      <div class="col-lg-1"><strong>Schaltanlagen Total Brutto</strong></div>
-      <div class="col-lg-1"><strong>Schaltanlagen Total Netto</strong></div>
-      <div class="col-lg-1"><strong>Elektroinstallation Total Brutto</strong></div>
-      <div class="col-lg-1"><strong>Elektroinstallation Total Brutto</strong></div>
-      <div class="col-lg-1"><strong>Actions</strong></div>
-    </div>
-    <br>
     <% @offer_offertpositions.each do |offer_offertposition| %>
+        <h3><%= offer_offertposition.offertposition.name %></h3>
+        <a class="btn btn-sm btn-info offer_offertposition_edit offer_offertposition<%=offer_offertposition.id.to_s%>_edit"
+           onclick="editLine(<%=offer_offertposition.id%>);">Edit</a>
+          <br><br>
         <%= render 'form', :offer_offertposition => offer_offertposition,
                    :offer => offer_offertposition.offer,
-                   :offertposition_name => offer_offertposition.offertposition.name,
                    :offer_offertpositionid => offer_offertposition.id %>
+    <br><br>
     <% end %>
   <% end %>
 </div>

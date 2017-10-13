@@ -19,77 +19,94 @@
         <br>
         <div class="field form-group">
           <%= device.label :eng_admin, 'Admin' %>
-          <%= device.text_field :eng_admin , :class => "form-control",
+          <%= device.text_field :eng_admin,
+                                  :class => "form-control",
+                                  :required => true,
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_steuerkonzept, 'Steuerkonzept' %>
-          <%= device.text_field :eng_steuerkonzept , :class => "form-control",
+          <%= device.text_field :eng_steuerkonzept,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_ioliste, 'IO-Liste' %>
-          <%= device.text_field :eng_ioliste , :class => "form-control",
+          <%= device.text_field :eng_ioliste,
+                                  :required => true,
+                                  :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_elplanung, 'El-Planung' %>
-          <%= device.text_field :eng_elplanung , :class => "form-control",
+          <%= device.text_field :eng_elplanung,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_fktbeschrieb, 'Fkt-Beschreibung/Dok' %>
-          <%= device.text_field :eng_fktbeschrieb , :class => "form-control",
+          <%= device.text_field :eng_fktbeschrieb,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_safetymatrix, 'Safety-Matrix' %>
-          <%= device.text_field :eng_safetymatrix , :class => "form-control",
+          <%= device.text_field :eng_safetymatrix,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_software, 'Software' %>
-          <%= device.text_field :eng_software , :class => "form-control",
+          <%= device.text_field :eng_software,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_softwaresafety, 'Software-Safety' %>
-          <%= device.text_field :eng_softwaresafety , :class => "form-control",
+          <%= device.text_field :eng_softwaresafety,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_bauleitung, 'Bauleitung' %>
-          <%= device.text_field :eng_bauleitung , :class => "form-control",
+          <%= device.text_field :eng_bauleitung,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_parametrierung, 'Parametrierung' %>
-          <%= device.text_field :eng_parametrierung , :class => "form-control",
+          <%= device.text_field :eng_parametrierung,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_signaltest, 'Signaltest' %>
-          <%= device.text_field :eng_signaltest , :class => "form-control",
+          <%= device.text_field :eng_signaltest,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_safetytest, 'Safety-Test' %>
-          <%= device.text_field :eng_safetytest , :class => "form-control",
+          <%= device.text_field :eng_safetytest,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_fkttestkalt, 'Fkt.-Test kalt' %>
-          <%= device.text_field :eng_fkttestkalt , :class => "form-control",
+          <%= device.text_field :eng_fkttestkalt,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_fkttestheiss, 'Fkt.-Test heiss' %>
-          <%= device.text_field :eng_fkttestheiss , :class => "form-control",
+          <%= device.text_field :eng_fkttestheiss,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :eng_konformitaet, 'Konformität' %>
-          <%= device.text_field :eng_konformitaet , :class => "form-control",
+          <%= device.text_field :eng_konformitaet,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
       </div>
@@ -97,67 +114,80 @@
         <br>
         <div class="field form-group">
           <%= device.label :ger_beschriftung, 'Gerätebeschriftung' %>
-          <%= device.text_field :ger_beschriftung , :class => "form-control",
+          <%= device.text_field :ger_beschriftung,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :ger_sensor, 'Sensor' %>
-          <%= device.text_field :ger_sensor , :class => "form-control",
+          <%= device.text_field :ger_sensor,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :ger_ventil, 'Ventil' %>
-          <%= device.text_field :ger_ventil , :class => "form-control",
+          <%= device.text_field :ger_ventil,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :ger_heizung, 'Heizung' %>
-          <%= device.text_field :ger_heizung , :class => "form-control",
+          <%= device.text_field :ger_heizung,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :ger_m1r, 'M 1Rtg' %>
-          <%= device.text_field :ger_m1r , :class => "form-control",
+          <%= device.text_field :ger_m1r,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :ger_m2r, 'M 2Rtg' %>
-          <%= device.text_field :ger_m2r , :class => "form-control",
+          <%= device.text_field :ger_m2r,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :ger_mfu, 'M FU' %>
-          <%= device.text_field :ger_mfu , :class => "form-control",
+          <%= device.text_field :ger_mfu,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :ger_wicklung, 'Wicklungsüberwachung' %>
-          <%= device.text_field :ger_wicklung , :class => "form-control",
+          <%= device.text_field :ger_wicklung,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :ger_bremse, 'Bremse' %>
-          <%= device.text_field :ger_bremse , :class => "form-control",
+          <%= device.text_field :ger_bremse,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :ger_geraeteheizung, 'Geräteheizung' %>
-          <%= device.text_field :ger_geraeteheizung , :class => "form-control",
+          <%= device.text_field :ger_geraeteheizung,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :ger_kommunikation, 'Kommunikation' %>
-          <%= device.text_field :ger_kommunikation , :class => "form-control",
+          <%= device.text_field :ger_kommunikation,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :ger_safety, 'Safety' %>
-          <%= device.text_field :ger_safety , :class => "form-control",
+          <%= device.text_field :ger_safety,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :ger_spsmodul, 'SPS-Modul' %>
-          <%= device.text_field :ger_spsmodul , :class => "form-control",
+          <%= device.text_field :ger_spsmodul,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
       </div>
@@ -165,62 +195,74 @@
         <br>
         <div class="field form-group">
           <%= device.label :sig_di, 'DI' %>
-          <%= device.text_field :sig_di , :class => "form-control",
+          <%= device.text_field :sig_di,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :sig_do, 'DO' %>
-          <%= device.text_field :sig_do , :class => "form-control",
+          <%= device.text_field :sig_do,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :sig_ai, 'AI' %>
-          <%= device.text_field :sig_ai , :class => "form-control",
+          <%= device.text_field :sig_ai,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :sig_ao, 'AO' %>
-          <%= device.text_field :sig_ao , :class => "form-control",
+          <%= device.text_field :sig_ao,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :sig_z, 'Z' %>
-          <%= device.text_field :sig_z , :class => "form-control",
+          <%= device.text_field :sig_z,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :sig_inkr, 'INKR' %>
-          <%= device.text_field :sig_inkr , :class => "form-control",
+          <%= device.text_field :sig_inkr,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :sig_ssi, 'SSI' %>
-          <%= device.text_field :sig_ssi , :class => "form-control",
+          <%= device.text_field :sig_ssi,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :sig_pb, 'PB' %>
-          <%= device.text_field :sig_pb , :class => "form-control",
+          <%= device.text_field :sig_pb,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :sig_sdi, 'sDI' %>
-          <%= device.text_field :sig_sdi , :class => "form-control",
+          <%= device.text_field :sig_sdi,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :sig_sdo, 'sDO' %>
-          <%= device.text_field :sig_sdo , :class => "form-control",
+          <%= device.text_field :sig_sdo,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :sig_sai, 'sAI' %>
-          <%= device.text_field :sig_sai , :class => "form-control",
+          <%= device.text_field :sig_sai,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <div class="field form-group">
           <%= device.label :sig_sao, 'sAO' %>
-          <%= device.text_field :sig_sao , :class => "form-control",
+          <%= device.text_field :sig_sao,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
       </div>
@@ -233,7 +275,8 @@
         </div>
         <div class="field form-group">
           <%= device.label :sch_anzahl, 'Schaltanlagen Anzahl' %>
-          <%= device.text_field :sch_anzahl , :class => "form-control",
+          <%= device.text_field :sch_anzahl,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
       </div>
@@ -246,7 +289,8 @@
         </div>
         <div class="field form-group">
           <%= device.label :kabelsteuerunglaenge, 'Kabel Steuerung Länge' %>
-          <%= device.text_field :kabelsteuerunglaenge , :class => "form-control",
+          <%= device.text_field :kabelsteuerunglaenge,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <br><br>
@@ -257,7 +301,8 @@
         </div>
         <div class="field form-group">
           <%= device.label :kabelspeisunglaenge, 'Kabel Speisung Länge' %>
-          <%= device.text_field :kabelspeisunglaenge , :class => "form-control",
+          <%= device.text_field :kabelspeisunglaenge,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <br><br>
@@ -268,7 +313,8 @@
         </div>
         <div class="field form-group">
           <%= device.label :kabelpotausgleichlaenge, 'Kabel Pot.-Ausgleich Länge' %>
-          <%= device.text_field :kabelpotausgleichlaenge , :class => "form-control",
+          <%= device.text_field :kabelpotausgleichlaenge,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <br><br>
@@ -279,7 +325,8 @@
         </div>
         <div class="field form-group">
           <%= device.label :installationtrasselaenge, 'Installation Trasse Länge' %>
-          <%= device.text_field :installationtrasselaenge , :class => "form-control",
+          <%= device.text_field :installationtrasselaenge,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <br><br>
@@ -290,7 +337,8 @@
         </div>
         <div class="field form-group">
           <%= device.label :installationrohrlaenge, 'Installation Rohr Länge' %>
-          <%= device.text_field :installationrohrlaenge , :class => "form-control",
+          <%= device.text_field :installationrohrlaenge,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
         <br><br>
@@ -301,7 +349,8 @@
         </div>
         <div class="field form-group">
           <%= device.label :installationgeraetelaenge, 'Installation Geräte Länge' %>
-          <%= device.text_field :installationgeraetelaenge , :class => "form-control",
+          <%= device.text_field :installationgeraetelaenge,
+                                  :required => true , :class => "form-control",
                                 placeholder: '' %>
         </div>
       </div>

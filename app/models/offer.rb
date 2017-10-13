@@ -53,6 +53,54 @@ class Offer < ApplicationRecord
     return total
   end
 
+  def total_io_et_total_brutto
+    total = 0
+    self.offer_offertpositions.each do |offer_offertposition|
+      total += offer_offertposition.io_et_total_brutto
+    end
+    return total
+  end
+
+  def total_io_et_total_netto
+    total = 0
+    self.offer_offertpositions.each do |offer_offertposition|
+      total += offer_offertposition.io_et_total_netto
+    end
+    return total
+  end
+
+  def total_io_pilz_total_brutto
+    total = 0
+    self.offer_offertpositions.each do |offer_offertposition|
+      total += offer_offertposition.io_pilz_total_brutto
+    end
+    return total
+  end
+
+  def total_io_pilz_total_netto
+    total = 0
+    self.offer_offertpositions.each do |offer_offertposition|
+      total += offer_offertposition.io_pilz_total_netto
+    end
+    return total
+  end
+
+  def total_fu_total_brutto
+    total = 0
+    self.offer_offertpositions.each do |offer_offertposition|
+      total += offer_offertposition.fu_total_brutto
+    end
+    return total
+  end
+
+  def total_fu_total_netto
+    total = 0
+    self.offer_offertpositions.each do |offer_offertposition|
+      total += offer_offertposition.fu_total_netto
+    end
+    return total
+  end
+
   def total_sch_total_brutto
     total = 0
     self.offer_offertpositions.each do |offer_offertposition|

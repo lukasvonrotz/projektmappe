@@ -3,12 +3,14 @@
     <div class="field form-group">
       <%= wirecaptionprice.label :kostenkabelmitmontagetraeger, 'Kosten Kabelbeschriftung inkl. Montageträger' %>
       <%= wirecaptionprice.text_field :kostenkabelmitmontagetraeger, :class => "form-control",
-                             placeholder: 'Preis eingeben' %>
+                                        :required => true,
+                                        placeholder: 'Preis eingeben' %>
     </div>
     <div class="field form-group">
       <%= wirecaptionprice.label :kostenadermitmontagehuelse, 'Kosten 1 x Aderbeschriftung inkl. Montagehülse' %>
       <%= wirecaptionprice.text_field :kostenadermitmontagehuelse, :class => "form-control",
-                                      placeholder: 'Preis eingeben' %>
+                                        :required => true,
+                                        placeholder: 'Preis eingeben' %>
     </div>
 
     <div class="actions form-group">

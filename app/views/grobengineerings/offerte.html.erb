@@ -7,76 +7,102 @@
 <div class="tab-content">
   <div id="berechnung" class="tab-pane fade in active">
     <br>
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th></th>
-        <th>Geräteanzahl</th>
-        <th>Eng Elektroplanung</th>
-        <th>Eng Planung/SW</th>
-        <th>Eng IBN/Bauleitung</th>
-        <th>SPS Total Brutto</th>
-        <th>SPS Total Netto</th>
-        <th>Schaltanlagen Total Brutto</th>
-        <th>Schaltanlagen Total Netto</th>
-        <th>Elektroinstallation Total Brutto</th>
-        <th>Elektroinstallation Total Netto</th>
-        <th>Total Brutto</th>
-        <th>Total Netto</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @offert_hash.each do |key1, array1| %>
-          <tr class="info" style="font-weight: bold;">
-            <td><%= Offertposition.find(key1).name %></td>
-            <td><%= array1["device_anzahl"] %></td>
-            <td><%= array1["kosten_eng_elplanung_total"].to_f.round(1) %></td>
-            <td><%= array1["kosten_eng_planung_sw_total"].to_f.round(1) %></td>
-            <td><%= array1["kosten_eng_ibn_bauleitung_total"].to_f.round(1) %></td>
-            <td><%= array1["kosten_sps_total_brutto"].to_f.round(1) %></td>
-            <td><%= array1["kosten_sps_total_netto"].to_f.round(1) %></td>
-            <td><%= array1["kosten_sch_total_brutto"].to_f.round(1) %></td>
-            <td><%= array1["kosten_sch_total_netto"].to_f.round(1) %></td>
-            <td><%= array1["kosten_elinst_total_brutto"].to_f.round(1) %></td>
-            <td><%= array1["kosten_elinst_total_netto"].to_f.round(1) %></td>
-            <td><%= array1["kosten_total_brutto"].to_f.round(1) %></td>
-            <td><%= array1["kosten_total_netto"].to_f.round(1) %></td>
-          </tr>
-          <% array1["devices"].each do |key2, array2| %>
-              <tr>
-                <td><%= Device.find(key2).definition %></td>
-                <td><%= array2["device_anzahl"] %></td>
-                <td><%= array2["kosten_eng_elplanung_total"].to_f.round(1) %></td>
-                <td><%= array2["kosten_eng_planung_sw_total"].to_f.round(1) %></td>
-                <td><%= array2["kosten_eng_ibn_bauleitung_total"].to_f.round(1) %></td>
-                <td><%= array2["kosten_sps_total_brutto"].to_f.round(1) %></td>
-                <td><%= array2["kosten_sps_total_netto"].to_f.round(1) %></td>
-                <td><%= array2["kosten_sch_total_brutto"].to_f.round(1) %></td>
-                <td><%= array2["kosten_sch_total_netto"].to_f.round(1) %></td>
-                <td><%= array2["kosten_elinst_total_brutto"].to_f.round(1) %></td>
-                <td><%= array2["kosten_elinst_total_netto"].to_f.round(1) %></td>
-                <td><%= array2["kosten_total_brutto"].to_f.round(1) %></td>
-                <td><%= array2["kosten_total_netto"].to_f.round(1) %></td>
-              </tr>
-          <% end %>
-      <% end %>
-      <tr class="success" style="font-weight: bold;">
-        <td>TOTAL</td>
-        <td><%= @total_geraeteanzahl %></td>
-        <td><%= @total_elplanung.to_f.round(1) %></td>
-        <td><%= @total_planung_sw.to_f.round(1) %></td>
-        <td><%= @total_ibn_bauleitung.to_f.round(1) %></td>
-        <td><%= @total_sps_brutto.to_f.round(1) %></td>
-        <td><%= @total_sps_netto.to_f.round(1) %></td>
-        <td><%= @total_sch_brutto.to_f.round(1) %></td>
-        <td><%= @total_sch_netto.to_f.round(1) %></td>
-        <td><%= @total_elinst_brutto.to_f.round(1) %></td>
-        <td><%= @total_elinst_netto.to_f.round(1) %></td>
-        <td><%= @total_brutto.to_f.round(1) %></td>
-        <td><%= @total_netto.to_f.round(1) %></td>
-      </tr>
-      </tbody>
-    </table>
+    <div id="content" class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th></th>
+          <th>Geräteanzahl</th>
+          <th>Eng Elektroplanung</th>
+          <th>Eng Planung/SW</th>
+          <th>Eng IBN/Bauleitung</th>
+          <th>SPS Total Brutto</th>
+          <th>SPS Total Netto</th>
+          <th>IO ET Total Brutto</th>
+          <th>IO ET Total Netto</th>
+          <th>IO PILZ Total Brutto</th>
+          <th>IO PILZ Total Netto</th>
+          <th>FU Total Brutto</th>
+          <th>FU Total Netto</th>
+          <th>Schaltanlagen Total Brutto</th>
+          <th>Schaltanlagen Total Netto</th>
+          <th>Elektroinstallation Total Brutto</th>
+          <th>Elektroinstallation Total Netto</th>
+          <th>Total Brutto</th>
+          <th>Total Netto</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="success" style="font-weight: bold;">
+          <td>TOTAL</td>
+          <td><%= @total_geraeteanzahl %></td>
+          <td><%= @total_elplanung.to_f.round(1) %></td>
+          <td><%= @total_planung_sw.to_f.round(1) %></td>
+          <td><%= @total_ibn_bauleitung.to_f.round(1) %></td>
+          <td><%= @total_sps_brutto.to_f.round(1) %></td>
+          <td><%= @total_sps_netto.to_f.round(1) %></td>
+          <td><%= @total_io_et_brutto.to_f.round(1) %></td>
+          <td><%= @total_io_et_netto.to_f.round(1) %></td>
+          <td><%= @total_io_pilz_brutto.to_f.round(1) %></td>
+          <td><%= @total_io_pilz_netto.to_f.round(1) %></td>
+          <td><%= @total_fu_brutto.to_f.round(1) %></td>
+          <td><%= @total_fu_netto.to_f.round(1) %></td>
+          <td><%= @total_sch_brutto.to_f.round(1) %></td>
+          <td><%= @total_sch_netto.to_f.round(1) %></td>
+          <td><%= @total_elinst_brutto.to_f.round(1) %></td>
+          <td><%= @total_elinst_netto.to_f.round(1) %></td>
+          <td><%= @total_brutto.to_f.round(1) %></td>
+          <td><%= @total_netto.to_f.round(1) %></td>
+        </tr>
+        <% @offert_hash.each do |key1, array1| %>
+            <tr class="info" style="font-weight: bold;">
+              <td><%= Offertposition.find(key1).name %></td>
+              <td><%= array1["device_anzahl"] %></td>
+              <td><%= array1["kosten_eng_elplanung_total"].to_f.round(1) %></td>
+              <td><%= array1["kosten_eng_planung_sw_total"].to_f.round(1) %></td>
+              <td><%= array1["kosten_eng_ibn_bauleitung_total"].to_f.round(1) %></td>
+              <td><%= array1["kosten_sps_total_brutto"].to_f.round(1) %></td>
+              <td><%= array1["kosten_sps_total_netto"].to_f.round(1) %></td>
+              <td><%= array1["kosten_sch_total_brutto"].to_f.round(1) %></td>
+              <td><%= array1["kosten_sch_total_netto"].to_f.round(1) %></td>
+              <td><%= array1["kosten_io_et_total_brutto"].to_f.round(1) %></td>
+              <td><%= array1["kosten_io_et_total_netto"].to_f.round(1) %></td>
+              <td><%= array1["kosten_io_pilz_total_brutto"].to_f.round(1) %></td>
+              <td><%= array1["kosten_io_pilz_total_netto"].to_f.round(1) %></td>
+              <td><%= array1["kosten_fu_total_brutto"].to_f.round(1) %></td>
+              <td><%= array1["kosten_fu_total_netto"].to_f.round(1) %></td>
+              <td><%= array1["kosten_elinst_total_brutto"].to_f.round(1) %></td>
+              <td><%= array1["kosten_elinst_total_netto"].to_f.round(1) %></td>
+              <td><%= array1["kosten_total_brutto"].to_f.round(1) %></td>
+              <td><%= array1["kosten_total_netto"].to_f.round(1) %></td>
+            </tr>
+            <% array1["devices"].each do |key2, array2| %>
+                <tr>
+                  <td><%= Device.find(key2).definition %></td>
+                  <td><%= array2["device_anzahl"] %></td>
+                  <td><%= array2["kosten_eng_elplanung_total"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_eng_planung_sw_total"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_eng_ibn_bauleitung_total"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_sps_total_brutto"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_sps_total_netto"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_sch_total_brutto"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_sch_total_netto"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_io_et_total_brutto"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_io_et_total_netto"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_io_pilz_total_brutto"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_io_pilz_total_netto"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_fu_total_brutto"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_fu_total_netto"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_elinst_total_brutto"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_elinst_total_netto"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_total_brutto"].to_f.round(1) %></td>
+                  <td><%= array2["kosten_total_netto"].to_f.round(1) %></td>
+                </tr>
+            <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
   <div id="offerten" class="tab-pane fade">
     <br>

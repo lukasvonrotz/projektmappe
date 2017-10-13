@@ -9,7 +9,8 @@
     <div class="field form-group">
       <%= wire.label :anzahladern, 'Anzahl Adern' %>
       <%= wire.text_field :anzahladern, :class => "form-control",
-                          placeholder: 'Anzahl Adern eingeben' %>
+                            :required => true,
+                            placeholder: 'Anzahl Adern eingeben' %>
     </div>
 
     <div class="field form-group">

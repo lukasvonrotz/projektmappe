@@ -1,77 +1,85 @@
 <%= form_for [offer, offer_offertposition] do |offer_offertposition| %>
-    <div class="row" style="margin-bottom: 10px;">
-      <div class="col-lg-1">
-        <strong class="hidden-lg">Name<br></strong>
-        <%= offertposition_name %></br>
-        <strong class="hidden-lg"><br></strong>
-      </div>
-      <div class="col-lg-1">
-        <strong class="hidden-lg">Geräteanzahl<br></strong>
-        <%= offer_offertposition.text_field :device_anzahl,
-                                         :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
-        <strong class="hidden-lg"><br></strong>
-      </div>
-      <div class="col-lg-1">
-        <strong class="hidden-lg">Eng El-Planung<br></strong>
-        <%= offer_offertposition.text_field :eng_elplanung,
-                                         :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
-        <strong class="hidden-lg"><br></strong>
-      </div>
-      <div class="col-lg-1">
-        <strong class="hidden-lg">Eng Planung/SW<br></strong>
-        <%= offer_offertposition.text_field :eng_planung_sw,
-                                         :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
-        <strong class="hidden-lg"><br></strong>
-      </div>
-      <div class="col-lg-1">
-        <strong class="hidden-lg">Eng IBN Bauleitung<br></strong>
-        <%= offer_offertposition.text_field :eng_ibn_bauleitung,
-                                         :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
-        <strong class="hidden-lg"><br></strong>
-      </div>
-      <div class="col-lg-1">
-        <strong class="hidden-lg">SPS Total Brutto<br></strong>
-        <%= offer_offertposition.text_field :sps_total_brutto,
-                                         :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
-        <strong class="hidden-lg"><br></strong>
-      </div>
-      <div class="col-lg-1">
-        <strong class="hidden-lg">SPS Total Netto<br></strong>
-        <%= offer_offertposition.text_field :sps_total_netto,
-                                         :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
-        <strong class="hidden-lg"><br></strong>
-      </div>
-      <div class="col-lg-1">
-        <strong class="hidden-lg">SCH Total Brutto<br></strong>
-        <%= offer_offertposition.text_field :sch_total_brutto,
-                                         :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
-        <strong class="hidden-lg"><br></strong>
-      </div>
-      <div class="col-lg-1">
-        <strong class="hidden-lg">SCH Total Netto<br></strong>
-        <%= offer_offertposition.text_field :sch_total_netto,
-                                            :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
-        <strong class="hidden-lg"><br></strong>
-      </div>
-      <div class="col-lg-1">
-        <strong class="hidden-lg">ELI Total Brutto<br></strong>
-        <%= offer_offertposition.text_field :elinst_total_brutto,
-                                            :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
-        <strong class="hidden-lg"><br></strong>
-      </div>
-      <div class="col-lg-1">
-        <strong class="hidden-lg">ELI Total Netto<br></strong>
-        <%= offer_offertposition.text_field :elinst_total_netto,
-                                            :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
-        <strong class="hidden-lg"><br></strong>
-      </div>
-      <div class="col-lg-1" style="line-height: 30px;">
-        <a class="btn btn-sm btn-info offer_offertposition_edit offer_offertposition<%=offer_offertpositionid.to_s%>_edit"
-           onclick="editLine(<%=offer_offertpositionid%>);">Edit</a>
-        <%= offer_offertposition.submit 'Update',
-                                     class: "btn btn-sm btn-success offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld",
-                                     data: { disable_with: "Verarbeite..." }  %>
-        <strong class="hidden-lg"><br><br><br><br></strong>
-      </div>
-    </div>
+    <strong>Geräteanzahl<br></strong>
+    <%= offer_offertposition.text_field :device_anzahl,
+                                          :required => true,
+                                     :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>Eng El-Planung<br></strong>
+    <%= offer_offertposition.text_field :eng_elplanung,
+                                          :required => true,
+                                     :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>Eng Planung/SW<br></strong>
+    <%= offer_offertposition.text_field :eng_planung_sw,
+                                          :required => true,
+                                     :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>Eng IBN Bauleitung<br></strong>
+    <%= offer_offertposition.text_field :eng_ibn_bauleitung,
+                                          :required => true,
+                                     :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>SPS Total Brutto<br></strong>
+    <%= offer_offertposition.text_field :sps_total_brutto,
+                                          :required => true,
+                                     :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>SPS Total Netto<br></strong>
+    <%= offer_offertposition.text_field :sps_total_netto,
+                                          :required => true,
+                                     :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>IO ET Total Brutto<br></strong>
+    <%= offer_offertposition.text_field :io_et_total_brutto,
+                                          :required => true,
+                                        :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>IO ET Total Netto<br></strong>
+    <%= offer_offertposition.text_field :io_et_total_netto,
+                                          :required => true,
+                                        :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>IO PILZ Total Brutto<br></strong>
+    <%= offer_offertposition.text_field :io_pilz_total_brutto,
+                                          :required => true,
+                                        :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>IO PILZ Total Netto<br></strong>
+    <%= offer_offertposition.text_field :io_pilz_total_netto,
+                                          :required => true,
+                                        :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>FU Total Brutto<br></strong>
+    <%= offer_offertposition.text_field :fu_total_brutto,
+                                          :required => true,
+                                        :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>FU Total Netto<br></strong>
+    <%= offer_offertposition.text_field :fu_total_netto,
+                                          :required => true,
+                                        :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>SCH Total Brutto<br></strong>
+    <%= offer_offertposition.text_field :sch_total_brutto,
+                                          :required => true,
+                                     :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>SCH Total Netto<br></strong>
+    <%= offer_offertposition.text_field :sch_total_netto,
+                                          :required => true,
+                                        :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>ELI Total Brutto<br></strong>
+    <%= offer_offertposition.text_field :elinst_total_brutto,
+                                          :required => true,
+                                        :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <strong>ELI Total Netto<br></strong>
+    <%= offer_offertposition.text_field :elinst_total_netto,
+                                          :required => true,
+                                          :class => "form-control offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld" %>
+    <br>
+    <%= offer_offertposition.submit 'Update',
+                                 class: "btn btn-sm btn-success offer_offertposition_fld offer_offertposition" + offer_offertpositionid.to_s + "_fld",
+                                 data: { disable_with: "Verarbeite..." }  %>
 <% end %>

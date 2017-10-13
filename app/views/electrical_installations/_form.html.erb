@@ -18,12 +18,14 @@
     <div class="field form-group">
       <%= electrical_installation.label :brutto, 'Bruttopreis [EUR]' %>
       <%= electrical_installation.text_field :brutto, :class => "form-control",
-                              placeholder: 'Bruttopreis (in CHF) für Elektroinstallation eingeben' %>
+                                               :required => true,
+                                               placeholder: 'Bruttopreis (in CHF) für Elektroinstallation eingeben' %>
     </div>
     <div class="field form-group">
       <%= electrical_installation.label :rabatt, 'Rabatt' %>
       <%= electrical_installation.text_field :rabatt, :class => "form-control",
-                              placeholder: 'Rabatt für Elektroinstallation eingeben' %>
+                                               :required => true,
+                                               placeholder: 'Rabatt für Elektroinstallation eingeben' %>
     </div>
 
 

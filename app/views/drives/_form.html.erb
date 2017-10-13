@@ -38,11 +38,13 @@
     <div class="field form-group">
       <%= drive.label :brutto, 'Bruttopreis [CHF]' %>
       <%= drive.text_field :brutto, :class => "form-control",
+                           :required => true,
                               placeholder: 'Bruttopreis (in Euro) für FU eingeben' %>
     </div>
     <div class="field form-group">
       <%= drive.label :rabatt, 'Rabatt' %>
       <%= drive.text_field :rabatt, :class => "form-control",
+                             :required => true,
                               placeholder: 'Rabatt für FU eingeben' %>
     </div>
 

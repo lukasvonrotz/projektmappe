@@ -9,6 +9,12 @@ class CreateOfferOffertpositions < ActiveRecord::Migration[5.0]
       t.float :eng_ibn_bauleitung, :default => 0, null: false
       t.float :sps_total_brutto, :default => 0, null: false
       t.float :sps_total_netto, :default => 0, null: false
+      t.float :io_et_total_brutto, :default => 0, null: false
+      t.float :io_et_total_netto, :default => 0, null: false
+      t.float :io_pilz_total_brutto, :default => 0, null: false
+      t.float :io_pilz_total_netto, :default => 0, null: false
+      t.float :fu_total_brutto, :default => 0, null: false
+      t.float :fu_total_netto, :default => 0, null: false
       t.float :sch_total_brutto, :default => 0, null: false
       t.float :sch_total_netto, :default => 0, null: false
       t.float :elinst_total_brutto, :default => 0, null: false

@@ -17,57 +17,59 @@
     </div>
     <div class="field form-group">
       <%= assembly.label :di, 'DI' %>
-      <%= assembly.text_field :di, :class => "form-control" %>
+      <%= assembly.text_field :di, :required => true, :class => "form-control" %>
     </div>
     <div class="field form-group">
       <%= assembly.label :do, 'DO' %>
-      <%= assembly.text_field :do, :class => "form-control" %>
+      <%= assembly.text_field :do, :required => true, :class => "form-control" %>
     </div>
     <div class="field form-group">
       <%= assembly.label :ai, 'AI' %>
-      <%= assembly.text_field :ai, :class => "form-control" %>
+      <%= assembly.text_field :ai, :required => true, :class => "form-control" %>
     </div>
     <div class="field form-group">
       <%= assembly.label :ao, 'AO' %>
-      <%= assembly.text_field :ao, :class => "form-control" %>
+      <%= assembly.text_field :ao, :required => true, :class => "form-control" %>
     </div>
     <div class="field form-group">
       <%= assembly.label :z, 'Z' %>
-      <%= assembly.text_field :z, :class => "form-control" %>
+      <%= assembly.text_field :z, :required => true, :class => "form-control" %>
     </div>
     <div class="field form-group">
       <%= assembly.label :inkr, 'INKR' %>
-      <%= assembly.text_field :inkr, :class => "form-control" %>
+      <%= assembly.text_field :inkr, :required => true, :class => "form-control" %>
     </div>
     <div class="field form-group">
       <%= assembly.label :ssi, 'SSI' %>
-      <%= assembly.text_field :ssi, :class => "form-control" %>
+      <%= assembly.text_field :ssi, :required => true, :class => "form-control" %>
     </div>
     <div class="field form-group">
       <%= assembly.label :sdi, 'sDI' %>
-      <%= assembly.text_field :sdi, :class => "form-control" %>
+      <%= assembly.text_field :sdi, :required => true, :class => "form-control" %>
     </div>
     <div class="field form-group">
       <%= assembly.label :sdo, 'sDO' %>
-      <%= assembly.text_field :sdo, :class => "form-control" %>
+      <%= assembly.text_field :sdo, :required => true, :class => "form-control" %>
     </div>
     <div class="field form-group">
       <%= assembly.label :sai, 'sAI' %>
-      <%= assembly.text_field :sai, :class => "form-control" %>
+      <%= assembly.text_field :sai, :required => true, :class => "form-control" %>
     </div>
     <div class="field form-group">
       <%= assembly.label :sao, 'sAO' %>
-      <%= assembly.text_field :sao, :class => "form-control" %>
+      <%= assembly.text_field :sao, :required => true, :class => "form-control" %>
     </div>
     <div class="field form-group">
       <%= assembly.label :brutto_eur, 'Bruttopreis [EUR]' %>
       <%= assembly.text_field :brutto_eur, :class => "form-control",
-                              placeholder: 'Bruttopreis (in Euro) für Baugruppe eingeben' %>
+                                :required => true,
+                                placeholder: 'Bruttopreis (in Euro) für Baugruppe eingeben' %>
     </div>
     <div class="field form-group">
       <%= assembly.label :rabatt, 'Rabatt' %>
       <%= assembly.text_field :rabatt, :class => "form-control",
-                              placeholder: 'Rabatt für Baugruppe eingeben' %>
+                                :required => true,
+                                placeholder: 'Rabatt für Baugruppe eingeben' %>
     </div>
 
 

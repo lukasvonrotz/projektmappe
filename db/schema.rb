@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171010093814) do
+ActiveRecord::Schema.define(version: 20171010093815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,7 +143,6 @@ ActiveRecord::Schema.define(version: 20171010093814) do
   end
 
   create_table "grobengineerings", force: :cascade do |t|
-    t.string   "offertposition"
     t.text     "beschreibung"
     t.text     "kommentar"
     t.text     "device_import"
@@ -232,20 +231,26 @@ ActiveRecord::Schema.define(version: 20171010093814) do
   end
 
   create_table "offer_offertpositions", force: :cascade do |t|
-    t.integer  "offer_id",                          null: false
-    t.integer  "offertposition_id",                 null: false
-    t.float    "device_anzahl",       default: 0.0, null: false
-    t.float    "eng_elplanung",       default: 0.0, null: false
-    t.float    "eng_planung_sw",      default: 0.0, null: false
-    t.float    "eng_ibn_bauleitung",  default: 0.0, null: false
-    t.float    "sps_total_brutto",    default: 0.0, null: false
-    t.float    "sps_total_netto",     default: 0.0, null: false
-    t.float    "sch_total_brutto",    default: 0.0, null: false
-    t.float    "sch_total_netto",     default: 0.0, null: false
-    t.float    "elinst_total_brutto", default: 0.0, null: false
-    t.float    "elinst_total_netto",  default: 0.0, null: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.integer  "offer_id",                           null: false
+    t.integer  "offertposition_id",                  null: false
+    t.float    "device_anzahl",        default: 0.0, null: false
+    t.float    "eng_elplanung",        default: 0.0, null: false
+    t.float    "eng_planung_sw",       default: 0.0, null: false
+    t.float    "eng_ibn_bauleitung",   default: 0.0, null: false
+    t.float    "sps_total_brutto",     default: 0.0, null: false
+    t.float    "sps_total_netto",      default: 0.0, null: false
+    t.float    "io_et_total_brutto",   default: 0.0, null: false
+    t.float    "io_et_total_netto",    default: 0.0, null: false
+    t.float    "io_pilz_total_brutto", default: 0.0, null: false
+    t.float    "io_pilz_total_netto",  default: 0.0, null: false
+    t.float    "fu_total_brutto",      default: 0.0, null: false
+    t.float    "fu_total_netto",       default: 0.0, null: false
+    t.float    "sch_total_brutto",     default: 0.0, null: false
+    t.float    "sch_total_netto",      default: 0.0, null: false
+    t.float    "elinst_total_brutto",  default: 0.0, null: false
+    t.float    "elinst_total_netto",   default: 0.0, null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.index ["offer_id", "offertposition_id"], name: "offer_offertposition_unique", unique: true, using: :btree
   end
 

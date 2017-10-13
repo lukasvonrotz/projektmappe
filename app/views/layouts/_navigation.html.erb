@@ -18,7 +18,7 @@
                 <li class="<%= 'active' if current_page? (projects_path) %>">
                   <%= link_to "Alle Anlagen", projects_path %>
                 </li>
-                <% Project.all.each do |project| %>
+                <% Project.all.order(:name).each do |project| %>
                   <li class="divider"></li>
                   <li class="dropdown-header"><%= project.name %></li>
                   <li class="<%= 'active' if current_page? (project_subsystems_path(project.id)) %>">
@@ -32,7 +32,7 @@
                       <ul class="dropdown-menu">
                         <li class="dropdown-submenu">
                           <% if project.subprojects.any? %>
-                            <% project.subprojects.each do |subproject| %>
+                            <% project.subprojects.order(:name).each do |subproject| %>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= subproject.name %></a>
                             <ul class="dropdown-menu">
                               <li class="<%= 'active' if current_page? (project_subproject_path(project.id, subproject.id)) %>">

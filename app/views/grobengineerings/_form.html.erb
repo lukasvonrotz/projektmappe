@@ -29,7 +29,7 @@
     </div>
     <div class="field form-group">
       <%= grobengineering.label :device_anzahl, 'Geräte Anzahl' %>
-      <%= grobengineering.text_field :device_anzahl, :class => "form-control" %>
+      <%= grobengineering.text_field :device_anzahl, :class => "form-control", :required => true %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :update_necessary, 'Update notwendig' %>
@@ -58,7 +58,7 @@
     </div>
     <div class="field form-group">
       <%= grobengineering.label :funktion_sw, 'Funktion SW' %>
-      <%= grobengineering.text_field :funktion_sw, :class => "form-control" %>
+      <%= grobengineering.text_field :funktion_sw, :class => "form-control", :required => true %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :schaltschrank_preisberechnung, 'Schaltschrank für Preisberechnung' %>
@@ -84,7 +84,7 @@
     </div>
     <div class="field form-group">
       <%= grobengineering.label :kabel_spez1_laenge, 'Kabel Spezifisch 1 Länge' %>
-      <%= grobengineering.text_field :kabel_spez1_laenge, :class => "form-control" %>
+      <%= grobengineering.text_field :kabel_spez1_laenge, :class => "form-control", :required => true %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :wire_spez2, 'Kabel Spezifisch 2' %>
@@ -94,7 +94,7 @@
     </div>
     <div class="field form-group">
       <%= grobengineering.label :kabel_spez2_laenge, 'Kabel Spezifisch 2 Länge' %>
-      <%= grobengineering.text_field :kabel_spez2_laenge, :class => "form-control" %>
+      <%= grobengineering.text_field :kabel_spez2_laenge, :class => "form-control", :required => true %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :wire_spez3, 'Kabel Spezifisch 3' %>
@@ -104,7 +104,7 @@
     </div>
     <div class="field form-group">
       <%= grobengineering.label :kabel_spez3_laenge, 'Kabel Spezifisch 3 Länge' %>
-      <%= grobengineering.text_field :kabel_spez3_laenge, :class => "form-control" %>
+      <%= grobengineering.text_field :kabel_spez3_laenge, :class => "form-control", :required => true %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :sicherheitszone, 'Sicherheitszone' %>
@@ -116,15 +116,15 @@
     </div>
     <div class="field form-group">
       <%= grobengineering.label :spannung, 'Spannung [V]' %>
-      <%= grobengineering.text_field :spannung, :class => "form-control" %>
+      <%= grobengineering.text_field :spannung, :class => "form-control", :required => true %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :leistung, 'Leistung [kW]' %>
-      <%= grobengineering.text_field :leistung, :class => "form-control" %>
+      <%= grobengineering.text_field :leistung, :class => "form-control", :required => true %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :strom, 'Strom [A]' %>
-      <%= grobengineering.text_field :strom, :class => "form-control" %>
+      <%= grobengineering.text_field :strom, :class => "form-control", :required => true %>
     </div>
 
     <%= grobengineering.hidden_field :subsubproject_id, :value => subsubprojectid %>

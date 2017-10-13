@@ -141,7 +141,7 @@
       <td><%= Grobengineering.kosten_sps_total_netto(@subsubproject) %></td>
       <td><%= Grobengineering.kosten_io_et_total_brutto(@subsubproject) %></td>
       <td><%= Grobengineering.kosten_io_et_total_netto(@subsubproject) %></td>
-      <td><%= Grobengineering.kosten_io_pilz_total_netto(@subsubproject) %></td>
+      <td><%= Grobengineering.kosten_io_pilz_total_brutto(@subsubproject) %></td>
       <td><%= Grobengineering.kosten_io_pilz_total_netto(@subsubproject) %></td>
       <td><%= Grobengineering.kosten_fu_einzel_brutto(@subsubproject).round(2) %></td>
       <td><%= Grobengineering.kosten_fu_einzel_netto(@subsubproject).round(2) %></td>
@@ -367,7 +367,7 @@
           <td><%= grobengineering.bemerkung %></td>
           <td><%= grobengineering.funktion_sw %></td>
           <td><%= grobengineering.switchgear_motorenabgang.nil? ? '' : grobengineering.switchgear_motorenabgang.kennung %></td>
-          <td><%= grobengineering.fu_typ.nil? ? '' : grobengineering.fu_typ.bezeichnung %></td>
+          <td><%= grobengineering.fu_typ.nil? ? '' : grobengineering.fu_typ.kennung %></td>
           <td><%= grobengineering.wire_spez1.nil? ? '' : grobengineering.wire_spez1.kabeltyp %></td>
           <td><%= grobengineering.kabel_spez1_laenge %></td>
           <td><%= grobengineering.wire_spez2.nil? ? '' : grobengineering.wire_spez2.kabeltyp %></td>
@@ -471,7 +471,7 @@
           <td><%= grobengineering.kosten_sps_total_netto(@subsubproject.eurokurs) %></td>
           <td><%= grobengineering.kosten_io_et_total_brutto(@subsubproject.proiorechnen, @subsubproject.eurokurs) %></td>
           <td><%= grobengineering.kosten_io_et_total_netto(@subsubproject.proiorechnen, @subsubproject.eurokurs) %></td>
-          <td><%= grobengineering.kosten_io_pilz_total_netto(@subsubproject.proiorechnen, @subsubproject.eurokurs) %></td>
+          <td><%= grobengineering.kosten_io_pilz_total_brutto(@subsubproject.proiorechnen, @subsubproject.eurokurs) %></td>
           <td><%= grobengineering.kosten_io_pilz_total_netto(@subsubproject.proiorechnen, @subsubproject.eurokurs) %></td>
           <td><%= grobengineering.kosten_fu_einzel_brutto %></td>
           <td><%= grobengineering.kosten_fu_einzel_netto %></td>

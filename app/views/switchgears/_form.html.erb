@@ -24,12 +24,14 @@
     <div class="field form-group">
       <%= switchgear.label :brutto, 'Bruttopreis [EUR]' %>
       <%= switchgear.text_field :brutto, :class => "form-control",
-                              placeholder: 'Bruttopreis (in CHF) für Eintrag eingeben' %>
+                                  :required => true,
+                                  placeholder: 'Bruttopreis (in CHF) für Eintrag eingeben' %>
     </div>
     <div class="field form-group">
       <%= switchgear.label :rabatt, 'Rabatt' %>
       <%= switchgear.text_field :rabatt, :class => "form-control",
-                              placeholder: 'Rabatt für Eintrag eingeben' %>
+                                  :required => true,
+                                  placeholder: 'Rabatt für Eintrag eingeben' %>
     </div>
 
 

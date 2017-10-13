@@ -93,6 +93,12 @@ class GrobengineeringsController < ApplicationController
     @total_sps_netto = 0
     @total_sch_brutto = 0
     @total_sch_netto = 0
+    @total_io_et_brutto = 0
+    @total_io_et_netto = 0
+    @total_io_pilz_brutto = 0
+    @total_io_pilz_netto = 0
+    @total_fu_brutto = 0
+    @total_fu_netto = 0
     @total_elinst_brutto = 0
     @total_elinst_netto = 0
     @total_brutto = 0
@@ -109,6 +115,12 @@ class GrobengineeringsController < ApplicationController
         @total_sps_netto += array2["kosten_sps_total_netto"]
         @total_sch_brutto += array2["kosten_sch_total_brutto"]
         @total_sch_netto += array2["kosten_sch_total_netto"]
+        @total_io_et_brutto += array2["kosten_io_et_total_brutto"]
+        @total_io_et_netto += array2["kosten_io_et_total_netto"]
+        @total_io_pilz_brutto += array2["kosten_io_pilz_total_brutto"]
+        @total_io_pilz_netto += array2["kosten_io_pilz_total_netto"]
+        @total_fu_brutto += array2["kosten_fu_total_brutto"]
+        @total_fu_netto += array2["kosten_fu_total_netto"]
         @total_elinst_brutto += array2["kosten_elinst_total_brutto"]
         @total_elinst_netto += array2["kosten_elinst_total_netto"]
         @total_brutto += array2["kosten_total_brutto"]

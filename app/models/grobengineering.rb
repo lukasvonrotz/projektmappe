@@ -70,6 +70,12 @@ class Grobengineering < ApplicationRecord
       offert_hash[offertposition.id]["kosten_sps_total_netto"] = 0
       offert_hash[offertposition.id]["kosten_sch_total_brutto"] = 0
       offert_hash[offertposition.id]["kosten_sch_total_netto"] = 0
+      offert_hash[offertposition.id]["kosten_io_et_total_brutto"] = 0
+      offert_hash[offertposition.id]["kosten_io_et_total_netto"] = 0
+      offert_hash[offertposition.id]["kosten_io_pilz_total_brutto"] = 0
+      offert_hash[offertposition.id]["kosten_io_pilz_total_netto"] = 0
+      offert_hash[offertposition.id]["kosten_fu_total_brutto"] = 0
+      offert_hash[offertposition.id]["kosten_fu_total_netto"] = 0
       offert_hash[offertposition.id]["kosten_elinst_total_brutto"] = 0
       offert_hash[offertposition.id]["kosten_elinst_total_netto"] = 0
       offert_hash[offertposition.id]["kosten_total_brutto"] = 0
@@ -85,6 +91,12 @@ class Grobengineering < ApplicationRecord
         offert_hash[offertposition.id]["devices"][device_id]["kosten_sps_total_netto"] = 0
         offert_hash[offertposition.id]["devices"][device_id]["kosten_sch_total_brutto"] = 0
         offert_hash[offertposition.id]["devices"][device_id]["kosten_sch_total_netto"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_io_et_total_brutto"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_io_et_total_netto"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_io_pilz_total_brutto"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_io_pilz_total_netto"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_fu_total_brutto"] = 0
+        offert_hash[offertposition.id]["devices"][device_id]["kosten_fu_total_netto"] = 0
         offert_hash[offertposition.id]["devices"][device_id]["kosten_elinst_total_brutto"] = 0
         offert_hash[offertposition.id]["devices"][device_id]["kosten_elinst_total_netto"] = 0
         offert_hash[offertposition.id]["devices"][device_id]["kosten_total_brutto"] = 0
@@ -98,6 +110,12 @@ class Grobengineering < ApplicationRecord
           offert_hash[offertposition.id]["devices"][device_id]["kosten_sps_total_netto"] += line.kosten_sps_total_netto(subsubproject.eurokurs)
           offert_hash[offertposition.id]["devices"][device_id]["kosten_sch_total_brutto"] += line.kosten_sch_total_brutto(subsubproject.eurokurs)
           offert_hash[offertposition.id]["devices"][device_id]["kosten_sch_total_netto"] += line.kosten_sch_total_netto(subsubproject.eurokurs)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_io_et_total_brutto"] += line.kosten_io_et_total_brutto(subsubproject.proiorechnen, subsubproject.eurokurs)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_io_et_total_netto"] += line.kosten_io_et_total_netto(subsubproject.proiorechnen, subsubproject.eurokurs)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_io_pilz_total_brutto"] += line.kosten_io_pilz_total_brutto(subsubproject.proiorechnen, subsubproject.eurokurs)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_io_pilz_total_netto"] += line.kosten_io_pilz_total_netto(subsubproject.proiorechnen, subsubproject.eurokurs)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_fu_total_brutto"] += line.kosten_fu_total_brutto
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_fu_total_netto"] += line.kosten_fu_total_netto
           offert_hash[offertposition.id]["devices"][device_id]["kosten_elinst_total_brutto"] += line.kosten_elinst_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier)
           offert_hash[offertposition.id]["devices"][device_id]["kosten_elinst_total_netto"] += line.kosten_elinst_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier)
           offert_hash[offertposition.id]["devices"][device_id]["kosten_total_brutto"] += line.kosten_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs)
@@ -111,6 +129,12 @@ class Grobengineering < ApplicationRecord
           offert_hash[offertposition.id]["kosten_sps_total_netto"] += line.kosten_sps_total_netto(subsubproject.eurokurs)
           offert_hash[offertposition.id]["kosten_sch_total_brutto"] += line.kosten_sch_total_brutto(subsubproject.eurokurs)
           offert_hash[offertposition.id]["kosten_sch_total_netto"] += line.kosten_sch_total_netto(subsubproject.eurokurs)
+          offert_hash[offertposition.id]["kosten_io_et_total_brutto"] += line.kosten_io_et_total_brutto(subsubproject.proiorechnen, subsubproject.eurokurs)
+          offert_hash[offertposition.id]["kosten_io_et_total_netto"] += line.kosten_io_et_total_netto(subsubproject.proiorechnen, subsubproject.eurokurs)
+          offert_hash[offertposition.id]["kosten_io_pilz_total_brutto"] += line.kosten_io_pilz_total_brutto(subsubproject.proiorechnen, subsubproject.eurokurs)
+          offert_hash[offertposition.id]["kosten_io_pilz_total_netto"] += line.kosten_io_pilz_total_netto(subsubproject.proiorechnen, subsubproject.eurokurs)
+          offert_hash[offertposition.id]["kosten_fu_total_brutto"] += line.kosten_fu_total_brutto
+          offert_hash[offertposition.id]["kosten_fu_total_netto"] += line.kosten_fu_total_netto
           offert_hash[offertposition.id]["kosten_elinst_total_brutto"] += line.kosten_elinst_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier)
           offert_hash[offertposition.id]["kosten_elinst_total_netto"] += line.kosten_elinst_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier)
           offert_hash[offertposition.id]["kosten_total_brutto"] += line.kosten_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs)
@@ -737,42 +761,42 @@ class Grobengineering < ApplicationRecord
   end
   def kosten_elinst_trasse_total_brutto
     if !self.device.elinst_trasse.nil?
-      self.device.installationtrasselaenge * self.device.elinst_trasse.brutto
+      self.elinst_trasse_laenge * self.device.elinst_trasse.brutto
     else
       0
     end
   end
   def kosten_elinst_trasse_total_netto
     if !self.device.elinst_trasse.nil?
-      self.device.installationtrasselaenge * self.device.elinst_trasse.netto
+      self.elinst_trasse_laenge * self.device.elinst_trasse.netto
     else
       0
     end
   end
   def kosten_elinst_rohr_total_brutto
     if !self.device.elinst_rohr.nil?
-      self.device.installationrohrlaenge * self.device.elinst_rohr.brutto
+      self.elinst_rohr_laenge * self.device.elinst_rohr.brutto
     else
       0
     end
   end
   def kosten_elinst_rohr_total_netto
     if !self.device.elinst_rohr.nil?
-      self.device.installationrohrlaenge * self.device.elinst_rohr.netto
+      self.elinst_rohr_laenge * self.device.elinst_rohr.netto
     else
       0
     end
   end
   def kosten_elinst_geraete_total_brutto
     if !self.device.elinst_geraete.nil?
-      self.device.installationgeraetelaenge * self.device.elinst_geraete.brutto
+      self.elinst_geraete_laenge * self.device.elinst_geraete.brutto
     else
       0
     end
   end
   def kosten_elinst_geraete_total_netto
     if !self.device.elinst_geraete.nil?
-      self.device.installationgeraetelaenge * self.device.elinst_geraete.netto
+      self.elinst_geraete_laenge * self.device.elinst_geraete.netto
     else
       0
     end

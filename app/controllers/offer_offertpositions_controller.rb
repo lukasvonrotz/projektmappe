@@ -13,7 +13,7 @@ class OfferOffertpositionsController < ApplicationController
     if @offer_offertposition.update(offer_offertposition_params)
       redirect_to offerte_path(:project_id => project.id,
                                :subproject_id => subproject.id,
-                               :subsubproject_id => subsubproject.id), :notice => 'Preise erfolgreich erstellt.'
+                               :subsubproject_id => subsubproject.id), :notice => 'Preise erfolgreich aktualisiert.'
     else
       render 'edit'
     end

@@ -1,7 +1,6 @@
 class CreateGrobengineerings < ActiveRecord::Migration[5.0]
   def change
     create_table :grobengineerings do |t|
-      t.string :offertposition
       t.text :beschreibung
       t.text :kommentar
       t.text :device_import
