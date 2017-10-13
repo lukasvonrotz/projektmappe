@@ -468,9 +468,9 @@ module GrobengineeringsHelper
     Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_io_et_total_netto(subsubproject.proiorechnen, subsubproject.eurokurs) end
     return sum
   end
-  def Grobengineering.kosten_io_pilz_total_netto(subsubproject)
+  def Grobengineering.kosten_io_pilz_total_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_io_pilz_total_netto(subsubproject.proiorechnen, subsubproject.eurokurs) end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_io_pilz_total_brutto(subsubproject.proiorechnen, subsubproject.eurokurs) end
     return sum
   end
   def Grobengineering.kosten_io_pilz_total_netto(subsubproject)
