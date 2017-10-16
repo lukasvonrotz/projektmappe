@@ -56,8 +56,13 @@ class SwitchgearcombinationsController < ApplicationController
   # DELETE /switchgearcombinations/:id
   def destroy
     @switchgearcombination = Switchgearcombination.find(params[:id])
-    @switchgearcombination.destroy
-    redirect_to switchgearcombinations_path, :notice => 'Schaltgerätekombination wurde gelöscht.'
+    if @switchgearcombination.iogroups.any?
+      redirect_to switchgearcombinations_path,
+                  :notice => 'Schaltgerätekombination kann nicht gelöscht werden, da IO-Gruppen zugewiesen sind (siehe Tab IO-Gruppen)'
+    else
+      @switchgearcombination.destroy
+      redirect_to switchgearcombinations_path, :notice => 'Schaltgerätekombination wurde gelöscht.'
+    end
   end
 
   def import

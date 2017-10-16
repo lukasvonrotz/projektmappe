@@ -10,6 +10,14 @@ class Switchgear < ApplicationRecord
 
   has_many :switchgearcombinations, dependent: :destroy
 
+  has_many :motorenabgang_grobengineerings, class_name: "Grobengineering",
+           foreign_key: "switchgear_motorenabgang_id",
+           dependent: :nullify
+
+  has_many :einbau_devices, class_name: "Device",
+           foreign_key: "switchgear_einbau_id",
+           dependent: :nullify
+
   def netto
     self.brutto - (self.brutto * self.rabatt)
   end

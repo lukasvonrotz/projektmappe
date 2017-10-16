@@ -63,3 +63,4 @@ gem 'rails-i18n', '~> 5.0.4'
 gem 'devise-i18n', '~> 1.3.0'
 gem 'chosen-rails', '~> 1.5.2'
 gem 'formtastic', '~> 3.1.5'
+gem 'rails-erd', require: false, group: :development

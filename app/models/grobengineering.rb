@@ -10,10 +10,12 @@ class Grobengineering < ApplicationRecord
 
   belongs_to :subsystem, optional: true
   belongs_to :iogroup, optional: true
+
   belongs_to :device
   validates :device, :presence => true
 
   belongs_to :offertposition
+  validates :offertposition, :presence => true
 
   belongs_to :schaltschrank_preisberechnung, :class_name => 'Switchgearcombination', :foreign_key => 'schaltschrank_preisberechnung_id', :optional => true
   belongs_to :switchgear_motorenabgang, :class_name => 'Switchgear', :foreign_key => 'switchgear_motorenabgang_id', :optional => true

@@ -55,8 +55,12 @@ class IotypesController < ApplicationController
   # DELETE /iotypes/:id
   def destroy
     @iotype = Iotype.find(params[:id])
-    @iotype.destroy
-    redirect_to iotypes_path, :notice => 'IO-Gruppentyp wurde gelöscht.'
+    if @iotype.iogroups.any?
+      redirect_to iotypes_path, :notice => 'IO-Gruppentyp kann nicht gelöscht werden, da bereits IO-Gruppen mit diesem Typ verknüpft sind.'
+    else
+      @iotype.destroy
+      redirect_to iotypes_path, :notice => 'IO-Gruppentyp wurde gelöscht.'
+    end
   end
 
   def import

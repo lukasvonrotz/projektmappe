@@ -5,6 +5,8 @@ class Offer < ApplicationRecord
   belongs_to :subsubproject
   validates :subsubproject, :presence => true
 
+  belongs_to :user
+
   def total_geraeteanzahl
     total = 0
     self.offer_offertpositions.each do |offer_offertposition|

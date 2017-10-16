@@ -5,6 +5,11 @@ class Drive < ApplicationRecord
   validates :brutto, presence:true, numericality: {only_float: true}
   validates :rabatt, presence:true, numericality: {only_float: true}
 
+  #delete association in grobengineerings if drive is deleted
+  has_many :fu_typ_grobengineerings, class_name: "Grobengineering",
+           foreign_key: "fu_typ_id",
+           dependent: :nullify
+
   def netto
     self.brutto - (self.brutto * self.rabatt)
   end

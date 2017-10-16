@@ -4,7 +4,20 @@ class Switchgearcombination < ApplicationRecord
 
   belongs_to :switchgear
   validates :switchgear, :presence => true
-  has_many :iogroups
+  has_many :iogroups, dependent: :nullify
+
+  #delete association in grobengineerings if switchgearcombination is deleted
+  has_many :preisberechnng_grobengineerings, class_name: "Grobengineering",
+           foreign_key: "schaltschrank_preisberechnung_id",
+           dependent: :nullify
+
+  has_many :top_switchgearconnections, class_name: "Switchgearconnection",
+           foreign_key: "topswitchgear_id",
+           dependent: :destroy
+  has_many :bottom_switchgearconnections, class_name: "Switchgearconnection",
+           foreign_key: "bottomswitchgear_id",
+           dependent: :destroy
+
 
   validates :u_feed_power, presence:true, numericality: {only_float: true}
   validates :u_feed_control, presence:true, numericality: {only_float: true}

@@ -63,7 +63,7 @@ class Device < ApplicationRecord
   belongs_to :elinst_geraete, :class_name => 'ElectricalInstallation', :foreign_key => 'elinst_geraete_id', :optional => true
 
   #delete association in grobengineerings if device is deleted
-  has_many :grobengineerings, dependent: :destroy
+  has_many :grobengineerings, dependent: :nullify
 
   def self.import(file)
     CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|

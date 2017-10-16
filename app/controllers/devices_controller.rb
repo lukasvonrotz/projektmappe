@@ -59,8 +59,12 @@ class DevicesController < ApplicationController
   # DELETE /devices/:id
   def destroy
     @device = Device.find(params[:id])
-    @device.destroy
-    redirect_to devices_path, :notice => 'Gerät wurde gelöscht.'
+    if @device.grobengineerings.any?
+      redirect_to devices_path, :notice => 'Gerät kann nicht gelöscht werden, da es bereits in Grobengineerings verknüpft ist.'
+    else
+      @device.destroy
+      redirect_to devices_path, :notice => 'Gerät wurde gelöscht.'
+    end
   end
 
   def import

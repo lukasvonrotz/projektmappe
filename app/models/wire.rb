@@ -8,6 +8,16 @@ class Wire < ApplicationRecord
 
   validates :anzahladern, presence:true, numericality: {only_integer: true}
 
+  has_many :wire_spez1_grobengineerings, class_name: "Grobengineering",
+           foreign_key: "wire_spez1_id",
+           dependent: :nullify
+  has_many :wire_spez2_grobengineerings, class_name: "Grobengineering",
+           foreign_key: "wire_spez2_id",
+           dependent: :nullify
+  has_many :wire_spez3_grobengineerings, class_name: "Grobengineering",
+           foreign_key: "wire_spez3_id",
+           dependent: :nullify
+
   def anschluesse_ohne_beschriftung(wiresupplier)
     wire_ohne_beschriftung = WireSupplier.where(["wire_id = ? and supplier_id = ?", self.id, wiresupplier.id]).first.anschlusstableauseite +
         WireSupplier.where(["wire_id = ? and supplier_id = ?", self.id, wiresupplier.id]).first.anschlussgeraeteseite

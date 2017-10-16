@@ -6,6 +6,16 @@ class ElectricalInstallation < ApplicationRecord
   validates :brutto, presence:true, numericality: {only_float: true}
   validates :rabatt, presence:true, numericality: {only_float: true}
 
+  has_many :elinst_trasse_devices, class_name: "Device",
+           foreign_key: "elinst_trasse_id",
+           dependent: :nullify
+  has_many :elinst_rohr_devices, class_name: "Device",
+           foreign_key: "elinst_rohr_id",
+           dependent: :nullify
+  has_many :elinst_geraete_devices, class_name: "Device",
+           foreign_key: "elinst_geraete_id",
+           dependent: :nullify
+
   def netto
     self.brutto - (self.brutto * self.rabatt)
   end
