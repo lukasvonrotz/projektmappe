@@ -6,7 +6,14 @@
     </div>
 <% end %>
 
-<%= render 'form', :project => @subsystem.project,
+<% projectid = @subsystem.project_id.nil? ? params[:project_id] : @subsystem.project_id %>
+<% project = Project.find(projectid) %>
+
+<%= render 'form', :project => project,
            :project_subsystem => @subsystem,
-           :projectid => @subsystem.project_id.nil? ? params[:project_id] : @subsystem.project_id,
+           :projectid => projectid,
            :context => true  %>
+
+<%= link_to "Zurück zu Teilanlagen", project_subsystems_path(project.id) %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

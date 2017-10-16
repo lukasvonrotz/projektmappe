@@ -93,4 +93,7 @@ Rails.application.routes.draw do
   match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offers/:offer_id/csvexport",
         to: "offers#csvexport", as: :csvexport, via: [:get]
 
+  match "/settings", to: "settings#index", as: :settings, via: [:get]
+  match "/settings/csvexport_all_tables", to: "settings#csvexport_all_tables", as: :csvexport_all_tables, via: [:get]
+
 end

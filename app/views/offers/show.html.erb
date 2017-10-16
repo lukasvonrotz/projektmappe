@@ -82,4 +82,6 @@
 <a href="<%= offer_offer_offertpositions_path(@offer.id) %>" class="btn btn-info btn-index">Preise bearbeiten</a>
 <a href="/projects/<%= @project.id %>/subprojects/<%= @subproject.id %>/subsubprojects/<%= @subsubproject.id %>/offers/<%= @offer.id %>/csvexport" class="btn btn-success btn-index">Offerte als CSV exportieren</a>
 <br><br>
-<a href="/projects/<%= @offer.subsubproject.subproject.project.id %>/subprojects/<%= @offer.subsubproject.subproject.id %>/subsubprojects/<%= @offer.subsubproject.id %>/offerte">Zurück zu Offertberechnung</a>
+<a href="/projects/<%= @project.id %>/subprojects/<%= @subproject.id %>/subsubprojects/<%=@subsubproject.id %>/offerte">Zurück zu Offertberechnung</a>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

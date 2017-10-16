@@ -12,3 +12,5 @@ Name: <%= @customer.name %><br>
 
 <br><br>
 <%= link_to "Zurück zu Kundenübersicht", customers_path %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

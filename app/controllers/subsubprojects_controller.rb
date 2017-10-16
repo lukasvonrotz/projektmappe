@@ -1,6 +1,8 @@
 class SubsubprojectsController < ApplicationController
   def index
-    @subsubprojects = Subsubproject.all
+    @subproject = Subproject.find(params[:subproject_id])
+    @project = @subproject.project
+    @subsubprojects = Subsubproject.where(:subproject_id => @subproject.id)
   end
 
   # Control logic for create-view
@@ -8,7 +10,6 @@ class SubsubprojectsController < ApplicationController
   def new
     # build a 'temporary' post which is written to DB later (create-method)
     @subsubproject = Subsubproject.new
-    @subprojectid = params[:subproject_id]
   end
 
   # Control logic when creating a new subsubproject
@@ -38,12 +39,16 @@ class SubsubprojectsController < ApplicationController
   # GET /subsubprojects/:id
   def show
     @subsubproject = Subsubproject.find(params[:id])
+    @subproject = @subsubproject.subproject
+    @project = @subproject.project
   end
 
   # Control logic for edit-view
   # GET /subsubprojects/:id/edit
   def edit
     @subsubproject = Subsubproject.find(params[:id])
+    @subproject = @subsubproject.subproject
+    @project = @subproject.project
   end
 
   # Save an updated subsubproject

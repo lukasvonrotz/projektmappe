@@ -35,8 +35,8 @@
             </ul>
           </td>
           <td>
-            <a href="<%= subproject_path(subproject.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
-            <a href="<%= edit_subproject_path(subproject.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
+            <a href="<%= project_subproject_path(@project.id, subproject.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
+            <a href="<%= edit_project_subproject_path(@project.id, subproject.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
             <button type="button" class="btn btn-xs btn-danger btn-index"
                     data-toggle="modal" data-target="#popup_sure_delete"
                     data-itemid="<%= subproject.id %>"
@@ -49,6 +49,8 @@
     </tbody>
   </table>
 </div>
+
+<%= link_to "Zurück zu Anlage", project_path(@project.id) %>
 
 <%= render 'layouts/loading', :message => "Lade Projekte..." %>
 <%= render 'layouts/popups' %>

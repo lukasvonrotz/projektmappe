@@ -8,10 +8,11 @@
 
 <% if Customer.any? %>
     <% projectid = @subproject.project_id.nil? ? params[:project_id] : @subproject.project_id %>
+    <% project = Project.find(projectid) %>
     <% customerid = @subproject.customer_id.nil? ? Customer.all.first : @subproject.customer_id %>
 
   <%= render 'form', :project_subproject => @subproject,
-             :project => @subproject.project,
+             :project => project,
              :projectid => projectid,
              :customerid => customerid,
              :context => true  %>
@@ -21,3 +22,7 @@
     Bevor ein Projekt erstellt werden kann, muss mind. ein Kunde in der Datenbank existieren.
   </div>
 <% end %>
+
+<%= link_to "Zurück zu Projekt", project_path(project.id) %>
+
+<%= render 'layouts/loading', :message => "Lade Offertpositionen..." %>

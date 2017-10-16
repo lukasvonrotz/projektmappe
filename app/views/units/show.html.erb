@@ -11,5 +11,6 @@ ID: <%= @unit.id %><br>
 Name: <%= @unit.name %><br>
 
 <br><br>
-<%= link_to "Zurück zu Unit-Übersicht", project_subsystem_path(@unit.subsystem.project.id,
-                                                                    @unit.subsystem.id) %>
+<%= link_to "Zurück zu Unit-Übersicht", project_subsystem_path(@project.id, @subsystem.id) %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

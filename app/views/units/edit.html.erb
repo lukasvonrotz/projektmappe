@@ -9,4 +9,7 @@
 <%= render 'form', :unit => @unit,
            :subsystemid => @unit.subsystem.id,
            :context => false  %>
-<%= link_to "Zurück zu Teilanlagenübersicht", units_path %>
+
+<%= link_to "Zurück zu Teilanlage", project_subsystem_path(@project.id, @subsystem.id) %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

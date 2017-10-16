@@ -2,6 +2,8 @@ class GrobengineeringsController < ApplicationController
   def index
     @hash = Hash.new
     @subsubproject = Subsubproject.find(params[:subsubproject_id])
+    @subproject = @subsubproject.subproject
+    @project = @subproject.project
     @grobengineerings = Grobengineering.where(:subsubproject_id => @subsubproject.id).order(:id)
 
     respond_to do |format|
@@ -33,12 +35,18 @@ class GrobengineeringsController < ApplicationController
   # GET /grobengineerings/:id
   def show
     @grobengineering = Grobengineering.find(params[:id])
+    @subsubproject = @grobengineering.subsubproject
+    @subproject = @subsubproject.subproject
+    @project = @subproject.project
   end
 
   # Control logic for edit-view
   # GET /grobengineerings/:id/edit
   def edit
     @grobengineering = Grobengineering.find(params[:id])
+    @subsubproject = @grobengineering.subsubproject
+    @subproject = @subsubproject.subproject
+    @project = @subproject.project
   end
 
   # Save an updated grobengineering

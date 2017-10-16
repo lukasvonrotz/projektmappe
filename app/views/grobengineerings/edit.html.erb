@@ -20,4 +20,6 @@
            :wirespez2id => @grobengineering.wire_spez2.nil? ? '' : @grobengineering.wire_spez2.id,
            :wirespez3id => @grobengineering.wire_spez3.nil? ? '' : @grobengineering.wire_spez3.id,
            :context => false  %>
-<%= link_to "Zurück zu Grobengineering", grobengineerings_path %>
+<%= link_to "Zurück zu Grobengineering", project_subproject_subsubproject_grobengineerings_path %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

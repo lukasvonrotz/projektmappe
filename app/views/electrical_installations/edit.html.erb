@@ -8,3 +8,5 @@
 
 <%= render 'form', :electrical_installation => @electrical_installation, :context => false  %>
 <%= link_to "Zurück zu Elektroinstallationen", electrical_installations_path %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

@@ -26,7 +26,7 @@
           </td>
           <td>
             <a href="<%= project_subsystem_path(@project.id, subsystem.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
-            <a href="<%= edit_subsystem_path(subsystem.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
+            <a href="<%= edit_project_subsystem_path(@project.id, subsystem.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
             <button type="button" class="btn btn-xs btn-danger btn-index"
                     data-toggle="modal" data-target="#popup_sure_delete"
                     data-itemid="<%= subsystem.id %>"

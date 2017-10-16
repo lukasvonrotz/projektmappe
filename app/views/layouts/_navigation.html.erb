@@ -20,7 +20,7 @@
                 </li>
                 <% Project.all.order(:name).each do |project| %>
                   <li class="divider"></li>
-                  <li class="dropdown-header"><%= project.name %></li>
+                  <li class="dropdown-header" style="background-color: #ccc; color: white;"><%= project.name %></li>
                   <li class="<%= 'active' if current_page? (project_subsystems_path(project.id)) %>">
                     <%= link_to "Alle Teilanlagen", project_subsystems_path(project.id) %>
                   </li>
@@ -30,45 +30,15 @@
                     <li class="dropdown-submenu">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projekte</a>
                       <ul class="dropdown-menu">
-                        <li class="dropdown-submenu">
-                          <% if project.subprojects.any? %>
+                        <% if project.subprojects.any? %>
                             <% project.subprojects.order(:name).each do |subproject| %>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= subproject.name %></a>
-                            <ul class="dropdown-menu">
                               <li class="<%= 'active' if current_page? (project_subproject_path(project.id, subproject.id)) %>">
-                                <%= link_to "Zeige Projekt", project_subproject_path(project.id, subproject.id) %>
+                                <%= link_to subproject.name, project_subproject_path(project.id, subproject.id) %>
                               </li>
-                              <li class="dropdown-submenu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Versionen</a>
-                                <ul class="dropdown-menu">
-                                  <% if subproject.subsubprojects.any? %>
-                                    <% subproject.subsubprojects.each do |subsubproject| %>
-                                      <li class="dropdown-submenu">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= subsubproject.name %></a>
-                                        <ul class="dropdown-menu">
-                                          <li class="<%= 'active' if current_page? (project_subproject_subsubproject_grobengineerings_path(project.id, subproject.id, subsubproject.id)) %>">
-                                            <%= link_to "Grobengineering", project_subproject_subsubproject_grobengineerings_path(project.id, subproject.id, subsubproject.id) %>
-                                          </li>
-                                          <li class="<%= 'active' if current_page? (project_subproject_subsubproject_offertpositions_path(project.id, subproject.id, subsubproject.id)) %>">
-                                            <%= link_to "Offertpositionen", project_subproject_subsubproject_offertpositions_path(project.id, subproject.id, subsubproject.id) %>
-                                          </li>
-                                          <li class="<%= 'active' if current_page? (offerte_path(project.id, subproject.id, subsubproject.id)) %>">
-                                            <%= link_to "Offerte", offerte_path(project.id, subproject.id, subsubproject.id) %>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                    <% end %>
-                                  <% else %>
-                                    <li class="disabled"><a href="#">keine Versionen verfügbar</a></li>
-                                  <% end %>
-                                </ul>
-                              </li>
-                            </ul>
                             <% end %>
-                          <% else %>
+                        <% else %>
                             <li class="disabled"><a href="#">keine Projekte verfügbar</a></li>
-                          <% end %>
-                        </li>
+                        <% end %>
                       </ul>
                     </li>
                 <% end %>
@@ -137,6 +107,9 @@
             </li>
             <li class="<%= 'active' if current_page? (devices_path) %>">
               <%= link_to "Geräte", devices_path %>
+            </li>
+            <li class="<%= 'active' if current_page? (settings_path) %>">
+              <%= link_to "Einstellungen", settings_path %>
             </li>
             
         <% end %>

@@ -9,9 +9,9 @@
 
 ID: <%= @history.id %><br>
 Datum: <%= @history.datum %><br>
-Quelle: <%= @history.quelle %><br>
-Info: <%= @history.history %><br>
-Querverweis: <%= @history.querverweis %><br>
+Ereignis: <%= @history.ereignis %><br>
 
 <br><br>
 <%= link_to "Zurück zu Projektübersicht", project_subproject_path(@history.subproject.project.id, @history.subproject.id) %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

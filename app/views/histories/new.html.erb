@@ -6,6 +6,11 @@
     </div>
 <% end %>
 
+<% subproject = @history.subproject_id.nil? ? Subproject.find(params[:subproject_id]) : Subproject.find(@history.subproject_id) %>
 <%= render 'form', :history => @history,
-           :subprojectid => @history.subproject_id.nil? ? params[:subproject_id] : @history.subproject_id,
+           :subprojectid => subproject.id,
            :context => true  %>
+
+<%= link_to "Zurück zu Projekt", project_subproject_path(subproject.project.id, subproject.id) %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

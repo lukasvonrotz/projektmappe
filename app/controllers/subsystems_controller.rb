@@ -31,14 +31,15 @@ class SubsystemsController < ApplicationController
   # Control logic for show-view
   # GET /subsystems/:id
   def show
-    @project = Project.find(params[:project_id])
     @subsystem = Subsystem.find(params[:id])
+    @project = @subsystem.project
   end
 
   # Control logic for edit-view
   # GET /subsystems/:id/edit
   def edit
     @subsystem = Subsystem.find(params[:id])
+    @project = @subsystem.project
   end
 
   # Save an updated subsystem

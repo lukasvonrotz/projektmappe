@@ -6,6 +6,11 @@
     </div>
 <% end %>
 
+<% subproject = @info.subproject_id.nil? ? Subproject.find(params[:subproject_id]) : Subproject.find(@info.subproject_id) %>
 <%= render 'form', :info => @info,
-           :subprojectid => @info.subproject_id.nil? ? params[:subproject_id] : @info.subproject_id,
+           :subprojectid => subproject.id,
            :context => true  %>
+
+<%= link_to "Zurück zu Projektübersicht", project_subproject_path(subproject.project.id, subproject.id) %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

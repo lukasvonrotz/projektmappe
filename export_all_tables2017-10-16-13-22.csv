@@ -1,0 +1,359 @@
+id;name
+1;XY 2x1
+2;XY 3x1
+3;XY 4x1
+4;XY 5x1
+5;XY 6x1
+6;XY 8x1
+7;XY 12x1
+8;XY 16x1
+9;XY 25x1
+10;XY 32x1
+11;XY 40x1
+12;XY 50x1
+13;CY 2x1
+14;CY 3x1
+15;CY 4x1
+16;CY 4x1 p. verdrillt
+17;CY 5x1
+18;CY 6x1
+19;CY 6x1 p. verdrillt
+20;CY 8x1
+21;CY 8x1 p. verdrillt
+22;CY 12x1
+23;CY 12x1 p. verdrillt
+24;CY 16x1
+25;CY 21x1
+26;CY 27x1
+27;CY 32x1
+28;TT-flex 3x1.5
+29;TT-flex 4x1.5
+30;TT-flex 5x1.5
+31;TT-flex 3x2.5
+32;TT-flex 4x2.5
+33;TT-flex 5x2.5
+34;TT 4x4 (20A)
+35;TT 5x4 (20A)
+36;TT 4x6 (25A)
+37;TT 5x6 (25A)
+38;TT 4x10 (40A)
+39;TT 5x10 (40A)
+40;TT 4x16 (60A)
+41;TT 5x16 (60A)
+42;TT 4x25 (80A)
+43;TT 5x25 (80A)
+44;TT 4x35 (100A)
+45;TT 5x35 (100A)
+46;TT 4x50 (125A)
+47;TT 5x50 (125A)
+48;TT 4x70 (160A)
+49;TT 5x70 (160A)
+50;TT 4x95 (200A)
+51;TT 5x95 (200A)
+52;TT 3x70+1x35 (160A)
+53;TT 4x70+1x35 (160A)
+54;TT 3x95+1x50 (200A)
+55;TT 4x95+1x50 (200A)
+56;TT 3x120+1x70 (250A)
+57;TT 4x120+1x70 (250A)
+58;TT 3x185+1x120 (315A)
+59;TT 4x185+1x120 (315A)
+60;TT 3x240+1x120 (355A)
+61;TT 4x240+1x120 (355A)
+62;TT 3x[2x120]+1x120 (400A)
+63;TT 4x[2x120]+1x120 (400A)
+64;TT 3x[2x150]+1x150 (500A)
+65;TT 4x[2x150]+1x150 (500A)
+66;TT 3x[2x185]+1x185 (630A)
+67;TT 4x[2x185]+1x185 (630A)
+68;TT 3x[2x240]+1x240 (800A)
+69;TT 3x[3x185]+2x150 (1000A)
+70;TT 3x[4x185]+2x185 (1250A)
+71;TT 3x[4x300]+2x300 (1600A)
+72;TT 3x[10x300]+5x300 (4300A)
+73;Trafoflex 3x185+95mm2 (400A)
+74;TT-flex 4x1.5 (13A) gesch.
+75;TT-flex 4x2.5 (16A) gesch.
+76;TT-flex 4x4 (20A) gesch.
+77;TT-flex 4x6 (25A) gesch.
+78;TT-flex 3x10+3x1.5 (40A) gesch.
+79;TT-flex 3x16+3x2.5 (63A) gesch.
+80;TT-flex 3x25+3x4 (80A) gesch.
+81;TT-flex 3x35+3x6 (100A) gesch.
+82;TT-flex 3x50+3x10 (125A) gesch.
+83;TT-flex 3x70+3x10 (160A) gesch.
+84;TT-flex 3x95+3x16 (200A) gesch.
+85;TT-flex 3x120+3x16 (224A) gesch.
+86;TT-flex 3x150+3x25 (250A) gesch.
+87;TT-flex 3x185+3x35 (315A) gesch.
+88;TT-flex 3x240+3x42.5 (355A) gesch.
+89;TT-flex 2x[3x120+3x16mm2] (400A) gesch.
+90;TT-flex 2x[3x150+3x25mm2] (500A) gesch.
+91;TT-flex 2x[3x240+3x42.5mm2] (630A) gesch.
+92;Potentialausgleich 6mm2
+93;Potentialausgleich 16mm2
+94;Potentialausgleich 50mm2
+95;Potentialausgleich 95mm2
+96;LWL-Kabel, Lieferung Bauseits
+97;PB-Kabel
+98;Ethernet CAT-5 gesch. (1000M, 100MHz)
+99;Ethernet CAT-6 gesch. (10G, 250MHz)
+100;Ethernet CAT-7 gesch. (10G, 600MHz)
+101;Ausgleichsleitung Typ K/S
+"";""
+1;1L 2m
+2;1 Relais 2K bis 10A
+3;1 Rel Spezial
+4;SPS-Modul
+5;1 LE à CHF 100.-
+6;Montage FU/MSS 0016A
+7;Montage FU/MSS 0025A
+8;Montage FU/MSS 0040A
+9;Montage FU/MSS 0080A
+10;Montage FU/MSS 0125A
+11;Montage FU/MSS 0200A
+12;Montage FU/MSS 0400A
+13;Montage FU/MSS 0600A
+14;Montage FU/MSS 0800A
+15;Montage FU/MSS 1000A
+16;Montage FU/MSS 2000A
+17;Montage FU/MSS 3000A
+18;Leistungsschütz 016A
+19;Leistungsschütz 025A
+20;Leistungsschütz 040A
+21;Leistungsschütz 080A
+22;Leistungsschütz 100A
+23;Leistungsschütz 200A
+24;Leistungsschütz 300A
+25;Leistungsschütz 400A
+26;Steuerschrank 40A
+27;Leistungsschrank 100A
+28;Leistungsschrank 200A
+29;Leistungsschrank 400A
+30;Leistungsschrank 600A
+31;Leistungsschrank 800A
+32;Leistungsschrank 1000A
+33;Leistungsschrank 1250A
+34;Klemmenkasten 04
+35;Klemmenkasten 08
+36;Klemmenkasten 12
+37;Klemmenkasten 16
+38;Klemmenkasten 20
+39;Klemmenkasten 24
+40;Klemmenkasten 32
+41;Bedienkasten 04
+42;Bedienkasten 08
+43;Bedienkasten 16
+44;Bedienkasten 24
+45;Bedienpult 800mm
+46;Bedienpult 1200mm
+"";""
+2;ET200SP PB
+3;ET200SP 08DI
+4;ET200SP 16DI
+5;ET200SP 08DO
+6;ET200SP 16DO
+7;ET200SP 02AI
+8;ET200SP 02AO
+9;ET200SP Enc INKR
+10;ET200SP Enc SSI
+11;ET200SP Base mit U-Vers
+12;ET200SP Base
+13;PNOZmulti
+14;PNOZmulti Chipcard
+15;PNOZmulti Klemm
+16;PNOZmulti SL
+17;PNOZmulti SL Klemm
+18;PNOZmulti PB
+19;PNOZmulti 08DI
+20;PNOZmulti 04DO
+21;PNOZmulti 01AI
+22;PNOZmulti 01AO
+23;ET200S IM151-3 PN HF
+24;ET200S PM-E DC24V
+25;ET200S 8DI DC 24V
+26;ET200S 8DO DC 24V 0.5A
+27;ET200S 4AI Standart I 2-Wire
+28;ET200S 2AO Standart I
+29;ET200S 1SI RS232
+30;ET200S 1SI MODBUS
+31;S7-300 Profilschiene 480mm
+32;MMC 2 MByte
+33;MMC 8 MByte
+34;CPU317F-2PN/DP
+35;CP341 mit RS232C
+36;CP341 mit TTY
+37;CP341 mit RS422/485
+38;SM321 16DI 24V
+39;SM321 32DI 24V
+40;SM322 16DO 24V
+41;SM322 32DO 24V
+42;SM331 8AI U/I
+43;SM332 4AO U/I
+44;SM332 8AO U/I
+45;WinCC-Lizenz 128 Tags
+46;Wandler M-Bus/RS232
+1;PB-Stecker
+"";""
+1;Gittertrasse 600mm 3 Etagen
+2;Gittertrasse Deckel 600mm
+3;Lochblechtrasse 300mm
+4;Lochblechtrasse+Deckel 300mm
+5;Installationsschlauch M25
+6;Alurohr oder Schlauch M25
+7;Alurohr M25
+8;Alurohr M32
+9;Montage Kästchen
+10;Montage Kasten
+11;Montage Schaltschrank
+12;RS AP 16A
+13;RS AP 16A mit SL
+14;Gerätebeschriftung
+15;Demontage 1 Tag, 8 Personen
+"";""
+1;ACS880-01-04A0-3 (400V/4A)
+2;ACS880-01-12A6-3 (400V/12.6A)
+3;ACS880-01-032A-3 (400V/32A)
+4;ACS880-01-045A-3 (400V/45A)
+5;ACS880-01-061A-3 (400V/61A)
+6;ACS880-01-087A-3 (400V/87A)
+7;ACS880-01-145A-3 (400V/145A)
+8;ACS880-01-169A-3 (400V/169A)
+9;ACS880-01-246A-3 (400V/246A)
+10;ACS880-01-430A-3 (400V/430A)
+11;ACS880-07-0145A-3 (400V/145A)
+12;ACS880-07-0169A-3 (400V/169A)
+13;ACS880-07-0246A-3 (400V/246A)
+14;ACS880-07-0650A-3 (400V/650A)
+15;ACS880-07-0820A-3 (400V/820A)
+16;ACS880-01-049A-7 (690V/49A)
+17;ACS808-01-271A-7 (690V/271A)
+18;ACS880-07-0522A-7 (690V/522A)
+19;ACS880-07-0800A-7 (690V/800A)
+20;ACS880-07-1160A-7 (690V/1160A)
+23;S120 6SL3120-1TE23-0AC0 (400V/1x30A)
+24;S120 6SL3120-1TE24-5AA3 (400V/1x45A)
+25;S120 Filter-CPU-DriveCliq-PB
+26;S120 Filter-CPU-DriveCliq-PB (2 Stk.)
+21;S120 6SL3120-2TE21-0AD0 (400V/2x9A) 1/2
+22;S120 6SL3120-2TE21-8AC0 (400V/2x18A) 1/2
+"";""
+1;Dummy-Eintrag
+2;DI
+3;DO
+4;AI
+5;AO
+6;Sensor 0DI
+7;Sensor 1DI
+8;Sensor 1DI PTC-Auswertegerät
+9;Sensor 1DI highspeed
+10;Sensor 1DI safety
+11;Sensor 2DI
+12;Sensor 2DI safety
+13;Sensor Sender Empfänger
+14;Sensor 1AI
+15;Sensor 2AI
+16;Sensor 3AI
+17;Sensor PT100 3-Draht
+18;Sensor PT100 4-Draht
+19;Sensor TC mit 1AI
+20;Sensor TC mit 1AI+1sDI
+21;Sensor Inkrementalgeber
+22;Sensor Inkrementalgeber 2ch
+23;Sensor Absolutwertgeber SSI
+24;Sensor Absolutwertgeber PB
+25;Sensor Analog ohne AI
+26;Ventil einfach
+27;Ventil einfach safety
+28;Ventil RM
+29;Ventil einfach Doppelspule
+30;Regelventil einfach
+31;Regelventil RMy
+32;Regelventil RMalles
+33;Motor 1 Rtg.
+34;Motor 2 Rtg.
+35;Motor 2 Rtg, Bremse
+36;Motor, FU
+37;Motor, FU, INKR
+38;Motor, FU, Heizung
+39;Motor, FU, MST
+40;Motor, FU, MST, INKR
+41;Motor, FU, MST, INKR, Heizung
+42;Motor, FU, MST, INKR, Bremse
+43;Motor, FU, Bremse
+44;Motor, FU, INKR, Bremse
+45;Motoren-Bremse
+46;Heizung
+47;Steuergerät PB
+48;Steuerschrank 40A
+49;Leistungsschrank 100A
+50;Leistungsschrank 200A
+51;Leistungsschrank 400A
+52;Leistungsschrank 600A
+53;Leistungsschrank 800A
+54;Leistungsschrank 1000A
+55;Leistungsschrank 1250A
+56;Klemmenkasten 4DI
+57;Klemmenkasten 8DI
+58;Klemmenkasten 12DI
+59;Klemmenkasten 16DI
+60;Klemmenkasten 20DI
+61;Klemmenkasten 24DI
+62;Klemmenkasten 32DI
+63;Klemmenkasten 4DI/AI
+64;Klemmenkasten 8DI/AI
+65;Klemmenkasten 12DI/AI
+66;Klemmenkasten 16DI/AI
+67;Klemmenkasten 20DI/AI
+68;Klemmenkasten 24DI/AI
+69;Klemmenkasten 32DI/AI
+70;Bedienkasten 04
+71;Bedienkasten 08
+72;Bedienkasten 16
+73;Bedienkasten 24
+74;Bedienpult 800mm
+75;Bedienpult 1200mm
+76;Elektrokabel
+77;Motorenstecker
+78;Revisionsschalter
+79;Sicherheitstüre inkl. Bed.
+80;Sicherheitslichtschranke
+81;Sicherheitszone
+82;PNOZmulti
+83;Demontage-Einheit 1 Tag 8 Pers
+84;ET200S IM151-3 PN HF
+85;ET200S PM-E DC24V
+86;ET200S 8DI DC 24V
+87;ET200S 8DO DC 24V 0.5A
+88;ET200S 4AI Standart I 2-Wire
+89;ET200S 2AO Standart I
+90;ET200S 1SI RS232
+91;ET200S 1SI MODBUS
+92;S7-300 Profilschiene 480mm
+93;MMC 2 MByte
+94;MMC 8 MByte
+95;CPU317F-2PN/DP
+96;CP341 mit RS232C
+97;CP341 mit TTY
+98;CP341 mit RS422/485
+99;SM321 16DI 24V
+100;SM321 32DI 24V
+101;SM322 16DO 24V
+102;SM322 32DO 24V
+103;SM331 8AI U/I
+104;SM332 4AO U/I
+105;SM332 8AO U/I
+106;WinCC-Lizenz 128 Tags
+107;Wandler M-Bus/RS232
+108;Schaltanlagenbau 1LE à CHF 100.-
+109;Engineering Software SPS
+110;Engineering Software HMI
+"";""
+1;SPS Hauptsteuerung
+2;ET Gaserzeugung
+3;ET Hilfsanlagen
+"";""
+3;UV3690.01 Hilfsanlagen
+2;UV3620.01 Gaserzeugung
+1;UV3610.01 Hauptsteuerung
+"";""

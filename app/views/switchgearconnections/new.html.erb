@@ -11,3 +11,5 @@
            :bottomswitchgearid => @switchgearconnection.bottomswitchgear_id.nil? ? Switchgearcombination.first.id : @switchgearconnection.bottomswitchgear_id,
            :context => true  %>
 <%= link_to "Zurück zu Verbindungs-Übersicht", switchgearconnections_path %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

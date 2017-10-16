@@ -8,3 +8,5 @@
 
 <%= render 'form', :customer => @customer, :context => true  %>
 <%= link_to "Zurück zu Kundenübersicht", customers_path %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

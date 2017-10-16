@@ -24,12 +24,16 @@ class InfosController < ApplicationController
   # GET /infos/:id
   def show
     @info = Info.find(params[:id])
+    @subproject = @info.subproject
+    @project = @subproject.project
   end
 
   # Control logic for edit-view
   # GET /infos/:id/edit
   def edit
     @info = Info.find(params[:id])
+    @subproject = @info.subproject
+    @project = @subproject.project
   end
 
   # Save an updated info

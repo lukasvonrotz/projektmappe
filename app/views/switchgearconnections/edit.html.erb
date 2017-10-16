@@ -11,3 +11,5 @@
            :bottomswitchgearid => @switchgearconnection.bottomswitchgear.id,
            :context => false  %>
 <%= link_to "Zurück zu Verbindungs-Übersicht", switchgearconnections_path %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

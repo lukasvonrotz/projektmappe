@@ -7,37 +7,47 @@
 <% end %>
 
 <% if Device.any? %>
-  <% subsubprojectid = @grobengineering.subsubproject_id.nil? ? params[:subsubproject_id] : @grobengineering.subsubproject_id %>
-  <% projectid = Subsubproject.find(subsubprojectid).subproject.project.id %>
-  <% offertpositionid = @grobengineering.offertposition_id.nil? ? Subsubproject.find(subsubprojectid).offertpositions.first.id : @grobengineering.offertposition_id %>
-  <% deviceid = @grobengineering.device_id.nil? ? Device.first.id : @grobengineering.device_id %>
-  <% schaltschrankpreisberechnungid = @grobengineering.schaltschrank_preisberechnung_id.nil? ? '' : @grobengineering.schaltschrank_preisberechnung_id %>
-  <% subsystemid = @grobengineering.subsystem_id.nil? ? '' : @grobengineering.subsystem_id %>
-  <% iogroupid = @grobengineering.iogroup_id.nil? ? '' : @grobengineering.iogroup_id %>
-  <% motorenabgangid = @grobengineering.switchgear_motorenabgang_id.nil? ? '' : @grobengineering.switchgear_motorenabgang_id %>
-  <% futypid = @grobengineering.fu_typ_id.nil? ? '' : @grobengineering.fu_typ_id %>
-  <% wirespez1id = @grobengineering.wire_spez1_id.nil? ? '' : @grobengineering.wire_spez1_id %>
-  <% wirespez2id = @grobengineering.wire_spez2_id.nil? ? '' : @grobengineering.wire_spez2_id %>
-  <% wirespez3id = @grobengineering.wire_spez3_id.nil? ? '' : @grobengineering.wire_spez3_id %>
+    <% subsubproject = @grobengineering.subsubproject_id.nil? ? Subsubproject.find(params[:subsubproject_id]) : Subsubproject.find(@grobengineering.subsubproject_id) %>
+    <% projectid = subsubproject.subproject.project.id %>
+    <% if Offertposition.where(:subsubproject_id => subsubproject.id).any? %>
+      <% offertpositionid = @grobengineering.offertposition_id.nil? ? subsubproject.offertpositions.first.id : @grobengineering.offertposition_id %>
+      <% deviceid = @grobengineering.device_id.nil? ? Device.first.id : @grobengineering.device_id %>
+      <% schaltschrankpreisberechnungid = @grobengineering.schaltschrank_preisberechnung_id.nil? ? '' : @grobengineering.schaltschrank_preisberechnung_id %>
+      <% subsystemid = @grobengineering.subsystem_id.nil? ? '' : @grobengineering.subsystem_id %>
+      <% iogroupid = @grobengineering.iogroup_id.nil? ? '' : @grobengineering.iogroup_id %>
+      <% motorenabgangid = @grobengineering.switchgear_motorenabgang_id.nil? ? '' : @grobengineering.switchgear_motorenabgang_id %>
+      <% futypid = @grobengineering.fu_typ_id.nil? ? '' : @grobengineering.fu_typ_id %>
+      <% wirespez1id = @grobengineering.wire_spez1_id.nil? ? '' : @grobengineering.wire_spez1_id %>
+      <% wirespez2id = @grobengineering.wire_spez2_id.nil? ? '' : @grobengineering.wire_spez2_id %>
+      <% wirespez3id = @grobengineering.wire_spez3_id.nil? ? '' : @grobengineering.wire_spez3_id %>
 
-  <%= render 'form', :grobengineering => @grobengineering,
-             :projectid => projectid,
-             :subsubprojectid => subsubprojectid,
-             :offertpositionid => offertpositionid,
-             :deviceid => deviceid,
-             :schaltschrankpreisberechnungid => schaltschrankpreisberechnungid,
-             :subsystemid => subsystemid,
-             :iogroupid => iogroupid,
-             :motorenabgangid => motorenabgangid,
-             :futypid => futypid,
-             :wirespez1id => wirespez1id,
-             :wirespez2id => wirespez2id,
-             :wirespez3id => wirespez3id,
-             :context => true  %>
+      <%= render 'form', :grobengineering => @grobengineering,
+                 :projectid => projectid,
+                 :subsubprojectid => subsubproject.id,
+                 :offertpositionid => offertpositionid,
+                 :deviceid => deviceid,
+                 :schaltschrankpreisberechnungid => schaltschrankpreisberechnungid,
+                 :subsystemid => subsystemid,
+                 :iogroupid => iogroupid,
+                 :motorenabgangid => motorenabgangid,
+                 :futypid => futypid,
+                 :wirespez1id => wirespez1id,
+                 :wirespez2id => wirespez2id,
+                 :wirespez3id => wirespez3id,
+                 :context => true  %>
+    <% else %>
+      <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Mindestens 1 Offertposition muss zu dieser Version existieren.<br>
+        <a href="<%= new_project_subproject_subsubproject_offertposition_path %>">Erstellen</a>
+      </div>
+    <% end %>
 <% else %>
     <div class="alert alert-danger">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      Mindestens 1 Gerät in der Datenbank existieren.
+      Mindestens 1 Gerät muss in der Datenbank existieren.
     </div>
 <% end %>
-<%= link_to "Zurück zu Grobengineering", grobengineerings_path %>
+<%= link_to "Zurück zu Grobengineering", project_subproject_subsubproject_grobengineerings_path %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

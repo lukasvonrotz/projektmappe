@@ -2,6 +2,9 @@ class OfferOffertpositionsController < ApplicationController
   def index
     @offer = Offer.find(params[:offer_id])
     @offer_offertpositions = @offer.offer_offertpositions
+    @subsubproject = @offer.subsubproject
+    @subproject = @subsubproject.subproject
+    @project = @subproject.project
   end
 
   def update

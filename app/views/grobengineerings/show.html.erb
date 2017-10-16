@@ -13,4 +13,6 @@ Beschreibung: <%= @grobengineering.beschreibung %><br>
 Kommentar: <%= @grobengineering.kommentar %><br>
 
 <br><br>
-<%= link_to "Zurück zu Grobengineering", grobengineerings_path %>
+<%= link_to "Zurück zu Grobengineering", project_subproject_subsubproject_grobengineerings_path %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

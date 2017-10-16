@@ -11,3 +11,5 @@ Definition: <%= @device.definition %><br>
 
 <br><br>
 <%= link_to "Zurück zu Geräte-Übersicht", devices_path %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

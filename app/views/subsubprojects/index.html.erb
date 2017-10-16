@@ -8,6 +8,7 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
+      <th>Master</th>
       <th>Aktionen</th>
     </tr>
     </thead>
@@ -15,10 +16,14 @@
       <% @subsubprojects.each do |subsubproject| %>
         <tr>
           <td><%= subsubproject.id %></td>
-          <td><a href="<%= project_subproject_subsubproject_path(subsubproject.subproject.project.id, subsubproject.subproject.id, subsubproject.id) %>"><%= subsubproject.name %></a></td>
+          <td><a href="<%= project_subproject_subsubproject_path(@project.id, @subproject.id, subsubproject.id) %>"><%= subsubproject.name %></a></td>
+          <td><%= subsubproject.master ? 'Ja' : 'Nein' %></td>
           <td>
-            <a href="<%= project_subproject_subsubproject_path(subsubproject.subproject.project.id, subsubproject.subproject.id, subsubproject.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
-            <a href="<%= edit_project_subproject_subsubproject_path(subsubproject.subproject.project.id, subsubproject.subproject.id, subsubproject.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
+            <a href="<%= project_subproject_subsubproject_path(@project.id, @subproject.id, subsubproject.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
+            <a href="<%= edit_project_subproject_subsubproject_path(@project.id, @subproject.id, subsubproject.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
+            <a href="<%= project_subproject_subsubproject_offertpositions_path(@project.id, @subproject.id, subsubproject.id) %>" class="btn btn-xs btn-info btn-index">Offertpositionen bearbeiten</a>
+            <a href="<%= project_subproject_subsubproject_grobengineerings_path(@project.id, @subproject.id, subsubproject.id) %>" class="btn btn-xs btn-info btn-index">Grobengineering</a>
+            <a href="/projects/<%= @project.id %>/subprojects/<%= @subproject.id %>/subsubprojects/<%= subsubproject.id %>/offerte" class="btn btn-xs btn-success btn-index">Offerte</a>
             <button type="button" class="btn btn-xs btn-danger btn-index"
                     data-toggle="modal" data-target="#popup_sure_delete"
                     data-itemid="<%= subsubproject.id %>"
@@ -31,6 +36,8 @@
     </tbody>
   </table>
 </div>
+
+<%= link_to "Zurück zu Projekt", project_subproject_path(@project.id, @subproject.id) %>
 
 <%= render 'layouts/loading', :message => "Lade Versionen..." %>
 <%= render 'layouts/popups' %>

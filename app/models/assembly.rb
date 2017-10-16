@@ -241,6 +241,15 @@ class Assembly < ApplicationRecord
     bruttoChf = (self.preisPbStecker(eurokurs) + self.preisPbBaugruppe(eurokurs))/
         @@ao_anz_bg + ((self.preisIoBaugruppe(eurokurs, 'ET200SP 02AO')+((self.preisBaseUvers(eurokurs)+self.preisBase(eurokurs))/2))/
         (self.anzahlKanaeleBaugruppe('ET200SP 02AO')-(@@ao_reserve*self.anzahlKanaeleBaugruppe('ET200SP 02AO'))))
+    puts self.preisPbStecker(eurokurs)
+    puts self.preisPbBaugruppe(eurokurs)
+    puts @@ao_anz_bg
+    puts self.preisIoBaugruppe(eurokurs,'ET200SP 02AO')
+    puts self.preisBaseUvers(eurokurs)
+    puts self.preisBase(eurokurs)
+    puts self.anzahlKanaeleBaugruppe('ET200SP 02AO')
+    puts @@ao_reserve
+    puts self.anzahlKanaeleBaugruppe('ET200SP 02AO')
     return bruttoChf
   end
   def self.ao_netto_chf(eurokurs)

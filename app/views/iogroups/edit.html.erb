@@ -9,3 +9,5 @@
 <%= render 'form', :iogroup => @iogroup, :iotypeid => @iogroup.iotype.id,
            :switchgearcombinationid => @iogroup.switchgearcombination.id, :context => false  %>
 <%= link_to "Zurück zu IO-Gruppen-Übersicht", iogroups_path %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

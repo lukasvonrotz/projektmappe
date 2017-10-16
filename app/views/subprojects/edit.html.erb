@@ -7,7 +7,11 @@
 <% end %>
 
 <%= render 'form', :project_subproject => @subproject,
-           :project => @subproject.project,
-           :projectid => @subproject.project.id,
+           :project => @project,
+           :projectid => @project.id,
            :customerid => @subproject.customer.id,
            :context => false  %>
+
+
+<%= link_to "Zurück zu Projekt", project_subproject_path(@project.id, @subproject.id) %>
+<%= render 'layouts/loading', :message => "Lade..." %>

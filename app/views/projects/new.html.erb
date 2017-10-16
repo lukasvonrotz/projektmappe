@@ -8,3 +8,5 @@
 
 <%= render 'form', :project => @project, :context => true  %>
 <%= link_to "Zurück zu Anlagenübersicht", projects_path %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

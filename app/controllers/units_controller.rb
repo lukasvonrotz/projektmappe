@@ -1,6 +1,8 @@
 class UnitsController < ApplicationController
   def index
-    @units = Unit.all
+    @subsystem = Subsystem.find(params[:subsystem_id])
+    @project = @subsystem.project
+    @units = @subsystem.units
 
     respond_to do |format|
       format.html
@@ -32,12 +34,16 @@ class UnitsController < ApplicationController
   # GET /units/:id
   def show
     @unit = Unit.find(params[:id])
+    @subsystem = @unit.subsystem
+    @project = @subsystem.project
   end
 
   # Control logic for edit-view
   # GET /units/:id/edit
   def edit
     @unit = Unit.find(params[:id])
+    @subsystem = @unit.subsystem
+    @project = @subsystem.project
   end
 
   # Save an updated unit

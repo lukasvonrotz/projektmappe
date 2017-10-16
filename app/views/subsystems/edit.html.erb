@@ -8,5 +8,9 @@
 
 <%= render 'form', :project => @subsystem.project,
            :project_subsystem => @subsystem,
-           :projectid => @subsystem.project.id,
+           :projectid => @project.id,
            :context => false  %>
+
+<%= link_to "Zurück zu Teilanlagen", project_subsystems_path(@project.id) %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

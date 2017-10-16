@@ -2,6 +2,8 @@ class OffertpositionsController < ApplicationController
   def index
     @offertpositions = Offertposition.where(:subsubproject_id => params[:subsubproject_id])
     @subsubproject = Subsubproject.find(params[:subsubproject_id])
+    @subproject = @subsubproject.subproject
+    @project = @subproject.project
 
     respond_to do |format|
       format.html

@@ -35,6 +35,7 @@ class SubprojectsController < ApplicationController
     # GET /subprojects/:id/edit
     def edit
       @subproject = Subproject.find(params[:id])
+      @project =  @subproject.project
     end
 
     # Save an updated subproject

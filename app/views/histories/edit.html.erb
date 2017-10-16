@@ -9,4 +9,7 @@
 <%= render 'form', :history => @history,
            :subprojectid => @history.subproject_id,
            :context => false  %>
-<%= link_to "Zurück zu Projektübersicht", project_subproject_path(@history.subproject.project.id, @history.subproject.id) %>
+
+<%= link_to "Zurück zu Projektübersicht", project_subproject_path(@project.id, @subproject.id) %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

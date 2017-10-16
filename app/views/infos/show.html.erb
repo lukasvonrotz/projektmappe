@@ -15,3 +15,5 @@ Querverweis: <%= @info.querverweis %><br>
 
 <br><br>
 <%= link_to "Zurück zu Projektübersicht", project_subproject_path(@info.subproject.project.id, @info.subproject.id) %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

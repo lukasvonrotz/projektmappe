@@ -31,139 +31,166 @@
                                           {:selected => wirecaptionsupplierid}, {class:"form-control"} %>
     </div>
 
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_admin, 'Stundenansatz Admin' %><br>
-      <%= subsubproject.text_field :hourrate_admin, :class => "form-control", :required => true %>
+    <div class="row" style="margin-bottom: 10px;">
+      <div class="col-lg-3">
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_admin, 'Stundenansatz Admin' %><br>
+          <%= subsubproject.text_field :hourrate_admin, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_admin, 'Komplexitätsfaktor Admin' %><br>
+          <%= subsubproject.text_field :complexity_admin, :class => "form-control", :required => true %>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_steuerkonzept, 'Stundenansatz Steuerkonzept' %><br>
+          <%= subsubproject.text_field :hourrate_steuerkonzept, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_steuerkonzept, 'Komplexitätsfaktor Steuerkonzept' %><br>
+          <%= subsubproject.text_field :complexity_steuerkonzept, :class => "form-control", :required => true %>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_ioliste, 'Stundenansatz IO-Liste' %><br>
+          <%= subsubproject.text_field :hourrate_ioliste, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_ioliste, 'Komplexitätsfaktor IO-Liste' %><br>
+          <%= subsubproject.text_field :complexity_ioliste, :class => "form-control", :required => true %>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_elplanung, 'Stundenansatz Elektroplanung' %><br>
+          <%= subsubproject.text_field :hourrate_elplanung, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_elplanung, 'Komplexitätsfaktor Elektroplanung' %><br>
+          <%= subsubproject.text_field :complexity_elplanung, :class => "form-control", :required => true %>
+        </div>
+      </div>
     </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_admin, 'Komplexitätsfaktor Admin' %><br>
-      <%= subsubproject.text_field :complexity_admin, :class => "form-control", :required => true %>
+    <div class="row" style="margin-bottom: 10px;">
+      <div class="col-lg-3">
+
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_fktbeschrieb, 'Stundenansatz Funktionsbeschreibung/Dok' %><br>
+          <%= subsubproject.text_field :hourrate_fktbeschrieb, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_fktbeschrieb, 'Komplexitätsfaktor Funktionsbeschreibung/Dok' %><br>
+          <%= subsubproject.text_field :complexity_fktbeschrieb, :class => "form-control", :required => true %>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_safetymatrix, 'Stundenansatz Safety-Matrix' %><br>
+          <%= subsubproject.text_field :hourrate_safetymatrix, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_safetymatrix, 'Komplexitätsfaktor Safety-Matrix' %><br>
+          <%= subsubproject.text_field :complexity_safetymatrix, :class => "form-control", :required => true %>
+        </div>
+      </div>
+      <div class="col-lg-3">
+
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_software, 'Stundenansatz Software' %><br>
+          <%= subsubproject.text_field :hourrate_software, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_software, 'Komplexitätsfaktor Software' %><br>
+          <%= subsubproject.text_field :complexity_software, :class => "form-control", :required => true %>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_softwaresafety, 'Stundenansatz Software Safety' %><br>
+          <%= subsubproject.text_field :hourrate_softwaresafety, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_softwaresafety, 'Komplexitätsfaktor Software Safety' %><br>
+          <%= subsubproject.text_field :complexity_softwaresafety, :class => "form-control", :required => true %>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 10px;">
+      <div class="col-lg-3">
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_bauleitung, 'Stundenansatz Bauleitung' %><br>
+          <%= subsubproject.text_field :hourrate_bauleitung, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_bauleitung, 'Komplexitätsfaktor Bauleitung' %><br>
+          <%= subsubproject.text_field :complexity_bauleitung, :class => "form-control", :required => true %>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_parametrierung, 'Stundenansatz Parametrierung' %><br>
+          <%= subsubproject.text_field :hourrate_parametrierung, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_parametrierung, 'Komplexitätsfaktor Parametrierung' %><br>
+          <%= subsubproject.text_field :complexity_parametrierung, :class => "form-control", :required => true %>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_signaltest, 'Stundenansatz Signaltest' %><br>
+          <%= subsubproject.text_field :hourrate_signaltest, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_signaltest, 'Komplexitätsfaktor Signaltest' %><br>
+          <%= subsubproject.text_field :complexity_signaltest, :class => "form-control", :required => true %>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_safetytest, 'Stundenansatz Safety-Test' %><br>
+          <%= subsubproject.text_field :hourrate_safetytest, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_safetytest, 'Komplexitätsfaktor Safety-Test' %><br>
+          <%= subsubproject.text_field :complexity_safetytest, :class => "form-control", :required => true %>
+        </div>
+      </div>
     </div>
 
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_steuerkonzept, 'Stundenansatz Steuerkonzept' %><br>
-      <%= subsubproject.text_field :hourrate_steuerkonzept, :class => "form-control", :required => true %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_steuerkonzept, 'Komplexitätsfaktor Steuerkonzept' %><br>
-      <%= subsubproject.text_field :complexity_steuerkonzept, :class => "form-control", :required => true %>
-    </div>
-
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_ioliste, 'Stundenansatz IO-Liste' %><br>
-      <%= subsubproject.text_field :hourrate_ioliste, :class => "form-control", :required => true %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_ioliste, 'Komplexitätsfaktor IO-Liste' %><br>
-      <%= subsubproject.text_field :complexity_ioliste, :class => "form-control", :required => true %>
-    </div>
-
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_elplanung, 'Stundenansatz Elektroplanung' %><br>
-      <%= subsubproject.text_field :hourrate_elplanung, :class => "form-control", :required => true %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_elplanung, 'Komplexitätsfaktor Elektroplanung' %><br>
-      <%= subsubproject.text_field :complexity_elplanung, :class => "form-control", :required => true %>
-    </div>
-
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_fktbeschrieb, 'Stundenansatz Funktionsbeschreibung/Dok' %><br>
-      <%= subsubproject.text_field :hourrate_fktbeschrieb, :class => "form-control", :required => true %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_fktbeschrieb, 'Komplexitätsfaktor Funktionsbeschreibung/Dok' %><br>
-      <%= subsubproject.text_field :complexity_fktbeschrieb, :class => "form-control", :required => true %>
-    </div>
-
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_safetymatrix, 'Stundenansatz Safety-Matrix' %><br>
-      <%= subsubproject.text_field :hourrate_safetymatrix, :class => "form-control", :required => true %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_safetymatrix, 'Komplexitätsfaktor Safety-Matrix' %><br>
-      <%= subsubproject.text_field :complexity_safetymatrix, :class => "form-control", :required => true %>
-    </div>
-
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_software, 'Stundenansatz Software' %><br>
-      <%= subsubproject.text_field :hourrate_software, :class => "form-control", :required => true %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_software, 'Komplexitätsfaktor Software' %><br>
-      <%= subsubproject.text_field :complexity_software, :class => "form-control", :required => true %>
-    </div>
-
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_softwaresafety, 'Stundenansatz Software Safety' %><br>
-      <%= subsubproject.text_field :hourrate_softwaresafety, :class => "form-control", :required => true %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_softwaresafety, 'Komplexitätsfaktor Software Safety' %><br>
-      <%= subsubproject.text_field :complexity_softwaresafety, :class => "form-control", :required => true %>
-    </div>
-
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_bauleitung, 'Stundenansatz Bauleitung' %><br>
-      <%= subsubproject.text_field :hourrate_bauleitung, :class => "form-control", :required => true %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_bauleitung, 'Komplexitätsfaktor Bauleitung' %><br>
-      <%= subsubproject.text_field :complexity_bauleitung, :class => "form-control", :required => true %>
-    </div>
-
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_parametrierung, 'Stundenansatz Parametrierung' %><br>
-      <%= subsubproject.text_field :hourrate_parametrierung, :class => "form-control", :required => true %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_parametrierung, 'Komplexitätsfaktor Parametrierung' %><br>
-      <%= subsubproject.text_field :complexity_parametrierung, :class => "form-control", :required => true %>
-    </div>
-
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_signaltest, 'Stundenansatz Signaltest' %><br>
-      <%= subsubproject.text_field :hourrate_signaltest, :class => "form-control", :required => true %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_signaltest, 'Komplexitätsfaktor Signaltest' %><br>
-      <%= subsubproject.text_field :complexity_signaltest, :class => "form-control", :required => true %>
-    </div>
-
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_safetytest, 'Stundenansatz Safety-Test' %><br>
-      <%= subsubproject.text_field :hourrate_safetytest, :class => "form-control", :required => true %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_safetytest, 'Komplexitätsfaktor Safety-Test' %><br>
-      <%= subsubproject.text_field :complexity_safetytest, :class => "form-control", :required => true %>
-    </div>
-
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_fkttestkalt, 'Stundenansatz Fkt.-Test kalt' %><br>
-      <%= subsubproject.text_field :hourrate_fkttestkalt, :class => "form-control", :required => true %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_fkttestkalt, 'Komplexitätsfaktor Fkt.-Test kalt' %><br>
-      <%= subsubproject.text_field :complexity_fkttestkalt, :class => "form-control", :required => true %>
-    </div>
-
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_fkttestheiss, 'Stundenansatz Fkt.-Test heiss' %><br>
-      <%= subsubproject.text_field :hourrate_fkttestheiss, :class => "form-control", :required => true %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_fkttestheiss, 'Komplexitätsfaktor Fkt.-Test heiss' %><br>
-      <%= subsubproject.text_field :complexity_fkttestheiss, :class => "form-control", :required => true %>
-    </div>
-
-    <div class="field form-group">
-      <%= subsubproject.label :hourrate_konformitaet, 'Stundenansatz Konformität' %><br>
-      <%= subsubproject.text_field :hourrate_konformitaet, :class => "form-control" %>
-    </div>
-    <div class="field form-group">
-      <%= subsubproject.label :complexity_konformitaet, 'Komplexitätsfaktor Konformität' %><br>
-      <%= subsubproject.text_field :complexity_konformitaet, :class => "form-control" %>
+    <div class="row" style="margin-bottom: 10px;">
+      <div class="col-lg-3">
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_fkttestkalt, 'Stundenansatz Fkt.-Test kalt' %><br>
+          <%= subsubproject.text_field :hourrate_fkttestkalt, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_fkttestkalt, 'Komplexitätsfaktor Fkt.-Test kalt' %><br>
+          <%= subsubproject.text_field :complexity_fkttestkalt, :class => "form-control", :required => true %>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_fkttestheiss, 'Stundenansatz Fkt.-Test heiss' %><br>
+          <%= subsubproject.text_field :hourrate_fkttestheiss, :class => "form-control", :required => true %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_fkttestheiss, 'Komplexitätsfaktor Fkt.-Test heiss' %><br>
+          <%= subsubproject.text_field :complexity_fkttestheiss, :class => "form-control", :required => true %>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="field form-group">
+          <%= subsubproject.label :hourrate_konformitaet, 'Stundenansatz Konformität' %><br>
+          <%= subsubproject.text_field :hourrate_konformitaet, :class => "form-control" %>
+        </div>
+        <div class="field form-group">
+          <%= subsubproject.label :complexity_konformitaet, 'Komplexitätsfaktor Konformität' %><br>
+          <%= subsubproject.text_field :complexity_konformitaet, :class => "form-control" %>
+        </div>
+      </div>
     </div>
 
     <%= subsubproject.hidden_field :subproject_id, :value => subprojectid %>

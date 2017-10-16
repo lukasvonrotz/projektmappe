@@ -11,4 +11,7 @@
 <%= render 'form', :offertposition => @offertposition,
            :subsubprojectid => subsubproject.id,
            :context => true  %>
-<%= link_to "Zurück zu Offertpositionen-Übersicht", project_subproject_subsubproject_offertpositions_path(subsubproject.subproject.project.id, subsubproject.subproject.id, subsubproject.id) %>
+<%= link_to "Zurück zu Offertpositionen-Übersicht",
+            project_subproject_subsubproject_offertpositions_path(subsubproject.subproject.project.id, subsubproject.subproject.id, subsubproject.id) %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

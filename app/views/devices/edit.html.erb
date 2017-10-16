@@ -16,3 +16,6 @@
            :elinst_geraete_id => @device.elinst_geraete.nil? ? '' : @device.elinst_geraete.id,
            :context => false %>
 <%= link_to "Zurück zu Geräteübersicht", devices_path %>
+
+
+<%= render 'layouts/loading', :message => "Lade..." %>
