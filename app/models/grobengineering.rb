@@ -675,8 +675,8 @@ class Grobengineering < ApplicationRecord
       total = 0
       total += self.schaltschrank_preisberechnung.switchgear.brutto
       self.schaltschrank_preisberechnung.iogroups.each do |iogroup|
-        iogroup.assemblies.each do |assembly|
-          total += assembly.brutto_chf(eurokurs)
+        iogroup.iogroupcomponents.each do |iogroupcomponent|
+          total += iogroupcomponent.assembly.brutto_chf(eurokurs)
         end
       end
       calc_tot(self.device_anzahl, total)
@@ -689,8 +689,8 @@ class Grobengineering < ApplicationRecord
       total = 0
       total += self.schaltschrank_preisberechnung.switchgear.netto
       self.schaltschrank_preisberechnung.iogroups.each do |iogroup|
-        iogroup.assemblies.each do |assembly|
-          total += assembly.netto(eurokurs)
+        iogroup.iogroupcomponents.each do |iogroupcomponent|
+          total += iogroupcomponent.assembly.netto(eurokurs)
         end
       end
       calc_tot(self.device_anzahl, total)
