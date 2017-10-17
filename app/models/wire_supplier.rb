@@ -25,20 +25,41 @@ class WireSupplier < ApplicationRecord
   end
 
   def self.import(file)
-    CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
-      begin
-        new_record = row.to_hash.except(:id)
-        if WireSupplier.where(:wire_id => new_record[:wire_id],
-                              :supplier_id => new_record[:supplier_id]).any?
-          # if this device already exists, only update existing entry
-          existing_record = WireSupplier.where(:wire_id => new_record[:wire_id],
-                                               :supplier_id => new_record[:supplier_id]).first
-          existing_record.update_attributes(new_record)
-          existing_record.save!
-        else
-          WireSupplier.create! new_record
-        end
-      rescue Exception => ex
+    records_to_save = []
+    records_to_update = []
+    begin
+      CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
+          new_record = row.to_hash.except(:id)
+          if WireSupplier.where(:wire_id => new_record[:wire_id],
+                                :supplier_id => new_record[:supplier_id]).any?
+            # if this device already exists, only update existing entry
+            existing_record = WireSupplier.where(:wire_id => new_record[:wire_id],
+                                                 :supplier_id => new_record[:supplier_id]).first
+            existing_record.assign_attributes(new_record)
+            if existing_record.valid?
+              records_to_update << existing_record
+            else
+              return 'Import konnte nicht durchgeführt werden!'
+            end
+          else
+            if WireSupplier.new(new_record).valid?
+              records_to_save << new_record
+            else
+              return 'Import konnte nicht durchgeführt werden!'
+            end
+          end
+      end
+      records_to_save.each do |record|
+        WireSupplier.create! record
+      end
+      records_to_update.each do |record|
+        record.save!
+      end
+      return ''
+    rescue Exception => ex
+      if file.nil?
+        return 'Dateipfad ungültig'
+      else
         return ex
       end
     end

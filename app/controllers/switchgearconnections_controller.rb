@@ -63,8 +63,8 @@ class SwitchgearconnectionsController < ApplicationController
 
   def import
     status = Switchgearconnection.import(params[:file])
-    if !status.nil?
-      redirect_to switchgearconnections_path, :notice => status
+    if !(status == '')
+      redirect_to switchgearconnections_path, :alert => status
     else
       redirect_to switchgearconnections_path, :notice => 'Verbindungen erfolgreich aktualisiert.'
     end

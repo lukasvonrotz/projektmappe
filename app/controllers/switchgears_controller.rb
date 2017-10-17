@@ -63,8 +63,8 @@ class SwitchgearsController < ApplicationController
 
   def import
     status = Switchgear.import(params[:file])
-    if !status.nil?
-      redirect_to switchgears_path, :notice => status
+    if !(status == '')
+      redirect_to switchgears_path, :alert => status
     else
       redirect_to switchgears_path, :notice => 'Schaltanlagenbau erfolgreich aktualisiert.'
     end

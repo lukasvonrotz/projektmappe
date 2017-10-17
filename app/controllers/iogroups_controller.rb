@@ -61,8 +61,8 @@ class IogroupsController < ApplicationController
 
   def import
     status = Iogroup.import(params[:file])
-    if !status.nil?
-      redirect_to iogroups_path, :notice => status
+    if !(status == '')
+      redirect_to iogroups_path, :alert => status
     else
       redirect_to iogroups_path, :notice => 'IO-Gruppen erfolgreich aktualisiert.'
     end

@@ -62,8 +62,8 @@ class AssembliesController < ApplicationController
 
   def import
     status = Assembly.import(params[:file])
-    if !status.nil?
-      redirect_to assemblies_path, :notice => status
+    if !(status == '')
+      redirect_to assemblies_path, :alert => status
     else
       redirect_to assemblies_path, :notice => 'IO-Baugruppen erfolgreich aktualisiert.'
     end

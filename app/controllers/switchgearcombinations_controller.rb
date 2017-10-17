@@ -67,8 +67,8 @@ class SwitchgearcombinationsController < ApplicationController
 
   def import
     status = Switchgearcombination.import(params[:file])
-    if !status.nil?
-      redirect_to switchgearcombinations_path, :notice => status
+    if !(status == '')
+      redirect_to switchgearcombinations_path, :alert => status
     else
       redirect_to switchgearcombinations_path, :notice => 'Schaltschrankkombinationen erfolgreich aktualisiert.'
     end

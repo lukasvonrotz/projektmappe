@@ -34,12 +34,25 @@ class Grobengineering < ApplicationRecord
   validates :kabel_spez3_laenge, presence:true, numericality: {only_float: true}
 
   def self.import(file, subsubprojectid)
-    CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
-      begin
+    records_to_save = []
+    begin
+      CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
         new_record = row.to_hash.except(:id)
         new_record[:subsubproject_id] = subsubprojectid
-        Grobengineering.create! new_record
-      rescue Exception => ex
+        if Grobengineering.new(new_record).valid?
+          records_to_save << new_record
+        else
+          return 'Bitte Eintrag von Gerät ' + Device.find(new_record[:device_id]).definition + ' überprüfen!'
+        end
+      end
+      records_to_save.each do |record|
+        Grobengineering.create! record
+      end
+      return ''
+    rescue Exception => ex
+      if file.nil?
+        return 'Dateipfad ungültig'
+      else
         return ex
       end
     end

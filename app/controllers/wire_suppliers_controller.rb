@@ -26,8 +26,8 @@ class WireSuppliersController < ApplicationController
 
   def import
     status = WireSupplier.import(params[:file])
-    if !status.nil?
-      redirect_to wire_suppliers_path, :notice => status
+    if !(status == '')
+      redirect_to wire_suppliers_path, :alert => status
     else
       redirect_to wire_suppliers_path, :notice => 'Kabel-Lieferantenpreise erfolgreich aktualisiert.'
     end

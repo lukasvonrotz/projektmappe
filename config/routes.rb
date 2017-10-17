@@ -68,6 +68,7 @@ Rails.application.routes.draw do
   end
   resources :iogroups do
     collection { post :import}
+    resources :iogroupcomponents
   end
   resources :iotypes do
     collection { post :import}
@@ -82,6 +83,7 @@ Rails.application.routes.draw do
   end
   resources :suppliertypes
   resources :wirecaptionprices
+  resources :iogroupcomponents
 
   match "/projects/:project_id/subprojects/:subproject_id/copy/:versiontocopy",
         to: "subprojects#copy", as: :copy, via: [:get]

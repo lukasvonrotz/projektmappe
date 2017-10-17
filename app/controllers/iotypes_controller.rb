@@ -65,8 +65,8 @@ class IotypesController < ApplicationController
 
   def import
     status = Iotype.import(params[:file])
-    if !status.nil?
-      redirect_to iotypes_path, :notice => status
+    if !(status == '')
+      redirect_to iotypes_path, :alert => status
     else
       redirect_to iotypes_path, :notice => 'IO-Typen-Liste erfolgreich aktualisiert.'
     end

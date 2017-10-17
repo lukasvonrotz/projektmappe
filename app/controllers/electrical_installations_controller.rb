@@ -62,8 +62,8 @@ class ElectricalInstallationsController < ApplicationController
 
   def import
     status = ElectricalInstallation.import(params[:file])
-    if !status.nil?
-      redirect_to electrical_installations_path, :notice => status
+    if !(status == '')
+      redirect_to electrical_installations_path, :alert => status
     else
       redirect_to electrical_installations_path, :notice => 'Elektoinstallationen erfolgreich aktualisiert.'
     end

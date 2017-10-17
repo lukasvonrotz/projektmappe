@@ -1,0 +1,27 @@
+<h1>Neue IO-Gruppen-Komponente erstellen</h1>
+<% if @iogroupcomponent.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @iogroupcomponent.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<% iogroupid = @iogroupcomponent.iogroup_id.nil? ? params[:iogroup_id] : @iogroupcomponent.iogroup_id %>
+
+<% if Assembly.any? %>
+  <% assemblyid = @iogroupcomponent.assembly_id.nil? ? Assembly.first.id : @iogroupcomponent.assembly_id %>
+
+  <%= render 'form', :iogroupcomponent => @iogroupcomponent,
+             :iogroupid => iogroupid,
+             :assemblyid => assemblyid,
+             :context => true  %>
+<% else %>
+  <div class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    Mindestens 1 IO-Baugruppe muss in der Datenbank existieren.
+  </div>
+<% end %>
+
+<%= link_to "Zurück zu Einbauten", iogroup_iogroupcomponents_path(iogroupid) %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

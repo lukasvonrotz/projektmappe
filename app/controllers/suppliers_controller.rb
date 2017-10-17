@@ -97,8 +97,8 @@ class SuppliersController < ApplicationController
 
     def import
       status = Supplier.import(params[:file])
-      if !status.nil?
-        redirect_to suppliers_path, :notice => status
+      if !(status == '')
+        redirect_to suppliers_path, :alert => status
       else
         redirect_to suppliers_path, :notice => 'Lieferanten-Liste erfolgreich aktualisiert.'
       end

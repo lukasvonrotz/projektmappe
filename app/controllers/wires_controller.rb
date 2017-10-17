@@ -110,8 +110,8 @@ class WiresController < ApplicationController
 
   def import
     status = Wire.import(params[:file])
-    if !status.nil?
-      redirect_to wires_path, :notice => status
+    if !(status == '')
+      redirect_to wires_path, :alert => status
     else
       redirect_to wires_path, :notice => 'Kabel erfolgreich aktualisiert.'
     end

@@ -35,18 +35,39 @@ class Switchgear < ApplicationRecord
   end
 
   def self.import(file)
-    CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
-      begin
+    records_to_save = []
+    records_to_update = []
+    begin
+      CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
         new_record = row.to_hash.except(:id)
         if Switchgear.where(:kennung => new_record[:kennung]).any?
           # if this device already exists, only update existing entry
           existing_record = Switchgear.where(:kennung => new_record[:kennung]).first
-          existing_record.update_attributes(new_record)
-          existing_record.save!
+          existing_record.assign_attributes(new_record)
+          if existing_record.valid?
+            records_to_update << existing_record
+          else
+            return 'Bitte Eintrag mit Kennung ' + existing_record[:kennung] + ' überprüfen!'
+          end
         else
-          Switchgear.create! new_record
+          if Switchgear.new(new_record).valid?
+            records_to_save << new_record
+          else
+            return 'Bitte Eintrag mit Kennung ' + new_record[:kennung] + ' überprüfen!'
+          end
         end
+      end
+      records_to_save.each do |record|
+        Switchgear.create! record
+      end
+      records_to_update.each do |record|
+        record.save!
+      end
+      return ''
       rescue Exception => ex
+      if file.nil?
+        return 'Dateipfad ungültig'
+      else
         return ex
       end
     end

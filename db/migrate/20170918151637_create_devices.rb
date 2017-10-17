@@ -69,5 +69,7 @@ class CreateDevices < ActiveRecord::Migration[5.0]
     add_foreign_key :devices, :electrical_installations, column: :elinst_trasse_id
     add_foreign_key :devices, :electrical_installations, column: :elinst_rohr_id
     add_foreign_key :devices, :electrical_installations, column: :elinst_geraete_id
+
+    add_index :devices, :definition, :unique => true, :name => 'devices_definition_unique'
   end
 end

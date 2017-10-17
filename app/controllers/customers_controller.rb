@@ -62,8 +62,8 @@ class CustomersController < ApplicationController
 
   def import
     status = Customer.import(params[:file])
-    if !status.nil?
-      redirect_to customers_path, :notice => status
+    if !(status == '')
+      redirect_to customers_path, :alert => status
     else
       redirect_to customers_path, :notice => 'Kundenliste erfolgreich aktualisiert.'
     end

@@ -24,6 +24,7 @@ class Switchgearcombination < ApplicationRecord
   validates :u_out_power, presence:true, numericality: {only_float: true}
   validates :u_out_control_high, presence:true, numericality: {only_float: true}
   validates :u_out_control_low, presence:true, numericality: {only_float: true}
+  validates :name, uniqueness: true
 
   def self.to_csv
     attributes = column_names
@@ -38,18 +39,39 @@ class Switchgearcombination < ApplicationRecord
   end
 
   def self.import(file)
-    CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
-      begin
+    records_to_save = []
+    records_to_update = []
+    begin
+      CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
         new_record = row.to_hash.except(:id)
         if Switchgearcombination.where(:name => new_record[:name]).any?
           # if this device already exists, only update existing entry
           existing_record = Switchgearcombination.where(:name => new_record[:name]).first
-          existing_record.update_attributes(new_record)
-          existing_record.save!
+          existing_record.assign_attributes(new_record)
+          if existing_record.valid?
+            records_to_update << existing_record
+          else
+            return 'Bitte Eintrag mit Name ' + existing_record[:name] + ' überprüfen!'
+          end
         else
-          Switchgearcombination.create! new_record
+          if Switchgearcombination.new(new_record).valid?
+            records_to_save << new_record
+          else
+            return 'Bitte Eintrag mit Name ' + new_record[:name] + ' überprüfen!'
+          end
         end
-      rescue Exception => ex
+      end
+      records_to_save.each do |record|
+        Switchgearcombination.create! record
+      end
+      records_to_update.each do |record|
+        record.save!
+      end
+      return ''
+    rescue Exception => ex
+      if file.nil?
+        return 'Dateipfad ungültig'
+      else
         return ex
       end
     end

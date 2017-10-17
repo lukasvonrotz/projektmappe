@@ -60,7 +60,7 @@ class DevicesController < ApplicationController
   def destroy
     @device = Device.find(params[:id])
     if @device.grobengineerings.any?
-      redirect_to devices_path, :notice => 'Gerät kann nicht gelöscht werden, da es bereits in Grobengineerings verknüpft ist.'
+      redirect_to devices_path, :alert => 'Gerät kann nicht gelöscht werden, da es bereits in Grobengineerings verknüpft ist.'
     else
       @device.destroy
       redirect_to devices_path, :notice => 'Gerät wurde gelöscht.'
@@ -69,8 +69,8 @@ class DevicesController < ApplicationController
 
   def import
     status = Device.import(params[:file])
-    if !status.nil?
-      redirect_to devices_path, :notice => status
+    if !(status == '')
+      redirect_to devices_path, :alert => status
     else
       redirect_to devices_path, :notice => 'Geräteliste erfolgreich aktualisiert.'
     end

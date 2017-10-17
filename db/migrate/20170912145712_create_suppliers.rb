@@ -5,5 +5,6 @@ class CreateSuppliers < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index :suppliers, :name, :unique => true, :name => 'suppliers_name_unique'
   end
 end

@@ -33,14 +33,15 @@
           <td><a href="<%= switchgearcombination_path(iogroup.switchgearcombination.id) %>"><%= iogroup.switchgearcombination.name %></a></td>
           <td>
             <ul>
-              <% iogroup.assemblies.each do |assembly| %>
-                <li><a href="<%= assembly_path(assembly.id) %>"><%= assembly.kennung %></li>
+              <% iogroup.iogroupcomponents.each do |iogroupcomponent| %>
+                <li><%= iogroupcomponent.steckplatznummer %>: <%= iogroupcomponent.name %></li>
               <% end %>
             </ul>
           </td>
           <td>
             <a href="<%= iogroup_path(iogroup.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
             <a href="<%= edit_iogroup_path(iogroup.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
+            <a href="<%= iogroup_iogroupcomponents_path(iogroup.id) %>" class="btn btn-xs btn-info btn-index">Einbauten</a>
             <button type="button" class="btn btn-xs btn-danger btn-index"
                     data-toggle="modal" data-target="#popup_sure_delete"
                     data-itemid="<%= iogroup.id %>"

@@ -1,0 +1,31 @@
+<%= form_for iogroupcomponent do |iogroupcomponent| %>
+
+    <div class="field form-group">
+      <%= iogroupcomponent.label :name, 'Name' %>
+      <%= iogroupcomponent.text_field :name, :class => "form-control",
+                             placeholder: 'Name für IO-Gruppen-Komponente eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= iogroupcomponent.label :steckplatznummer, 'Steckplatznummer' %>
+      <%= iogroupcomponent.text_field :steckplatznummer, :class => "form-control",
+                                      :required => true,
+                                      placeholder: 'Steckplatznr. eingeben' %>
+    </div>
+
+    <div class="field form-group">
+      <%= iogroupcomponent.label :assembly, 'Typ' %>
+      <%= iogroupcomponent.collection_select :assembly_id, Assembly.all.sort_by {|obj| obj.kennung},:id,:kennung,
+                                               {:selected => assemblyid}, {class:"form-control"} %>
+    </div>
+
+    <%= iogroupcomponent.hidden_field :iogroup_id, :value => iogroupid %>
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= iogroupcomponent.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= iogroupcomponent.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

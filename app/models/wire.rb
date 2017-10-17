@@ -7,6 +7,8 @@ class Wire < ApplicationRecord
   has_many :suppliers, :through => :wire_suppliers
 
   validates :anzahladern, presence:true, numericality: {only_integer: true}
+  validates :aderbeschriftung, presence:true, numericality: {only_integer: true}
+  validates :kabeltyp, uniqueness: true
 
   has_many :wire_spez1_grobengineerings, class_name: "Grobengineering",
            foreign_key: "wire_spez1_id",
@@ -16,6 +18,16 @@ class Wire < ApplicationRecord
            dependent: :nullify
   has_many :wire_spez3_grobengineerings, class_name: "Grobengineering",
            foreign_key: "wire_spez3_id",
+           dependent: :nullify
+
+  has_many :steuerung_devices, class_name: "Device",
+           foreign_key: "wire_steuerung_id",
+           dependent: :nullify
+  has_many :speisung_devices, class_name: "Device",
+           foreign_key: "wire_speisung_id",
+           dependent: :nullify
+  has_many :potausgleich_devices, class_name: "Device",
+           foreign_key: "wire_potausgleich_id",
            dependent: :nullify
 
   def anschluesse_ohne_beschriftung(wiresupplier)
@@ -51,25 +63,46 @@ class Wire < ApplicationRecord
   end
 
   def self.import(file)
-    CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
-      begin
+    records_to_save = []
+    records_to_update = []
+    begin
+      CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
         new_record = row.to_hash.except(:id)
         if Wire.where(:kabeltyp => new_record[:kabeltyp]).any?
           # if this device already exists, only update existing entry
           existing_record = Wire.where(:kabeltyp => new_record[:kabeltyp]).first
-          existing_record.update_attributes(new_record)
-          existing_record.save!
+          existing_record.assign_attributes(new_record)
+          if existing_record.valid?
+            records_to_update << existing_record
+          else
+            return 'Bitte Eintrag mit Kabeltyp ' + existing_record[:kabeltyp] + ' überprüfen!'
+          end
         else
-          new_wire = Wire.create! new_record
-          wiresuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'})
-          wiresuppliers.each do |wiresupplier|
-            wireWiresupplierEntry = WireSupplier.new
-            wireWiresupplierEntry.wire_id = new_wire.id
-            wireWiresupplierEntry.supplier_id = wiresupplier.id
-            wireWiresupplierEntry.save!
+          if Wire.new(new_record).valid?
+            records_to_save << new_record
+          else
+            return 'Bitte Eintrag mit Kabeltyp ' + new_record[:kabeltyp] + ' überprüfen!'
           end
         end
-      rescue Exception => ex
+      end
+      records_to_save.each do |record|
+        new_wire = Wire.create! record
+        wiresuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'})
+        wiresuppliers.each do |wiresupplier|
+          wireWiresupplierEntry = WireSupplier.new
+          wireWiresupplierEntry.wire_id = new_wire.id
+          wireWiresupplierEntry.supplier_id = wiresupplier.id
+          wireWiresupplierEntry.save!
+        end
+      end
+      records_to_update.each do |record|
+        record.save!
+      end
+      return ''
+    rescue Exception => ex
+      if file.nil?
+        return 'Dateipfad ungültig'
+      else
         return ex
       end
     end

@@ -23,18 +23,39 @@ class Supplier < ApplicationRecord
   end
 
   def self.import(file)
+    records_to_save = []
+    records_to_update = []
+    begin
     CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
-      begin
-        new_record = row.to_hash.except(:id)
-        if Supplier.where(:name => new_record[:name]).any?
-          # if this device already exists, only update existing entry
-          existing_record = Supplier.where(:name => new_record[:name]).first
-          existing_record.update_attributes(new_record)
-          existing_record.save!
+      new_record = row.to_hash.except(:id)
+      if Supplier.where(:name => new_record[:name]).any?
+        # if this device already exists, only update existing entry
+        existing_record = Supplier.where(:name => new_record[:name]).first
+        existing_record.assign_attributes(new_record)
+        if existing_record.valid?
+          records_to_update << existing_record
         else
-          Supplier.create! new_record
+          return 'Bitte Eintrag mit Name ' + existing_record[:name] + ' überprüfen!'
         end
-      rescue Exception => ex
+      else
+        if Supplier.new(new_record).valid?
+          records_to_save << new_record
+        else
+          return 'Bitte Eintrag mit Name ' + new_record[:name] + ' überprüfen!'
+        end
+      end
+    end
+    records_to_save.each do |record|
+      Supplier.create! record
+    end
+    records_to_update.each do |record|
+      record.save!
+    end
+    return ''
+    rescue Exception => ex
+      if file.nil?
+        return 'Dateipfad ungültig'
+      else
         return ex
       end
     end

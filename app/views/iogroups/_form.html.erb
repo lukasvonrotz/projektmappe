@@ -22,12 +22,6 @@
 
                                     {:selected => switchgearcombinationid}, {class:"form-control"} %>
     </div>
-    <div class="field form-group">
-      <%= iogroup.label :assembly_ids, 'Einbauten' %></br>
-      <%= iogroup.select :assembly_ids,
-                                    Assembly.all.map { |u| [u.kennung, u.id] },
-                                    { include_blank: true }, { class: 'chosen-select', multiple: 'true' } %>
-    </div>
 
 
     <div class="actions form-group">
@@ -39,8 +33,3 @@
     </div>
 
 <% end %>
-
-<script>
-    $(".chosen-select").chosen({allow_single_deselect: true, placeholder_text: "Wähle Optionen aus",
-        no_results_text: 'Keine Einbauten gefunden', search_contains: true, width: '100%'});
-</script>

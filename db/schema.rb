@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171010093815) do
+ActiveRecord::Schema.define(version: 20171017132740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,12 +35,6 @@ ActiveRecord::Schema.define(version: 20171010093815) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.index ["kennung"], name: "assemblies_kennung_unique", unique: true, using: :btree
-  end
-
-  create_table "assemblies_iogroups", id: false, force: :cascade do |t|
-    t.integer "assembly_id"
-    t.integer "iogroup_id"
-    t.index ["assembly_id", "iogroup_id"], name: "assemblies_iogroups_unique", unique: true, using: :btree
   end
 
   create_table "customers", force: :cascade do |t|
@@ -107,6 +101,7 @@ ActiveRecord::Schema.define(version: 20171010093815) do
     t.integer  "elinst_trasse_id"
     t.integer  "elinst_rohr_id"
     t.integer  "elinst_geraete_id"
+    t.index ["definition"], name: "devices_definition_unique", unique: true, using: :btree
     t.index ["elinst_geraete_id"], name: "index_devices_on_elinst_geraete_id", using: :btree
     t.index ["elinst_rohr_id"], name: "index_devices_on_elinst_rohr_id", using: :btree
     t.index ["elinst_trasse_id"], name: "index_devices_on_elinst_trasse_id", using: :btree
@@ -207,6 +202,18 @@ ActiveRecord::Schema.define(version: 20171010093815) do
     t.index ["subproject_id"], name: "index_infos_on_subproject_id", using: :btree
   end
 
+  create_table "iogroupcomponents", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "steckplatznummer", default: 0, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "assembly_id",                  null: false
+    t.integer  "iogroup_id",                   null: false
+    t.index ["assembly_id"], name: "index_iogroupcomponents_on_assembly_id", using: :btree
+    t.index ["iogroup_id", "steckplatznummer"], name: "iogroup_steckplatz_unique", unique: true, using: :btree
+    t.index ["iogroup_id"], name: "index_iogroupcomponents_on_iogroup_id", using: :btree
+  end
+
   create_table "iogroups", force: :cascade do |t|
     t.string   "name"
     t.string   "profibus_address"
@@ -215,19 +222,15 @@ ActiveRecord::Schema.define(version: 20171010093815) do
     t.integer  "switchgearcombination_id", null: false
     t.integer  "iotype_id",                null: false
     t.index ["iotype_id"], name: "index_iogroups_on_iotype_id", using: :btree
+    t.index ["name"], name: "iogroups_name_unique", unique: true, using: :btree
     t.index ["switchgearcombination_id"], name: "index_iogroups_on_switchgearcombination_id", using: :btree
-  end
-
-  create_table "iogroups_assemblies", id: false, force: :cascade do |t|
-    t.integer "iogroup_id"
-    t.integer "assembly_id"
-    t.index ["iogroup_id", "assembly_id"], name: "iogroups_assemblies_unique", unique: true, using: :btree
   end
 
   create_table "iotypes", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "iotypes_name_unique", unique: true, using: :btree
   end
 
   create_table "offer_offertpositions", force: :cascade do |t|
@@ -370,6 +373,7 @@ ActiveRecord::Schema.define(version: 20171010093815) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "suppliers_name_unique", unique: true, using: :btree
   end
 
   create_table "suppliertypes", force: :cascade do |t|
@@ -498,6 +502,8 @@ ActiveRecord::Schema.define(version: 20171010093815) do
   add_foreign_key "grobengineerings", "wires", column: "wire_spez3_id"
   add_foreign_key "histories", "subprojects"
   add_foreign_key "infos", "subprojects"
+  add_foreign_key "iogroupcomponents", "assemblies"
+  add_foreign_key "iogroupcomponents", "iogroups"
   add_foreign_key "iogroups", "iotypes"
   add_foreign_key "iogroups", "switchgearcombinations"
   add_foreign_key "offers", "subsubprojects"

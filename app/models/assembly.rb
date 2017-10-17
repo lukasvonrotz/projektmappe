@@ -2,6 +2,8 @@ class Assembly < ApplicationRecord
 
   require 'csv'
 
+  has_many :iogroupcomponents, dependent: :destroy
+
 
   validates :di, numericality: {only_integer: true, :presence => true}
   validates :do, numericality: {only_integer: true, :presence => true}
@@ -16,8 +18,8 @@ class Assembly < ApplicationRecord
   validates :sao, numericality: {only_integer: true, :presence => true}
   validates :brutto_eur, numericality: {only_float: true, :presence => true}
   validates :rabatt, numericality: {only_float: true}
+  validates :kennung, uniqueness: true
 
-  has_and_belongs_to_many :iogroups
 
   @@di_anz_bg = 8
   @@di_reserve = 0.2
@@ -63,18 +65,39 @@ class Assembly < ApplicationRecord
   end
 
   def self.import(file)
-    CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
-      begin
+    records_to_save = []
+    records_to_update = []
+    begin
+      CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
         new_record = row.to_hash.except(:id)
         if Assembly.where(:kennung => new_record[:kennung]).any?
           # if this device already exists, only update existing entry
           existing_record = Assembly.where(:kennung => new_record[:kennung]).first
-          existing_record.update_attributes(new_record)
-          existing_record.save!
+          existing_record.assign_attributes(new_record)
+          if existing_record.valid?
+            records_to_update << existing_record
+          else
+            return 'Bitte Eintrag mit Kennung ' + existing_record[:kennung] + ' überprüfen!'
+          end
         else
-          Assembly.create! new_record
+          if Assembly.new(new_record).valid?
+            records_to_save << new_record
+          else
+            return 'Bitte Eintrag mit Kennung ' + new_record[:kennung] + ' überprüfen!'
+          end
         end
-      rescue Exception => ex
+      end
+      records_to_save.each do |record|
+        Assembly.create! record
+      end
+      records_to_update.each do |record|
+        record.save!
+      end
+      return ''
+    rescue Exception => ex
+      if file.nil?
+        return 'Dateipfad ungültig'
+      else
         return ex
       end
     end

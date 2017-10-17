@@ -3,7 +3,8 @@
     <div class="field form-group">
       <%= wire.label :aderbeschriftung, 'Aderbeschriftung' %>
       <%= wire.text_field :aderbeschriftung, :class => "form-control",
-                             placeholder: 'Aderbeschriftung eingeben' %>
+                          :required => true,
+                          placeholder: 'Aderbeschriftung eingeben' %>
     </div>
 
     <div class="field form-group">

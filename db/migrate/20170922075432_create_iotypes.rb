@@ -5,5 +5,6 @@ class CreateIotypes < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index :iotypes, :name, :unique => true, :name => 'iotypes_name_unique'
   end
 end

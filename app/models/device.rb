@@ -2,6 +2,7 @@ class Device < ApplicationRecord
 
   require 'csv'
 
+  validates :definition, uniqueness: true
   validates :eng_admin, presence:true, numericality: {only_float: true}
   validates :eng_steuerkonzept, presence:true, numericality: {only_float: true}
   validates :eng_ioliste, presence:true, numericality: {only_float: true}
@@ -66,18 +67,39 @@ class Device < ApplicationRecord
   has_many :grobengineerings, dependent: :nullify
 
   def self.import(file)
-    CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
-      begin
+    records_to_save = []
+    records_to_update = []
+    begin
+      CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
         new_record = row.to_hash.except(:id)
         if Device.where(:definition => new_record[:definition]).any?
           # if this device already exists, only update existing entry
           existing_record = Device.where(:definition => new_record[:definition]).first
-          existing_record.update_attributes(new_record)
-          existing_record.save!
+          existing_record.assign_attributes(new_record)
+          if existing_record.valid?
+            records_to_update << existing_record
+          else
+            return 'Bitte Eintrag mit Kennung ' + existing_record[:definition] + ' überprüfen!'
+          end
         else
-          Device.create! new_record
+          if Device.new(new_record).valid?
+            records_to_save << new_record
+          else
+            return 'Bitte Eintrag mit Definition ' + new_record[:definition] + ' überprüfen!'
+          end
         end
-      rescue Exception => ex
+      end
+      records_to_save.each do |record|
+        Device.create! record
+      end
+      records_to_update.each do |record|
+        record.save!
+      end
+      return ''
+    rescue Exception => ex
+      if file.nil?
+        return 'Dateipfad ungültig'
+      else
         return ex
       end
     end

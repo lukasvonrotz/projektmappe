@@ -62,8 +62,8 @@ class DrivesController < ApplicationController
 
   def import
     status = Drive.import(params[:file])
-    if !status.nil?
-      redirect_to drives_path, :notice => status
+    if !(status == '')
+      redirect_to drives_path, :alert => status
     else
       redirect_to drives_path, :notice => 'FU-Liste erfolgreich aktualisiert.'
     end
