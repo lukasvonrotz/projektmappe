@@ -9,7 +9,7 @@ default: &default
   pool: 5
   timeout: 5000
   encoding: unicode
-  host: \\PROLANB02
+  host: 192.168.0.22
   port: 5432
   database: projektmappe_db
   username: postgres
@@ -23,8 +23,9 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  #database: db/test.sqlite3
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
 
 production:
   <<: *default
