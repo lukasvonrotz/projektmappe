@@ -48,6 +48,6 @@
       Mindestens 1 Gerät muss in der Datenbank existieren.
     </div>
 <% end %>
-<%= link_to "Zurück zu Grobengineering", project_subproject_subsubproject_grobengineerings_path %>
+<%= link_to "Zurück zu Grobengineering", project_subproject_subsubproject_grobengineerings_path(subsubproject.subproject.project.id, subsubproject.subproject.id, subsubproject.id) %>
 
 <%= render 'layouts/loading', :message => "Lade..." %>

@@ -91,8 +91,12 @@ class SuppliersController < ApplicationController
     # DELETE /suppliers/:id
     def destroy
       @supplier = Supplier.find(params[:id])
-      @supplier.destroy
-      redirect_to suppliers_path, :notice => 'Lieferant wurde gelöscht.'
+      if @supplier.wire_subsubprojects.any? || @supplier.wirecaption_subsubprojects.any?
+        redirect_to suppliers_path, :alert => 'Lieferant konnte nicht gelöscht werden, da er bereits in Versionen verknüpft ist.'
+      else
+        @supplier.destroy
+        redirect_to suppliers_path, :notice => 'Lieferant wurde gelöscht.'
+      end
     end
 
     def import

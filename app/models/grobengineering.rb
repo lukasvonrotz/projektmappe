@@ -33,16 +33,26 @@ class Grobengineering < ApplicationRecord
   validates :kabel_spez2_laenge, presence:true, numericality: {only_float: true}
   validates :kabel_spez3_laenge, presence:true, numericality: {only_float: true}
 
+  validate :offertpositions_within_range?
+  def offertpositions_within_range?
+    offertposition = Offertposition.find(self.offertposition_id)
+    if !Offertposition.where(:subsubproject_id  => self.subsubproject_id).include?(offertposition)
+      errors.add(:offertposition, "must be within range")
+    end
+
+  end
+
+
   def self.import(file, subsubprojectid)
     records_to_save = []
     begin
       CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
         new_record = row.to_hash.except(:id)
         new_record[:subsubproject_id] = subsubprojectid
-        if Grobengineering.new(new_record).valid?
+        if Grobengineering.new(new_record).valid? &&
           records_to_save << new_record
         else
-          return 'Bitte Eintrag von Gerät ' + Device.find(new_record[:device_id]).definition + ' überprüfen!'
+          return 'Bitte Eintrag von Gerät ' + Device.find(new_record[:device_id]).definition + ' überprüfen! Ist Anzahl Geräte ein Integer? Sind Funktion SW, Spannung, Leistung, Strom und die Längen von Kabel Spezifisch 1-3 Floats? Ist Offertposition eine Offertposition welche der aktuellen Version zugeordnet ist?'
         end
       end
       records_to_save.each do |record|
@@ -893,4 +903,5 @@ class Grobengineering < ApplicationRecord
       hourrate.to_f * single.to_f
     end
   end
+
 end

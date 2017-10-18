@@ -59,7 +59,7 @@ class OffertpositionsController < ApplicationController
   def destroy
     @offertposition = Offertposition.find(params[:id])
     if @offertposition.grobengineerings.any?
-      redirect_to project_subproject_subsubproject_offertpositions_path(@offertposition.subsubproject.subproject.project.id, @offertposition.subsubproject.subproject.id, @offertposition.subsubproject.id), :notice => 'Offertposition kann nicht gelöscht werden, da sie bereits in Grobengineerings verknüpft ist.'
+      redirect_to project_subproject_subsubproject_offertpositions_path(@offertposition.subsubproject.subproject.project.id, @offertposition.subsubproject.subproject.id, @offertposition.subsubproject.id), :alert => 'Offertposition kann nicht gelöscht werden, da sie bereits in Grobengineerings verknüpft ist.'
     else
       @offertposition.destroy
       redirect_to project_subproject_subsubproject_offertpositions_path(@offertposition.subsubproject.subproject.project.id, @offertposition.subsubproject.subproject.id, @offertposition.subsubproject.id), :notice => 'Offertposition wurde gelöscht.'

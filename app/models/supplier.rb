@@ -10,6 +10,13 @@ class Supplier < ApplicationRecord
 
   has_many :wirecaptionprices, dependent: :destroy
 
+  has_many :wire_subsubprojects, class_name: "Subsubproject",
+           foreign_key: "wiresupplier_id",
+           dependent: :nullify
+  has_many :wirecaption_subsubprojects, class_name: "Subsubproject",
+           foreign_key: "wirecaptionsupplier_id",
+           dependent: :nullify
+
   def self.to_csv
     attributes = column_names
 

@@ -6,12 +6,16 @@
     </div>
 <% end %>
 
+<% subsubproject = Subsubproject.find(@subsubproject.id) %>
+<% subproject = subsubproject.subproject %>
+<% project = subproject.project %>
+
 <%= render 'form', :subprojectid => @subsubproject.subproject.id,
            :subsubproject => @subsubproject,
            :wiresupplierid => @subsubproject.wiresupplier.id,
            :wirecaptionsupplierid => @subsubproject.wirecaptionsupplier.id,
            :context => false  %>
 
-<%= link_to "Zurück zu Versionsübersicht", project_subproject_subsubprojects_path(@project.id, @subproject.id) %>
+<%= link_to "Zurück zu Versionsübersicht", project_subproject_subsubprojects_path(project.id, subproject.id) %>
 
 <%= render 'layouts/loading', :message => "Lade..." %>
