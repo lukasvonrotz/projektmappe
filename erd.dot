@@ -26,7 +26,7 @@ m_Assembly [label = <{<table border="0" align="center" cellspacing="0.5" cellpad
   <tr><td align="left" width="130" port="di">di <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
   <tr><td align="left" width="130" port="do">do <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
   <tr><td align="left" width="130" port="inkr">inkr <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
-  <tr><td align="left" width="130" port="kennung">kennung <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="kennung">kennung <font face="Arial Italic" color="grey60">string U</font></td></tr>
   <tr><td align="left" width="130" port="rabatt">rabatt <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="sai">sai <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
   <tr><td align="left" width="130" port="sao">sao <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
@@ -49,7 +49,7 @@ m_Device [label = <{<table border="0" align="center" cellspacing="0.5" cellpaddi
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
-  <tr><td align="left" width="130" port="definition">definition <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="definition">definition <font face="Arial Italic" color="grey60">text U</font></td></tr>
   <tr><td align="left" width="130" port="eng_admin">eng_admin <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="eng_bauleitung">eng_bauleitung <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="eng_elplanung">eng_elplanung <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
@@ -109,7 +109,7 @@ m_Drive [label = <{<table border="0" align="center" cellspacing="0.5" cellpaddin
   <tr><td align="left" width="130" port="bg">bg <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="brutto">brutto <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="in">in <font face="Arial Italic" color="grey60">text</font></td></tr>
-  <tr><td align="left" width="130" port="kennung">kennung <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="kennung">kennung <font face="Arial Italic" color="grey60">string U</font></td></tr>
   <tr><td align="left" width="130" port="pn">pn <font face="Arial Italic" color="grey60">text</font></td></tr>
   <tr><td align="left" width="130" port="rabatt">rabatt <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="un">un <font face="Arial Italic" color="grey60">text</font></td></tr>
@@ -122,7 +122,7 @@ m_ElectricalInstallation [label = <{<table border="0" align="center" cellspacing
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="brutto">brutto <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="einheit">einheit <font face="Arial Italic" color="grey60">string</font></td></tr>
-  <tr><td align="left" width="130" port="kennung">kennung <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="kennung">kennung <font face="Arial Italic" color="grey60">text U</font></td></tr>
   <tr><td align="left" width="130" port="leistung">leistung <font face="Arial Italic" color="grey60">text</font></td></tr>
   <tr><td align="left" width="130" port="rabatt">rabatt <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
 </table>
@@ -177,8 +177,17 @@ m_Iogroup [label = <{<table border="0" align="center" cellspacing="0.5" cellpadd
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
-  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string U</font></td></tr>
   <tr><td align="left" width="130" port="profibus_address">profibus_address <font face="Arial Italic" color="grey60">string</font></td></tr>
+</table>
+}>];
+m_Iogroupcomponent [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Iogroupcomponent</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="steckplatznummer">steckplatznummer <font face="Arial Italic" color="grey60">integer ∗ U</font></td></tr>
 </table>
 }>];
 m_Iotype [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -186,7 +195,7 @@ m_Iotype [label = <{<table border="0" align="center" cellspacing="0.5" cellpaddi
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
-  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string U</font></td></tr>
 </table>
 }>];
 m_Offer [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -340,7 +349,7 @@ m_Switchgearcombination [label = <{<table border="0" align="center" cellspacing=
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
-  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string U</font></td></tr>
   <tr><td align="left" width="130" port="standort">standort <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="u_feed_control">u_feed_control <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="u_feed_power">u_feed_power <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
@@ -391,9 +400,9 @@ m_Wire [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
-  <tr><td align="left" width="130" port="aderbeschriftung">aderbeschriftung <font face="Arial Italic" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="aderbeschriftung">aderbeschriftung <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
   <tr><td align="left" width="130" port="anzahladern">anzahladern <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
-  <tr><td align="left" width="130" port="kabeltyp">kabeltyp <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="kabeltyp">kabeltyp <font face="Arial Italic" color="grey60">string U</font></td></tr>
 </table>
 }>];
 m_WireSupplier [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -429,25 +438,26 @@ m_Wirecaptionprice [label = <{<table border="0" align="center" cellspacing="0.5"
   m_Iogroup -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Device -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Offertposition -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "2"];
-  m_Switchgearcombination -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_Switchgear -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_Drive -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_Wire -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_Wire -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_Wire -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_Assembly -> m_Iogroup [arrowhead = "normal", arrowtail = "normal", weight = "2"];
+  m_Switchgearcombination -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Switchgear -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Drive -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Wire -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Wire -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Wire -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Assembly -> m_Iogroupcomponent [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Customer -> m_Subproject [arrowhead = "normal", arrowtail = "none", weight = "2"];
-  m_Switchgear -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_Wire -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_Wire -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_Wire -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_ElectricalInstallation -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_ElectricalInstallation -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_ElectricalInstallation -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_Switchgear -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Wire -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Wire -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Wire -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_ElectricalInstallation -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_ElectricalInstallation -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_ElectricalInstallation -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Subproject -> m_History [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Subproject -> m_Info [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Switchgearcombination -> m_Iogroup [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Iotype -> m_Iogroup [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Iogroup -> m_Iogroupcomponent [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Offer -> m_OfferOffertposition [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Offer -> m_Offertposition [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"];
   m_Subsubproject -> m_Offer [arrowhead = "normal", arrowtail = "none", weight = "2"];
@@ -458,8 +468,8 @@ m_Wirecaptionprice [label = <{<table border="0" align="center" cellspacing="0.5"
   m_Project -> m_Subsystem [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Subproject -> m_SubprojectUser [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Subproject -> m_Subsubproject [arrowhead = "normal", arrowtail = "none", weight = "2"];
-  m_Supplier -> m_Subsubproject [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_Supplier -> m_Subsubproject [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_Supplier -> m_Subsubproject [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Supplier -> m_Subsubproject [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Subsystem -> m_Unit [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Supplier -> m_SupplierSuppliertype [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Supplier -> m_Suppliertype [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"];
@@ -468,7 +478,7 @@ m_Wirecaptionprice [label = <{<table border="0" align="center" cellspacing="0.5"
   m_Supplier -> m_Wirecaptionprice [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Suppliertype -> m_SupplierSuppliertype [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Switchgear -> m_Switchgearcombination [arrowhead = "normal", arrowtail = "none", weight = "2"];
-  m_Switchgearcombination -> m_Switchgearconnection [arrowhead = "normal", arrowtail = "none", weight = "1"];
-  m_Switchgearcombination -> m_Switchgearconnection [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_Switchgearcombination -> m_Switchgearconnection [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Switchgearcombination -> m_Switchgearconnection [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Wire -> m_WireSupplier [arrowhead = "normal", arrowtail = "none", weight = "2"];
 }

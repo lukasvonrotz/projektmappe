@@ -111,7 +111,7 @@ class Device < ApplicationRecord
     CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|
       csv << attributes
 
-      all.each do |user|
+      all.order(:id).each do |user|
         csv << attributes.map{ |attr| user.send(attr) }
       end
     end

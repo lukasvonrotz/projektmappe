@@ -36,7 +36,7 @@ class ElectricalInstallation < ApplicationRecord
     CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|
       csv << attributes
 
-      all.each do |entry|
+      all.order(:id).each do |entry|
         csv << attributes.map{ |attr| entry.send(attr) }
       end
     end

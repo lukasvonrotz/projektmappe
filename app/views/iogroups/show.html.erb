@@ -10,12 +10,19 @@
 ID: <%= @iogroup.id %><br>
 Name: <%= @iogroup.name %><br>
 Profibus-Adresse: <%= @iogroup.profibus_address %><br>
+IO-Gruppentyp: <%= @iogroup.iotype.name %><br>
+Schaltgerätekombination: <a href="<%= switchgearcombination_path(@iogroup.switchgearcombination)%>">
+  <%= @iogroup.switchgearcombination.name %>
+</a><br>
 Einbauten:
 <ul>
-  <% @iogroup.assemblies.each do |assembly| %>
-    <li><a href="<%= assembly_path(assembly.id) %>"><%= assembly.kennung %></a></li>
+  <% @iogroup.iogroupcomponents.order(:steckplatznummer).each do |iogroupcomponent| %>
+    <li><a href="<%= iogroup_iogroupcomponents_path(@iogroup.id) %>">
+      <%= iogroupcomponent.steckplatznummer %>: <%= iogroupcomponent.name %></a>
+    </li>
   <% end %>
 </ul>
+<a href="<%= iogroup_iogroupcomponents_path(@iogroup.id) %>" class="btn btn-xs btn-info btn-index">Einbauten</a>
 
 <br><br>
 <%= link_to "Zurück zu IO-Gruppen-Übersicht", iogroups_path %>

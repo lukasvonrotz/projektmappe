@@ -3,10 +3,11 @@ class Switchgear < ApplicationRecord
   require 'csv'
 
 
-  validates :maxstrom, numericality: {only_float: true, allow_blank: true}
+  validates :maxstrom, numericality: {only_float: true}
   validates :brutto, presence:true, numericality: {only_float: true}
   validates :rabatt, presence:true, numericality: {only_float: true}
   validates :typ, presence:true
+  validates :kennung, uniqueness: true
 
   has_many :switchgearcombinations, dependent: :destroy
 
@@ -28,7 +29,7 @@ class Switchgear < ApplicationRecord
     CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|
       csv << attributes
 
-      all.each do |entry|
+      all.order(:id).each do |entry|
         csv << attributes.map{ |attr| entry.send(attr) }
       end
     end
