@@ -26,6 +26,7 @@ class Switchgearcombination < ApplicationRecord
   validates :u_out_control_low, presence:true, numericality: {only_float: true}
   validates :name, uniqueness: true
 
+  # CSV Export
   def self.to_csv
     attributes = column_names
 
@@ -38,6 +39,7 @@ class Switchgearcombination < ApplicationRecord
     end
   end
 
+  # CSV Import
   def self.import(file)
     records_to_save = []
     records_to_update = []

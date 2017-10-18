@@ -1,5 +1,6 @@
 class SwitchgearcombinationsController < ApplicationController
-
+  # Auflistung aller Schaltgerätekombinationen
+  # GET /switchgearcombinations
   def index
     @switchgearcombinations = Switchgearcombination.all
 
@@ -65,6 +66,7 @@ class SwitchgearcombinationsController < ApplicationController
     end
   end
 
+  # CSV Import
   def import
     status = Switchgearcombination.import(params[:file])
     if !(status == '')

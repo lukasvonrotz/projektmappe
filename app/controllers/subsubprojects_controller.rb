@@ -1,4 +1,6 @@
 class SubsubprojectsController < ApplicationController
+  # Auflistung aller Versionen pro Projekt
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects
   def index
     @subproject = Subproject.find(params[:subproject_id])
     @project = @subproject.project
@@ -6,16 +8,17 @@ class SubsubprojectsController < ApplicationController
   end
 
   # Control logic for create-view
-  # GET /subsubprojects/new
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/new
   def new
     # build a 'temporary' post which is written to DB later (create-method)
     @subsubproject = Subsubproject.new
   end
 
   # Control logic when creating a new subsubproject
-  # POST /subsubprojects
+  # POST /projects/:project_id/subprojects/:subproject_id/subsubprojects
   def create
     @subsubproject = Subsubproject.new(subsubproject_params)
+    # if the new created version is set to be master, than set all other versions to master=false
     if params[:subsubproject][:master] == "1"
       if @subsubproject.subproject.subsubprojects.any?
         @subsubproject.subproject.subsubprojects.each do |othersubsubproject|
@@ -36,7 +39,7 @@ class SubsubprojectsController < ApplicationController
   end
 
   # Control logic for show-view
-  # GET /subsubprojects/:id
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:id
   def show
     @subsubproject = Subsubproject.find(params[:id])
     @subproject = @subsubproject.subproject
@@ -44,7 +47,7 @@ class SubsubprojectsController < ApplicationController
   end
 
   # Control logic for edit-view
-  # GET /subsubprojects/:id/edit
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:id/edit
   def edit
     @subsubproject = Subsubproject.find(params[:id])
   end
@@ -52,11 +55,11 @@ class SubsubprojectsController < ApplicationController
   # Save an updated subsubproject
   # This method is either called from the subsubproject edit-view (GET /subsubprojects/:id/edit)
   # or the subsubproject filter-view (GET /subsubprojects/:id/filter)
-  # PUT /subsubprojects/:id
+  # PUT /projects/:project_id/subprojects/:subproject_id/subsubprojects/:id
   def update
     @subsubproject = Subsubproject.find(params[:id])
+    # if the updated version is set to be master, than set all other versions to master=false
     if params[:subsubproject][:master] == "1"
-
       @subsubproject.subproject.subsubprojects.each do |othersubsubproject|
         if othersubsubproject.master
           othersubsubproject.master = false
@@ -74,7 +77,7 @@ class SubsubprojectsController < ApplicationController
   end
 
   # Delete a subsubproject
-  # DELETE /subsubprojects/:id
+  # DELETE /projects/:project_id/subprojects/:subproject_id/subsubprojects/:id
   def destroy
     @subsubproject = Subsubproject.find(params[:id])
     projectid = @subsubproject.subproject.project.id

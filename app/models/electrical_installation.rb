@@ -30,6 +30,7 @@ class ElectricalInstallation < ApplicationRecord
     return elinst.nil? ? 0 : elinst.netto
   end
 
+  # CSV Export
   def self.to_csv
     attributes = column_names
 
@@ -42,6 +43,7 @@ class ElectricalInstallation < ApplicationRecord
     end
   end
 
+  # CSV Import
   def self.import(file)
     records_to_save = []
     records_to_update = []

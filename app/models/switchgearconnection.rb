@@ -8,6 +8,7 @@ class Switchgearconnection < ApplicationRecord
   validates :topswitchgear_id, uniqueness:  { scope: :bottomswitchgear_id,
                                               message: ": Diese Verbindung existiert bereits!" }
 
+  # CSV Export
   def self.to_csv
     attributes = column_names
 
@@ -20,6 +21,7 @@ class Switchgearconnection < ApplicationRecord
     end
   end
 
+  # CSV Import
   def self.import(file)
     records_to_save = []
     records_to_update = []

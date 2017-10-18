@@ -1,4 +1,6 @@
 class IogroupsController < ApplicationController
+  # Auflistung aller IO-Gruppen
+  # GET /iogroups
   def index
     @iogroups = Iogroup.all
 
@@ -59,6 +61,7 @@ class IogroupsController < ApplicationController
     redirect_to iogroups_path, :notice => 'IO-Gruppe wurde gelöscht.'
   end
 
+  # CSV Import
   def import
     status = Iogroup.import(params[:file])
     if !(status == '')

@@ -15,6 +15,7 @@ class Drive < ApplicationRecord
     self.brutto - (self.brutto * self.rabatt)
   end
 
+  # CSV Export
   def self.to_csv
     attributes = column_names
 
@@ -27,6 +28,7 @@ class Drive < ApplicationRecord
     end
   end
 
+  # CSV Import
   def self.import(file)
     records_to_save = []
     records_to_update = []

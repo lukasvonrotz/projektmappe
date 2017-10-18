@@ -1,4 +1,6 @@
 class SuppliertypesController < ApplicationController
+  # Auflistung aller Lieferantentypen
+  # GET /suppliertypes
   def index
     @suppliertypes = Suppliertype.all
   end

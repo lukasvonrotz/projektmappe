@@ -1,4 +1,6 @@
 class IotypesController < ApplicationController
+  # Auflistung aller Io-Gruppen-Typen
+  # GET /iotypes
   def index
     @iotypes = Iotype.all
 
@@ -63,6 +65,7 @@ class IotypesController < ApplicationController
     end
   end
 
+  # CSV Import
   def import
     status = Iotype.import(params[:file])
     if !(status == '')

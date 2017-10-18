@@ -23,6 +23,7 @@ class Switchgear < ApplicationRecord
     self.brutto - (self.brutto * self.rabatt)
   end
 
+  # CSV Export
   def self.to_csv
     attributes = column_names
 
@@ -35,6 +36,7 @@ class Switchgear < ApplicationRecord
     end
   end
 
+  # CSV Import
   def self.import(file)
     records_to_save = []
     records_to_update = []

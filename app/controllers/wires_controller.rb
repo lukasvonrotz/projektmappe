@@ -1,4 +1,6 @@
 class WiresController < ApplicationController
+  # Auflistung aller Kabel
+  # GET /wires
   def index
     @wires = Wire.all
     @wiresuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'})
@@ -62,6 +64,7 @@ class WiresController < ApplicationController
     # write wire to database
     if @wire.save
       @wiresuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'})
+      # Einträge in wire_suppliers für alle Kabellieferanten mit neuem Kabel erstellen
       @wiresuppliers.each do |wiresupplier|
         wireWiresupplierEntry = WireSupplier.new
         wireWiresupplierEntry.wire_id = @wire.id
@@ -108,6 +111,7 @@ class WiresController < ApplicationController
     redirect_to wires_path, :notice => 'Kabel wurde gelöscht.'
   end
 
+  # CSV Import
   def import
     status = Wire.import(params[:file])
     if !(status == '')

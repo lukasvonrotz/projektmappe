@@ -1,4 +1,6 @@
 class ElectricalInstallationsController < ApplicationController
+  # Auflistung aller Elektroinstallationen
+  # GET /electrical_installations
   def index
     @electrical_installations = ElectricalInstallation.all
 
@@ -60,6 +62,7 @@ class ElectricalInstallationsController < ApplicationController
     redirect_to electrical_installations_path, :notice => 'Eintrag wurde gelöscht.'
   end
 
+  # CSV Import
   def import
     status = ElectricalInstallation.import(params[:file])
     if !(status == '')

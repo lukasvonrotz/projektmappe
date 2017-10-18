@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  # Auflistung aller Projekte
+  # GET /projects
   def index
     @projects = Project.all
   end

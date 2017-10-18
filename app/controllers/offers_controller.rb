@@ -1,14 +1,14 @@
 class OffersController < ApplicationController
 
   # Control logic for create-view
-  # GET /offers/new
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offers/new
   def new
     # build a 'temporary' post which is written to DB later (create-method)
     @offer = Offer.new
   end
 
   # Control logic when creating a new offer
-  # POST /offers
+  # POST /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offers
   def create
     @offer = Offer.new(offer_params)
     @subsubproject = Subsubproject.find(@offer.subsubproject_id)
@@ -50,7 +50,7 @@ class OffersController < ApplicationController
   end
 
   # Control logic for show-view
-  # GET /offers/:id
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offers/:id
   def show
     @offer = Offer.find(params[:id])
     @subsubproject = @offer.subsubproject
@@ -59,7 +59,7 @@ class OffersController < ApplicationController
   end
 
   # Control logic for edit-view
-  # GET /offers/:id/edit
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_idoffers/:id/edit
   def edit
     @offer = Offer.find(params[:id])
   end
@@ -67,21 +67,13 @@ class OffersController < ApplicationController
   # Save an updated offer
   # This method is either called from the offer edit-view (GET /offers/:id/edit)
   # or the offer filter-view (GET /offers/:id/filter)
-  # PUT /offers/:id
+  # PUT /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offers/:id
   def update
     @offer = Offer.find(params[:id])
     projectid = @offer.subsubproject.subproject.project.id
     subprojectid = @offer.subsubproject.subproject.id
     subsubprojectid = @offer.subsubproject.id
-    if params[:offer][:master] == "1"
 
-      @offer.subproject.offers.each do |otheroffer|
-        if otheroffer.master
-          otheroffer.master = false
-          otheroffer.save!
-        end
-      end
-    end
     if @offer.update(offer_params)
       redirect_to offerte_path(:project_id => projectid,
                                :subproject_id => subprojectid,
@@ -93,7 +85,7 @@ class OffersController < ApplicationController
   end
 
   # Delete a offer
-  # DELETE /offers/:id
+  # DELETE /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offers/:id
   def destroy
     @offer = Offer.find(params[:id])
     projectid = @offer.subsubproject.subproject.project.id
@@ -105,6 +97,8 @@ class OffersController < ApplicationController
                              :subsubproject_id => subsubprojectid), :notice => 'Offerte wurde gelöscht.'
   end
 
+  # Exportiere Offerte in ein CSV-File
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offers/:offer_id/csvexport
   def csvexport
     @offer = Offer.find(params[:offer_id])
     projectid = @offer.subsubproject.subproject.project.id

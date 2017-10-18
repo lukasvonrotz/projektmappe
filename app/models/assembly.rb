@@ -52,6 +52,7 @@ class Assembly < ApplicationRecord
   @@sao_reserve = 0
   @@sao_rabatt = 0.05
 
+  # CSV Export
   def self.to_csv
     attributes = column_names
 
@@ -64,6 +65,7 @@ class Assembly < ApplicationRecord
     end
   end
 
+  # CSV Import
   def self.import(file)
     records_to_save = []
     records_to_update = []

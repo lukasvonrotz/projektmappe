@@ -1,4 +1,6 @@
 class AssembliesController < ApplicationController
+  # Auflistung aller IO-Baugruppen
+  # GET /assemblies
   def index
     @assemblies = Assembly.all
 
@@ -60,6 +62,7 @@ class AssembliesController < ApplicationController
     redirect_to assemblies_path, :notice => 'Baugruppe wurde gelöscht.'
   end
 
+  # CSV Import
   def import
     status = Assembly.import(params[:file])
     if !(status == '')

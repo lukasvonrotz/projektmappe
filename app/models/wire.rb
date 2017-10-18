@@ -50,6 +50,7 @@ class Wire < ApplicationRecord
     return anschluesse_ohne_beschriftung(wiresupplier) + beschriftung_total(wiresupplier, wirecaptionsupplier)
   end
 
+  # CSV Export
   def self.to_csv
     attributes = column_names
 
@@ -62,6 +63,7 @@ class Wire < ApplicationRecord
     end
   end
 
+  # CSV Import
   def self.import(file)
     records_to_save = []
     records_to_update = []

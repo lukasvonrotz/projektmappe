@@ -1,4 +1,6 @@
 class OffertpositionsController < ApplicationController
+  # Auflistung aller Offertpositionen pro version
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offertpositions
   def index
     @offertpositions = Offertposition.where(:subsubproject_id => params[:subsubproject_id])
     @subsubproject = Subsubproject.find(params[:subsubproject_id])
@@ -12,14 +14,14 @@ class OffertpositionsController < ApplicationController
   end
 
   # Control logic for create-view
-  # GET /offertpositions/new
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offertpositions/new
   def new
     # build a 'temporary' post which is written to DB later (create-method)
     @offertposition = Offertposition.new
   end
 
   # Control logic when creating a new offertposition
-  # POST /offertpositions
+  # POST /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offertpositions
   def create
     @offertposition = Offertposition.new(offertposition_params)
 
@@ -32,19 +34,19 @@ class OffertpositionsController < ApplicationController
   end
 
   # Control logic for show-view
-  # GET /offertpositions/:id
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offertpositions/:id
   def show
     @offertposition = Offertposition.find(params[:id])
   end
 
   # Control logic for edit-view
-  # GET /offertpositions/:id/edit
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offertpositions/:id/edit
   def edit
     @offertposition = Offertposition.find(params[:id])
   end
 
   # Save an updated offertposition
-  # PUT /offertpositions/:id
+  # PUT /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offertpositions/:id
   def update
     @offertposition = Offertposition.find(params[:id])
     if @offertposition.update(offertposition_params)
@@ -55,7 +57,7 @@ class OffertpositionsController < ApplicationController
   end
 
   # Delete a offertposition
-  # DELETE /offertpositions/:id
+  # DELETE /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offertpositions/:id
   def destroy
     @offertposition = Offertposition.find(params[:id])
     if @offertposition.grobengineerings.any?

@@ -20,7 +20,7 @@ class HistoriesController < ApplicationController
   end
 
   # Control logic for show-view
-  # GET /histories/:id
+  # GET /projects/:project_id/histories/:id
   def show
     @history = History.find(params[:id])
     @subproject = @history.subproject
@@ -28,13 +28,13 @@ class HistoriesController < ApplicationController
   end
 
   # Control logic for edit-view
-  # GET /histories/:id/edit
+  # GET /projects/:project_id/histories/:id/edit
   def edit
     @history = History.find(params[:id])
   end
 
   # Save an updated history
-  # PUT /histories/:id
+  # PUT /projects/:project_id/histories/:id
   def update
     @history = History.find(params[:id])
     if @history.update(history_params)
@@ -45,7 +45,7 @@ class HistoriesController < ApplicationController
   end
 
   # Delete a history
-  # DELETE /histories/:id
+  # DELETE /projects/:project_id/histories/:id
   def destroy
     @history = History.find(params[:id])
     @history.destroy

@@ -66,6 +66,7 @@ class Device < ApplicationRecord
   #delete association in grobengineerings if device is deleted
   has_many :grobengineerings, dependent: :nullify
 
+  # CSV Import
   def self.import(file)
     records_to_save = []
     records_to_update = []
@@ -105,6 +106,7 @@ class Device < ApplicationRecord
     end
   end
 
+  # CSV Export
   def self.to_csv
     attributes = column_names
 

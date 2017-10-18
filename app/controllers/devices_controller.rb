@@ -1,5 +1,6 @@
 class DevicesController < ApplicationController
-  
+  # Auflistung aller Geräte
+  # GET /devices
   def index
     @devices = Device.all
 
@@ -67,6 +68,7 @@ class DevicesController < ApplicationController
     end
   end
 
+  # CSV Import
   def import
     status = Device.import(params[:file])
     if !(status == '')

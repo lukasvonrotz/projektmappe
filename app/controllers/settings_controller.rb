@@ -1,8 +1,11 @@
 class SettingsController < ApplicationController
+  # Settings View
+  # GET /settings
   def index
-
   end
 
+  # export all relevant tables into a csv
+  # GET /settings/csvexport_all_tables
   def csvexport_all_tables
     @wires = Wire.all
     @switchgears = Switchgear.all

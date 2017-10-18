@@ -1,4 +1,6 @@
 class GrobengineeringsController < ApplicationController
+  # Auflistung aller Grobengineerings PRO Version
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubprojects_id/grobengineerings
   def index
     @hash = Hash.new
     @subsubproject = Subsubproject.find(params[:subsubproject_id])
@@ -13,14 +15,14 @@ class GrobengineeringsController < ApplicationController
   end
 
   # Control logic for create-view
-  # GET /grobengineerings/new
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubprojects_id/grobengineerings/new
   def new
     # build a 'temporary' post which is written to DB later (create-method)
     @grobengineering = Grobengineering.new
   end
 
   # Control logic when creating a new grobengineering
-  # POST /grobengineerings
+  # POST /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubprojects_id/grobengineerings
   def create
     @grobengineering = Grobengineering.new(grobengineering_params)
     # write grobengineering to database
@@ -32,7 +34,7 @@ class GrobengineeringsController < ApplicationController
   end
 
   # Control logic for show-view
-  # GET /grobengineerings/:id
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubprojects_id/grobengineerings/:id
   def show
     @grobengineering = Grobengineering.find(params[:id])
     @subsubproject = @grobengineering.subsubproject
@@ -41,7 +43,7 @@ class GrobengineeringsController < ApplicationController
   end
 
   # Control logic for edit-view
-  # GET /grobengineerings/:id/edit
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubprojects_id/grobengineerings/:id/edit
   def edit
     @grobengineering = Grobengineering.find(params[:id])
     @subsubproject = @grobengineering.subsubproject
@@ -50,7 +52,7 @@ class GrobengineeringsController < ApplicationController
   end
 
   # Save an updated grobengineering
-  # PUT /grobengineerings/:id
+  # PUT /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubprojects_id/grobengineerings/:id
   def update
     @grobengineering = Grobengineering.find(params[:id])
     if @grobengineering.update(grobengineering_params)
@@ -61,13 +63,14 @@ class GrobengineeringsController < ApplicationController
   end
 
   # Delete a grobengineering
-  # DELETE /grobengineerings/:id
+  # DELETE /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubprojects_id/grobengineerings/:id
   def destroy
     @grobengineering = Grobengineering.find(params[:id])
     @grobengineering.destroy
     redirect_to project_subproject_subsubproject_grobengineerings_path(@grobengineering.subsubproject.subproject.project.id, @grobengineering.subsubproject.subproject.id, @grobengineering.subsubproject.id), :notice => 'Eintrag wurde gelöscht.'
   end
 
+  # CSV Import
   def import
     status = Grobengineering.import(params[:file], params[:subsubproject_id])
     projectid = params[:project_id]
@@ -82,6 +85,8 @@ class GrobengineeringsController < ApplicationController
     end
   end
 
+  # Delete all Grobengineering-Entries in specific version
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubprojects_id/grobengineerings/delete_all
   def delete_all
     projectid = params[:project_id]
     subprojectid = params[:subproject_id]
@@ -91,6 +96,8 @@ class GrobengineeringsController < ApplicationController
                 :notice => 'Einträge erfolgreich gelöscht'
   end
 
+  # Show offert prices
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubprojects_id/offerte
   def offerte
     @subsubproject = Subsubproject.find(params[:subsubproject_id])
     @subproject = @subsubproject.subproject

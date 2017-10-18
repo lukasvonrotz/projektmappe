@@ -1,4 +1,6 @@
 class CustomersController < ApplicationController
+  # Auflistung aller Kunden
+  # GET /customers
   def index
     @customers = Customer.all
 
@@ -59,7 +61,7 @@ class CustomersController < ApplicationController
     redirect_to customers_path, :notice => 'Kunde wurde gelöscht.'
   end
 
-
+  # CSV Import
   def import
     status = Customer.import(params[:file])
     if !(status == '')

@@ -1,4 +1,6 @@
 class IogroupcomponentsController < ApplicationController
+  # Auflistung aller IO-Gruppen-Komponenten PRO IO-Gruppe
+  # GET /iogroups/:iogroup_id/iogroupcomponents
   def index
     @iogroup = Iogroup.find(params[:iogroup_id])
     @iogroupcomponents = @iogroup.iogroupcomponents
@@ -10,14 +12,14 @@ class IogroupcomponentsController < ApplicationController
   end
 
   # Control logic for create-view
-  # GET /iogroupcomponents/new
+  # GET /iogroups/:iogroup_id/iogroupcomponents/new
   def new
     # build a 'temporary' post which is written to DB later (create-method)
     @iogroupcomponent = Iogroupcomponent.new
   end
 
   # Control logic when creating a new iogroupcomponent
-  # POST /iogroupcomponents
+  # POST /iogroups/:iogroup_id/iogroupcomponents
   def create
     @iogroupcomponent = Iogroupcomponent.new(iogroupcomponent_params)
     # write iogroupcomponent to database
@@ -30,7 +32,7 @@ class IogroupcomponentsController < ApplicationController
   end
 
   # Control logic for edit-view
-  # GET /iogroupcomponents/:id/edit
+  # GET /iogroups/:iogroup_id/iogroupcomponents/:id/edit
   def edit
     @iogroupcomponent = Iogroupcomponent.find(params[:id])
   end
@@ -38,7 +40,7 @@ class IogroupcomponentsController < ApplicationController
   # Save an updated iogroupcomponent
   # This method is either called from the iogroupcomponent edit-view (GET /iogroupcomponents/:id/edit)
   # or the iogroupcomponent filter-view (GET /iogroupcomponents/:id/filter)
-  # PUT /iogroupcomponents/:id
+  # PUT /iogroups/:iogroup_id/iogroupcomponents/:id
   def update
     @iogroupcomponent = Iogroupcomponent.find(params[:id])
     if @iogroupcomponent.update(iogroupcomponent_params)
@@ -50,7 +52,7 @@ class IogroupcomponentsController < ApplicationController
   end
 
   # Delete a iogroupcomponent
-  # DELETE /iogroupcomponents/:id
+  # DELETE /iogroups/:iogroup_id/iogroupcomponents/:id
   def destroy
     @iogroupcomponent = Iogroupcomponent.find(params[:id])
     @iogroupcomponent.destroy

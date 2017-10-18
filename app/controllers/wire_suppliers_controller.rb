@@ -1,4 +1,6 @@
 class WireSuppliersController < ApplicationController
+  # Kabelpreise zu Lieferant bearbeiten
+  # GET /suppliers/:supplier_id/wire_suppliers
   def index
     begin
       supplier = Supplier.find(params[:supplier_id])
@@ -15,6 +17,8 @@ class WireSuppliersController < ApplicationController
     end
   end
 
+  # Kabelpreise zu Lieferant speichern
+  # GET /suppliers/:supplier_id/wire_suppliers
   def update
     @wire_supplier = WireSupplier.find(params[:id])
     if @wire_supplier.update(wire_supplier_params)
@@ -24,6 +28,7 @@ class WireSuppliersController < ApplicationController
     end
   end
 
+  # CSV Import
   def import
     status = WireSupplier.import(params[:file])
     if !(status == '')

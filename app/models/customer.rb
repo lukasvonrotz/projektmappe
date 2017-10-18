@@ -3,6 +3,7 @@ class Customer < ApplicationRecord
   #delete association in subprojects if customer is deleted
   has_many :subprojects, dependent: :nullify
 
+  # CSV Export
   def self.to_csv
     attributes = column_names
 
@@ -15,6 +16,7 @@ class Customer < ApplicationRecord
     end
   end
 
+  # CSV Import
   def self.import(file)
     records_to_save = []
     records_to_update = []

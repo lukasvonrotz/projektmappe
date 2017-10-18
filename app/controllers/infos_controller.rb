@@ -8,7 +8,7 @@ class InfosController < ApplicationController
   end
 
   # Control logic when creating a new info
-  # POST /infos
+  # POST /projects/:project_id/infos
   def create
     @info = Info.new(info_params)
 
@@ -21,7 +21,7 @@ class InfosController < ApplicationController
   end
 
   # Control logic for show-view
-  # GET /infos/:id
+  # GET /projects/:project_id/infos/:id
   def show
     @info = Info.find(params[:id])
     @subproject = @info.subproject
@@ -29,13 +29,13 @@ class InfosController < ApplicationController
   end
 
   # Control logic for edit-view
-  # GET /infos/:id/edit
+  # GET /projects/:project_id/infos/:id/edit
   def edit
     @info = Info.find(params[:id])
   end
 
   # Save an updated info
-  # PUT /infos/:id
+  # PUT /projects/:project_id/infos/:id
   def update
     @info = Info.find(params[:id])
     if @info.update(info_params)
@@ -46,7 +46,7 @@ class InfosController < ApplicationController
   end
 
   # Delete a info
-  # DELETE /infos/:id
+  # DELETE /projects/:project_id/infos/:id
   def destroy
     @info = Info.find(params[:id])
     @info.destroy

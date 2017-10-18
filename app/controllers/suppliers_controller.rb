@@ -1,4 +1,6 @@
 class SuppliersController < ApplicationController
+  # Auflistung aller Lieferanten
+  # GET /suppliers
     def index
       @suppliers = Supplier.all
 
@@ -20,7 +22,7 @@ class SuppliersController < ApplicationController
     def create
       @supplier = Supplier.new(supplier_params)
 
-      # Einträge in wire_suppliers für alle Kabel erstellen
+      # Wenn neu erstellter Lieferant ein Kabellieferant ist, dann Einträge in wire_suppliers für alle Kabel erstellen
       suppliertypeid = Suppliertype.where(name: 'Kabel').first.id
       if supplier_params[:suppliertype_ids].include? suppliertypeid.to_s
         Wire.all.each do |wire|
@@ -31,6 +33,7 @@ class SuppliersController < ApplicationController
         end
       end
 
+      # Wenn neu erstellter Lieferant ein Kabelbeschriftungslieferant ist, dann einen neuen Eintrag in wirecaptionprices erstellen
       suppliertypeid = Suppliertype.where(name: 'Kabelbeschriftung').first.id
       if supplier_params[:suppliertype_ids].include? suppliertypeid.to_s
         wirecaptionprice = Wirecaptionprice.create
@@ -63,7 +66,7 @@ class SuppliersController < ApplicationController
     def update
       @supplier = Supplier.find(params[:id])
 
-      # Einträge in wire_suppliers für alle Kabel erstellen
+      # Wenn updated Lieferant ein Kabellieferant ist, dann Einträge in wire_suppliers für alle Kabel erstellen
       suppliertypeid = Suppliertype.where(name: 'Kabel').first.id
       if (supplier_params[:suppliertype_ids].include? suppliertypeid.to_s) && !WireSupplier.where(:supplier_id => @supplier.id).any?
         Wire.all.each do |wire|
@@ -73,6 +76,8 @@ class SuppliersController < ApplicationController
           wire_supplier.save!
         end
       end
+
+      # Wenn updated Lieferant ein Kabelbeschriftungslieferant ist, dann einen neuen Eintrag in wirecaptionprices erstellen
       suppliertypeid = Suppliertype.where(name: 'Kabelbeschriftung').first.id
       if (supplier_params[:suppliertype_ids].include? suppliertypeid.to_s) && !Wirecaptionprice.where(:supplier_id => @supplier.id).any?
         wirecaptionprice = Wirecaptionprice.create
@@ -99,6 +104,7 @@ class SuppliersController < ApplicationController
       end
     end
 
+    # CSV Import
     def import
       status = Supplier.import(params[:file])
       if !(status == '')

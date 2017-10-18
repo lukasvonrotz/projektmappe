@@ -1,10 +1,5 @@
 class WirecaptionpricesController < ApplicationController
 
-  def new
-    # build a 'temporary' post which is written to DB later (create-method)
-    @wirecaptionprice = Wirecaptionprice.new
-  end
-
   def create
     @wirecaptionprice = Wirecaptionprice.new(wirecaptionprice_params)
     if @wirecaptionprice.save

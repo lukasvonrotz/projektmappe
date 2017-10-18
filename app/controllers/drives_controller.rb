@@ -1,4 +1,6 @@
 class DrivesController < ApplicationController
+  # Auflistung aller FUs
+  # GET /drives
   def index
     @drives = Drive.all
 
@@ -60,6 +62,7 @@ class DrivesController < ApplicationController
     redirect_to drives_path, :notice => 'Frequenzumrichter wurde gelöscht.'
   end
 
+  # CSV Import
   def import
     status = Drive.import(params[:file])
     if !(status == '')

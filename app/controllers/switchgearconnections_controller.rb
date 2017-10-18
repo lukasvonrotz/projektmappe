@@ -1,5 +1,6 @@
 class SwitchgearconnectionsController < ApplicationController
-
+  # Auflistung aller Schaltgerätekombinations-Verbindungen
+  # GET /switchgearconnections
   def index
     @switchgearconnections = Switchgearconnection.all
 
@@ -60,7 +61,7 @@ class SwitchgearconnectionsController < ApplicationController
     redirect_to switchgearconnections_path, :notice => 'Schaltgerätekombination wurde gelöscht.'
   end
 
-
+  # CSV Import
   def import
     status = Switchgearconnection.import(params[:file])
     if !(status == '')

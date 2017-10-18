@@ -1,4 +1,6 @@
 class SwitchgearsController < ApplicationController
+  # Auflistung aller Schaltanlagenbau Einträgen
+  # GET /switchgears
   def index
     @switchgears = Switchgear.all
 
@@ -61,6 +63,7 @@ class SwitchgearsController < ApplicationController
     redirect_to switchgears_path, :notice => 'Eintrag wurde gelöscht.'
   end
 
+  # CSV Import
   def import
     status = Switchgear.import(params[:file])
     if !(status == '')

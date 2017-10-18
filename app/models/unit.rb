@@ -4,6 +4,7 @@ class Unit < ApplicationRecord
   belongs_to :subsystem
   validates :subsystem, :presence => true
 
+  # CSV Export
   def self.to_csv
     attributes = column_names
 

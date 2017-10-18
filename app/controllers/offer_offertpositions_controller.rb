@@ -1,4 +1,6 @@
 class OfferOffertpositionsController < ApplicationController
+  # Preise zu gespeicherter Offerte bearbeiten
+  # GET /offers/:offer_id/offer_offertpositions
   def index
     @offer = Offer.find(params[:offer_id])
     @offer_offertpositions = @offer.offer_offertpositions
@@ -7,6 +9,8 @@ class OfferOffertpositionsController < ApplicationController
     @project = @subproject.project
   end
 
+  # Preise zu gespeicherter Offerte speichern
+  # PUT /offers/:offer_id/offer_offertpositions
   def update
     @offer_offertposition = OfferOffertposition.find(params[:id])
     @offer = Offer.find(@offer_offertposition.offer_id)

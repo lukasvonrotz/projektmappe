@@ -1,4 +1,6 @@
 class UnitsController < ApplicationController
+  # Auflistung aller Units pro Teilanlage
+  # GET /project/:project_id/subsystems/:subsystem_id/units
   def index
     @subsystem = Subsystem.find(params[:subsystem_id])
     @project = @subsystem.project
@@ -11,14 +13,14 @@ class UnitsController < ApplicationController
   end
 
   # Control logic for create-view
-  # GET /units/new
+  # GET /project/:project_id/subsystems/:subsystem_id/units/new
   def new
     # build a 'temporary' post which is written to DB later (create-method)
     @unit = Unit.new
   end
 
   # Control logic when creating a new unit
-  # POST /units
+  # POST /project/:project_id/subsystems/:subsystem_id/units
   def create
     @unit = Unit.new(unit_params)
     # write unit to database
@@ -31,7 +33,7 @@ class UnitsController < ApplicationController
   end
 
   # Control logic for show-view
-  # GET /units/:id
+  # GET /project/:project_id/subsystems/:subsystem_id/units/:id
   def show
     @unit = Unit.find(params[:id])
     @subsystem = @unit.subsystem
@@ -39,7 +41,7 @@ class UnitsController < ApplicationController
   end
 
   # Control logic for edit-view
-  # GET /units/:id/edit
+  # GET /project/:project_id/subsystems/:subsystem_id/units/:id/edit
   def edit
     @unit = Unit.find(params[:id])
     @subsystem = @unit.subsystem
@@ -49,7 +51,7 @@ class UnitsController < ApplicationController
   # Save an updated unit
   # This method is either called from the unit edit-view (GET /units/:id/edit)
   # or the unit filter-view (GET /units/:id/filter)
-  # PUT /units/:id
+  # PUT /project/:project_id/subsystems/:subsystem_id/units/:id
   def update
     @unit = Unit.find(params[:id])
     if @unit.update(unit_params)
@@ -62,7 +64,7 @@ class UnitsController < ApplicationController
   end
 
   # Delete a unit
-  # DELETE /units/:id
+  # DELETE /project/:project_id/subsystems/:subsystem_id/units/:id
   def destroy
     @unit = Unit.find(params[:id])
     projectid = @unit.subsystem.project.id

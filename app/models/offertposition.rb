@@ -13,7 +13,7 @@ class Offertposition < ApplicationRecord
 
   validates :name, uniqueness:  { scope: :subsubproject_id,
                                     message: " für Offertposition bereits vergeben." }
-
+  # CSV Export
   def self.to_csv
     attributes = column_names
 
