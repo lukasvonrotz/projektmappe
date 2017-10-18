@@ -6,6 +6,10 @@
     </div>
 <% end %>
 
+<% subsubproject = Subsubproject.find(@grobengineering.subsubproject_id) %>
+<% subproject = subsubproject.subproject %>
+<% project = subproject.project %>
+
 <%= render 'form', :grobengineering => @grobengineering,
            :projectid => @grobengineering.subsubproject.subproject.project.id,
            :offertpositionid => @grobengineering.offertposition.id,
@@ -20,6 +24,6 @@
            :wirespez2id => @grobengineering.wire_spez2.nil? ? '' : @grobengineering.wire_spez2.id,
            :wirespez3id => @grobengineering.wire_spez3.nil? ? '' : @grobengineering.wire_spez3.id,
            :context => false  %>
-<%= link_to "Zurück zu Grobengineering", project_subproject_subsubproject_grobengineerings_path %>
+<%= link_to "Zurück zu Grobengineering", project_subproject_subsubproject_grobengineerings_path(project.id, subproject.id, subsubproject.id) %>
 
 <%= render 'layouts/loading', :message => "Lade..." %>

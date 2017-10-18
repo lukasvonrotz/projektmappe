@@ -62,9 +62,6 @@ class OffersController < ApplicationController
   # GET /offers/:id/edit
   def edit
     @offer = Offer.find(params[:id])
-    @subsubproject = @offer.subsubproject
-    @subproject = @subsubproject.subproject
-    @project = @subproject.project
   end
 
   # Save an updated offer

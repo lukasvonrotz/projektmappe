@@ -6,9 +6,13 @@
     </div>
 <% end %>
 
+<% subsubproject = Subsubproject.find(@offertposition.subsubproject_id) %>
+<% subproject = subsubproject.subproject %>
+<% project = subproject.project %>
+
 <%= render 'form', :offertposition => @offertposition,
            :subsubprojectid => @offertposition.subsubproject_id,
            :context => false  %>
-<%= link_to "Zurück zu Offertpositionsübersicht", project_subproject_subsubproject_offertpositions_path %>
+<%= link_to "Zurück zu Offertpositionsübersicht", project_subproject_subsubproject_offertpositions_path(project.id, subproject.id, subsubproject.id) %>
 
 <%= render 'layouts/loading', :message => "Lade..." %>

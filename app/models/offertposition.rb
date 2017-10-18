@@ -11,6 +11,9 @@ class Offertposition < ApplicationRecord
   #delete association in grobengineerings if offertposition is deleted
   has_many :grobengineerings, dependent: :nullify
 
+  validates :name, uniqueness:  { scope: :subsubproject_id,
+                                    message: " für Offertposition bereits vergeben." }
+
   def self.to_csv
     attributes = column_names
 

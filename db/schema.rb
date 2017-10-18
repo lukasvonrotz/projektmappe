@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171017132740) do
+ActiveRecord::Schema.define(version: 20171018115058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(version: 20171017132740) do
     t.integer  "switchgearcombination_id", null: false
     t.integer  "iotype_id",                null: false
     t.index ["iotype_id"], name: "index_iogroups_on_iotype_id", using: :btree
-    t.index ["name"], name: "iogroups_name_unique", unique: true, using: :btree
+    t.index ["name", "switchgearcombination_id"], name: "name_switchgearcombination_uniqueness", unique: true, using: :btree
     t.index ["switchgearcombination_id"], name: "index_iogroups_on_switchgearcombination_id", using: :btree
   end
 
@@ -273,6 +273,7 @@ ActiveRecord::Schema.define(version: 20171017132740) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "subsubproject_id", null: false
+    t.index ["name", "subsubproject_id"], name: "name_subsubproject_uniqueness", unique: true, using: :btree
     t.index ["subsubproject_id"], name: "index_offertpositions_on_subsubproject_id", using: :btree
   end
 

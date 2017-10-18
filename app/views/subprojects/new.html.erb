@@ -6,11 +6,11 @@
     </div>
 <% end %>
 
-<% if Customer.any? %>
-    <% projectid = @subproject.project_id.nil? ? params[:project_id] : @subproject.project_id %>
-    <% project = Project.find(projectid) %>
-    <% customerid = @subproject.customer_id.nil? ? Customer.all.first : @subproject.customer_id %>
+<% projectid = @subproject.project_id.nil? ? params[:project_id] : @subproject.project_id %>
+<% project = Project.find(projectid) %>
 
+<% if Customer.any? %>
+  <% customerid = @subproject.customer_id.nil? ? Customer.all.first : @subproject.customer_id %>
   <%= render 'form', :project_subproject => @subproject,
              :project => project,
              :projectid => projectid,

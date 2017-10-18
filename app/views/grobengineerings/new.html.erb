@@ -6,8 +6,9 @@
     </div>
 <% end %>
 
+<% subsubproject = @grobengineering.subsubproject_id.nil? ? Subsubproject.find(params[:subsubproject_id]) : Subsubproject.find(@grobengineering.subsubproject_id) %>
+
 <% if Device.any? %>
-    <% subsubproject = @grobengineering.subsubproject_id.nil? ? Subsubproject.find(params[:subsubproject_id]) : Subsubproject.find(@grobengineering.subsubproject_id) %>
     <% projectid = subsubproject.subproject.project.id %>
     <% if Offertposition.where(:subsubproject_id => subsubproject.id).any? %>
       <% offertpositionid = @grobengineering.offertposition_id.nil? ? subsubproject.offertpositions.first.id : @grobengineering.offertposition_id %>

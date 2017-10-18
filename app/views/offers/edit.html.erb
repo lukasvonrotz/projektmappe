@@ -6,11 +6,15 @@
     </div>
 <% end %>
 
+<% subsubproject = Subsubproject.find(@offer.subsubproject_id) %>
+<% subproject = subsubproject.subproject %>
+<% project = subproject.project %>
+
 <%= render 'form', :offer => @offer,
            :subsubprojectid => @subsubproject.id,
            :userid => current_user.id,
            :context => false %>
 
-<a href="/projects/<%= @project.id %>/subprojects/<%= @subproject.id %>/subsubprojects/<%= @subsubproject.id %>/offerte">Zurück zu Offertberechnung</a>
+<a href="/projects/<%= project.id %>/subprojects/<%= subproject.id %>/subsubprojects/<%= subsubproject.id %>/offerte">Zurück zu Offertberechnung</a>
 
 <%= render 'layouts/loading', :message => "Lade..." %>

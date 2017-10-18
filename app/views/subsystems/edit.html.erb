@@ -6,11 +6,13 @@
     </div>
 <% end %>
 
+<% project = @subsystem.project %>
+
 <%= render 'form', :project => @subsystem.project,
            :project_subsystem => @subsystem,
-           :projectid => @project.id,
+           :projectid => project.id,
            :context => false  %>
 
-<%= link_to "Zurück zu Teilanlagen", project_subsystems_path(@project.id) %>
+<%= link_to "Zurück zu Teilanlagen", project_subsystems_path(project.id) %>
 
 <%= render 'layouts/loading', :message => "Lade..." %>

@@ -39,7 +39,6 @@ class SubsystemsController < ApplicationController
   # GET /subsystems/:id/edit
   def edit
     @subsystem = Subsystem.find(params[:id])
-    @project = @subsystem.project
   end
 
   # Save an updated subsystem

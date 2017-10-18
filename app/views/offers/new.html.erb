@@ -7,9 +7,9 @@
 <% end %>
 
 <% subsubproject = @offer.subsubproject_id.nil? ? Subsubproject.find(params[:subsubproject_id]) : Subsubproject.find(@offer.subsubproject.id) %>
+
 <%= render 'form', :offer => @offer,
            :subsubprojectid => subsubproject.id,
-           :offertpositions => params[:offertpositions],
            :device_anzahl => 0,
            :userid => current_user.id,
            :context => true %>

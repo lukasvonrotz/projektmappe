@@ -8,7 +8,8 @@ class Iogroup < ApplicationRecord
   belongs_to :iotype
   validates :iotype, :presence => true
 
-  validates :name, uniqueness: true
+  validates :name, uniqueness:  { scope: :switchgearcombination_id,
+                                  message: " für Offertposition bereits vergeben." }
 
   #delete association in grobengineerings if iogroup is deleted
   has_many :grobengineerings, dependent: :nullify

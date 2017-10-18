@@ -31,8 +31,6 @@ class HistoriesController < ApplicationController
   # GET /histories/:id/edit
   def edit
     @history = History.find(params[:id])
-    @subproject = @history.subproject
-    @project = @subproject.project
   end
 
   # Save an updated history
