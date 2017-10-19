@@ -24,4 +24,8 @@ class Iosignal < ApplicationRecord
   validates :safety, numericality: {only_integer: true, :presence => true}
   validates :ex, numericality: {only_integer: true, :presence => true}
 
+  def tagname
+    'tagname'
+  end
+
 end
