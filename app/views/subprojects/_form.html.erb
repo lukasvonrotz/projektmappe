@@ -11,6 +11,48 @@
       <%= project_subproject.collection_select :customer_id, Customer.all.sort_by {|obj| obj.name},:id,:name,
                                     {:selected => customerid}, {class:"form-control"} %>
     </div>
+    <div class="field form-group">
+      <%= project_subproject.label :trennzeichen, 'Trennzeichen' %>
+      <%= project_subproject.text_field :trennzeichen, :class => "form-control",
+                                        placeholder: 'Trennzeichen für Tagnames eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= project_subproject.label :max_zeichen_klartext_grobeng, 'Max. Zeichen für Klartext in Grobengineering' %>
+      <%= project_subproject.text_field :max_zeichen_klartext_grobeng, :class => "form-control",
+                                        :required => true,
+                                        placeholder: 'Max. Zeichen für Klartext in Grobengineering eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= project_subproject.label :max_zeichen_klartext_signal, 'Max. Zeichen für Klartext in Signale' %>
+      <%= project_subproject.text_field :max_zeichen_klartext_signal, :class => "form-control",
+                                        :required => true,
+                                        placeholder: 'Max. Zeichen für Klartext in Signale eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= project_subproject.label :info1_text, 'Freie Beschreibung 1 für Signale' %>
+      <%= project_subproject.text_field :info1_text, :class => "form-control",
+                                        placeholder: 'Freie Beschreibung 1 für Signale eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= project_subproject.label :info2_text, 'Freie Beschreibung 2 für Signale' %>
+      <%= project_subproject.text_field :info2_text, :class => "form-control",
+                                        placeholder: 'Freie Beschreibung 2 für Signale eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= project_subproject.label :info3_text, 'Freie Beschreibung 3 für Signale' %>
+      <%= project_subproject.text_field :info3_text, :class => "form-control",
+                                        placeholder: 'Freie Beschreibung 3 für Signale eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= project_subproject.label :info4_text, 'Freie Beschreibung 4 für Signale' %>
+      <%= project_subproject.text_field :info4_text, :class => "form-control",
+                                        placeholder: 'Freie Beschreibung 4 für Signale eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= project_subproject.label :info5_text, 'Freie Beschreibung 5 für Signale' %>
+      <%= project_subproject.text_field :info5_text, :class => "form-control",
+                                        placeholder: 'Freie Beschreibung 5 für Signale eingeben' %>
+    </div>
 
     <% if !context %>
       <div class="field form-group">

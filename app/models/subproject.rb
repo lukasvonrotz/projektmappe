@@ -8,4 +8,7 @@ class Subproject < ApplicationRecord
   has_many :subsubprojects, dependent: :destroy
   has_many :histories, dependent: :destroy
   has_many :infos, dependent: :destroy
+
+  validates :max_zeichen_klartext_grobeng, presence:true, numericality: {only_integer: true}
+  validates :max_zeichen_klartext_signal, presence:true, numericality: {only_integer: true}
 end

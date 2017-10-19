@@ -6,22 +6,39 @@
   <table class="table table-striped table-bordered data_table" cellspacing="0" width="100%">
     <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
       <th>IO-Gruppen-Steckplatz</th>
+      <th>Name</th>
       <th>Typ</th>
+      <th>Kanäle</th>
       <th>Aktionen</th>
     </tr>
     </thead>
     <tbody>
       <% @iogroupcomponents.each do |iogroupcomponent| %>
         <tr>
-          <td><%= iogroupcomponent.id %></td>
-          <td><%= iogroupcomponent.name %></td>
           <td><%= iogroupcomponent.steckplatznummer %></td>
+          <td><%= iogroupcomponent.name %></td>
           <td><%= iogroupcomponent.assembly.kennung %></td>
           <td>
+            <ul>
+              <% iogroupcomponent.iochannels.group_by(&:channeltype).each do |channeltype, channels| %>
+                <% channels.sort_by{|e| e[:kanalnummer]}.each do |channel| %>
+                  <% if channel.iosignal.nil? %>
+                    <li style="color: green;"><%= channel.kanalnummer %>: <%= channeltype %></li>
+                  <% else %>
+                    <li style="color: red;"><%= channel.kanalnummer %>: <%= channeltype %> (<%= channel.iosignal.tagname %>)</li>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </ul>
+          </td>
+          <td>
             <a href="<%= edit_iogroup_iogroupcomponent_path(@iogroup.id, iogroupcomponent.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
+            <a href="<%= iogroup_iogroupcomponent_iochannels_path(@iogroup.id, iogroupcomponent.id) %>" class="btn btn-xs btn-default btn-index">Kanäle anzeigen</a>
+            <a href="<%= generate_channels_path(@iogroup.id, iogroupcomponent.id) %>" class="btn btn-xs btn-default btn-index">Kanäle generieren</a>
+            <a href="<%= delete_free_channels_path(@iogroup.id, iogroupcomponent.id) %>"
+               class="btn btn-xs btn-default btn-index" onclick="return confirm('Are you sure?')">Freie Kanäle löschen
+            </a>
             <button type="button" class="btn btn-xs btn-danger btn-index"
                     data-toggle="modal" data-target="#popup_sure_delete"
                     data-itemid="<%= iogroupcomponent.id %>"
@@ -37,5 +54,5 @@
 
 <%= link_to "Zurück zu IO-Gruppen-Übersicht", iogroups_path %>
 
-<%= render 'layouts/loading', :message => "Lade Units..." %>
+<%= render 'layouts/loading', :message => "Lade Kanäle..." %>
 <%= render 'layouts/popups' %>

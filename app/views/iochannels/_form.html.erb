@@ -1,0 +1,25 @@
+<%= form_for iochannel do |iochannel| %>
+
+    <div class="field form-group">
+      <%= iochannel.label :kanalnummer, 'Kanalnummer' %>
+      <%= iochannel.text_field :kanalnummer, :class => "form-control",
+                               :required => true,
+                               :value => startnummerkanal %>
+    </div>
+    <div class="field form-group">
+      <%= iochannel.label :channeltype, 'Kanaltyp' %>
+      <%= iochannel.text_field :channeltype, :class => "form-control",
+                               placeholder: 'Kanalnummer für Kanal eingeben' %>
+    </div>
+
+    <%= iochannel.hidden_field :iogroupcomponent_id, :value => iogroupcomponentid %>
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= iochannel.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= iochannel.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+
+<% end %>

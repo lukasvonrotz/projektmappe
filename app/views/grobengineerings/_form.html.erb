@@ -41,16 +41,24 @@
                                             {:selected => iogroupid, :include_blank => ''}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
-      <%= grobengineering.label :tagnr, 'Tag-Nr.' %>
-      <%= grobengineering.text_field :tagnr, :class => "form-control" %>
+      <%= grobengineering.label :tag_anlage, 'Tag-Anlage' %>
+      <%= grobengineering.text_field :tag_anlage, :class => "form-control" %>
     </div>
     <div class="field form-group">
-      <%= grobengineering.label :tagname, 'Tag-Name' %>
-      <%= grobengineering.text_field :tagname, :class => "form-control" %>
+      <%= grobengineering.label :tag_objekt, 'Tag-Objekt' %>
+      <%= grobengineering.text_field :tag_objekt, :class => "form-control" %>
     </div>
     <div class="field form-group">
-      <%= grobengineering.label :bezeichnung, 'Bezeichnung' %>
-      <%= grobengineering.text_field :bezeichnung, :class => "form-control" %>
+      <%= grobengineering.label :tag_nummer, 'Tag-Nummer' %>
+      <%= grobengineering.text_field :tag_nummer, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :brake, 'Brake' %>
+      <%= grobengineering.text_field :brake, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :klartext, 'Klartext' %>
+      <%= grobengineering.text_field :klartext, :class => "form-control" %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :bemerkung, 'Bemerkung' %>

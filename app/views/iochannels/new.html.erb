@@ -1,0 +1,21 @@
+<h1>Neuen Kanal erstellen</h1>
+<% if @iochannel.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @iochannel.errors.full_messages.first %>
+    </div>
+<% end %>
+
+<% iogroupcomponentid = @iochannel.iogroupcomponent_id.nil? ? params[:iogroupcomponent_id] : @iochannel.iogroupcomponent_id %>
+<% iogroupcomponent = Iogroupcomponent.find(iogroupcomponentid) %>
+<% startnummerkanal = iogroupcomponent.assembly.kanal_startnummer %>
+
+
+<%= render 'form', :iochannel => @iochannel,
+           :iogroupcomponentid => iogroupcomponentid,
+           :startnummerkanal => startnummerkanal,
+           :context => true  %>
+
+<%= link_to "Zurück zu Kanalübersicht", iogroup_iogroupcomponent_iochannels_path(iogroupcomponent.iogroup.id, iogroupcomponent.id) %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

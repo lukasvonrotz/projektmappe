@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018115058) do
+ActiveRecord::Schema.define(version: 20171019133210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,21 +19,22 @@ ActiveRecord::Schema.define(version: 20171018115058) do
     t.string   "kennung"
     t.string   "artikelnr"
     t.text     "bezeichnung"
-    t.integer  "di",          default: 0,   null: false
-    t.integer  "do",          default: 0,   null: false
-    t.integer  "ai",          default: 0,   null: false
-    t.integer  "ao",          default: 0,   null: false
-    t.integer  "z",           default: 0,   null: false
-    t.integer  "inkr",        default: 0,   null: false
-    t.integer  "ssi",         default: 0,   null: false
-    t.integer  "sdi",         default: 0,   null: false
-    t.integer  "sdo",         default: 0,   null: false
-    t.integer  "sai",         default: 0,   null: false
-    t.integer  "sao",         default: 0,   null: false
-    t.float    "brutto_eur",  default: 0.0, null: false
-    t.float    "rabatt",      default: 0.0, null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "di",                default: 0,   null: false
+    t.integer  "do",                default: 0,   null: false
+    t.integer  "ai",                default: 0,   null: false
+    t.integer  "ao",                default: 0,   null: false
+    t.integer  "z",                 default: 0,   null: false
+    t.integer  "inkr",              default: 0,   null: false
+    t.integer  "ssi",               default: 0,   null: false
+    t.integer  "sdi",               default: 0,   null: false
+    t.integer  "sdo",               default: 0,   null: false
+    t.integer  "sai",               default: 0,   null: false
+    t.integer  "sao",               default: 0,   null: false
+    t.float    "brutto_eur",        default: 0.0, null: false
+    t.float    "rabatt",            default: 0.0, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "kanal_startnummer", default: 1,   null: false
     t.index ["kennung"], name: "assemblies_kennung_unique", unique: true, using: :btree
   end
 
@@ -143,9 +144,7 @@ ActiveRecord::Schema.define(version: 20171018115058) do
     t.text     "device_import"
     t.integer  "device_anzahl",                    default: 1,   null: false
     t.boolean  "update_necessary"
-    t.string   "tagnr"
-    t.string   "tagname"
-    t.text     "bezeichnung"
+    t.text     "klartext"
     t.text     "bemerkung"
     t.float    "funktion_sw",                      default: 0.0, null: false
     t.float    "kabel_spez1_laenge",               default: 0.0, null: false
@@ -169,6 +168,10 @@ ActiveRecord::Schema.define(version: 20171018115058) do
     t.integer  "wire_spez3_id"
     t.integer  "offertposition_id"
     t.integer  "schaltschrank_preisberechnung_id"
+    t.string   "tag_anlage"
+    t.string   "tag_objekt"
+    t.string   "tag_nummer"
+    t.string   "brake"
     t.index ["device_id"], name: "index_grobengineerings_on_device_id", using: :btree
     t.index ["fu_typ_id"], name: "index_grobengineerings_on_fu_typ_id", using: :btree
     t.index ["iogroup_id"], name: "index_grobengineerings_on_iogroup_id", using: :btree
@@ -202,6 +205,16 @@ ActiveRecord::Schema.define(version: 20171018115058) do
     t.index ["subproject_id"], name: "index_infos_on_subproject_id", using: :btree
   end
 
+  create_table "iochannels", force: :cascade do |t|
+    t.integer  "kanalnummer",         default: 0, null: false
+    t.string   "channeltype"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "iogroupcomponent_id",             null: false
+    t.index ["iogroupcomponent_id"], name: "index_iochannels_on_iogroupcomponent_id", using: :btree
+    t.index ["kanalnummer", "channeltype", "iogroupcomponent_id"], name: "kanalnummer_typ_iogroupcomponent_uniqueness", unique: true, using: :btree
+  end
+
   create_table "iogroupcomponents", force: :cascade do |t|
     t.string   "name"
     t.integer  "steckplatznummer", default: 0, null: false
@@ -221,9 +234,92 @@ ActiveRecord::Schema.define(version: 20171018115058) do
     t.datetime "updated_at",               null: false
     t.integer  "switchgearcombination_id", null: false
     t.integer  "iotype_id",                null: false
+    t.string   "address_prefix"
     t.index ["iotype_id"], name: "index_iogroups_on_iotype_id", using: :btree
     t.index ["name", "switchgearcombination_id"], name: "name_switchgearcombination_uniqueness", unique: true, using: :btree
     t.index ["switchgearcombination_id"], name: "index_iogroups_on_switchgearcombination_id", using: :btree
+  end
+
+  create_table "iosignalenginfos", force: :cascade do |t|
+    t.text     "pendenz"
+    t.datetime "pendenz_datum"
+    t.string   "pendenz_wer"
+    t.text     "pendenz_antwort"
+    t.datetime "pendenz_antwort_datum"
+    t.string   "pendenz_antwort_wer"
+    t.text     "frage"
+    t.datetime "frage_datum"
+    t.string   "frage_wer"
+    t.text     "frage_antwort"
+    t.datetime "frage_antwort_datum"
+    t.string   "frage_antwort_wer"
+    t.text     "sw_instruction"
+    t.datetime "sw_instruction_datum"
+    t.string   "sw_instruction_wer"
+    t.text     "sw_instruction_antwort"
+    t.datetime "sw_instruction_antwort_datum"
+    t.string   "sw_instruction_antwort_wer"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "iosignal_id",                  null: false
+    t.index ["iosignal_id"], name: "index_iosignalenginfos_on_iosignal_id", using: :btree
+  end
+
+  create_table "iosignalibninfos", force: :cascade do |t|
+    t.string   "signaltest_feld"
+    t.string   "signaltest_sw"
+    t.string   "signaltest_hmi"
+    t.string   "signaltest_event"
+    t.datetime "signaltest_ok_datum"
+    t.string   "signaltest_ok_wer"
+    t.text     "bemerkungen"
+    t.text     "todo"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "iosignal_id",         null: false
+    t.index ["iosignal_id"], name: "index_iosignalibninfos_on_iosignal_id", using: :btree
+  end
+
+  create_table "iosignals", force: :cascade do |t|
+    t.string   "tagname_suffix"
+    t.string   "pendenz"
+    t.text     "signal_beschreibung"
+    t.string   "signal_phys"
+    t.string   "signal_dig_aktiv_text"
+    t.float    "signal_ana_range_min",      default: 0.0, null: false
+    t.float    "signal_ana_range_max",      default: 0.0, null: false
+    t.integer  "signal_ana_range_decimals", default: 0,   null: false
+    t.string   "signal_ana_range_unit",     default: ""
+    t.integer  "bus",                       default: 0,   null: false
+    t.integer  "di",                        default: 0,   null: false
+    t.integer  "do",                        default: 0,   null: false
+    t.integer  "ai",                        default: 0,   null: false
+    t.integer  "ao",                        default: 0,   null: false
+    t.integer  "z",                         default: 0,   null: false
+    t.integer  "inkr",                      default: 0,   null: false
+    t.integer  "ssi",                       default: 0,   null: false
+    t.integer  "safety",                    default: 0,   null: false
+    t.integer  "ex",                        default: 0,   null: false
+    t.string   "sicherheitsgruppe"
+    t.string   "info1"
+    t.string   "info2"
+    t.string   "info3"
+    t.string   "info4"
+    t.string   "info5"
+    t.string   "sw_datentyp"
+    t.string   "sw_event_message"
+    t.string   "sw_event_prio"
+    t.string   "sw_event_normal_state"
+    t.string   "sw_trend"
+    t.string   "sw_info1"
+    t.string   "sw_info2"
+    t.string   "sw_info3"
+    t.integer  "iochannel_id"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "grobengineerings_id",                     null: false
+    t.index ["grobengineerings_id"], name: "index_iosignals_on_grobengineerings_id", using: :btree
+    t.index ["iochannel_id"], name: "index_iosignals_on_iochannel_id", using: :btree
   end
 
   create_table "iotypes", force: :cascade do |t|
@@ -301,10 +397,18 @@ ActiveRecord::Schema.define(version: 20171018115058) do
 
   create_table "subprojects", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "project_id",  null: false
-    t.integer  "customer_id", null: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+    t.integer  "project_id",                                                    null: false
+    t.integer  "customer_id",                                                   null: false
+    t.string   "trennzeichen"
+    t.integer  "max_zeichen_klartext_grobeng"
+    t.integer  "max_zeichen_klartext_signal"
+    t.string   "info1_text",                   default: "Freie Beschreibung 1"
+    t.string   "info2_text",                   default: "Freie Beschreibung 2"
+    t.string   "info3_text",                   default: "Freie Beschreibung 3"
+    t.string   "info4_text",                   default: "Freie Beschreibung 4"
+    t.string   "info5_text",                   default: "Freie Beschreibung 5"
     t.index ["customer_id"], name: "index_subprojects_on_customer_id", using: :btree
     t.index ["project_id"], name: "index_subprojects_on_project_id", using: :btree
   end
@@ -503,10 +607,14 @@ ActiveRecord::Schema.define(version: 20171018115058) do
   add_foreign_key "grobengineerings", "wires", column: "wire_spez3_id"
   add_foreign_key "histories", "subprojects"
   add_foreign_key "infos", "subprojects"
+  add_foreign_key "iochannels", "iogroupcomponents"
   add_foreign_key "iogroupcomponents", "assemblies"
   add_foreign_key "iogroupcomponents", "iogroups"
   add_foreign_key "iogroups", "iotypes"
   add_foreign_key "iogroups", "switchgearcombinations"
+  add_foreign_key "iosignalenginfos", "iosignals"
+  add_foreign_key "iosignalibninfos", "iosignals"
+  add_foreign_key "iosignals", "grobengineerings", column: "grobengineerings_id"
   add_foreign_key "offers", "subsubprojects"
   add_foreign_key "offers", "users"
   add_foreign_key "offertpositions", "subsubprojects"

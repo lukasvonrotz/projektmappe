@@ -1,0 +1,2 @@
+class IosignalenginfosController < ApplicationController
+end

@@ -33,6 +33,8 @@ class Grobengineering < ApplicationRecord
   validates :kabel_spez2_laenge, presence:true, numericality: {only_float: true}
   validates :kabel_spez3_laenge, presence:true, numericality: {only_float: true}
 
+  has_many :iosignals, dependent: :destroy
+
   validate :offertpositions_within_range?
   def offertpositions_within_range?
     offertposition = Offertposition.find(self.offertposition_id)

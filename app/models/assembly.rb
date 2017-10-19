@@ -19,6 +19,7 @@ class Assembly < ApplicationRecord
   validates :brutto_eur, numericality: {only_float: true, :presence => true}
   validates :rabatt, numericality: {only_float: true}
   validates :kennung, uniqueness: true
+  validates :kanal_startnummer, numericality: {only_integer: true, :presence => true}
 
 
   @@di_anz_bg = 8
@@ -211,6 +212,29 @@ class Assembly < ApplicationRecord
 
 
 
+  def self.validateEntries
+    Assembly.where(["kennung = ?", "PB-Stecker"]).any? &&
+    Assembly.where(["kennung = ?", "ET200SP 08DI"]).any? &&
+    Assembly.where(["kennung = ?", "ET200SP 16DI"]).any? &&
+    Assembly.where(["kennung = ?", "ET200SP 08DO"]).any? &&
+    Assembly.where(["kennung = ?", "ET200SP 16DO"]).any? &&
+    Assembly.where(["kennung = ?", "ET200SP 02AI"]).any? &&
+    Assembly.where(["kennung = ?", "ET200SP 02AO"]).any? &&
+    Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).any? &&
+    Assembly.where(["kennung = ?", "ET200SP Enc SSI"]).any? &&
+    Assembly.where(["kennung = ?", "ET200SP Base mit U-Vers"]).any? &&
+    Assembly.where(["kennung = ?", "ET200SP Base"]).any? &&
+    Assembly.where(["kennung = ?", "PNOZmulti"]).any? &&
+    Assembly.where(["kennung = ?", "PNOZmulti Chipcard"]).any? &&
+    Assembly.where(["kennung = ?", "PNOZmulti Klemm"]).any? &&
+    Assembly.where(["kennung = ?", "PNOZmulti SL"]).any? &&
+    Assembly.where(["kennung = ?", "PNOZmulti SL Klemm"]).any? &&
+    Assembly.where(["kennung = ?", "PNOZmulti PB"]).any? &&
+    Assembly.where(["kennung = ?", "PNOZmulti 08DI"]).any? &&
+    Assembly.where(["kennung = ?", "PNOZmulti 04DO"]).any? &&
+    Assembly.where(["kennung = ?", "PNOZmulti 01AI"]).any? &&
+    Assembly.where(["kennung = ?", "PNOZmulti 01AO"]).any?
+  end
 
 
   def self.preisPbStecker(eurokurs)

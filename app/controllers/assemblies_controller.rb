@@ -15,6 +15,11 @@ class AssembliesController < ApplicationController
   def new
     # build a 'temporary' post which is written to DB later (create-method)
     @assembly = Assembly.new
+    # !! ATTENTION !!
+    # Dont create more variables here for being used in the new-view !! Because this method is NOT called again
+    # if an error happens (if new object cant be saved) in the create method (see below)!
+    # Render 'new' only calls the new-view again and not the new-method!!
+    # !! ATTENTION !!
   end
 
   # Control logic when creating a new assembly
@@ -39,6 +44,11 @@ class AssembliesController < ApplicationController
   # GET /assemblies/:id/edit
   def edit
     @assembly = Assembly.find(params[:id])
+    # !! ATTENTION !!
+    # Dont create more variables here for being used in the edit-view !! Because this method is NOT called again
+    # if an error happens (if new object cant be saved) in the update method (see below)!
+    # Render 'edit' only calls the edit-view again and not the new-method!!
+    # !! ATTENTION !!
   end
 
   # Save an updated assembly

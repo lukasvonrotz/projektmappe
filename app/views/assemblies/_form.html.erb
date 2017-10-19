@@ -16,6 +16,12 @@
                               placeholder: 'Bezeichnung für Baugruppe eingeben' %>
     </div>
     <div class="field form-group">
+      <%= assembly.label :kanal_startnummer, 'Startnummer Kanal' %>
+      <%= assembly.text_field :kanal_startnummer, :class => "form-control",
+                              :required => true,
+                              placeholder: 'Startnummer für Kanal eingeben' %>
+    </div>
+    <div class="field form-group">
       <%= assembly.label :di, 'DI' %>
       <%= assembly.text_field :di, :required => true, :class => "form-control" %>
     </div>

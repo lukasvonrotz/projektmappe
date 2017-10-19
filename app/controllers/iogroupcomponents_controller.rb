@@ -60,9 +60,109 @@ class IogroupcomponentsController < ApplicationController
                 :notice => 'IO-Gruppen-Komponente wurde gelöscht.'
   end
 
+  # Automatically generate all channels based on assembly
+  def generate_channels
+    @iogroupcomponent = Iogroupcomponent.find(params[:iogroupcomponent_id])
+    notice = 'done'
+    if notice != notice = generate_channels_by_type(@iogroupcomponent,'DI')
+      notice = 'Nicht alle Kanäle konnten generiert werden!'
+    end
+    if notice != generate_channels_by_type(@iogroupcomponent,'DO')
+      notice = 'Nicht alle Kanäle konnten generiert werden!'
+    end
+    if notice != generate_channels_by_type(@iogroupcomponent,'AI')
+      notice = 'Nicht alle Kanäle konnten generiert werden!'
+    end
+    if notice != generate_channels_by_type(@iogroupcomponent,'AO')
+      notice = 'Nicht alle Kanäle konnten generiert werden!'
+    end
+    if notice != generate_channels_by_type(@iogroupcomponent,'INKR')
+      notice = 'Nicht alle Kanäle konnten generiert werden!'
+    end
+    if notice != generate_channels_by_type(@iogroupcomponent,'Z')
+      notice = 'Nicht alle Kanäle konnten generiert werden!'
+    end
+    if notice != generate_channels_by_type(@iogroupcomponent,'SSI')
+      notice = 'Nicht alle Kanäle konnten generiert werden!'
+    end
+    if notice != generate_channels_by_type(@iogroupcomponent,'SDI')
+      notice = 'Nicht alle Kanäle konnten generiert werden!'
+    end
+    if notice != generate_channels_by_type(@iogroupcomponent,'SDO')
+      notice = 'Nicht alle Kanäle konnten generiert werden!'
+    end
+    if notice != generate_channels_by_type(@iogroupcomponent,'SAI')
+      notice = 'Nicht alle Kanäle konnten generiert werden!'
+    end
+    if notice != generate_channels_by_type(@iogroupcomponent,'SAO')
+      notice = 'Nicht alle Kanäle konnten generiert werden!'
+    end
+
+    redirect_to iogroup_iogroupcomponents_path(@iogroupcomponent.iogroup.id),
+                :notice => (notice == 'done') ? 'Alle Kanäle wurden erfolgreich erstellt' : notice
+  end
+
+  # Delete all free channels of this Iogroupcomponent
+  def delete_free_channels
+    @iogroupcomponent = Iogroupcomponent.find(params[:iogroupcomponent_id])
+    @iogroupcomponent.iochannels.each do |channel|
+      channel.destroy!
+    end
+    redirect_to iogroup_iogroupcomponents_path(@iogroupcomponent.iogroup.id),
+                :notice => 'Freie Kanäle wurden gelöscht'
+  end
+
   private
   # defines which parameters have to be provided by the form when creating a new iogroupcomponent
   def iogroupcomponent_params
     params.require(:iogroupcomponent).permit!
+  end
+
+  def generate_channels_by_type(iogroupcomponent, type)
+    counter_internal = 0
+    case type
+      when 'DI'
+        anzahl = iogroupcomponent.assembly.di.to_i
+      when 'DO'
+        anzahl = iogroupcomponent.assembly.do.to_i
+      when 'AI'
+        anzahl = iogroupcomponent.assembly.ai.to_i
+      when 'AO'
+        anzahl = iogroupcomponent.assembly.ao.to_i
+      when 'INKR'
+        anzahl = iogroupcomponent.assembly.inkr.to_i
+      when 'Z'
+        anzahl = iogroupcomponent.assembly.z.to_i
+      when 'SSI'
+        anzahl = iogroupcomponent.assembly.ssi.to_i
+      when 'SDI'
+        anzahl = iogroupcomponent.assembly.sdi.to_i
+      when 'SDO'
+        anzahl = iogroupcomponent.assembly.sdo.to_i
+      when 'SAI'
+        anzahl = iogroupcomponent.assembly.sai.to_i
+      when 'SAO'
+        anzahl = iogroupcomponent.assembly.sao.to_i
+      else
+        return 'Check types in iogroupcomponents_controller'
+    end
+    index = 0
+    kanalnummer = iogroupcomponent.assembly.kanal_startnummer
+    records_to_save = []
+    while index < anzahl do
+      new_channel = Iochannel.new
+      new_channel.kanalnummer = kanalnummer
+      new_channel.channeltype = type
+      new_channel.iogroupcomponent = iogroupcomponent
+      if new_channel.valid?
+        records_to_save << new_channel
+      end
+      records_to_save.each do |record|
+        record.save!
+      end
+      index += 1
+      kanalnummer += 1
+    end
+    return 'done'
   end
 end

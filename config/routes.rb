@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         end
         resources :offertpositions
         resources :offers
+        resources :iosignals
       end
     end
   end
@@ -68,7 +69,9 @@ Rails.application.routes.draw do
   end
   resources :iogroups do
     collection { post :import}
-    resources :iogroupcomponents
+    resources :iogroupcomponents do
+      resources :iochannels
+    end
   end
   resources :iotypes do
     collection { post :import}
@@ -85,6 +88,16 @@ Rails.application.routes.draw do
   resources :wirecaptionprices
   resources :iogroupcomponents
 
+  resources :iochannels
+  resources :iosignals do
+    resources :iosignalenginfos
+    resources :iosignalibninfos
+  end
+  resources :iosignalenginfos
+  resources :iosignalibninfos
+
+
+
   match "/projects/:project_id/subprojects/:subproject_id/copy/:versiontocopy",
         to: "subprojects#copy", as: :copy, via: [:get]
   match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/offerte",
@@ -97,5 +110,11 @@ Rails.application.routes.draw do
 
   match "/settings", to: "settings#index", as: :settings, via: [:get]
   match "/settings/csvexport_all_tables", to: "settings#csvexport_all_tables", as: :csvexport_all_tables, via: [:get]
+
+  match "/iogroups/:iogroup_id/iogroupcomponents/:iogroupcomponent_id/generate_channels",
+        to: "iogroupcomponents#generate_channels", as: :generate_channels, via: [:get]
+
+  match "/iogroups/:iogroup_id/iogroupcomponents/:iogroupcomponent_id/delete_free_channels",
+        to: "iogroupcomponents#delete_free_channels", as: :delete_free_channels, via: [:get]
 
 end

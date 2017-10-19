@@ -12,11 +12,15 @@
                                       placeholder: 'Steckplatznr. eingeben' %>
     </div>
 
-    <div class="field form-group">
-      <%= iogroupcomponent.label :assembly, 'Typ' %>
-      <%= iogroupcomponent.collection_select :assembly_id, Assembly.all.sort_by {|obj| obj.kennung},:id,:kennung,
-                                               {:selected => assemblyid}, {class:"form-control"} %>
-    </div>
+    <% if context %>
+      <div class="field form-group">
+        <%= iogroupcomponent.label :assembly, 'Typ' %>
+        <%= iogroupcomponent.collection_select :assembly_id, Assembly.all.sort_by {|obj| obj.kennung},:id,:kennung,
+                                                 {:selected => assemblyid}, {class:"form-control"} %>
+      </div>
+    <% else %>
+      <%= iogroupcomponent.hidden_field :assembly_id, :value => assemblyid %>
+    <% end %>
 
     <%= iogroupcomponent.hidden_field :iogroup_id, :value => iogroupid %>
 

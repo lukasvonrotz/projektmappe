@@ -100,6 +100,8 @@ class SubprojectsController < ApplicationController
   private
   # defines which parameters have to be provided by the form when creating a new subproject
   def subproject_params
-    params.require(:subproject).permit(:name, {:user_ids => []}, :project_id, :customer_id)
+    params.require(:subproject).permit(:name, {:user_ids => []}, :project_id, :customer_id, :trennzeichen,
+                                       :max_zeichen_klartext_grobeng, :max_zeichen_klartext_signal,
+                                       :info1_text, :info2_text, :info3_text, :info4_text, :info5_text)
   end
 end

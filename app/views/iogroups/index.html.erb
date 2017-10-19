@@ -33,8 +33,10 @@
           <td><a href="<%= switchgearcombination_path(iogroup.switchgearcombination.id) %>"><%= iogroup.switchgearcombination.name %></a></td>
           <td>
             <ul>
-              <% iogroup.iogroupcomponents.each do |iogroupcomponent| %>
-                <li><%= iogroupcomponent.steckplatznummer %>: <%= iogroupcomponent.name %></li>
+              <% iogroup.iogroupcomponents.order(:steckplatznummer).each do |iogroupcomponent| %>
+                <li>
+                  <%= iogroupcomponent.steckplatznummer %>: <%= iogroupcomponent.name %>
+                </li>
               <% end %>
             </ul>
           </td>

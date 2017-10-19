@@ -37,6 +37,8 @@
               <td></td>
               <td></td>
               <td></td>
+              <td></td>
+              <td></td>
               <td><%= Grobengineering.funktion_sw(@subsubproject).round(2) %></td>
               <td></td>
               <td></td>
@@ -189,9 +191,11 @@
               <th rowspan="2">Schaltschrank für Preisberechnung</th>
               <th rowspan="2">Cluster/Schaltschrank zu IO-Gruppe</th>
               <th rowspan="2">IO-Gruppe</th>
-              <th rowspan="2">Tag-Nr.</th>
-              <th rowspan="2">Tag-Name</th>
-              <th rowspan="2">Bezeichnung</th>
+              <th rowspan="2">Tag-Anlage</th>
+              <th rowspan="2">Tag-Objekt</th>
+              <th rowspan="2">Tag-Nummer</th>
+              <th rowspan="2">Brake</th>
+              <th rowspan="2">Klartext</th>
               <th rowspan="2">Bemerkung</th>
               <th rowspan="2">Funktion SW [h]</th>
               <th rowspan="2">Schaltanlagen Motorenabgang</th>
@@ -363,9 +367,11 @@
                   <td><%= grobengineering.schaltschrank_preisberechnung.nil? ? '' : grobengineering.schaltschrank_preisberechnung.name %></td>
                   <td><%= grobengineering.iogroup.nil? ? '' : grobengineering.iogroup.switchgearcombination.name %></td>
                   <td><%= grobengineering.iogroup.nil? ? '' : grobengineering.iogroup.name %></td>
-                  <td><%= grobengineering.tagnr %></td>
-                  <td><%= grobengineering.tagname %></td>
-                  <td><%= grobengineering.bezeichnung %></td>
+                  <td><%= grobengineering.tag_anlage %></td>
+                  <td><%= grobengineering.tag_objekt %></td>
+                  <td><%= grobengineering.tag_nummer %></td>
+                  <td><%= grobengineering.brake %></td>
+                  <td><%= grobengineering.klartext %></td>
                   <td><%= grobengineering.bemerkung %></td>
                   <td><%= grobengineering.funktion_sw %></td>
                   <td><%= grobengineering.switchgear_motorenabgang.nil? ? '' : grobengineering.switchgear_motorenabgang.kennung %></td>

@@ -9,6 +9,14 @@
       <th>ID</th>
       <th>Name</th>
       <th>Kunde</th>
+      <th>Trennzeichen</th>
+      <th>Max. Zeichen für Klartext in Grobengineering</th>
+      <th>Max. Zeichen für Klartext in Signale</th>
+      <th>Freie Beschreibung 1 für Signale</th>
+      <th>Freie Beschreibung 2 für Signale</th>
+      <th>Freie Beschreibung 3 für Signale</th>
+      <th>Freie Beschreibung 4 für Signale</th>
+      <th>Freie Beschreibung 5 für Signale</th>
       <th>Versionen</th>
       <th>Benutzer</th>
       <th>Aktionen</th>
@@ -20,6 +28,14 @@
           <td><%= subproject.id %></td>
           <td><a href="<%= project_subproject_path(@project.id, subproject.id) %>"><%= subproject.name %></a></td>
           <td><%= subproject.customer.name %></td>
+          <td><%= subproject.trennzeichen %></td>
+          <td><%= subproject.max_zeichen_klartext_grobeng %></td>
+          <td><%= subproject.max_zeichen_klartext_signal %></td>
+          <td><%= subproject.info1_text %></td>
+          <td><%= subproject.info2_text %></td>
+          <td><%= subproject.info3_text %></td>
+          <td><%= subproject.info4_text %></td>
+          <td><%= subproject.info5_text %></td>
           <td>
             <ul style="padding-left: 15px;">
               <% subproject.subsubprojects.each do |subsubproject| %>
