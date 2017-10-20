@@ -39,6 +39,7 @@
               <td></td>
               <td></td>
               <td></td>
+              <td></td>
               <td><%= Grobengineering.funktion_sw(@subsubproject).round(2) %></td>
               <td></td>
               <td></td>
@@ -188,6 +189,7 @@
               <th rowspan="2">Gerät Import</th>
               <th rowspan="2">Gerät</th>
               <th rowspan="2">Geräte Anzahl</th>
+              <th rowspan="2">Signale</th>
               <th rowspan="2">Schaltschrank für Preisberechnung</th>
               <th rowspan="2">Cluster/Schaltschrank zu IO-Gruppe</th>
               <th rowspan="2">IO-Gruppe</th>
@@ -364,6 +366,13 @@
                   <td><%= grobengineering.device_import %></td>
                   <td><%= grobengineering.device.definition %></td>
                   <td><%= grobengineering.device_anzahl %></td>
+                  <td>
+                    <ul>
+                      <% grobengineering.iosignals.each do |iosignal| %>
+                        <li><%= iosignal.tagname %> </li>
+                      <% end %>
+                    </ul>
+                  </td>
                   <td><%= grobengineering.schaltschrank_preisberechnung.nil? ? '' : grobengineering.schaltschrank_preisberechnung.name %></td>
                   <td><%= grobengineering.iogroup.nil? ? '' : grobengineering.iogroup.switchgearcombination.name %></td>
                   <td><%= grobengineering.iogroup.nil? ? '' : grobengineering.iogroup.name %></td>
@@ -514,6 +523,7 @@
                   <td>
                     <a href="<%= project_subproject_subsubproject_grobengineering_path(@project.id, @subproject.id, @subsubproject.id, grobengineering.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
                     <a href="<%= edit_project_subproject_subsubproject_grobengineering_path(@project.id, @subproject.id, @subsubproject.id, grobengineering.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
+                    <a href="<%= new_project_subproject_subsubproject_grobengineering_iosignal_path(@project.id, @subproject.id, @subsubproject.id, grobengineering.id) %>" class="btn btn-xs btn-success btn-index">Neues Signal erstellen</a>
                     <button type="button" class="btn btn-xs btn-danger btn-index"
                             data-toggle="modal" data-target="#popup_sure_delete"
                             data-itemid="<%= grobengineering.id %>"
@@ -527,8 +537,8 @@
           </table>
         </div>
 
-        <%= render 'layouts/loading', :message => "Lade Grobingeneering-Einträge..." %>
         <%= render 'layouts/popups' %>
+        <%= render 'layouts/loading', :message => "Lade..." %>
 
         <script type="text/javascript">
             function confirm_click()

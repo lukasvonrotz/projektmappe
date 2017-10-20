@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019133210) do
+ActiveRecord::Schema.define(version: 20171020142719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,12 @@ ActiveRecord::Schema.define(version: 20171019133210) do
     t.datetime "updated_at",                      null: false
     t.integer  "kanal_startnummer", default: 1,   null: false
     t.index ["kennung"], name: "assemblies_kennung_unique", unique: true, using: :btree
+  end
+
+  create_table "assemblies_iogroups", id: false, force: :cascade do |t|
+    t.integer "assembly_id"
+    t.integer "iogroup_id"
+    t.index ["assembly_id", "iogroup_id"], name: "assemblies_iogroups_unique", unique: true, using: :btree
   end
 
   create_table "customers", force: :cascade do |t|
@@ -102,7 +108,6 @@ ActiveRecord::Schema.define(version: 20171019133210) do
     t.integer  "elinst_trasse_id"
     t.integer  "elinst_rohr_id"
     t.integer  "elinst_geraete_id"
-    t.index ["definition"], name: "devices_definition_unique", unique: true, using: :btree
     t.index ["elinst_geraete_id"], name: "index_devices_on_elinst_geraete_id", using: :btree
     t.index ["elinst_rohr_id"], name: "index_devices_on_elinst_rohr_id", using: :btree
     t.index ["elinst_trasse_id"], name: "index_devices_on_elinst_trasse_id", using: :btree
@@ -208,6 +213,7 @@ ActiveRecord::Schema.define(version: 20171019133210) do
   create_table "iochannels", force: :cascade do |t|
     t.integer  "kanalnummer",         default: 0, null: false
     t.string   "channeltype"
+    t.string   "address_suffix"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.integer  "iogroupcomponent_id",             null: false
@@ -238,6 +244,12 @@ ActiveRecord::Schema.define(version: 20171019133210) do
     t.index ["iotype_id"], name: "index_iogroups_on_iotype_id", using: :btree
     t.index ["name", "switchgearcombination_id"], name: "name_switchgearcombination_uniqueness", unique: true, using: :btree
     t.index ["switchgearcombination_id"], name: "index_iogroups_on_switchgearcombination_id", using: :btree
+  end
+
+  create_table "iogroups_assemblies", id: false, force: :cascade do |t|
+    t.integer "iogroup_id"
+    t.integer "assembly_id"
+    t.index ["iogroup_id", "assembly_id"], name: "iogroups_assemblies_unique", unique: true, using: :btree
   end
 
   create_table "iosignalenginfos", force: :cascade do |t|
@@ -317,8 +329,8 @@ ActiveRecord::Schema.define(version: 20171019133210) do
     t.integer  "iochannel_id"
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
-    t.integer  "grobengineerings_id",                     null: false
-    t.index ["grobengineerings_id"], name: "index_iosignals_on_grobengineerings_id", using: :btree
+    t.integer  "grobengineering_id",                      null: false
+    t.index ["grobengineering_id"], name: "index_iosignals_on_grobengineering_id", using: :btree
     t.index ["iochannel_id"], name: "index_iosignals_on_iochannel_id", using: :btree
   end
 
@@ -326,7 +338,6 @@ ActiveRecord::Schema.define(version: 20171019133210) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "iotypes_name_unique", unique: true, using: :btree
   end
 
   create_table "offer_offertpositions", force: :cascade do |t|
@@ -402,8 +413,8 @@ ActiveRecord::Schema.define(version: 20171019133210) do
     t.integer  "project_id",                                                    null: false
     t.integer  "customer_id",                                                   null: false
     t.string   "trennzeichen"
-    t.integer  "max_zeichen_klartext_grobeng"
-    t.integer  "max_zeichen_klartext_signal"
+    t.integer  "max_zeichen_klartext_grobeng", default: 20,                     null: false
+    t.integer  "max_zeichen_klartext_signal",  default: 20,                     null: false
     t.string   "info1_text",                   default: "Freie Beschreibung 1"
     t.string   "info2_text",                   default: "Freie Beschreibung 2"
     t.string   "info3_text",                   default: "Freie Beschreibung 3"
@@ -478,7 +489,6 @@ ActiveRecord::Schema.define(version: 20171019133210) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "suppliers_name_unique", unique: true, using: :btree
   end
 
   create_table "suppliertypes", force: :cascade do |t|
@@ -614,7 +624,7 @@ ActiveRecord::Schema.define(version: 20171019133210) do
   add_foreign_key "iogroups", "switchgearcombinations"
   add_foreign_key "iosignalenginfos", "iosignals"
   add_foreign_key "iosignalibninfos", "iosignals"
-  add_foreign_key "iosignals", "grobengineerings", column: "grobengineerings_id"
+  add_foreign_key "iosignals", "grobengineerings"
   add_foreign_key "offers", "subsubprojects"
   add_foreign_key "offers", "users"
   add_foreign_key "offertpositions", "subsubprojects"

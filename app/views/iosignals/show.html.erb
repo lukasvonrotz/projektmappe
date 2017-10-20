@@ -1,0 +1,16 @@
+<h1><%= @iosignal.tagname %></h1>
+<br>
+<% if @iosignal.errors.any? %>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= @iosignal.errors.full_messages.first %>
+    </div>
+<% end %>
+
+ID: <%= @iosignal.id %><br>
+Gerät: <%= @iosignal.grobengineering.device.definition %><br>
+
+<br><br>
+<%= link_to "Zurück zur Signal-Übersicht", project_subproject_subsubproject_iosignals_path(@project.id, @subproject.id, @subsubproject.id) %>
+
+<%= render 'layouts/loading', :message => "Lade..." %>

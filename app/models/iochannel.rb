@@ -20,4 +20,9 @@ class Iochannel < ApplicationRecord
       end
     end
   end
+
+  def address
+   self.iogroupcomponent.iogroup.address_prefix.to_s + '.' + self.iogroupcomponent.iogroup.profibus_address.to_s + '.'  +
+       self.iogroupcomponent.steckplatznummer.to_s + '.' +  self.kanalnummer.to_s + '.' + self.address_suffix.to_s + ' ('+ self.channeltype + ')'
+  end
 end

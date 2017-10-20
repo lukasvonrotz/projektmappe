@@ -157,12 +157,14 @@ class IogroupcomponentsController < ApplicationController
       if new_channel.valid?
         records_to_save << new_channel
       end
-      records_to_save.each do |record|
-        record.save!
-      end
       index += 1
       kanalnummer += 1
     end
+
+    records_to_save.each do |record|
+      record.save!
+    end
+
     return 'done'
   end
 end

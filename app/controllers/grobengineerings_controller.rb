@@ -2,7 +2,6 @@ class GrobengineeringsController < ApplicationController
   # Auflistung aller Grobengineerings PRO Version
   # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubprojects_id/grobengineerings
   def index
-    @hash = Hash.new
     @subsubproject = Subsubproject.find(params[:subsubproject_id])
     @subproject = @subsubproject.subproject
     @project = @subproject.project

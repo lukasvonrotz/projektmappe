@@ -37,7 +37,7 @@ class CreateIosignals < ActiveRecord::Migration[5.0]
       t.string :sw_info2
       t.string :sw_info3
 
-      t.belongs_to :iochannel, index: true
+      t.belongs_to :iochannel, index: true, null: true
 
       t.timestamps
     end

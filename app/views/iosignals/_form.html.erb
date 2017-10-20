@@ -1,0 +1,32 @@
+<%= form_for iosignal do |iosignal| %>
+    <div class="field form-group">
+      <%= iosignal.label :tagname_suffix, 'Tagname Suffix' %>
+      <%= iosignal.text_field :tagname_suffix, :class => "form-control",
+                                    autofocus: true,
+                             placeholder: 'Tagname Suffix von Signal eingeben' %>
+    </div>
+
+    <div class="field form-group">
+      <%= iosignal.label :iochannel, 'Kanal' %>
+      <% iochannels = [] %>
+      <% Grobengineering.find(grobengineeringid).iogroup.iogroupcomponents.each do |iogroupcomponent| %>
+        <% iogroupcomponent.iochannels.each do |iochannel| %>
+              <% iochannels << iochannel %>
+        <% end %>
+      <% end %>
+
+      <%= iosignal.collection_select :iochannel_id, iochannels.sort_by {|obj| obj.address},:id,:address,
+                                               {:selected => iochannelid, :include_blank => ''}, {class:"form-control"} %>
+    </div>
+
+
+    <%= iosignal.hidden_field :grobengineering_id, :value => grobengineeringid %>
+
+    <div class="actions form-group">
+      <% if context %>
+          <%= iosignal.submit 'Erstellen', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% else %>
+          <%= iosignal.submit 'Update', class: "btn btn-success", data: { disable_with: "Verarbeite..." }  %>
+      <% end %>
+    </div>
+<% end %>

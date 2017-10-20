@@ -87,6 +87,49 @@ class SubsubprojectsController < ApplicationController
                                         :id => subprojectid), :notice => 'Version wurde gelöscht.'
   end
 
+  # Generate signals (One per Version and Grobengineering)
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/generate_signals
+  def generate_signals
+    subsubproject = Subsubproject.find(params[:subsubproject_id])
+    subproject = subsubproject.subproject
+    project = subproject.project
+
+    records_to_save = []
+    subsubproject.grobengineerings.sort_by{|e| e[:id]}.each do |grobengineering|
+      new_signal = Iosignal.new
+      new_signal.grobengineering = grobengineering
+
+      if new_signal.valid? && !Iosignal.where(:grobengineering_id => grobengineering).any?
+        records_to_save << new_signal
+      end
+    end
+
+    records_to_save.each do |record|
+      record.save!
+    end
+
+    redirect_to project_subproject_subsubproject_iosignals_path(project.id, subproject.id, subsubproject.id), :notice => 'Signale wurden generiert.'
+  end
+
+  def delete_signals
+    subsubproject = Subsubproject.find(params[:subsubproject_id])
+    subproject = subsubproject.subproject
+    project = subproject.project
+
+    records_to_delete = []
+    subsubproject.grobengineerings.each do |grobengineering|
+
+      grobengineering.iosignals.each do |iosignal|
+        records_to_delete << iosignal
+      end
+    end
+
+    records_to_delete.each do |record|
+      record.destroy!
+    end
+
+    redirect_to project_subproject_subsubproject_iosignals_path(project.id, subproject.id, subsubproject.id), :notice => 'Signale wurden generiert.'
+  end
   private
   # defines which parameters have to be provided by the form when creating a new subsubproject
   def subsubproject_params

@@ -21,10 +21,17 @@ Rails.application.routes.draw do
       resources :subsubprojects do
         resources :grobengineerings do
           collection { post :import}
+          resources :iosignals do
+            resources :iosignalenginfos
+            resources :iosignalibninfos
+          end
         end
         resources :offertpositions
         resources :offers
-        resources :iosignals
+        resources :iosignals do
+          resources :iosignalenginfos
+          resources :iosignalibninfos
+        end
       end
     end
   end
@@ -117,4 +124,9 @@ Rails.application.routes.draw do
   match "/iogroups/:iogroup_id/iogroupcomponents/:iogroupcomponent_id/delete_free_channels",
         to: "iogroupcomponents#delete_free_channels", as: :delete_free_channels, via: [:get]
 
+  match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/generate_signals",
+        to: "subsubprojects#generate_signals", as: :generate_signals, via: [:get]
+
+  match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/delete_signals",
+        to: "subsubprojects#delete_signals", as: :delete_signals, via: [:get]
 end

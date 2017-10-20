@@ -1,5 +1,7 @@
 class Iosignal < ApplicationRecord
-  belongs_to :iochannel
+  require 'csv'
+
+  belongs_to :iochannel, :optional => true
 
   belongs_to :grobengineering
   validates :grobengineering, :presence => true
@@ -25,7 +27,34 @@ class Iosignal < ApplicationRecord
   validates :ex, numericality: {only_integer: true, :presence => true}
 
   def tagname
-    'tagname'
+    delimiter = self.grobengineering.subsubproject.subproject.trennzeichen.to_s
+    tagname = ''
+    tagname += add_tag_part(self.grobengineering.tag_anlage.to_s, delimiter)
+    tagname += add_tag_part(self.grobengineering.tag_objekt.to_s, delimiter)
+    tagname += add_tag_part(self.grobengineering.tag_nummer.to_s, delimiter)
+    tagname += add_tag_part(self.tagname_suffix.to_s, '')
   end
 
+  # CSV Export
+  def self.to_csv
+    attributes = column_names
+
+    CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|
+      csv << attributes
+
+      all.order(:id).each do |entry|
+        csv << attributes.map{ |attr| entry.send(attr) }
+      end
+    end
+  end
+
+  private
+  def add_tag_part(tagname, delimiter)
+    if tagname.to_s == ''
+      ''
+    else
+      tagname += delimiter
+    end
+
+  end
 end
