@@ -22,7 +22,23 @@ class Iochannel < ApplicationRecord
   end
 
   def address
-   self.iogroupcomponent.iogroup.address_prefix.to_s + '.' + self.iogroupcomponent.iogroup.profibus_address.to_s + '.'  +
-       self.iogroupcomponent.steckplatznummer.to_s + '.' +  self.kanalnummer.to_s + '.' + self.address_suffix.to_s + ' ('+ self.channeltype + ')'
+    delimiter = '.'
+    address = ''
+    address += add_address_part(self.iogroupcomponent.iogroup.address_prefix.to_s, delimiter)
+    address += add_address_part(self.iogroupcomponent.iogroup.profibus_address.to_s, delimiter)
+    address += add_address_part(self.kanalnummer.to_s, delimiter)
+    address += add_address_part(self.address_suffix.to_s, delimiter)
+    address += add_address_part(self.grobengineering.tag_anlage.to_s, delimiter)
+    address +=  ' ('+ self.channeltype + ')'
+  end
+
+  private
+  def add_address_part(tagname, delimiter)
+    if tagname.to_s == ''
+      ''
+    else
+      tagname += delimiter
+    end
+
   end
 end

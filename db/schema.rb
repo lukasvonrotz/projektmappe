@@ -38,12 +38,6 @@ ActiveRecord::Schema.define(version: 20171020142719) do
     t.index ["kennung"], name: "assemblies_kennung_unique", unique: true, using: :btree
   end
 
-  create_table "assemblies_iogroups", id: false, force: :cascade do |t|
-    t.integer "assembly_id"
-    t.integer "iogroup_id"
-    t.index ["assembly_id", "iogroup_id"], name: "assemblies_iogroups_unique", unique: true, using: :btree
-  end
-
   create_table "customers", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -108,6 +102,7 @@ ActiveRecord::Schema.define(version: 20171020142719) do
     t.integer  "elinst_trasse_id"
     t.integer  "elinst_rohr_id"
     t.integer  "elinst_geraete_id"
+    t.index ["definition"], name: "devices_definition_unique", unique: true, using: :btree
     t.index ["elinst_geraete_id"], name: "index_devices_on_elinst_geraete_id", using: :btree
     t.index ["elinst_rohr_id"], name: "index_devices_on_elinst_rohr_id", using: :btree
     t.index ["elinst_trasse_id"], name: "index_devices_on_elinst_trasse_id", using: :btree
@@ -171,7 +166,7 @@ ActiveRecord::Schema.define(version: 20171020142719) do
     t.integer  "wire_spez1_id"
     t.integer  "wire_spez2_id"
     t.integer  "wire_spez3_id"
-    t.integer  "offertposition_id"
+    t.integer  "offertposition_id",                              null: false
     t.integer  "schaltschrank_preisberechnung_id"
     t.string   "tag_anlage"
     t.string   "tag_objekt"
@@ -244,12 +239,6 @@ ActiveRecord::Schema.define(version: 20171020142719) do
     t.index ["iotype_id"], name: "index_iogroups_on_iotype_id", using: :btree
     t.index ["name", "switchgearcombination_id"], name: "name_switchgearcombination_uniqueness", unique: true, using: :btree
     t.index ["switchgearcombination_id"], name: "index_iogroups_on_switchgearcombination_id", using: :btree
-  end
-
-  create_table "iogroups_assemblies", id: false, force: :cascade do |t|
-    t.integer "iogroup_id"
-    t.integer "assembly_id"
-    t.index ["iogroup_id", "assembly_id"], name: "iogroups_assemblies_unique", unique: true, using: :btree
   end
 
   create_table "iosignalenginfos", force: :cascade do |t|
@@ -338,6 +327,7 @@ ActiveRecord::Schema.define(version: 20171020142719) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "iotypes_name_unique", unique: true, using: :btree
   end
 
   create_table "offer_offertpositions", force: :cascade do |t|
@@ -489,6 +479,7 @@ ActiveRecord::Schema.define(version: 20171020142719) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "suppliers_name_unique", unique: true, using: :btree
   end
 
   create_table "suppliertypes", force: :cascade do |t|
@@ -589,7 +580,7 @@ ActiveRecord::Schema.define(version: 20171020142719) do
   end
 
   create_table "wires", force: :cascade do |t|
-    t.integer  "aderbeschriftung"
+    t.integer  "aderbeschriftung", default: 0, null: false
     t.integer  "anzahladern",      default: 0, null: false
     t.string   "kabeltyp"
     t.datetime "created_at",                   null: false

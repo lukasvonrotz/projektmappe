@@ -97,6 +97,8 @@ class SubsubprojectsController < ApplicationController
     records_to_save = []
     subsubproject.grobengineerings.sort_by{|e| e[:id]}.each do |grobengineering|
       new_signal = Iosignal.new
+      puts 'lukas'
+      puts grobengineering.id
       new_signal.grobengineering = grobengineering
 
       if new_signal.valid? && !Iosignal.where(:grobengineering_id => grobengineering).any?

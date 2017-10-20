@@ -17,7 +17,7 @@
         <div class="col-lg-2"><strong>Actions</strong></div>
       </div>
       <br>
-      <% @wire_suppliers.each do |wire_supplier| %>
+      <% @wire_suppliers.sort_by{|e| e[:id]}.each do |wire_supplier| %>
           <%= render 'form', :wire_supplier => wire_supplier, :supplier => wire_supplier.supplier,
                      :wire_supplier_kabeltyp => wire_supplier.wire.kabeltyp,
                      :wire_supplierid => wire_supplier.id %>

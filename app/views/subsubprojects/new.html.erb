@@ -6,13 +6,13 @@
     </div>
 <% end %>
 
+<% subprojectid = @subsubproject.subproject_id.nil? ? params[:subproject_id] : @subsubproject.subproject_id %>
+<% subproject = Subproject.find(subprojectid) %>
+<% project = subproject.project %>
 
 <% if Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'}).any? &&
     Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}).any? %>
-
-    <% subprojectid = @subsubproject.subproject_id.nil? ? params[:subproject_id] : @subsubproject.subproject_id %>
-    <% subproject = Subproject.find(subprojectid) %>
-  <%= render 'form', :subprojectid => subprojectid,
+    <%= render 'form', :subprojectid => subprojectid,
              :subsubproject => @subsubproject,
              :wiresupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'}).first.id,
              :wirecaptionsupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}).first.id,
@@ -25,6 +25,6 @@
   </div>
 <% end %>
 
-<%= link_to "Zurück zu Versionsübersicht", project_subproject_subsubprojects_path(@subsubproject.subproject.project.id, @subsubproject.subproject.id) %>
+<%= link_to "Zurück zu Versionsübersicht", project_subproject_subsubprojects_path(project.id, subproject.id) %>
 
 <%= render 'layouts/loading', :message => "Lade..." %>

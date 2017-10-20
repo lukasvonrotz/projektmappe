@@ -9,9 +9,15 @@
     <div class="field form-group">
       <%= iosignal.label :iochannel, 'Kanal' %>
       <% iochannels = [] %>
-      <% Grobengineering.find(grobengineeringid).iogroup.iogroupcomponents.each do |iogroupcomponent| %>
-        <% iogroupcomponent.iochannels.each do |iochannel| %>
-              <% iochannels << iochannel %>
+      <% if Grobengineering.find(grobengineeringid).iogroup.nil? %>
+        <% Iochannel.all.each do |iochannel| %>
+            <% iochannels << iochannel %>
+        <% end %>
+      <% else %>
+        <% Grobengineering.find(grobengineeringid).iogroup.iogroupcomponents.each do |iogroupcomponent| %>
+          <% iogroupcomponent.iochannels.each do |iochannel| %>
+                <% iochannels << iochannel %>
+          <% end %>
         <% end %>
       <% end %>
 
