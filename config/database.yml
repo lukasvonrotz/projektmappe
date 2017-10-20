@@ -9,14 +9,14 @@ default: &default
   pool: 5
   timeout: 5000
   encoding: unicode
-  host: 192.168.0.22
-  port: 5432
-  database: projektmappe_db
   username: postgres
   password: <%= ENV["POSTGRES_PW"] %>
 
+
 development:
   <<: *default
+  database: projektmappe_db
+  host: localhost
   #database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
@@ -30,4 +30,7 @@ test:
 
 production:
   <<: *default
+  database: projektmappe_db_prod
+  host: 192.168.0.22
+  port: 5432
   #database: db/production.sqlite3
