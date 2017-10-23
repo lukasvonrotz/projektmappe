@@ -37,7 +37,7 @@
             <a href="<%= iogroup_iogroupcomponent_iochannels_path(@iogroup.id, iogroupcomponent.id) %>" class="btn btn-xs btn-default btn-index">Kanäle anzeigen</a>
             <a href="<%= generate_channels_path(@iogroup.id, iogroupcomponent.id) %>" class="btn btn-xs btn-default btn-index">Kanäle generieren</a>
             <a href="<%= delete_free_channels_path(@iogroup.id, iogroupcomponent.id) %>"
-               class="btn btn-xs btn-default btn-index" onclick="return confirm('Are you sure?')">Freie Kanäle löschen
+               class="btn btn-xs btn-default btn-index" onclick="return confirm('Sind Sie sicher? Allfällige Verknüpfungen mit Signalen werden ebenfalls gelöscht!')">Kanäle löschen
             </a>
             <button type="button" class="btn btn-xs btn-danger btn-index"
                     data-toggle="modal" data-target="#popup_sure_delete"

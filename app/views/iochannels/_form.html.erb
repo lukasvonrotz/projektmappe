@@ -11,6 +11,11 @@
       <%= iochannel.text_field :channeltype, :class => "form-control",
                                placeholder: 'Kanalnummer für Kanal eingeben' %>
     </div>
+    <div class="field form-group">
+      <%= iochannel.label :address_suffix, 'Adresse-Suffix' %>
+      <%= iochannel.text_field :address_suffix, :class => "form-control",
+                               placeholder: 'Adresse-Suffix für Kanal eingeben' %>
+    </div>
 
     <%= iochannel.hidden_field :iogroupcomponent_id, :value => iogroupcomponentid %>
 

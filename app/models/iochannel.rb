@@ -2,7 +2,7 @@ class Iochannel < ApplicationRecord
   belongs_to :iogroupcomponent
   validates :iogroupcomponent, :presence => true
 
-  has_one :iosignal
+  has_one :iosignal, dependent: :nullify
 
   validates :kanalnummer, presence:true, numericality: {only_integer: true}
   validates :kanalnummer, uniqueness:  { scope: [:channeltype, :iogroupcomponent_id],
@@ -28,7 +28,6 @@ class Iochannel < ApplicationRecord
     address += add_address_part(self.iogroupcomponent.iogroup.profibus_address.to_s, delimiter)
     address += add_address_part(self.kanalnummer.to_s, delimiter)
     address += add_address_part(self.address_suffix.to_s, delimiter)
-    address += add_address_part(self.grobengineering.tag_anlage.to_s, delimiter)
     address +=  ' ('+ self.channeltype + ')'
   end
 

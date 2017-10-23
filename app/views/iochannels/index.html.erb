@@ -9,6 +9,7 @@
       <th>ID</th>
       <th>Kanalnummer</th>
       <th>Kanaltyp</th>
+      <th>Adresse-Suffix</th>
       <th>Aktionen</th>
     </tr>
     </thead>
@@ -18,6 +19,7 @@
           <td><%= iochannel.id %></td>
           <td><%= iochannel.kanalnummer %></td>
           <td><%= iochannel.channeltype %></td>
+          <td><%= iochannel.address_suffix %></td>
           <td>
             <a href="<%= edit_iogroup_iogroupcomponent_iochannel_path(@iogroup.id, @iogroupcomponent.id, iochannel.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
             <button type="button" class="btn btn-xs btn-danger btn-index"

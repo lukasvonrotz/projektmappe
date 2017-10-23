@@ -41,7 +41,7 @@
 <script>
     $(document).ready ( function(){
         // Disable all input fields and add 'edit'-button, except for first line.
-        <% @wire_suppliers.each_with_index do |wire_supplier, i| %>
+        <% @wire_suppliers.sort_by{|e| e[:id]}.each_with_index do |wire_supplier, i| %>
           <% if i != 0 %>
             $("input.wire_supplier<%=wire_supplier.id %>_fld").attr("disabled", true);
           <% else %>
