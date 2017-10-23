@@ -46,12 +46,9 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-  gem 'pg'
 end
 
-group :production do
-  gem 'pg'
-end
+gem 'pg'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
@@ -64,3 +61,4 @@ gem 'devise-i18n', '~> 1.3.0'
 gem 'chosen-rails', '~> 1.5.2'
 gem 'formtastic', '~> 3.1.5'
 gem 'rails-erd', require: false, group: :development
+gem 'compass-rails', github: 'Compass/compass-rails'
