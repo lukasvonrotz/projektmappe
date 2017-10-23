@@ -110,6 +110,11 @@ class SubsubprojectsController < ApplicationController
       new_iosignalenginfo = Iosignalenginfo.new
       new_iosignalenginfo.iosignal_id = record.id
       new_iosignalenginfo.save!
+
+      # Generate associated Iosignalibninfo
+      new_iosignalibninfo = Iosignalibninfo.new
+      new_iosignalibninfo.iosignal_id = record.id
+      new_iosignalibninfo.save!
     end
 
     redirect_to project_subproject_subsubproject_iosignals_path(project.id, subproject.id, subsubproject.id), :notice => 'Signale wurden generiert.'

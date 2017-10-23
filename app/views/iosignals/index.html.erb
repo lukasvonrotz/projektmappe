@@ -3,6 +3,7 @@
 <a href="<%=generate_signals_path%>" class="btn btn-success">Signale generieren</a>
 <a href="<%=delete_signals_path%>" class="btn btn-danger" onclick="return confirm('Are you sure?')">Signale löschen</a>
 <a href="<%=project_subproject_subsubproject_iosignalenginfos_path(@project.id, @subproject.id, @subsubproject.id)%>" class="btn btn-info">Eng-Infos zu Signale anzeigen</a>
+<a href="<%=project_subproject_subsubproject_iosignalibninfos_path(@project.id, @subproject.id, @subsubproject.id)%>" class="btn btn-info">IBN-Infos zu Signale anzeigen</a>
 
 <br><br><br>
 <div id="content" class="table-responsive">
@@ -19,8 +20,8 @@
       <th>Dig Aktiv Text</th>
       <th>Ana Range min</th>
       <th>Ana Range max</th>
-      <th>ana Range decimals</th>
-      <th>ana Range Unit</th>
+      <th>Ana Range decimals</th>
+      <th>Ana Range Unit</th>
       <th>Bus</th>
       <th>DI</th>
       <th>DO</th>

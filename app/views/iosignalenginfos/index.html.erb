@@ -90,9 +90,11 @@
         <% @iosignalenginfos.each_with_index do |iosignalenginfo, i| %>
           <% if i != 0 %>
             $("input.iosignalenginfo<%=iosignalenginfo.id %>_fld").attr("disabled", true);
+            $("select.iosignalenginfo<%=iosignalenginfo.id %>_fld").attr("disabled", true);
           <% else %>
             $("a.iosignalenginfo<%=iosignalenginfo.id %>_edit").hide();
             $("input.iosignalenginfo<%=iosignalenginfo.id %>_fld").attr("disabled", false);
+            $("select.iosignalenginfo<%=iosignalenginfo.id %>_fld").attr("disabled", false);
           <% end %>
         <% end %>
 
@@ -102,7 +104,6 @@
         var $input = $('#refresh');
         if ($input.val() == 'yes') {
             location.reload(true);
-            loadingAlgorithm();
             $(".table-responsive").hide();
         }
         else {
@@ -112,8 +113,10 @@
 
     function editLine(id) {
         $("input.iosignalenginfo_fld").attr("disabled", true);
+        $("select.iosignalenginfo_fld").attr("disabled", true);
         $("a.iosignalenginfo_edit").show();
         $("a.iosignalenginfo" + id + "_edit").hide();
         $("input.iosignalenginfo" + id + "_fld").attr("disabled", false);
+        $("select.iosignalenginfo" + id + "_fld").attr("disabled", false);
     }
 </script>

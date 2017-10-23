@@ -380,7 +380,11 @@
                   <td><%= grobengineering.tag_objekt %></td>
                   <td><%= grobengineering.tag_nummer %></td>
                   <td><%= grobengineering.brake %></td>
-                  <td><%= grobengineering.klartext %></td>
+                  <% if @subsubproject.subproject.max_zeichen_klartext_grobeng.to_i < grobengineering.klartext.length.to_i %>
+                      <td class="danger"><%= grobengineering.klartext %></td>
+                  <% else %>
+                      <td><%= grobengineering.klartext %></td>
+                  <% end %>
                   <td><%= grobengineering.bemerkung %></td>
                   <td><%= grobengineering.funktion_sw %></td>
                   <td><%= grobengineering.switchgear_motorenabgang.nil? ? '' : grobengineering.switchgear_motorenabgang.kennung %></td>

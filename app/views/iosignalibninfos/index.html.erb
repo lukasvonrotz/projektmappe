@@ -1,0 +1,79 @@
+
+<h1>IBN Infos von <%= @subsubproject.name %></h1>
+<br>
+<div id="content">
+  <% if @iosignals.length == 0 %>
+      Keine Signale für diese Vesrion vorhanden
+  <% else %>
+    <div class="row">
+      <div class="col-lg-2"><strong>Tagname</strong></div>
+      <div class="col-lg-1"><strong>Signaltest Feld</strong></div>
+      <div class="col-lg-1"><strong>Signaltest Software</strong></div>
+      <div class="col-lg-1"><strong>Signaltest HMI</strong></div>
+      <div class="col-lg-1"><strong>Signaltest Event</strong></div>
+      <div class="col-lg-2"><strong>Signaltest Ok Datum</strong></div>
+      <div class="col-lg-1"><strong>Signaltest Ok Wer</strong></div>
+      <div class="col-lg-1"><strong>Bemerkungen</strong></div>
+      <div class="col-lg-1"><strong>Todo</strong></div>
+      <div class="col-lg-1"><strong>Aktionen</strong></div>
+    </div>
+    <br>
+    <% @iosignalibninfos.sort_by{|e| e[:id]}.each do |iosignalibninfo| %>
+        <%= render 'form', :iosignalibninfo => iosignalibninfo, :iosignal => iosignalibninfo.iosignal,
+                   :iosignaltagname => iosignalibninfo.iosignal.tagname,
+                   :iogignalibninfodate => iosignalibninfo.signaltest_ok_datum,
+                   :iosignalibninfoid => iosignalibninfo.id %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to "Zurück zu Signale", project_subproject_subsubproject_iosignals_path(@project.id, @subproject.id, @subsubproject.id) %>
+
+<script>
+    $(document).ready ( function(){
+        // Disable all input fields and add 'edit'-button, except for first line.
+        <% @iosignalibninfos.sort_by{|e| e[:id]}.each_with_index do |iosignalibninfo, i| %>
+          <% if i != 0 %>
+            $("input.iosignalibninfo<%=iosignalibninfo.id %>_fld").attr("disabled", true);
+          <% else %>
+            $("a.iosignalibninfo<%=iosignalibninfo.id %>_edit").hide();
+            $("input.iosignalibninfo<%=iosignalibninfo.id %>_fld").attr("disabled", false);
+          <% end %>
+        <% end %>
+
+
+
+        $('.inputdetection').bind('input', function() {
+            var d = new Date();
+            var year = d.getFullYear();
+            var month = d.getMonth()+1;
+            var day = d.getDate();
+            var hour = d.getHours();
+            var minute = d.getMinutes();
+            var current_date = "" + day + "/" + month + "/" + year + " " + hour + ":" + minute;
+            $(".iosignalibninfo" + this.id + "_date").val(current_date);
+        });
+
+        // In case of using the browser back button! Rails duplicates html-elements when using this button
+        // Hence, do reload page (only once!) by usage of a hidden input field!
+        $('#loadingModal').modal('hide');
+        var $input = $('#refresh');
+        if ($input.val() == 'yes') {
+            location.reload(true);
+            $(".table-responsive").hide();
+        }
+        else {
+            $input.val('yes');
+        }
+    });
+
+    function editLine(id) {
+        $("input.iosignalibninfo_fld").attr("disabled", true);
+        $("select.iosignalibninfo_fld").attr("disabled", true);
+        $("a.iosignalibninfo_edit").show();
+        $("a.iosignalibninfo" + id + "_edit").hide();
+        $("input.iosignalibninfo" + id + "_fld").attr("disabled", false);
+        $("select.iosignalibninfo" + id + "_fld").attr("disabled", false);
+    }
+
+</script>
