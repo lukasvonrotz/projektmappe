@@ -1,0 +1,81 @@
+<%= form_for [iosignal, iosignalenginfo] do |iosignalenginfo| %>
+    <td>
+      <a class="btn btn-sm btn-info iosignalenginfo_edit iosignalenginfo<%=iosignalenginfoid.to_s%>_edit"
+         onclick="editLine(<%=iosignalenginfoid%>);">Edit</a>
+    </td>
+    <td>
+      <strong class="hidden-lg">Tagname<br></strong>
+      <%= iosignal_tagname %></br>
+    </td>
+    <td>
+      <%= iosignalenginfo.text_field :pendenz,
+                                   :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+    </td>
+    <td>
+      <%= iosignalenginfo.datetime_select :pendenz_datum, {}, { class: "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" } %>
+    </td>
+    <td>
+      <%= iosignalenginfo.text_field :pendenz_wer,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+    </td>
+    <td>
+      <%= iosignalenginfo.text_field :pendenz_antwort,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+    </td>
+    <td>
+      <%= iosignalenginfo.datetime_select :pendenz_antwort_datum, {}, { class: "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" } %>
+    </td>
+    <td>
+      <%= iosignalenginfo.text_field :pendenz_antwort_wer,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+    </td>
+    <td>
+      <%= iosignalenginfo.text_field :frage,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+    </td>
+    <td>
+      <%= iosignalenginfo.datetime_select :frage_datum, {}, { class: "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" } %>
+    </td>
+    <td>
+      <%= iosignalenginfo.text_field :frage_wer,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+    </td>
+    <td>
+      <%= iosignalenginfo.text_field :frage_antwort,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+    </td>
+    <td>
+      <%= iosignalenginfo.datetime_select :frage_antwort_datum, {}, { class: "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" } %>
+    </td>
+    <td>
+      <%= iosignalenginfo.text_field :frage_antwort_wer,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+    </td>
+    <td>
+      <%= iosignalenginfo.text_field :sw_instruction,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+    </td>
+    <td>
+      <%= iosignalenginfo.datetime_select :sw_instruction_datum, {}, { class: "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" } %>
+    </td>
+    <td>
+      <%= iosignalenginfo.text_field :sw_instruction_wer,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+    </td>
+    <td>
+      <%= iosignalenginfo.text_field :sw_instruction_antwort,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+    </td>
+    <td>
+      <%= iosignalenginfo.datetime_select :sw_instruction_antwort_datum, {}, { class: "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" } %>
+    </td>
+    <td>
+      <%= iosignalenginfo.text_field :sw_instruction_antwort_wer,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+    </td>
+    <td>
+      <%= iosignalenginfo.submit 'Update',
+                                 class: "btn btn-sm btn-success iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld",
+                                 data: { disable_with: "Verarbeite..." }  %>
+    </td>
+<% end %>

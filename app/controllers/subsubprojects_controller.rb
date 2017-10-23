@@ -97,8 +97,6 @@ class SubsubprojectsController < ApplicationController
     records_to_save = []
     subsubproject.grobengineerings.sort_by{|e| e[:id]}.each do |grobengineering|
       new_signal = Iosignal.new
-      puts 'lukas'
-      puts grobengineering.id
       new_signal.grobengineering = grobengineering
 
       if new_signal.valid? && !Iosignal.where(:grobengineering_id => grobengineering).any?
@@ -108,6 +106,10 @@ class SubsubprojectsController < ApplicationController
 
     records_to_save.each do |record|
       record.save!
+      # Generate associated Iosignalenginfo
+      new_iosignalenginfo = Iosignalenginfo.new
+      new_iosignalenginfo.iosignal_id = record.id
+      new_iosignalenginfo.save!
     end
 
     redirect_to project_subproject_subsubproject_iosignals_path(project.id, subproject.id, subsubproject.id), :notice => 'Signale wurden generiert.'

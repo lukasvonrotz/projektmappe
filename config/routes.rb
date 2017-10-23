@@ -32,6 +32,8 @@ Rails.application.routes.draw do
           resources :iosignalenginfos
           resources :iosignalibninfos
         end
+        resources :iosignalenginfos
+        resources :iosignalibninfos
       end
     end
   end

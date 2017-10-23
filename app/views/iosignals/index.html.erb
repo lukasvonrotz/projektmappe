@@ -2,6 +2,7 @@
 <br>
 <a href="<%=generate_signals_path%>" class="btn btn-success">Signale generieren</a>
 <a href="<%=delete_signals_path%>" class="btn btn-danger" onclick="return confirm('Are you sure?')">Signale löschen</a>
+<a href="<%=project_subproject_subsubproject_iosignalenginfos_path(@project.id, @subproject.id, @subsubproject.id)%>" class="btn btn-info">Eng-Infos zu Signale anzeigen</a>
 
 <br><br><br>
 <div id="content" class="table-responsive">

@@ -1,6 +1,6 @@
 class HistoriesController < ApplicationController
   # Control logic for create-view
-  # GET /histories/new
+  # GET /projects/:project_id/histories/new
   def new
     # build a 'temporary' post which is written to DB later (create-method)
     @history = History.new

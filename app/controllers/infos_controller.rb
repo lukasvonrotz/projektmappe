@@ -1,7 +1,7 @@
 class InfosController < ApplicationController
 
   # Control logic for create-view
-  # GET /infos/new
+  # GET /projects/:project_id/infos/new
   def new
     # build a 'temporary' post which is written to DB later (create-method)
     @info = Info.new
