@@ -9,6 +9,9 @@
 /*.dot
 /*.png
 
+# Ignore public asset files
+/public/assets/**
+
 
 # Ignore bundler config.
 /.bundle
