@@ -1,0 +1,72 @@
+<% if @formview %>
+  <h1>Elektroinstallationen von <%= @supplier.name %></h1>
+  <br>
+  <div id="content">
+    <% if @electrical_installation_suppliers.length == 0 %>
+        Keine Elektroinstallationen von diesem Lieferanten vorhanden
+    <% else %>
+      <div class="row visible-lg">
+        <div class="col-lg-5"><strong>Kennung von Elektroinstallation</strong></div>
+        <div class="col-lg-2"><strong>Buttopreis (CHF)</strong></div>
+        <div class="col-lg-2"><strong>Rabatt</strong></div>
+        <div class="col-lg-3"><strong>Actions</strong></div>
+      </div>
+      <br>
+      <% @electrical_installation_suppliers.sort_by{|e| e[:id]}.each do |electrical_installation_supplier| %>
+          <%= render 'form', :electrical_installation_supplier => electrical_installation_supplier,
+                     :supplier => electrical_installation_supplier.supplier,
+                     :electrical_installation_supplier_kennung => electrical_installation_supplier.electrical_installation.kennung,
+                     :electrical_installation_supplierid => electrical_installation_supplier.id %>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <h1>Elektroinstallation/Lieferanten-Preise Import/Export</h1>
+  <br>
+  <a href="<%=electrical_installation_suppliers_path%>.csv" class="btn btn-default">CSV-Export</a><br><br>
+  <h4>Import von CSV</h4>
+  <%= form_tag import_electrical_installation_suppliers_path, multipart: true do %>
+      <div class="actions form-group">
+        <%= file_field_tag :file, class: 'form-control' %><br>
+        <%= submit_tag "Import CSV", class: "btn btn-success" %>
+      </div>
+  <% end %><br>
+<% end %>
+
+<br><br>
+<%= link_to "Zurück zu Lieferanten", suppliers_path %>
+
+
+<script>
+    $(document).ready ( function(){
+        // Disable all input fields and add 'edit'-button, except for first line.
+        <% @electrical_installation_suppliers.sort_by{|e| e[:id]}.each_with_index do |electrical_installation_supplier, i| %>
+          <% if i != 0 %>
+            $("input.electrical_installation_supplier<%=electrical_installation_supplier.id %>_fld").attr("disabled", true);
+          <% else %>
+            $("a.electrical_installation_supplier<%=electrical_installation_supplier.id %>_edit").hide();
+            $("input.electrical_installation_supplier<%=electrical_installation_supplier.id %>_fld").attr("disabled", false);
+          <% end %>
+        <% end %>
+
+        // In case of using the browser back button! Rails duplicates html-elements when using this button
+        // Hence, do reload page (only once!) by usage of a hidden input field!
+        $('#loadingModal').modal('hide');
+        var $input = $('#refresh');
+        if ($input.val() == 'yes') {
+            location.reload(true);
+            loadingAlgorithm();
+            $(".table-responsive").hide();
+        }
+        else {
+            $input.val('yes');
+        }
+    });
+
+    function editLine(id) {
+        $("input.electrical_installation_supplier_fld").attr("disabled", true);
+        $("a.electrical_installation_supplier_edit").show();
+        $("a.electrical_installation_supplier" + id + "_edit").hide();
+        $("input.electrical_installation_supplier" + id + "_fld").attr("disabled", false);
+    }
+</script>

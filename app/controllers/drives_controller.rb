@@ -3,10 +3,29 @@ class DrivesController < ApplicationController
   # GET /drives
   def index
     @drives = Drive.all
+    @drivesuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'FU'})
 
     respond_to do |format|
       format.html
       format.csv { send_data @drives.to_csv, filename: "drives-#{Date.today}.csv" }
+    end
+
+    # Check whether all prices of all drive suppliers are provided in database
+    @allPricesEntered = 0
+    @drives.each do |drive|
+      @drivesuppliers.each do |drivesupplier|
+        begin
+          drivesupplierEntry = DriveSupplier.where(["drive_id = ? and supplier_id = ?", drive.id, drivesupplier.id]).first
+          brutto = drivesupplierEntry.brutto
+          rabatt = drivesupplierEntry.rabatt
+
+          if brutto.nil? or rabatt.nil?
+            @allPricesEntered = drivesupplierEntry.supplier_id
+          end
+        rescue
+          @allPricesEntered = drivesupplier.id
+        end
+      end
     end
   end
 
@@ -23,6 +42,14 @@ class DrivesController < ApplicationController
     @drive = Drive.new(drive_params)
     # write drive to database
     if @drive.save
+      @drivesuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'FU'})
+      # Einträge in drive_suppliers für alle FU-Lieferanten mit neuem FU erstellen
+      @drivesuppliers.each do |drivesupplier|
+        driveSupplierEntry = DriveSupplier.new
+        driveSupplierEntry.drive_id = @drive.id
+        driveSupplierEntry.supplier_id = drivesupplier.id
+        driveSupplierEntry.save!
+      end
       redirect_to drives_path, :notice => 'Frequenzumrichter erfolgreich erstellt.'
     else
       render 'new'
@@ -33,6 +60,7 @@ class DrivesController < ApplicationController
   # GET /drives/:id
   def show
     @drive = Drive.find(params[:id])
+    @drivesuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'FU'})
   end
 
   # Control logic for edit-view

@@ -10,15 +10,46 @@ ID: <%= @switchgear.id %><br>
 Kennung: <%= @switchgear.kennung %><br>
 Leistung: <%= @switchgear.leistung %><br>
 Max. Strom: <%= @switchgear.maxstrom %><br>
-Bruttopreis (EUR): <%= @switchgear.brutto %><br>
-Rabatt: <%= @switchgear.rabatt %><br>
 Typ:
 <% if @switchgear.typ == 1 %>
     Schaltgerätetyp
 <% else %>
     Sonstiges
 <% end %>
+<% if @switchgearsuppliers.any? %>
+  <h3>Preis</h3>
+  <label for="sel1">Schaltanlagenbau-Lieferant</label>
+  <select class="form-control" id="select_switchgearsupplier">
+    <% @switchgearsuppliers.each do |switchgearsupplier| %>
+        <option value="<%= switchgearsupplier.id %>"><%= switchgearsupplier.name %></option>
+    <% end %>
+  </select><br>
+  <button id="updatePrices" class="btn btn-success">Preise aktualisieren</button>
+  <br><br>
+  Bruttopreis (CHF): <span id="brutto"><%= @switchgear.brutto(@switchgearsuppliers.first) %></span><br>
+  Rabatt: <span id="rabatt"><%= @switchgear.rabatt(@switchgearsuppliers.first) %></span><br>
+  Netto: <span id="netto"><%= @switchgear.netto(@switchgearsuppliers.first) %></span><br>
 
+  <script>
+    $("#updatePrices").click(function() {
+        updatePrices();
+    });
+    function updatePrices() {
+        var pricesSwitchgearsuppliers = {};
+        <% @switchgearsuppliers.each do |switchgearsupplier| %>
+          pricesSwitchgearsuppliers['brutto<%= switchgearsupplier.id %>'] = <%= @switchgear.brutto(switchgearsupplier) %>;
+          pricesSwitchgearsuppliers['rabatt<%= switchgearsupplier.id %>'] = <%= @switchgear.rabatt(switchgearsupplier) %>;
+          pricesSwitchgearsuppliers['netto<%= switchgearsupplier.id %>'] = <%= @switchgear.netto(switchgearsupplier) %>;
+        <% end %>
+        var brutto = pricesSwitchgearsuppliers["brutto" + $('#select_switchgearsupplier').find(":selected").val()];
+        var rabatt = pricesSwitchgearsuppliers["rabatt" + $('#select_switchgearsupplier').find(":selected").val()];
+        var netto = pricesSwitchgearsuppliers["netto" + $('#select_switchgearsupplier').find(":selected").val()];
+        $("#brutto").html(brutto);
+        $("#rabatt").html(rabatt);
+        $("#netto").html(netto);
+    }
+  </script>
+<% end %>
 <br><br>
 <%= link_to "Zurück zu Schaltanlagenbau", switchgears_path %>
 

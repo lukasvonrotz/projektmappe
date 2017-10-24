@@ -41,6 +41,15 @@
                 <% wirecaptionprice_id = Wirecaptionprice.where(:supplier_id => supplier.id).first.id %>
               <a href="<%= edit_wirecaptionprice_path(wirecaptionprice_id) %>" class="btn btn-xs btn-info btn-index">Kabelbeschriftungspreise bearbeiten</a>
             <% end %>
+            <% if supplier.suppliertypes.exists?(name: 'FU') %>
+                <a href="<%= supplier_drive_suppliers_path(supplier.id) %>" class="btn btn-xs btn-info btn-index">FU-Preise bearbeiten</a>
+            <% end %>
+            <% if supplier.suppliertypes.exists?(name: 'Elektroinstallation') %>
+                <a href="<%= supplier_electrical_installation_suppliers_path(supplier.id) %>" class="btn btn-xs btn-info btn-index">Elektroinstallations-Preise bearbeiten</a>
+            <% end %>
+            <% if supplier.suppliertypes.exists?(name: 'Schaltanlagenbau') %>
+                <a href="<%= supplier_switchgear_suppliers_path(supplier.id) %>" class="btn btn-xs btn-info btn-index">Schaltanlagenbau-Preise bearbeiten</a>
+            <% end %>
             <button type="button" class="btn btn-xs btn-danger btn-index"
                     data-toggle="modal" data-target="#popup_sure_delete"
                     data-itemid="<%= supplier.id %>"

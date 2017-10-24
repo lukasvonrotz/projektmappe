@@ -4,6 +4,9 @@ class WireSupplier < ApplicationRecord
   belongs_to :supplier
   validates :supplier, :presence => true
 
+  validates :wire, uniqueness:  { scope: :supplier_id,
+                                  message: " mit diesem Lieferant bereits vergeben." }
+
   validates :anschlusstableauseite, presence:true, numericality: {only_float: true}
   validates :anschlussgeraeteseite, presence:true, numericality: {only_float: true}
   validates :beschriftungkabeleinanschluss, presence:true, numericality: {only_float: true}
@@ -38,13 +41,15 @@ class WireSupplier < ApplicationRecord
             existing_record = WireSupplier.where(:wire_id => new_record[:wire_id],
                                                  :supplier_id => new_record[:supplier_id]).first
             existing_record.assign_attributes(new_record)
-            if existing_record.valid?
+            suppliertypeid = Suppliertype.where(name: 'Kabel').first.id
+            if existing_record.valid? && SupplierSuppliertype.where(:supplier_id => existing_record.supplier_id, :suppliertype_id => suppliertypeid).any?
               records_to_update << existing_record
             else
               return 'Import konnte nicht durchgeführt werden!'
             end
           else
-            if WireSupplier.new(new_record).valid?
+            suppliertypeid = Suppliertype.where(name: 'Kabel').first.id
+            if WireSupplier.new(new_record).valid? && SupplierSuppliertype.where(:supplier_id => new_record[:supplier_id], :suppliertype_id => suppliertypeid).any?
               records_to_save << new_record
             else
               return 'Import konnte nicht durchgeführt werden!'

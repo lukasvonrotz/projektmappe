@@ -2,17 +2,24 @@ class Drive < ApplicationRecord
 
   require 'csv'
 
-  validates :brutto, presence:true, numericality: {only_float: true}
-  validates :rabatt, presence:true, numericality: {only_float: true}
   validates :kennung, uniqueness: true
+
+  has_many :drive_suppliers, dependent: :destroy
+  has_many :suppliers, :through => :drive_suppliers
 
   #delete association in grobengineerings if drive is deleted
   has_many :fu_typ_grobengineerings, class_name: "Grobengineering",
            foreign_key: "fu_typ_id",
            dependent: :nullify
 
-  def netto
-    self.brutto - (self.brutto * self.rabatt)
+  def brutto(supplier)
+    DriveSupplier.where(["drive_id = ? and supplier_id = ?", self.id, supplier.id]).first.brutto
+  end
+  def rabatt(supplier)
+    DriveSupplier.where(["drive_id = ? and supplier_id = ?", self.id, supplier.id]).first.rabatt
+  end
+  def netto(supplier)
+    self.brutto(supplier) - (self.brutto(supplier) * self.rabatt(supplier))
   end
 
   # CSV Export
@@ -53,7 +60,14 @@ class Drive < ApplicationRecord
       end
     end
     records_to_save.each do |record|
-      Drive.create! record
+      new_drive = Drive.create! record
+      drivesuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'FU'})
+      drivesuppliers.each do |drivesupplier|
+        driveSupplierEntry = DriveSupplier.new
+        driveSupplierEntry.drive_id = new_drive.id
+        driveSupplierEntry.supplier_id = drivesupplier.id
+        driveSupplierEntry.save!
+      end
     end
     records_to_update.each do |record|
       record.save!

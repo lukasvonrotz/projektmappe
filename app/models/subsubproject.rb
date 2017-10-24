@@ -6,6 +6,12 @@ class Subsubproject < ApplicationRecord
   validates :wiresupplier, :presence => true
   belongs_to :wirecaptionsupplier, :class_name => 'Supplier', :foreign_key => 'wirecaptionsupplier_id'
   validates :wirecaptionsupplier, :presence => true
+  belongs_to :electricalinstallationsupplier, :class_name => 'Supplier', :foreign_key => 'electricalinstallationsupplier_id'
+  validates :electricalinstallationsupplier, :presence => true
+  belongs_to :drivesupplier, :class_name => 'Supplier', :foreign_key => 'drivesupplier_id'
+  validates :drivesupplier, :presence => true
+  belongs_to :switchgearsupplier, :class_name => 'Supplier', :foreign_key => 'switchgearsupplier_id'
+  validates :switchgearsupplier, :presence => true
 
   validates :hourrate_admin, presence:true, numericality: {only_float: true}
   validates :hourrate_steuerkonzept, presence:true, numericality: {only_float: true}

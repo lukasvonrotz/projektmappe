@@ -30,6 +30,21 @@
 
                                           {:selected => wirecaptionsupplierid}, {class:"form-control"} %>
     </div>
+    <div class="field form-group">
+      <%= subsubproject.label :electricalinstallationsupplier, 'Elektroinstallationslieferant' %>
+      <%= subsubproject.collection_select :electricalinstallationsupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Elektroinstallation'}),:id,:name,
+                                          {:selected => electricalinstallationsupplierid}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= subsubproject.label :drivesupplier, 'FU-Lieferant' %>
+      <%= subsubproject.collection_select :drivesupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'FU'}),:id,:name,
+                                          {:selected => drivesupplierid}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= subsubproject.label :switchgearsupplier, 'Schaltanlagenbau-Lieferant' %>
+      <%= subsubproject.collection_select :switchgearsupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Schaltanlagenbau'}),:id,:name,
+                                          {:selected => switchgearsupplierid}, {class:"form-control"} %>
+    </div>
 
     <div class="row" style="margin-bottom: 10px;">
       <div class="col-lg-3">

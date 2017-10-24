@@ -3,10 +3,29 @@ class SwitchgearsController < ApplicationController
   # GET /switchgears
   def index
     @switchgears = Switchgear.all
+    @switchgearsuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Schaltanlagenbau'})
 
     respond_to do |format|
       format.html
       format.csv { send_data @switchgears.to_csv, filename: "switchgears-#{Date.today}.csv" }
+    end
+
+    # Check whether all prices of all switchgear suppliers are provided in database
+    @allPricesEntered = 0
+    @switchgears.each do |switchgear|
+      @switchgearsuppliers.each do |switchgearsupplier|
+        begin
+          switchgearsupplierEntry = SwitchgearSupplier.where(["switchgear_id = ? and supplier_id = ?", switchgear.id, switchgearsupplier.id]).first
+          brutto = switchgearsupplierEntry.brutto
+          rabatt = switchgearsupplierEntry.rabatt
+
+          if brutto.nil? or rabatt.nil?
+            @allPricesEntered = switchgearsupplierEntry.supplier_id
+          end
+        rescue
+          @allPricesEntered = switchgearsupplier.id
+        end
+      end
     end
 
   end
@@ -24,6 +43,14 @@ class SwitchgearsController < ApplicationController
     @switchgear = Switchgear.new(switchgear_params)
     # write switchgear to database
     if @switchgear.save
+      @switchgearsuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Schaltanlagenbau'})
+      # Einträge in switchgear_suppliers für alle Schaltanlagenbau-Lieferanten mit neuem Schaltanlagenbau-Eintrag erstellen
+      @switchgearsuppliers.each do |switchgearsupplier|
+        switchgearSupplierEntry = SwitchgearSupplier.new
+        switchgearSupplierEntry.switchgear_id = @switchgear.id
+        switchgearSupplierEntry.supplier_id = switchgearsupplier.id
+        switchgearSupplierEntry.save!
+      end
       redirect_to switchgears_path, :notice => 'Eintrag erfolgreich erstellt.'
     else
       render 'new'
@@ -34,6 +61,7 @@ class SwitchgearsController < ApplicationController
   # GET /switchgears/:id
   def show
     @switchgear = Switchgear.find(params[:id])
+    @switchgearsuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Schaltanlagenbau'})
   end
 
   # Control logic for edit-view

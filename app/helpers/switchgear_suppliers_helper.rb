@@ -1,0 +1,2 @@
+module SwitchgearSuppliersHelper
+end

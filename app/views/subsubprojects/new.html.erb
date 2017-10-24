@@ -11,17 +11,23 @@
 <% project = subproject.project %>
 
 <% if Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'}).any? &&
-    Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}).any? %>
+    Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}).any? &&
+    Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Elektroinstallation'}).any? &&
+    Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'FU'}).any? &&
+    Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Schaltanlagenbau'}).any? %>
     <%= render 'form', :subprojectid => subprojectid,
-             :subsubproject => @subsubproject,
-             :wiresupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'}).first.id,
-             :wirecaptionsupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}).first.id,
-             :context => true  %>
+       :subsubproject => @subsubproject,
+       :wiresupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'}).first.id,
+       :wirecaptionsupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}).first.id,
+       :electricalinstallationsupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Elektroinstallation'}).first.id,
+       :drivesupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'FU'}).first.id,
+       :switchgearsupplierid => Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Schaltanlagenbau'}).first.id,
+       :context => true  %>
 
 <% else %>
   <div class="alert alert-danger">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      Mindestens 1 Kabellieferant und 1 Kabelbeschriftungslieferant müssen in der Datenbank existieren.
+      Mindestens 1 Kabellieferant, 1 Kabelbeschriftungslieferant, 1 Elektroinstallationslieferant, 1 FU-Lieferant und 1 Schaltanlagenbaulieferant muss in der Datenbank existieren.
   </div>
 <% end %>
 

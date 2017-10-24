@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020142719) do
+ActiveRecord::Schema.define(version: 20171024063932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,16 @@ ActiveRecord::Schema.define(version: 20171020142719) do
     t.index ["wire_steuerung_id"], name: "index_devices_on_wire_steuerung_id", using: :btree
   end
 
+  create_table "drive_suppliers", force: :cascade do |t|
+    t.integer  "drive_id",                  null: false
+    t.integer  "supplier_id",               null: false
+    t.float    "brutto",      default: 0.0, null: false
+    t.float    "rabatt",      default: 0.0, null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["drive_id", "supplier_id"], name: "drive_supplier_unique", unique: true, using: :btree
+  end
+
   create_table "drives", force: :cascade do |t|
     t.string   "kennung"
     t.string   "artikelnr"
@@ -120,21 +130,27 @@ ActiveRecord::Schema.define(version: 20171020142719) do
     t.text     "in"
     t.text     "pn"
     t.string   "bg"
-    t.float    "brutto",      default: 0.0, null: false
-    t.float    "rabatt",      default: 0.0, null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["kennung"], name: "drives_kennung_unique", unique: true, using: :btree
+  end
+
+  create_table "electrical_installation_suppliers", force: :cascade do |t|
+    t.integer  "electrical_installation_id",               null: false
+    t.integer  "supplier_id",                              null: false
+    t.float    "brutto",                     default: 0.0, null: false
+    t.float    "rabatt",                     default: 0.0, null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.index ["electrical_installation_id", "supplier_id"], name: "electrical_installation_supplier_unique", unique: true, using: :btree
   end
 
   create_table "electrical_installations", force: :cascade do |t|
     t.text     "kennung"
     t.text     "leistung"
     t.string   "einheit"
-    t.float    "brutto",     default: 0.0, null: false
-    t.float    "rabatt",     default: 0.0, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["kennung"], name: "electrical_installations_kennung_unique", unique: true, using: :btree
   end
 
@@ -416,45 +432,51 @@ ActiveRecord::Schema.define(version: 20171020142719) do
 
   create_table "subsubprojects", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "master",                    default: false, null: false
-    t.float    "eurokurs",                  default: 0.0,   null: false
-    t.boolean  "proiorechnen",              default: false, null: false
-    t.float    "hourrate_admin",            default: 0.0,   null: false
-    t.float    "hourrate_steuerkonzept",    default: 0.0,   null: false
-    t.float    "hourrate_ioliste",          default: 0.0,   null: false
-    t.float    "hourrate_elplanung",        default: 0.0,   null: false
-    t.float    "hourrate_fktbeschrieb",     default: 0.0,   null: false
-    t.float    "hourrate_safetymatrix",     default: 0.0,   null: false
-    t.float    "hourrate_software",         default: 0.0,   null: false
-    t.float    "hourrate_softwaresafety",   default: 0.0,   null: false
-    t.float    "hourrate_bauleitung",       default: 0.0,   null: false
-    t.float    "hourrate_parametrierung",   default: 0.0,   null: false
-    t.float    "hourrate_signaltest",       default: 0.0,   null: false
-    t.float    "hourrate_safetytest",       default: 0.0,   null: false
-    t.float    "hourrate_fkttestkalt",      default: 0.0,   null: false
-    t.float    "hourrate_fkttestheiss",     default: 0.0,   null: false
-    t.float    "hourrate_konformitaet",     default: 0.0,   null: false
-    t.float    "complexity_admin",          default: 1.0,   null: false
-    t.float    "complexity_steuerkonzept",  default: 1.0,   null: false
-    t.float    "complexity_ioliste",        default: 1.0,   null: false
-    t.float    "complexity_elplanung",      default: 1.0,   null: false
-    t.float    "complexity_fktbeschrieb",   default: 1.0,   null: false
-    t.float    "complexity_safetymatrix",   default: 1.0,   null: false
-    t.float    "complexity_software",       default: 1.0,   null: false
-    t.float    "complexity_softwaresafety", default: 1.0,   null: false
-    t.float    "complexity_bauleitung",     default: 1.0,   null: false
-    t.float    "complexity_parametrierung", default: 1.0,   null: false
-    t.float    "complexity_signaltest",     default: 1.0,   null: false
-    t.float    "complexity_safetytest",     default: 1.0,   null: false
-    t.float    "complexity_fkttestkalt",    default: 1.0,   null: false
-    t.float    "complexity_fkttestheiss",   default: 1.0,   null: false
-    t.float    "complexity_konformitaet",   default: 1.0,   null: false
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.integer  "subproject_id",                             null: false
-    t.integer  "wiresupplier_id",                           null: false
-    t.integer  "wirecaptionsupplier_id",                    null: false
+    t.boolean  "master",                            default: false, null: false
+    t.float    "eurokurs",                          default: 0.0,   null: false
+    t.boolean  "proiorechnen",                      default: false, null: false
+    t.float    "hourrate_admin",                    default: 0.0,   null: false
+    t.float    "hourrate_steuerkonzept",            default: 0.0,   null: false
+    t.float    "hourrate_ioliste",                  default: 0.0,   null: false
+    t.float    "hourrate_elplanung",                default: 0.0,   null: false
+    t.float    "hourrate_fktbeschrieb",             default: 0.0,   null: false
+    t.float    "hourrate_safetymatrix",             default: 0.0,   null: false
+    t.float    "hourrate_software",                 default: 0.0,   null: false
+    t.float    "hourrate_softwaresafety",           default: 0.0,   null: false
+    t.float    "hourrate_bauleitung",               default: 0.0,   null: false
+    t.float    "hourrate_parametrierung",           default: 0.0,   null: false
+    t.float    "hourrate_signaltest",               default: 0.0,   null: false
+    t.float    "hourrate_safetytest",               default: 0.0,   null: false
+    t.float    "hourrate_fkttestkalt",              default: 0.0,   null: false
+    t.float    "hourrate_fkttestheiss",             default: 0.0,   null: false
+    t.float    "hourrate_konformitaet",             default: 0.0,   null: false
+    t.float    "complexity_admin",                  default: 1.0,   null: false
+    t.float    "complexity_steuerkonzept",          default: 1.0,   null: false
+    t.float    "complexity_ioliste",                default: 1.0,   null: false
+    t.float    "complexity_elplanung",              default: 1.0,   null: false
+    t.float    "complexity_fktbeschrieb",           default: 1.0,   null: false
+    t.float    "complexity_safetymatrix",           default: 1.0,   null: false
+    t.float    "complexity_software",               default: 1.0,   null: false
+    t.float    "complexity_softwaresafety",         default: 1.0,   null: false
+    t.float    "complexity_bauleitung",             default: 1.0,   null: false
+    t.float    "complexity_parametrierung",         default: 1.0,   null: false
+    t.float    "complexity_signaltest",             default: 1.0,   null: false
+    t.float    "complexity_safetytest",             default: 1.0,   null: false
+    t.float    "complexity_fkttestkalt",            default: 1.0,   null: false
+    t.float    "complexity_fkttestheiss",           default: 1.0,   null: false
+    t.float    "complexity_konformitaet",           default: 1.0,   null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.integer  "subproject_id",                                     null: false
+    t.integer  "wiresupplier_id",                                   null: false
+    t.integer  "wirecaptionsupplier_id",                            null: false
+    t.integer  "electricalinstallationsupplier_id",                 null: false
+    t.integer  "drivesupplier_id",                                  null: false
+    t.integer  "switchgearsupplier_id",                             null: false
+    t.index ["drivesupplier_id"], name: "index_subsubprojects_on_drivesupplier_id", using: :btree
+    t.index ["electricalinstallationsupplier_id"], name: "index_subsubprojects_on_electricalinstallationsupplier_id", using: :btree
     t.index ["subproject_id"], name: "index_subsubprojects_on_subproject_id", using: :btree
+    t.index ["switchgearsupplier_id"], name: "index_subsubprojects_on_switchgearsupplier_id", using: :btree
     t.index ["wirecaptionsupplier_id"], name: "index_subsubprojects_on_wirecaptionsupplier_id", using: :btree
     t.index ["wiresupplier_id"], name: "index_subsubprojects_on_wiresupplier_id", using: :btree
   end
@@ -488,6 +510,16 @@ ActiveRecord::Schema.define(version: 20171020142719) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "switchgear_suppliers", force: :cascade do |t|
+    t.integer  "switchgear_id",               null: false
+    t.integer  "supplier_id",                 null: false
+    t.float    "brutto",        default: 0.0, null: false
+    t.float    "rabatt",        default: 0.0, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["switchgear_id", "supplier_id"], name: "switchgear_supplier_unique", unique: true, using: :btree
+  end
+
   create_table "switchgearcombinations", force: :cascade do |t|
     t.string   "name"
     t.string   "standort"
@@ -518,8 +550,6 @@ ActiveRecord::Schema.define(version: 20171020142719) do
     t.string   "kennung"
     t.text     "leistung"
     t.float    "maxstrom",   default: 0.0, null: false
-    t.float    "brutto",     default: 0.0, null: false
-    t.float    "rabatt",     default: 0.0, null: false
     t.integer  "typ",        default: 0,   null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
@@ -577,6 +607,7 @@ ActiveRecord::Schema.define(version: 20171020142719) do
     t.datetime "updated_at",                                 null: false
     t.integer  "supplier_id",                                null: false
     t.index ["supplier_id"], name: "index_wirecaptionprices_on_supplier_id", using: :btree
+    t.index ["supplier_id"], name: "wirecaptionprices_supplier_unique", unique: true, using: :btree
   end
 
   create_table "wires", force: :cascade do |t|
@@ -622,6 +653,9 @@ ActiveRecord::Schema.define(version: 20171020142719) do
   add_foreign_key "subprojects", "customers"
   add_foreign_key "subprojects", "projects"
   add_foreign_key "subsubprojects", "subprojects"
+  add_foreign_key "subsubprojects", "suppliers", column: "drivesupplier_id"
+  add_foreign_key "subsubprojects", "suppliers", column: "electricalinstallationsupplier_id"
+  add_foreign_key "subsubprojects", "suppliers", column: "switchgearsupplier_id"
   add_foreign_key "subsubprojects", "suppliers", column: "wirecaptionsupplier_id"
   add_foreign_key "subsubprojects", "suppliers", column: "wiresupplier_id"
   add_foreign_key "subsystems", "projects"

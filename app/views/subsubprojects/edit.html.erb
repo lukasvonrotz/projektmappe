@@ -14,6 +14,9 @@
            :subsubproject => @subsubproject,
            :wiresupplierid => @subsubproject.wiresupplier.id,
            :wirecaptionsupplierid => @subsubproject.wirecaptionsupplier.id,
+           :electricalinstallationsupplierid => @subsubproject.electricalinstallationsupplier.id,
+           :drivesupplierid => @subsubproject.drivesupplier.id,
+           :switchgearsupplierid => @subsubproject.switchgearsupplier.id,
            :context => false  %>
 
 <%= link_to "Zurück zu Versionsübersicht", project_subproject_subsubprojects_path(project.id, subproject.id) %>

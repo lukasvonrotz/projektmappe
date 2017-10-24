@@ -10,11 +10,33 @@ class Supplier < ApplicationRecord
 
   has_many :wirecaptionprices, dependent: :destroy
 
+  has_many :electrical_installation_suppliers, dependent: :destroy
+  has_many :electrical_installations, :through => :electrical_installation_suppliers
+
+  has_many :drive_suppliers, dependent: :destroy
+  has_many :drives, :through => :drive_suppliers
+
+  has_many :switchgear_suppliers, dependent: :destroy
+  has_many :switchgears, :through => :switchgear_suppliers
+
   has_many :wire_subsubprojects, class_name: "Subsubproject",
            foreign_key: "wiresupplier_id",
            dependent: :nullify
+
   has_many :wirecaption_subsubprojects, class_name: "Subsubproject",
            foreign_key: "wirecaptionsupplier_id",
+           dependent: :nullify
+
+  has_many :electrical_installation_subsubprojects, class_name: "Subsubproject",
+           foreign_key: "electricalinstallationsupplier_id",
+           dependent: :nullify
+
+  has_many :drive_subsubprojects, class_name: "Subsubproject",
+           foreign_key: "drivesupplier_id",
+           dependent: :nullify
+
+  has_many :switchgear_subsubprojects, class_name: "Subsubproject",
+           foreign_key: "switchgearsupplier_id",
            dependent: :nullify
 
   # CSV Export

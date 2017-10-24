@@ -2,12 +2,12 @@ class Switchgear < ApplicationRecord
 
   require 'csv'
 
-
   validates :maxstrom, numericality: {only_float: true}
-  validates :brutto, presence:true, numericality: {only_float: true}
-  validates :rabatt, presence:true, numericality: {only_float: true}
   validates :typ, presence:true
   validates :kennung, uniqueness: true
+
+  has_many :switchgear_suppliers, dependent: :destroy
+  has_many :suppliers, :through => :switchgear_suppliers
 
   has_many :switchgearcombinations, dependent: :destroy
 
@@ -19,8 +19,14 @@ class Switchgear < ApplicationRecord
            foreign_key: "switchgear_einbau_id",
            dependent: :nullify
 
-  def netto
-    self.brutto - (self.brutto * self.rabatt)
+  def brutto(switchgearsupplier)
+    SwitchgearSupplier.where(["switchgear_id = ? and supplier_id = ?", self.id, switchgearsupplier.id]).first.brutto
+  end
+  def rabatt(switchgearsupplier)
+    SwitchgearSupplier.where(["switchgear_id = ? and supplier_id = ?", self.id, switchgearsupplier.id]).first.rabatt
+  end
+  def netto(switchgearsupplier)
+    self.brutto(switchgearsupplier) - (self.brutto(switchgearsupplier) * self.rabatt(switchgearsupplier))
   end
 
   # CSV Export
@@ -61,7 +67,14 @@ class Switchgear < ApplicationRecord
         end
       end
       records_to_save.each do |record|
-        Switchgear.create! record
+        new_switchgear = Switchgear.create! record
+        switchgearsuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Schaltanlagenbau'})
+        switchgearsuppliers.each do |switchgearsupplier|
+          switchgearSwitchgearsupplierEntry = SwitchgearSupplier.new
+          switchgearSwitchgearsupplierEntry.switchgear_id = new_switchgear.id
+          switchgearSwitchgearsupplierEntry.supplier_id = switchgearsupplier.id
+          switchgearSwitchgearsupplierEntry.save!
+        end
       end
       records_to_update.each do |record|
         record.save!

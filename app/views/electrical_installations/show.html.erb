@@ -10,8 +10,40 @@ ID: <%= @electrical_installation.id %><br>
 Kennung: <%= @electrical_installation.kennung %><br>
 Leistung: <%= @electrical_installation.leistung %><br>
 Einheit: <%= @electrical_installation.einheit %><br>
-Bruttopreis (EUR): <%= @electrical_installation.brutto %><br>
-Rabatt: <%= @electrical_installation.rabatt %>
+<% if @electrical_installationsuppliers.any? %>
+    <h3>Preis</h3>
+    <label for="sel1">Elektroinstallations-Lieferant</label>
+    <select class="form-control" id="select_electrical_installationsupplier">
+      <% @electrical_installationsuppliers.each do |electrical_installationsupplier| %>
+          <option value="<%= electrical_installationsupplier.id %>"><%= electrical_installationsupplier.name %></option>
+      <% end %>
+    </select><br>
+    <button id="updatePrices" class="btn btn-success">Preise aktualisieren</button>
+    <br><br>
+    Bruttopreis (CHF): <span id="brutto"><%= @electrical_installation.brutto(@electrical_installationsuppliers.first) %></span><br>
+    Rabatt: <span id="rabatt"><%= @electrical_installation.rabatt(@electrical_installationsuppliers.first) %></span><br>
+    Netto: <span id="netto"><%= @electrical_installation.netto(@electrical_installationsuppliers.first) %></span><br>
+
+    <script>
+        $("#updatePrices").click(function() {
+            updatePrices();
+        });
+        function updatePrices() {
+            var pricesElectricalinstallationsuppliers = {};
+            <% @electrical_installationsuppliers.each do |electrical_installationsupplier| %>
+            pricesElectricalinstallationsuppliers['brutto<%= electrical_installationsupplier.id %>'] = <%= @electrical_installation.brutto(electrical_installationsupplier) %>;
+            pricesElectricalinstallationsuppliers['rabatt<%= electrical_installationsupplier.id %>'] = <%= @electrical_installation.rabatt(electrical_installationsupplier) %>;
+            pricesElectricalinstallationsuppliers['netto<%= electrical_installationsupplier.id %>'] = <%= @electrical_installation.netto(electrical_installationsupplier) %>;
+            <% end %>
+            var brutto = pricesElectricalinstallationsuppliers["brutto" + $('#select_electrical_installationsupplier').find(":selected").val()];
+            var rabatt = pricesElectricalinstallationsuppliers["rabatt" + $('#select_electrical_installationsupplier').find(":selected").val()];
+            var netto = pricesElectricalinstallationsuppliers["netto" + $('#select_electrical_installationsupplier').find(":selected").val()];
+            $("#brutto").html(brutto);
+            $("#rabatt").html(rabatt);
+            $("#netto").html(netto);
+        }
+    </script>
+<% end %>
 
 <br><br>
 <%= link_to "Zurück zu Elektroinstallationen", electrical_installations_path %>

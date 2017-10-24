@@ -24,7 +24,7 @@ class WireSuppliersController < ApplicationController
     if @wire_supplier.update(wire_supplier_params)
       redirect_to supplier_wire_suppliers_path, :notice => 'Kabelpreise erfolgreich aktualisiert!'
     else
-      render 'edit'
+      redirect_to supplier_wire_suppliers_path, :alert => 'Kabelpreise konnten nicht aktualisiert werden!'
     end
   end
 

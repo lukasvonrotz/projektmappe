@@ -22,19 +22,6 @@
                                 :required => true,
                                 placeholder: 'Max. Strom für Eintrag eingeben' %>
     </div>
-    <div class="field form-group">
-      <%= switchgear.label :brutto, 'Bruttopreis [EUR]' %>
-      <%= switchgear.text_field :brutto, :class => "form-control",
-                                  :required => true,
-                                  placeholder: 'Bruttopreis (in CHF) für Eintrag eingeben' %>
-    </div>
-    <div class="field form-group">
-      <%= switchgear.label :rabatt, 'Rabatt' %>
-      <%= switchgear.text_field :rabatt, :class => "form-control",
-                                  :required => true,
-                                  placeholder: 'Rabatt für Eintrag eingeben' %>
-    </div>
-
 
     <div class="actions form-group">
       <% if context %>

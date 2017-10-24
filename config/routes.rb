@@ -89,11 +89,25 @@ Rails.application.routes.draw do
   resources :suppliers do
     collection { post :import}
     resources :wire_suppliers
+    resources :electrical_installation_suppliers
+    resources :drive_suppliers
+    resources :switchgear_suppliers
   end
   resources :wire_suppliers do
     collection { post :import}
   end
-  resources :suppliertypes
+  resources :electrical_installation_suppliers do
+    collection { post :import}
+  end
+  resources :drive_suppliers do
+    collection { post :import}
+  end
+  resources :switchgear_suppliers do
+    collection { post :import}
+  end
+  resources :suppliertypes do
+    collection { post :import}
+  end
   resources :wirecaptionprices
   resources :iogroupcomponents
 

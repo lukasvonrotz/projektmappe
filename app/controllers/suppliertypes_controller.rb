@@ -3,6 +3,11 @@ class SuppliertypesController < ApplicationController
   # GET /suppliertypes
   def index
     @suppliertypes = Suppliertype.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @suppliertypes.to_csv, filename: "suppliertypes-#{Date.today}.csv" }
+    end
   end
 
   # Control logic for create-view
@@ -54,6 +59,16 @@ class SuppliertypesController < ApplicationController
     @suppliertype = Suppliertype.find(params[:id])
     @suppliertype.destroy
     redirect_to suppliertypes_path, :notice => 'Lieferantentyp wurde gelöscht.'
+  end
+
+  # CSV Import
+  def import
+    status = Suppliertype.import(params[:file])
+    if !(status == '')
+      redirect_to suppliertypes_path, :alert => status
+    else
+      redirect_to suppliertypes_path, :notice => 'Lieferantentypen erfolgreich aktualisiert.'
+    end
   end
 
   private

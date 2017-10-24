@@ -75,8 +75,17 @@
                 <li class="<%= 'active' if current_page? (customers_path) %>">
                   <%= link_to "Kunden", customers_path %>
                 </li>
-                <li class="<%= 'active' if current_page? (home_index_path) %>">
-                  <%= link_to "Import Kabel-Kabellieferanten", wire_suppliers_path %>
+                <li class="<%= 'active' if current_page? (wire_suppliers_path) %>">
+                  <%= link_to "Import Kabelpreise", wire_suppliers_path %>
+                </li>
+                <li class="<%= 'active' if current_page? (switchgear_suppliers_path) %>">
+                  <%= link_to "Import Schaltanlagenbaupreise", switchgear_suppliers_path %>
+                </li>
+                <li class="<%= 'active' if current_page? (electrical_installation_suppliers_path) %>">
+                  <%= link_to "Import Elektroinstallationspreise", electrical_installation_suppliers_path %>
+                </li>
+                <li class="<%= 'active' if current_page? (drive_suppliers_path) %>">
+                  <%= link_to "Import FU-Preise", drive_suppliers_path %>
                 </li>
               </ul>
             </li>

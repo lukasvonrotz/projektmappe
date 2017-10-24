@@ -14,8 +14,40 @@ Spannung: <%= @drive.un %><br>
 Strom: <%= @drive.in %><br>
 Leistung: <%= @drive.pn %><br>
 BG: <%= @drive.bg %><br>
-Bruttopreis (EUR): <%= @drive.brutto %><br>
-Rabatt: <%= @drive.rabatt %>
+<% if @drivesuppliers.any? %>
+    <h3>Preis</h3>
+    <label for="sel1">Schaltanlagenbau-Lieferant</label>
+    <select class="form-control" id="select_drivesupplier">
+      <% @drivesuppliers.each do |drivesupplier| %>
+          <option value="<%= drivesupplier.id %>"><%= drivesupplier.name %></option>
+      <% end %>
+    </select><br>
+    <button id="updatePrices" class="btn btn-success">Preise aktualisieren</button>
+    <br><br>
+    Bruttopreis (CHF): <span id="brutto"><%= @drive.brutto(@drivesuppliers.first) %></span><br>
+    Rabatt: <span id="rabatt"><%= @drive.rabatt(@drivesuppliers.first) %></span><br>
+    Netto: <span id="netto"><%= @drive.netto(@drivesuppliers.first) %></span><br>
+
+    <script>
+        $("#updatePrices").click(function() {
+            updatePrices();
+        });
+        function updatePrices() {
+            var pricesDrivesuppliers = {};
+            <% @drivesuppliers.each do |drivesupplier| %>
+            pricesDrivesuppliers['brutto<%= drivesupplier.id %>'] = <%= @drive.brutto(drivesupplier) %>;
+            pricesDrivesuppliers['rabatt<%= drivesupplier.id %>'] = <%= @drive.rabatt(drivesupplier) %>;
+            pricesDrivesuppliers['netto<%= drivesupplier.id %>'] = <%= @drive.netto(drivesupplier) %>;
+            <% end %>
+            var brutto = pricesDrivesuppliers["brutto" + $('#select_drivesupplier').find(":selected").val()];
+            var rabatt = pricesDrivesuppliers["rabatt" + $('#select_drivesupplier').find(":selected").val()];
+            var netto = pricesDrivesuppliers["netto" + $('#select_drivesupplier').find(":selected").val()];
+            $("#brutto").html(brutto);
+            $("#rabatt").html(rabatt);
+            $("#netto").html(netto);
+        }
+    </script>
+<% end %>
 
 <br><br>
 <%= link_to "Zurück zu FU-Übersicht", drives_path %>

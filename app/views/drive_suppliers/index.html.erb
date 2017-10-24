@@ -1,0 +1,71 @@
+<% if @formview %>
+  <h1>FU's von <%= @supplier.name %></h1>
+  <br>
+  <div id="content">
+    <% if @drive_suppliers.length == 0 %>
+        Keine FU's von diesem Lieferanten vorhanden
+    <% else %>
+      <div class="row visible-lg">
+        <div class="col-lg-5"><strong>Kennung von FU</strong></div>
+        <div class="col-lg-2"><strong>Buttopreis (CHF)</strong></div>
+        <div class="col-lg-2"><strong>Rabatt</strong></div>
+        <div class="col-lg-3"><strong>Actions</strong></div>
+      </div>
+      <br>
+      <% @drive_suppliers.sort_by{|e| e[:id]}.each do |drive_supplier| %>
+          <%= render 'form', :drive_supplier => drive_supplier,
+                     :supplier => drive_supplier.supplier,
+                     :drive_supplier_kennung => drive_supplier.drive.kennung,
+                     :drive_supplierid => drive_supplier.id %>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <h1>FU/Lieferanten-Preise Import/Export</h1>
+  <br>
+  <a href="<%=drive_suppliers_path%>.csv" class="btn btn-default">CSV-Export</a><br><br>
+  <h4>Import von CSV</h4>
+  <%= form_tag import_drive_suppliers_path, multipart: true do %>
+      <div class="actions form-group">
+        <%= file_field_tag :file, class: 'form-control' %><br>
+        <%= submit_tag "Import CSV", class: "btn btn-success" %>
+      </div>
+  <% end %><br>
+<% end %>
+<br><br>
+<%= link_to "Zurück zu Lieferanten", suppliers_path %>
+
+
+<script>
+    $(document).ready ( function(){
+        // Disable all input fields and add 'edit'-button, except for first line.
+        <% @drive_suppliers.sort_by{|e| e[:id]}.each_with_index do |drive_supplier, i| %>
+          <% if i != 0 %>
+            $("input.drive_supplier<%=drive_supplier.id %>_fld").attr("disabled", true);
+          <% else %>
+            $("a.drive_supplier<%=drive_supplier.id %>_edit").hide();
+            $("input.drive_supplier<%=drive_supplier.id %>_fld").attr("disabled", false);
+          <% end %>
+        <% end %>
+
+        // In case of using the browser back button! Rails duplicates html-elements when using this button
+        // Hence, do reload page (only once!) by usage of a hidden input field!
+        $('#loadingModal').modal('hide');
+        var $input = $('#refresh');
+        if ($input.val() == 'yes') {
+            location.reload(true);
+            loadingAlgorithm();
+            $(".table-responsive").hide();
+        }
+        else {
+            $input.val('yes');
+        }
+    });
+
+    function editLine(id) {
+        $("input.drive_supplier_fld").attr("disabled", true);
+        $("a.drive_supplier_edit").show();
+        $("a.drive_supplier" + id + "_edit").hide();
+        $("input.drive_supplier" + id + "_fld").attr("disabled", false);
+    }
+</script>

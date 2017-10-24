@@ -2,10 +2,10 @@ class ElectricalInstallation < ApplicationRecord
 
   require 'csv'
 
-
-  validates :brutto, presence:true, numericality: {only_float: true}
-  validates :rabatt, presence:true, numericality: {only_float: true}
   validates :kennung, uniqueness: true
+
+  has_many :electrical_installation_suppliers, dependent: :destroy
+  has_many :suppliers, :through => :electrical_installation_suppliers
 
   has_many :elinst_trasse_devices, class_name: "Device",
            foreign_key: "elinst_trasse_id",
@@ -17,17 +17,23 @@ class ElectricalInstallation < ApplicationRecord
            foreign_key: "elinst_geraete_id",
            dependent: :nullify
 
-  def netto
-    self.brutto - (self.brutto * self.rabatt)
+  def brutto(supplier)
+    ElectricalInstallationSupplier.where(["electrical_installation_id = ? and supplier_id = ?", self.id, supplier.id]).first.brutto
+  end
+  def rabatt(supplier)
+    ElectricalInstallationSupplier.where(["electrical_installation_id = ? and supplier_id = ?", self.id, supplier.id]).first.rabatt
+  end
+  def netto(supplier)
+    self.brutto(supplier) - (self.brutto(supplier) * self.rabatt(supplier))
   end
 
-  def self.geraetebeschriftung_brutto
+  def self.geraetebeschriftung_brutto(supplier)
     elinst = ElectricalInstallation.where(["kennung = ?", "Gerätebeschriftung"]).first
-    return elinst.nil? ? 0 : elinst.brutto
+    return elinst.nil? ? 0 : elinst.brutto(supplier)
   end
-  def self.geraetebeschriftung_netto
+  def self.geraetebeschriftung_netto(supplier)
     elinst = ElectricalInstallation.where(["kennung = ?", "Gerätebeschriftung"]).first
-    return elinst.nil? ? 0 : elinst.netto
+    return elinst.nil? ? 0 : elinst.netto(supplier)
   end
 
   # CSV Export
@@ -68,7 +74,14 @@ class ElectricalInstallation < ApplicationRecord
         end
       end
       records_to_save.each do |record|
-        ElectricalInstallation.create! record
+        new_electrical_installation = ElectricalInstallation.create! record
+        electricalinstallationsuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Elektroinstallation'})
+        electricalinstallationsuppliers.each do |electricalinstallationsupplier|
+          electricalInstallationSupplierEntry = ElectricalInstallationSupplier.new
+          electricalInstallationSupplierEntry.electrical_installation_id = new_electrical_installation.id
+          electricalInstallationSupplierEntry.supplier_id = electricalinstallationsupplier.id
+          electricalInstallationSupplierEntry.save!
+        end
       end
       records_to_update.each do |record|
         record.save!

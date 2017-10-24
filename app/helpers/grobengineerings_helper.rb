@@ -480,62 +480,62 @@ module GrobengineeringsHelper
   end
   def Grobengineering.kosten_fu_einzel_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_fu_einzel_brutto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_fu_einzel_brutto(subsubproject.drivesupplier) end
     return sum
   end
   def Grobengineering.kosten_fu_einzel_netto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_fu_einzel_netto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_fu_einzel_netto(subsubproject.drivesupplier) end
     return sum
   end
   def Grobengineering.kosten_fu_total_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_fu_total_brutto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_fu_total_brutto(subsubproject.drivesupplier) end
     return sum
   end
   def Grobengineering.kosten_fu_total_netto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_fu_total_netto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_fu_total_netto(subsubproject.drivesupplier) end
     return sum
   end
   def Grobengineering.kosten_sch_abgaenge_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_abgaenge_brutto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_abgaenge_brutto(subsubproject.switchgearsupplier) end
     return sum
   end
   def Grobengineering.kosten_sch_abgaenge_netto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_abgaenge_netto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_abgaenge_netto(subsubproject.switchgearsupplier) end
     return sum
   end
   def Grobengineering.kosten_sch_einbau_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_einbau_brutto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_einbau_brutto(subsubproject.switchgearsupplier) end
     return sum
   end
   def Grobengineering.kosten_sch_einbau_netto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_einbau_netto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_einbau_netto(subsubproject.switchgearsupplier) end
     return sum
   end
   def Grobengineering.kosten_sch_preisberechnung_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_preisberechnung_brutto(subsubproject.eurokurs) end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_preisberechnung_brutto(subsubproject.eurokurs, subsubproject.switchgearsupplier) end
     return sum
   end
   def Grobengineering.kosten_sch_preisberechnung_netto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_preisberechnung_netto(subsubproject.eurokurs) end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_preisberechnung_netto(subsubproject.eurokurs, subsubproject.switchgearsupplier) end
     return sum
   end
   def Grobengineering.kosten_sch_total_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_total_brutto(subsubproject.eurokurs) end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_total_brutto(subsubproject.eurokurs, subsubproject.switchgearsupplier) end
     return sum
   end
   def Grobengineering.kosten_sch_total_netto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_total_netto(subsubproject.eurokurs) end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_sch_total_netto(subsubproject.eurokurs, subsubproject.switchgearsupplier) end
     return sum
   end
   def Grobengineering.kosten_wire_steuerung_total(subsubproject)
@@ -570,62 +570,62 @@ module GrobengineeringsHelper
   end
   def Grobengineering.kosten_elinst_trasse_total_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_trasse_total_brutto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_trasse_total_brutto(subsubproject.electricalinstallationsupplier) end
     return sum
   end
   def Grobengineering.kosten_elinst_trasse_total_netto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_trasse_total_netto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_trasse_total_netto(subsubproject.electricalinstallationsupplier) end
     return sum
   end
   def Grobengineering.kosten_elinst_rohr_total_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_rohr_total_brutto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_rohr_total_brutto(subsubproject.electricalinstallationsupplier) end
     return sum
   end
   def Grobengineering.kosten_elinst_rohr_total_netto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_rohr_total_netto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_rohr_total_netto(subsubproject.electricalinstallationsupplier) end
     return sum
   end
   def Grobengineering.kosten_elinst_geraete_total_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_geraete_total_brutto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_geraete_total_brutto(subsubproject.electricalinstallationsupplier) end
     return sum
   end
   def Grobengineering.kosten_elinst_geraete_total_netto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_geraete_total_netto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_geraete_total_netto(subsubproject.electricalinstallationsupplier) end
     return sum
   end
   def Grobengineering.kosten_geraetebeschriftung_total_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_geraetebeschriftung_total_brutto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_geraetebeschriftung_total_brutto(subsubproject.electricalinstallationsupplier) end
     return sum
   end
   def Grobengineering.kosten_geraetebeschriftung_total_netto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_geraetebeschriftung_total_netto end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_geraetebeschriftung_total_netto(subsubproject.electricalinstallationsupplier) end
     return sum
   end
   def Grobengineering.kosten_elinst_total_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier) end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.electricalinstallationsupplier) end
     return sum
   end
   def Grobengineering.kosten_elinst_total_netto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier) end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_elinst_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.electricalinstallationsupplier) end
     return sum
   end
   def Grobengineering.kosten_total_brutto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs) end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs, subsubproject.drivesupplier, subsubproject.switchgearsupplier, subsubproject.electricalinstallationsupplier) end
     return sum
   end
   def Grobengineering.kosten_total_netto(subsubproject)
     sum = 0
-    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs) end
+    Grobengineering.where(:subsubproject_id => subsubproject.id).each do |grobengineering| sum += grobengineering.kosten_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs, subsubproject.drivesupplier, subsubproject.switchgearsupplier, subsubproject.electricalinstallationsupplier) end
     return sum
   end
 end

@@ -3,10 +3,29 @@ class ElectricalInstallationsController < ApplicationController
   # GET /electrical_installations
   def index
     @electrical_installations = ElectricalInstallation.all
+    @electricalinstallationsuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Elektroinstallation'})
 
     respond_to do |format|
       format.html
       format.csv { send_data @electrical_installations.to_csv, filename: "electricalinstallations-#{Date.today}.csv" }
+    end
+
+    # Check whether all prices of all electrical installation suppliers are provided in database
+    @allPricesEntered = 0
+    @electrical_installations.each do |electrical_installation|
+      @electricalinstallationsuppliers.each do |electricalinstallationsupplier|
+        begin
+          electricalinstallationSupplierEntry = ElectricalInstallationSupplier.where(["electrical_installation_id = ? and supplier_id = ?", electrical_installation.id, electricalinstallationsupplier.id]).first
+          brutto = electricalinstallationSupplierEntry.brutto
+          rabatt = electricalinstallationSupplierEntry.rabatt
+
+          if brutto.nil? or rabatt.nil?
+            @allPricesEntered = electricalinstallationSupplierEntry.supplier_id
+          end
+        rescue
+          @allPricesEntered = electricalinstallationSupplierEntry.id
+        end
+      end
     end
   end
 
@@ -23,6 +42,14 @@ class ElectricalInstallationsController < ApplicationController
     @electrical_installation = ElectricalInstallation.new(electrical_installations_params)
     # write electrical_installation to database
     if @electrical_installation.save
+      @electricalinstallationsuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Elektroinstallation'})
+      # Einträge in electrical_installation_suppliers für alle Elektroinstallationslieferanten mit neuer Elektroinstallation erstellen
+      @electricalinstallationsuppliers.each do |electricalinstallationsupplier|
+        electricalinstallationSupplierEntry = ElectricalInstallationSupplier.new
+        electricalinstallationSupplierEntry.electrical_installation_id = @electrical_installation.id
+        electricalinstallationSupplierEntry.supplier_id = electricalinstallationsupplier.id
+        electricalinstallationSupplierEntry.save!
+      end
       redirect_to electrical_installations_path, :notice => 'Eintrag erfolgreich erstellt.'
     else
       render 'new'
@@ -33,6 +60,7 @@ class ElectricalInstallationsController < ApplicationController
   # GET /electrical_installations/:id
   def show
     @electrical_installation = ElectricalInstallation.find(params[:id])
+    @electrical_installationsuppliers = Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Elektroinstallation'})
   end
 
   # Control logic for edit-view

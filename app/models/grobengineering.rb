@@ -136,18 +136,18 @@ class Grobengineering < ApplicationRecord
           offert_hash[offertposition.id]["devices"][device_id]["kosten_eng_ibn_bauleitung_total"] += line.kosten_eng_ibn_bauleitung_total
           offert_hash[offertposition.id]["devices"][device_id]["kosten_sps_total_brutto"] += line.kosten_sps_total_brutto(subsubproject.eurokurs)
           offert_hash[offertposition.id]["devices"][device_id]["kosten_sps_total_netto"] += line.kosten_sps_total_netto(subsubproject.eurokurs)
-          offert_hash[offertposition.id]["devices"][device_id]["kosten_sch_total_brutto"] += line.kosten_sch_total_brutto(subsubproject.eurokurs)
-          offert_hash[offertposition.id]["devices"][device_id]["kosten_sch_total_netto"] += line.kosten_sch_total_netto(subsubproject.eurokurs)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_sch_total_brutto"] += line.kosten_sch_total_brutto(subsubproject.eurokurs, subsubproject.switchgearsupplier)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_sch_total_netto"] += line.kosten_sch_total_netto(subsubproject.eurokurs, subsubproject.switchgearsupplier)
           offert_hash[offertposition.id]["devices"][device_id]["kosten_io_et_total_brutto"] += line.kosten_io_et_total_brutto(subsubproject.proiorechnen, subsubproject.eurokurs)
           offert_hash[offertposition.id]["devices"][device_id]["kosten_io_et_total_netto"] += line.kosten_io_et_total_netto(subsubproject.proiorechnen, subsubproject.eurokurs)
           offert_hash[offertposition.id]["devices"][device_id]["kosten_io_pilz_total_brutto"] += line.kosten_io_pilz_total_brutto(subsubproject.proiorechnen, subsubproject.eurokurs)
           offert_hash[offertposition.id]["devices"][device_id]["kosten_io_pilz_total_netto"] += line.kosten_io_pilz_total_netto(subsubproject.proiorechnen, subsubproject.eurokurs)
-          offert_hash[offertposition.id]["devices"][device_id]["kosten_fu_total_brutto"] += line.kosten_fu_total_brutto
-          offert_hash[offertposition.id]["devices"][device_id]["kosten_fu_total_netto"] += line.kosten_fu_total_netto
-          offert_hash[offertposition.id]["devices"][device_id]["kosten_elinst_total_brutto"] += line.kosten_elinst_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier)
-          offert_hash[offertposition.id]["devices"][device_id]["kosten_elinst_total_netto"] += line.kosten_elinst_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier)
-          offert_hash[offertposition.id]["devices"][device_id]["kosten_total_brutto"] += line.kosten_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs)
-          offert_hash[offertposition.id]["devices"][device_id]["kosten_total_netto"] += line.kosten_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_fu_total_brutto"] += line.kosten_fu_total_brutto(subsubproject.drivesupplier)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_fu_total_netto"] += line.kosten_fu_total_netto(subsubproject.drivesupplier)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_elinst_total_brutto"] += line.kosten_elinst_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.electricalinstallationsupplier)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_elinst_total_netto"] += line.kosten_elinst_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.electricalinstallationsupplier)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_total_brutto"] += line.kosten_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs, subsubproject.drivesupplier, subsubproject.switchgearsupplier, subsubproject.electricalinstallationsupplier)
+          offert_hash[offertposition.id]["devices"][device_id]["kosten_total_netto"] += line.kosten_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs, subsubproject.drivesupplier, subsubproject.switchgearsupplier, subsubproject.electricalinstallationsupplier)
 
           offert_hash[offertposition.id]["device_anzahl"] += line.device_anzahl
           offert_hash[offertposition.id]["kosten_eng_elplanung_total"] += line.kosten_eng_elplanung_total
@@ -155,18 +155,18 @@ class Grobengineering < ApplicationRecord
           offert_hash[offertposition.id]["kosten_eng_ibn_bauleitung_total"] += line.kosten_eng_ibn_bauleitung_total
           offert_hash[offertposition.id]["kosten_sps_total_brutto"] += line.kosten_sps_total_brutto(subsubproject.eurokurs)
           offert_hash[offertposition.id]["kosten_sps_total_netto"] += line.kosten_sps_total_netto(subsubproject.eurokurs)
-          offert_hash[offertposition.id]["kosten_sch_total_brutto"] += line.kosten_sch_total_brutto(subsubproject.eurokurs)
-          offert_hash[offertposition.id]["kosten_sch_total_netto"] += line.kosten_sch_total_netto(subsubproject.eurokurs)
+          offert_hash[offertposition.id]["kosten_sch_total_brutto"] += line.kosten_sch_total_brutto(subsubproject.eurokurs, subsubproject.switchgearsupplier)
+          offert_hash[offertposition.id]["kosten_sch_total_netto"] += line.kosten_sch_total_netto(subsubproject.eurokurs, subsubproject.switchgearsupplier)
           offert_hash[offertposition.id]["kosten_io_et_total_brutto"] += line.kosten_io_et_total_brutto(subsubproject.proiorechnen, subsubproject.eurokurs)
           offert_hash[offertposition.id]["kosten_io_et_total_netto"] += line.kosten_io_et_total_netto(subsubproject.proiorechnen, subsubproject.eurokurs)
           offert_hash[offertposition.id]["kosten_io_pilz_total_brutto"] += line.kosten_io_pilz_total_brutto(subsubproject.proiorechnen, subsubproject.eurokurs)
           offert_hash[offertposition.id]["kosten_io_pilz_total_netto"] += line.kosten_io_pilz_total_netto(subsubproject.proiorechnen, subsubproject.eurokurs)
-          offert_hash[offertposition.id]["kosten_fu_total_brutto"] += line.kosten_fu_total_brutto
-          offert_hash[offertposition.id]["kosten_fu_total_netto"] += line.kosten_fu_total_netto
-          offert_hash[offertposition.id]["kosten_elinst_total_brutto"] += line.kosten_elinst_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier)
-          offert_hash[offertposition.id]["kosten_elinst_total_netto"] += line.kosten_elinst_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier)
-          offert_hash[offertposition.id]["kosten_total_brutto"] += line.kosten_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs)
-          offert_hash[offertposition.id]["kosten_total_netto"] += line.kosten_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs)
+          offert_hash[offertposition.id]["kosten_fu_total_brutto"] += line.kosten_fu_total_brutto(subsubproject.drivesupplier)
+          offert_hash[offertposition.id]["kosten_fu_total_netto"] += line.kosten_fu_total_netto(subsubproject.drivesupplier)
+          offert_hash[offertposition.id]["kosten_elinst_total_brutto"] += line.kosten_elinst_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.electricalinstallationsupplier)
+          offert_hash[offertposition.id]["kosten_elinst_total_netto"] += line.kosten_elinst_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.electricalinstallationsupplier)
+          offert_hash[offertposition.id]["kosten_total_brutto"] += line.kosten_total_brutto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs, subsubproject.drivesupplier, subsubproject.switchgearsupplier, subsubproject.electricalinstallationsupplier)
+          offert_hash[offertposition.id]["kosten_total_netto"] += line.kosten_total_netto(subsubproject.wiresupplier, subsubproject.wirecaptionsupplier, subsubproject.proiorechnen, subsubproject.eurokurs, subsubproject.drivesupplier, subsubproject.switchgearsupplier, subsubproject.electricalinstallationsupplier)
         end
       end
     end
@@ -633,60 +633,60 @@ class Grobengineering < ApplicationRecord
   end
 
   # Kosten FU
-  def kosten_fu_einzel_brutto
+  def kosten_fu_einzel_brutto(supplier)
     if !self.fu_typ.nil?
-      self.fu_typ.brutto
+      self.fu_typ.brutto(supplier)
     else
       0
     end
   end
-  def kosten_fu_einzel_netto
+  def kosten_fu_einzel_netto(supplier)
     if !self.fu_typ.nil?
-      self.fu_typ.netto
+      self.fu_typ.netto(supplier)
     else
       0
     end
   end
-  def kosten_fu_total_brutto
-    calc_tot(self.device_anzahl, self.kosten_fu_einzel_brutto)
+  def kosten_fu_total_brutto(supplier)
+    calc_tot(self.device_anzahl, self.kosten_fu_einzel_brutto(supplier))
   end
-  def kosten_fu_total_netto
-    calc_tot(self.device_anzahl, self.kosten_fu_einzel_netto)
+  def kosten_fu_total_netto(supplier)
+    calc_tot(self.device_anzahl, self.kosten_fu_einzel_netto(supplier))
   end
 
   # Kosten Schaltanlagen
-  def kosten_sch_abgaenge_brutto
+  def kosten_sch_abgaenge_brutto(supplier)
     if !self.switchgear_motorenabgang.nil?
-      calc_tot(self.device_anzahl, self.switchgear_motorenabgang.brutto)
+      calc_tot(self.device_anzahl, self.switchgear_motorenabgang.brutto(supplier))
     else
       0
     end
   end
-  def kosten_sch_abgaenge_netto
+  def kosten_sch_abgaenge_netto(supplier)
     if !self.switchgear_motorenabgang.nil?
-      calc_tot(self.device_anzahl, self.switchgear_motorenabgang.netto)
+      calc_tot(self.device_anzahl, self.switchgear_motorenabgang.netto(supplier))
     else
       0
     end
   end
-  def kosten_sch_einbau_brutto
+  def kosten_sch_einbau_brutto(supplier)
     if !self.device.switchgear_einbau.nil?
-      calc_tot(self.device_anzahl * self.device.sch_anzahl, self.device.switchgear_einbau.brutto)
+      calc_tot(self.device_anzahl * self.device.sch_anzahl, self.device.switchgear_einbau.brutto(supplier))
     else
       0
     end
   end
-  def kosten_sch_einbau_netto
+  def kosten_sch_einbau_netto(supplier)
     if !self.device.switchgear_einbau.nil?
-      calc_tot(self.device_anzahl * self.device.sch_anzahl, self.device.switchgear_einbau.netto)
+      calc_tot(self.device_anzahl * self.device.sch_anzahl, self.device.switchgear_einbau.netto(supplier))
     else
       0
     end
   end
-  def kosten_sch_preisberechnung_brutto(eurokurs)
+  def kosten_sch_preisberechnung_brutto(eurokurs, supplier)
     if !self.schaltschrank_preisberechnung.nil?
       total = 0
-      total += self.schaltschrank_preisberechnung.switchgear.brutto
+      total += self.schaltschrank_preisberechnung.switchgear.brutto(supplier)
       self.schaltschrank_preisberechnung.iogroups.each do |iogroup|
         iogroup.iogroupcomponents.each do |iogroupcomponent|
           total += iogroupcomponent.assembly.brutto_chf(eurokurs)
@@ -697,10 +697,10 @@ class Grobengineering < ApplicationRecord
       0
     end
   end
-  def kosten_sch_preisberechnung_netto(eurokurs)
+  def kosten_sch_preisberechnung_netto(eurokurs, supplier)
     if !self.schaltschrank_preisberechnung.nil?
       total = 0
-      total += self.schaltschrank_preisberechnung.switchgear.netto
+      total += self.schaltschrank_preisberechnung.switchgear.netto(supplier)
       self.schaltschrank_preisberechnung.iogroups.each do |iogroup|
         iogroup.iogroupcomponents.each do |iogroupcomponent|
           total += iogroupcomponent.assembly.netto(eurokurs)
@@ -711,12 +711,12 @@ class Grobengineering < ApplicationRecord
       0
     end
   end
-  def kosten_sch_total_brutto(eurokurs)
-    total = self.kosten_sch_abgaenge_brutto + self.kosten_sch_einbau_brutto + self.kosten_sch_preisberechnung_brutto(eurokurs)
+  def kosten_sch_total_brutto(eurokurs, supplier)
+    total = self.kosten_sch_abgaenge_brutto(supplier) + self.kosten_sch_einbau_brutto(supplier) + self.kosten_sch_preisberechnung_brutto(eurokurs, supplier)
     total
   end
-  def kosten_sch_total_netto(eurokurs)
-    total = self.kosten_sch_abgaenge_netto + self.kosten_sch_einbau_netto + self.kosten_sch_preisberechnung_netto(eurokurs)
+  def kosten_sch_total_netto(eurokurs, supplier)
+    total = self.kosten_sch_abgaenge_netto(supplier) + self.kosten_sch_einbau_netto(supplier) + self.kosten_sch_preisberechnung_netto(eurokurs, supplier)
     total
   end
 
@@ -787,105 +787,105 @@ class Grobengineering < ApplicationRecord
       0
     end
   end
-  def kosten_elinst_trasse_total_brutto
+  def kosten_elinst_trasse_total_brutto(supplier)
     if !self.device.elinst_trasse.nil?
-      self.elinst_trasse_laenge * self.device.elinst_trasse.brutto
+      self.elinst_trasse_laenge * self.device.elinst_trasse.brutto(supplier)
     else
       0
     end
   end
-  def kosten_elinst_trasse_total_netto
+  def kosten_elinst_trasse_total_netto(supplier)
     if !self.device.elinst_trasse.nil?
-      self.elinst_trasse_laenge * self.device.elinst_trasse.netto
+      self.elinst_trasse_laenge * self.device.elinst_trasse.netto(supplier)
     else
       0
     end
   end
-  def kosten_elinst_rohr_total_brutto
+  def kosten_elinst_rohr_total_brutto(supplier)
     if !self.device.elinst_rohr.nil?
-      self.elinst_rohr_laenge * self.device.elinst_rohr.brutto
+      self.elinst_rohr_laenge * self.device.elinst_rohr.brutto(supplier)
     else
       0
     end
   end
-  def kosten_elinst_rohr_total_netto
+  def kosten_elinst_rohr_total_netto(supplier)
     if !self.device.elinst_rohr.nil?
-      self.elinst_rohr_laenge * self.device.elinst_rohr.netto
+      self.elinst_rohr_laenge * self.device.elinst_rohr.netto(supplier)
     else
       0
     end
   end
-  def kosten_elinst_geraete_total_brutto
+  def kosten_elinst_geraete_total_brutto(supplier)
     if !self.device.elinst_geraete.nil?
-      self.elinst_geraete_laenge * self.device.elinst_geraete.brutto
+      self.elinst_geraete_laenge * self.device.elinst_geraete.brutto(supplier)
     else
       0
     end
   end
-  def kosten_elinst_geraete_total_netto
+  def kosten_elinst_geraete_total_netto(supplier)
     if !self.device.elinst_geraete.nil?
-      self.elinst_geraete_laenge * self.device.elinst_geraete.netto
+      self.elinst_geraete_laenge * self.device.elinst_geraete.netto(supplier)
     else
       0
     end
   end
-  def kosten_geraetebeschriftung_total_brutto
-    self.ger_beschriftung * ElectricalInstallation.geraetebeschriftung_brutto
+  def kosten_geraetebeschriftung_total_brutto(supplier)
+    self.ger_beschriftung * ElectricalInstallation.geraetebeschriftung_brutto(supplier)
   end
-  def kosten_geraetebeschriftung_total_netto
-    self.ger_beschriftung * ElectricalInstallation.geraetebeschriftung_netto
+  def kosten_geraetebeschriftung_total_netto(supplier)
+    self.ger_beschriftung * ElectricalInstallation.geraetebeschriftung_netto(supplier)
   end
 
 
-  def kosten_elinst_total_brutto(wiresupplier, wirecaptionsupplier)
+  def kosten_elinst_total_brutto(wiresupplier, wirecaptionsupplier, electricalinstallationsupplier)
     total = self.kosten_wire_steuerung_total(wiresupplier, wirecaptionsupplier) +
       self.kosten_wire_speisung_total(wiresupplier, wirecaptionsupplier) +
       self.kosten_wire_potausgleich_total(wiresupplier, wirecaptionsupplier) +
       self.kosten_wire_spez1_total(wiresupplier, wirecaptionsupplier) +
       self.kosten_wire_spez2_total(wiresupplier, wirecaptionsupplier) +
       self.kosten_wire_spez3_total(wiresupplier, wirecaptionsupplier) +
-      self.kosten_elinst_trasse_total_brutto +
-      self.kosten_elinst_rohr_total_brutto +
-      self.kosten_elinst_geraete_total_brutto
+      self.kosten_elinst_trasse_total_brutto(electricalinstallationsupplier) +
+      self.kosten_elinst_rohr_total_brutto(electricalinstallationsupplier) +
+      self.kosten_elinst_geraete_total_brutto(electricalinstallationsupplier)
     total
   end
 
-  def kosten_elinst_total_netto(wiresupplier, wirecaptionsupplier)
+  def kosten_elinst_total_netto(wiresupplier, wirecaptionsupplier, electricalinstallationsupplier)
     total = self.kosten_wire_steuerung_total(wiresupplier, wirecaptionsupplier) +
       self.kosten_wire_speisung_total(wiresupplier, wirecaptionsupplier) +
       self.kosten_wire_potausgleich_total(wiresupplier, wirecaptionsupplier) +
       self.kosten_wire_spez1_total(wiresupplier, wirecaptionsupplier) +
       self.kosten_wire_spez2_total(wiresupplier, wirecaptionsupplier) +
       self.kosten_wire_spez3_total(wiresupplier, wirecaptionsupplier) +
-      self.kosten_elinst_trasse_total_netto +
-      self.kosten_elinst_rohr_total_netto +
-      self.kosten_elinst_geraete_total_netto
+      self.kosten_elinst_trasse_total_netto(electricalinstallationsupplier) +
+      self.kosten_elinst_rohr_total_netto(electricalinstallationsupplier) +
+      self.kosten_elinst_geraete_total_netto(electricalinstallationsupplier)
     total
   end
 
-  def kosten_total_brutto(wiresupplier, wirecaptionsupplier, pro_io_rechnen, eurokurs)
+  def kosten_total_brutto(wiresupplier, wirecaptionsupplier, pro_io_rechnen, eurokurs, drivesupplier, switchgearsupplier, elinstsupplier)
     total = self.kosten_eng_elplanung_total +
       self.kosten_eng_planung_sw_total +
       self.kosten_eng_ibn_bauleitung_total +
       self.kosten_sps_total_brutto(eurokurs) +
       self.kosten_io_et_total_brutto(pro_io_rechnen, eurokurs) +
       self.kosten_io_pilz_total_brutto(pro_io_rechnen, eurokurs) +
-      self.kosten_fu_total_brutto +
-      self.kosten_sch_total_brutto(eurokurs) +
-      self.kosten_elinst_total_brutto(wiresupplier, wirecaptionsupplier)
+      self.kosten_fu_total_brutto(drivesupplier) +
+      self.kosten_sch_total_brutto(eurokurs, switchgearsupplier) +
+      self.kosten_elinst_total_brutto(wiresupplier, wirecaptionsupplier, elinstsupplier)
     total
   end
 
-  def kosten_total_netto(wiresupplier, wirecaptionsupplier, pro_io_rechnen, eurokurs)
+  def kosten_total_netto(wiresupplier, wirecaptionsupplier, pro_io_rechnen, eurokurs, drivesupplier, switchgearsupplier, elinstsupplier)
     total = self.kosten_eng_elplanung_total +
       self.kosten_eng_planung_sw_total +
       self.kosten_eng_ibn_bauleitung_total +
       self.kosten_sps_total_netto(eurokurs) +
       self.kosten_io_et_total_netto(pro_io_rechnen, eurokurs) +
       self.kosten_io_pilz_total_netto(pro_io_rechnen, eurokurs) +
-      self.kosten_fu_total_netto +
-      self.kosten_sch_total_netto(eurokurs) +
-      self.kosten_elinst_total_netto(wiresupplier, wirecaptionsupplier)
+      self.kosten_fu_total_netto(drivesupplier) +
+      self.kosten_sch_total_netto(eurokurs, switchgearsupplier) +
+      self.kosten_elinst_total_netto(wiresupplier, wirecaptionsupplier, elinstsupplier)
     total
   end
 

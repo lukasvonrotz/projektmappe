@@ -26,7 +26,7 @@ class WiresController < ApplicationController
           installationrohr = wiresupplierEntry.installationrohr
 
           if anschlusstableauseite.nil? or anschlussgeraeteseite.nil? or beschriftungkabeleinanschluss.nil? or beschriftungaderneinanschluss.nil? or installationhohlboden.nil? or installationtrasse.nil? or installationrohr.nil?
-            @allPricesEntered = wiresupplierEntry.wiresupplier_id
+            @allPricesEntered = wiresupplierEntry.supplier_id
           end
         rescue
           @allPricesEntered = wiresupplier.id
