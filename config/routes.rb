@@ -145,4 +145,7 @@ Rails.application.routes.draw do
 
   match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/delete_signals",
         to: "subsubprojects#delete_signals", as: :delete_signals, via: [:get]
+
+  match "/projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubproject_id/grobengineering_extended",
+        to: "grobengineerings#grobengineering_extended", as: :grobengineering_extended, via: [:get]
 end

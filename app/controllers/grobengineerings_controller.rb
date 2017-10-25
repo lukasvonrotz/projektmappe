@@ -146,8 +146,15 @@ class GrobengineeringsController < ApplicationController
         @total_netto += array2["kosten_total_netto"]
       end
     end
+  end
 
-
+  # Auflistung aller Grobengineerings PRO Version (extended view)
+  # GET /projects/:project_id/subprojects/:subproject_id/subsubprojects/:subsubprojects_id/grobengineerings
+  def grobengineering_extended
+    @subsubproject = Subsubproject.find(params[:subsubproject_id])
+    @subproject = @subsubproject.subproject
+    @project = @subproject.project
+    @grobengineerings = Grobengineering.where(:subsubproject_id => @subsubproject.id).order(:id)
   end
 
   private
