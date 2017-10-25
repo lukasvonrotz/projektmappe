@@ -18,4 +18,5 @@
 //= require turbolinks
 //= require jquery.dataTables.min.js
 //= require dataTables.bootstrap.min.js
+//= require dataTables.fixedColumns.min.js
 //= require_tree .

@@ -20,44 +20,10 @@
              class="btn btn-danger">Alle Einträge löschen</a>
           <a href="<%= grobengineering_extended_path(@subsubproject.subproject.project.id, @subsubproject.subproject.id, @subsubproject.id) %>" class="btn btn-info">Erweiterte Ansicht</a>
           <br><br><br>
-          <div id="content" class="table-responsive">
-            <table id="grobengineerigns_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+          <div id="content">
+            <table id="grobengineerigns_table" class="table table-striped" cellspacing="0" width="100%">
               <thead>
-              <tr class="success">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><%= Grobengineering.device_anzahl(@subsubproject).round(2) %></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><%= Grobengineering.funktion_sw(@subsubproject).round(2) %></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><%= Grobengineering.kabel_spez1_laenge(@subsubproject).round(2) %></td>
-                <td></td>
-                <td><%= Grobengineering.kabel_spez2_laenge(@subsubproject).round(2) %></td>
-                <td></td>
-                <td><%= Grobengineering.kabel_spez3_laenge(@subsubproject).round(2) %></td>
-                <td></td>
-                <td></td>
-                <td><%= Grobengineering.leistung(@subsubproject).round(2) %></td>
-                <td></td>
-                <td><%= Grobengineering.strom_total(@subsubproject).round(2) %></td>
-              </tr>
-              <tr>
+              <tr style="background-color: white;">
                 <th rowspan="2">ID</th>
                 <th rowspan="2">Offertposition</th>
                 <th rowspan="2">Teilanlage</th>
@@ -100,7 +66,7 @@
               <% @grobengineerings.each_with_index do |grobengineering, i| %>
                   <tr>
                     <td><%= grobengineering.id %></td>
-                    <td><%= truncate(grobengineering.offertposition.name, :length => 40) %></td>
+                    <td><a href="#" data-toggle="tooltip" title="<%=grobengineering.offertposition.name%>"><%= truncate(grobengineering.offertposition.name, :length => 40) %></td>
                     <td><%= truncate((grobengineering.subsystem.nil? ? '' : grobengineering.subsystem.name), :length => 40) %></td>
                     <td><%= truncate(grobengineering.beschreibung, :length => 40) %></td>
                     <td><%= truncate(grobengineering.kommentar, :length => 40) %></td>
@@ -158,54 +124,59 @@
             </table>
           </div>
 
+          <%= render 'layouts/tooltip' %>
           <%= render 'layouts/popups' %>
           <%= render 'layouts/loading', :message => "Lade..." %>
 
           <script>
             $( document ).ready(function() {
                 $('#grobengineerigns_table').DataTable({
-                    "scrollX": true,
+                    scrollX: true,
+                    fixedColumns: {
+                        leftColumns: 1,
+                        rightColumns: 1
+                    },
                     'createdRow': function (row, data, dataIndex) {
                         //min-width for offertposition column
-                        $('td:eq(1)', row).css('min-width', '200px');
+                        $('td:eq(1)', row).css('min-width', '300px');
                         //min-width for teilanlage column
-                        $('td:eq(2)', row).css('min-width', '200px');
+                        $('td:eq(2)', row).css('min-width', '300px');
                         //min-width for beschreibung column
-                        $('td:eq(3)', row).css('min-width', '200px');
+                        $('td:eq(3)', row).css('min-width', '300px');
                         //min-width for kommentar column
-                        $('td:eq(4)', row).css('min-width', '200px');
+                        $('td:eq(4)', row).css('min-width', '300px');
                         //min-width for geraet_import column
-                        $('td:eq(5)', row).css('min-width', '200px');
+                        $('td:eq(5)', row).css('min-width', '300px');
                         //min-width for gerät column
-                        $('td:eq(6)', row).css('min-width', '200px');
+                        $('td:eq(6)', row).css('min-width', '300px');
                         //min-width for signale column
-                        $('td:eq(8)', row).css('min-width', '200px');
+                        $('td:eq(8)', row).css('min-width', '300px');
                         //min-width for schaltschrank column
-                        $('td:eq(9)', row).css('min-width', '200px');
+                        $('td:eq(9)', row).css('min-width', '300px');
                         //min-width for cluster column
-                        $('td:eq(10)', row).css('min-width', '200px');
+                        $('td:eq(10)', row).css('min-width', '300px');
                         //min-width for io-gruppe column
-                        $('td:eq(11)', row).css('min-width', '200px');
+                        $('td:eq(11)', row).css('min-width', '300px');
                         //min-width for brake column
-                        $('td:eq(15)', row).css('min-width', '200px');
+                        $('td:eq(15)', row).css('min-width', '300px');
                         //min-width for klartext column
-                        $('td:eq(16)', row).css('min-width', '200px');
+                        $('td:eq(16)', row).css('min-width', '300px');
                         //min-width for bemerkung column
-                        $('td:eq(17)', row).css('min-width', '200px');
+                        $('td:eq(17)', row).css('min-width', '300px');
                         //min-width for motorenabgang column
-                        $('td:eq(19)', row).css('min-width', '200px');
+                        $('td:eq(19)', row).css('min-width', '300px');
                         //min-width for fu-typ column
-                        $('td:eq(20)', row).css('min-width', '200px');
+                        $('td:eq(20)', row).css('min-width', '300px');
                         //min-width for kabelspez1 column
-                        $('td:eq(21)', row).css('min-width', '200px');
+                        $('td:eq(21)', row).css('min-width', '300px');
                         //min-width for kabelspez2 column
-                        $('td:eq(23)', row).css('min-width', '200px');
+                        $('td:eq(23)', row).css('min-width', '300px');
                         //min-width for kabelspez3 column
-                        $('td:eq(25)', row).css('min-width', '200px');
+                        $('td:eq(25)', row).css('min-width', '300px');
                         //min-width for lieferant column
-                        $('td:eq(27)', row).css('min-width', '200px');
+                        $('td:eq(27)', row).css('min-width', '300px');
                         //min-width for actions column
-                        $('td:eq(32)', row).css('min-width', '400px');
+                        $('td:eq(32)', row).css('min-width', '380px');
                     },
                     "pageLength": 10,
                     "language": {

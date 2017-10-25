@@ -52,6 +52,9 @@
   margin-bottom: 1px;
 }
 
+.table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
+  background-color: white;
+}
 
 // do not stretch input fields over whole screen. But then, prevent margin from inner bootstrap container
 .half-screen {
