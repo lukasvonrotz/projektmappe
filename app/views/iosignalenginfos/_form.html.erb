@@ -4,7 +4,6 @@
          onclick="editLine(<%=iosignalenginfoid%>);">Edit</a>
     </td>
     <td>
-      <strong class="hidden-lg">Tagname<br></strong>
       <%= iosignal_tagname %></br>
     </td>
     <td>
@@ -12,66 +11,114 @@
                                    :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
     </td>
     <td>
-      <%= iosignalenginfo.datetime_select :pendenz_datum, {}, { class: "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" } %>
+      <% if !pendenzdate.nil? %>
+        <%= iosignalenginfo.text_field :pendenz_datum,
+              :value => pendenzdate.try(:strftime,'%d/%m/%Y %H:%M'),
+              :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+      <% else %>
+          <%= iosignalenginfo.text_field :pendenz_datum,
+                                         :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld pendenz" + iosignalenginfoid.to_s + "_date" %>
+      <% end %>
     </td>
     <td>
       <%= iosignalenginfo.text_field :pendenz_wer,
-                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+                                     :id => "pendenz" + iosignalenginfoid.to_s,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld inputdetection" %>
     </td>
     <td>
       <%= iosignalenginfo.text_field :pendenz_antwort,
                                      :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
     </td>
     <td>
-      <%= iosignalenginfo.datetime_select :pendenz_antwort_datum, {}, { class: "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" } %>
+      <% if !pendenzantwortdate.nil? %>
+          <%= iosignalenginfo.text_field :pendenz_antwort_datum,
+                                         :value => pendenzantwortdate.try(:strftime,'%d/%m/%Y %H:%M'),
+                                         :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+      <% else %>
+          <%= iosignalenginfo.text_field :pendenz_antwort_datum,
+                                         :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld pendenz_antwort" + iosignalenginfoid.to_s + "_date" %>
+      <% end %>
     </td>
     <td>
       <%= iosignalenginfo.text_field :pendenz_antwort_wer,
-                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+                                     :id => "pendenz_antwort" + iosignalenginfoid.to_s,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld inputdetection" %>
     </td>
     <td>
       <%= iosignalenginfo.text_field :frage,
                                      :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
     </td>
     <td>
-      <%= iosignalenginfo.datetime_select :frage_datum, {}, { class: "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" } %>
+      <% if !fragedate.nil? %>
+          <%= iosignalenginfo.text_field :frage_datum,
+                                         :value => fragedate.try(:strftime,'%d/%m/%Y %H:%M'),
+                                         :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+      <% else %>
+          <%= iosignalenginfo.text_field :frage_datum,
+                                         :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld frage" + iosignalenginfoid.to_s + "_date" %>
+      <% end %>
     </td>
     <td>
       <%= iosignalenginfo.text_field :frage_wer,
-                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+                                     :id => "frage" + iosignalenginfoid.to_s,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld inputdetection" %>
     </td>
     <td>
       <%= iosignalenginfo.text_field :frage_antwort,
                                      :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
     </td>
     <td>
-      <%= iosignalenginfo.datetime_select :frage_antwort_datum, {}, { class: "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" } %>
+      <% if !frageantwortdate.nil? %>
+          <%= iosignalenginfo.text_field :frage_antwort_datum,
+                                         :value => frageantwortdate.try(:strftime,'%d/%m/%Y %H:%M'),
+                                         :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+      <% else %>
+          <%= iosignalenginfo.text_field :frage_antwort_datum,
+                                         :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld frage_antwort" + iosignalenginfoid.to_s + "_date" %>
+      <% end %>
     </td>
     <td>
       <%= iosignalenginfo.text_field :frage_antwort_wer,
-                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+                                     :id => "frage_antwort" + iosignalenginfoid.to_s,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld inputdetection" %>
     </td>
     <td>
       <%= iosignalenginfo.text_field :sw_instruction,
                                      :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
     </td>
     <td>
-      <%= iosignalenginfo.datetime_select :sw_instruction_datum, {}, { class: "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" } %>
+      <% if !swinstructiondate.nil? %>
+          <%= iosignalenginfo.text_field :sw_instruction_datum,
+                                         :value => swinstructiondate.try(:strftime,'%d/%m/%Y %H:%M'),
+                                         :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+      <% else %>
+          <%= iosignalenginfo.text_field :sw_instruction_datum,
+                                         :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld sw_instruction" + iosignalenginfoid.to_s + "_date" %>
+      <% end %>
     </td>
     <td>
       <%= iosignalenginfo.text_field :sw_instruction_wer,
-                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+                                     :id => "sw_instruction" + iosignalenginfoid.to_s,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld inputdetection" %>
     </td>
     <td>
       <%= iosignalenginfo.text_field :sw_instruction_antwort,
                                      :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
     </td>
     <td>
-      <%= iosignalenginfo.datetime_select :sw_instruction_antwort_datum, {}, { class: "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" } %>
+      <% if !swinstructionantwortdate.nil? %>
+          <%= iosignalenginfo.text_field :sw_instruction_antwort_datum,
+                                         :value => swinstructionantwortdate.try(:strftime,'%d/%m/%Y %H:%M'),
+                                         :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+      <% else %>
+          <%= iosignalenginfo.text_field :sw_instruction_antwort_datum,
+                                         :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld sw_instruction_antwort" + iosignalenginfoid.to_s + "_date" %>
+      <% end %>
     </td>
     <td>
       <%= iosignalenginfo.text_field :sw_instruction_antwort_wer,
-                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld" %>
+                                     :id => "sw_instruction_antwort" + iosignalenginfoid.to_s,
+                                     :class => "form-control iosignalenginfo_fld iosignalenginfo" + iosignalenginfoid.to_s + "_fld inputdetection" %>
     </td>
     <td>
       <%= iosignalenginfo.submit 'Update',

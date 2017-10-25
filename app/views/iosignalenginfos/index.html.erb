@@ -6,7 +6,11 @@
     <div id="content">
       <div class="alert alert-warning">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        ACHTUNG: Das Datum wird nur abgespeichert falls ein Kürzel dazu eingetragen wird!
+        ACHTUNG:
+        <ul>
+          <li>Beim ersten Mal dieses Seitenaufrufs bitte Seite aktualisieren! Ansonsten kann nicht editiert werden!</li>
+          <li>Das Datum wird nur abgespeichert falls ein Kürzel dazu eingetragen wird!</li>
+        </ul>
       </div>
       <table id="iosignalenginfo_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
@@ -45,6 +49,12 @@
                 <%= render 'form', :iosignalenginfo => iosignalenginfo,
                            :iosignal => iosignalenginfo.iosignal,
                            :iosignal_tagname => iosignalenginfo.iosignal.tagname,
+                           :pendenzdate => iosignalenginfo.pendenz_datum,
+                           :pendenzantwortdate => iosignalenginfo.pendenz_antwort_datum,
+                           :fragedate => iosignalenginfo.frage_datum,
+                           :frageantwortdate => iosignalenginfo.frage_antwort_datum,
+                           :swinstructiondate => iosignalenginfo.sw_instruction_datum,
+                           :swinstructionantwortdate => iosignalenginfo.sw_instruction_antwort_datum,
                            :iosignalenginfoid => iosignalenginfo.id %>
               </tr>
           <% end %>
@@ -103,6 +113,18 @@
           $("select.iosignalenginfo<%=iosignalenginfo.id %>_fld").attr("disabled", false);
         <% end %>
       <% end %>
+
+        // Set dates
+        $('.inputdetection').bind('input', function() {
+            var d = new Date();
+            var year = d.getFullYear();
+            var month = ("0" + (d.getMonth()+1)).slice(-2);
+            var day = ("0" + (d.getDate())).slice(-2);
+            var hour = ("0" + (d.getHours())).slice(-2);
+            var minute = ("0" + (d.getMinutes()+1)).slice(-2);
+            var current_date = "" + day + "/" + month + "/" + year + " " + hour + ":" + minute;
+            $("." + this.id + "_date").val(current_date);
+        });
     });
 
     function editLine(id) {
