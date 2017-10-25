@@ -1,0 +1,62 @@
+= README
+This is a rails application, with bootstrap, devise and I18n.
+
+== Installation on Windows
+
+* Download RubyInstaller for Windows (http://railsinstaller.org/en), including:
+  * Ruby 2.3.3
+  * Rails 5.0.5
+  * If Ruby is already installed on your machine, try to install the software with your current version,
+  or use a version management tool such as rbenv or rvm.
+* run 'git clone <PATH_TO_APP>/projektmappe.git'
+* Open the installed git bash (console) and type in the following commands:
+  * cd projektmappe
+  * gem install bundler
+  * bundle install
+  * bundle update
+
+== Installation on Ubuntu
+
+* Follow instructions on https://gorails.com, depending on your operating system
+* run 'git clone <PATH_TO_APP>/projektmappe.git'
+* Run the following commands:
+  * cd projektmappe
+  * gem install bundler
+  * bundle install
+  * bundle update
+
+== Setup database
+
+* Check /config/database.yml and set database you want to use
+
+* Database initialization (run commands in git bash)
+  * Run 'rake db:create'
+  * Run 'rake db:migrate'
+
+
+== Generate Files in /config
+* Create a file called 'secrets.yml' in /config
+* This file should look as follows:
+
+development:
+  secret_key_base: <%= ENV["SECRET_KEY_BASE_DEV"] %>
+test:
+  secret_key_base: <%= ENV["SECRET_KEY_BASE_TEST"] %>
+production:
+  secret_key_base: <%= ENV["SECRET_KEY_BASE_PROD"] %>
+
+* Create a file called 'secrets.yml' in /config
+* This file should look as follows:
+
+GMAIL_DOMAIN: <HOSTNAME (e.g. localhost:3000)>
+GMAIL_USERNAME: <GMAIL USERNAME FOR SENDING USER MGMT MAILS (e.g. username@gmail.com)>
+GMAIL_PASSWORD: <GMAIL PASSWORD>
+POSTGRES_PW: <PASSWORD FOR USER IN PG DATABASE>
+
+SECRET_KEY_BASE_DEV: <SECRET KEY (generated with the command 'rake secret')>
+SECRET_KEY_BASE_PROD: <SECRET KEY (generated with the command 'rake secret')>
+SECRET_KEY_BASE_TEST: <SECRET KEY (generated with the command 'rake secret')>
+
+== Start application
+* Start application by running 'rails server'
+* Navigate to http://localhost:3000/ with a browser.
