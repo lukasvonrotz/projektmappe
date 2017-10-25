@@ -10,10 +10,7 @@
 /*.png
 
 # Ignore public asset files
-/public/assets/*
-
-# Ignore Gemfile.lock
-/Gemfile.lock
+public/assets/*
 
 
 # Ignore bundler config.

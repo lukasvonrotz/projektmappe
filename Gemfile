@@ -61,6 +61,3 @@ gem 'devise-i18n', '~> 1.3.0'
 gem 'chosen-rails', '~> 1.5.2'
 gem 'formtastic', '~> 3.1.5'
 gem 'rails-erd', require: false, group: :development
-
-#used only because otherwise assets:precompile cannot be performed for production mode
-gem 'compass-rails', github: 'Compass/compass-rails'
