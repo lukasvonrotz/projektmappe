@@ -18,6 +18,7 @@
 </div>
 <br><br>
 <a href="/projects/<%= @project.id %>/subprojects/<%= @subproject.id %>/subsubprojects/<%= @subsubproject.id %>/offers/<%= @offer.id %>">Zurück zu Offerte</a>
+<%= render 'layouts/loading', :message => "Lade Preise..." %>
 
 
 <script>
@@ -31,19 +32,6 @@
             $("input.offer_offertposition<%=offer_offertposition.id %>_fld").attr("disabled", false);
           <% end %>
         <% end %>
-
-        // In case of using the browser back button! Rails duplicates html-elements when using this button
-        // Hence, do reload page (only once!) by usage of a hidden input field!
-        $('#loadingModal').modal('hide');
-        var $input = $('#refresh');
-        if ($input.val() == 'yes') {
-            location.reload(true);
-            loadingAlgorithm();
-            $(".table-responsive").hide();
-        }
-        else {
-            $input.val('yes');
-        }
     });
 
     function editLine(id) {

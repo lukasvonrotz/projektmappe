@@ -36,6 +36,8 @@
 <br><br>
 <%= link_to "Zurück zu Lieferanten", suppliers_path %>
 
+<%= render 'layouts/loading', :message => "Lade Preise..." %>
+
 
 <script>
     $(document).ready ( function(){
@@ -48,19 +50,6 @@
             $("input.electrical_installation_supplier<%=electrical_installation_supplier.id %>_fld").attr("disabled", false);
           <% end %>
         <% end %>
-
-        // In case of using the browser back button! Rails duplicates html-elements when using this button
-        // Hence, do reload page (only once!) by usage of a hidden input field!
-        $('#loadingModal').modal('hide');
-        var $input = $('#refresh');
-        if ($input.val() == 'yes') {
-            location.reload(true);
-            loadingAlgorithm();
-            $(".table-responsive").hide();
-        }
-        else {
-            $input.val('yes');
-        }
     });
 
     function editLine(id) {

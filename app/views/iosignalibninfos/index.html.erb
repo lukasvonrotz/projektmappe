@@ -29,6 +29,8 @@
 
 <%= link_to "Zurück zu Signale", project_subproject_subsubproject_iosignals_path(@project.id, @subproject.id, @subsubproject.id) %>
 
+<%= render 'layouts/loading', :message => "Lade IBN Infos..." %>
+
 <script>
     $(document).ready ( function(){
         // Disable all input fields and add 'edit'-button, except for first line.
@@ -41,8 +43,6 @@
           <% end %>
         <% end %>
 
-
-
         $('.inputdetection').bind('input', function() {
             var d = new Date();
             var year = d.getFullYear();
@@ -53,18 +53,6 @@
             var current_date = "" + day + "/" + month + "/" + year + " " + hour + ":" + minute;
             $(".iosignalibninfo" + this.id + "_date").val(current_date);
         });
-
-        // In case of using the browser back button! Rails duplicates html-elements when using this button
-        // Hence, do reload page (only once!) by usage of a hidden input field!
-        $('#loadingModal').modal('hide');
-        var $input = $('#refresh');
-        if ($input.val() == 'yes') {
-            location.reload(true);
-            $(".table-responsive").hide();
-        }
-        else {
-            $input.val('yes');
-        }
     });
 
     function editLine(id) {
