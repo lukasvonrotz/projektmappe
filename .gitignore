@@ -12,6 +12,9 @@
 # Ignore public asset files
 /public/assets/*
 
+# Ignore Gemfile.lock
+/Gemfile.lock
+
 
 # Ignore bundler config.
 /.bundle
