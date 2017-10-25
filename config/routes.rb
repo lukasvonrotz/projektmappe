@@ -134,9 +134,13 @@ Rails.application.routes.draw do
   match "/settings", to: "settings#index", as: :settings, via: [:get]
   match "/settings/csvexport_all_tables", to: "settings#csvexport_all_tables", as: :csvexport_all_tables, via: [:get]
 
+  # generate / destroy channels per iogroup / iogroupcomponent
+  match "/iogroups/:iogroup_id/generate_iogroup_channels",
+        to: "iogroups#generate_iogroup_channels", as: :generate_iogroup_channels, via: [:get]
+  match "/iogroups/:iogroup_id/delete_free_iogroup_channels",
+        to: "iogroups#delete_free_iogroup_channels", as: :delete_free_iogroup_channels, via: [:get]
   match "/iogroups/:iogroup_id/iogroupcomponents/:iogroupcomponent_id/generate_channels",
         to: "iogroupcomponents#generate_channels", as: :generate_channels, via: [:get]
-
   match "/iogroups/:iogroup_id/iogroupcomponents/:iogroupcomponent_id/delete_free_channels",
         to: "iogroupcomponents#delete_free_channels", as: :delete_free_channels, via: [:get]
 

@@ -40,24 +40,28 @@
     <script>
       $(document).ready(function() {
         $('.data_table').DataTable({
-            "scrollX": true,
-            "pageLength": 50,
-            "language": {
-                "decimal":        "",
-                "emptyTable":     "Keine Einträge gefunden",
-                "info":           "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
-                "infoEmpty":      "Zeige 0 bis 0 von 0 Einträgen",
-                "infoFiltered":   "(gefiltert aus total _MAX_ Einträgen)",
-                "lengthMenu":     "Zeige _MENU_ Einträge",
-                "loadingRecords": "Lade Daten",
-                "processing":     "Verarbeite...",
-                "search":         "Suche",
-                "zeroRecords":    "0 Einträge",
-                "paginate": {
-                    "first":      "Erster",
-                    "last":       "Letzter",
-                    "next":       "Nächste",
-                    "previous":   "Vorherige"
+            scrollX:        true,
+            scrollCollapse: true,
+            fixedColumns:   {
+                rightColumns: 1
+            },
+            pageLength: 50,
+            language: {
+                decimal:        "",
+                emptyTable:     "Keine Einträge gefunden",
+                info:           "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
+                infoEmpty:      "Zeige 0 bis 0 von 0 Einträgen",
+                infoFiltered:   "(gefiltert aus total _MAX_ Einträgen)",
+                lengthMenu:     "Zeige _MENU_ Einträge",
+                loadingRecords: "Lade Daten",
+                processing:     "Verarbeite...",
+                search:         "Suche",
+                zeroRecords:    "0 Einträge",
+                paginate: {
+                    first:      "Erster",
+                    last:       "Letzter",
+                    next:       "Nächste",
+                    previous:   "Vorherige"
                 }
             }});
       });
