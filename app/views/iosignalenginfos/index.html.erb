@@ -4,7 +4,12 @@
     Keine IO-Signale zu dieser Version vorhanden!
 <% else %>
     <div id="content">
-      <table id="iosignalenginfo_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+      <div class="alert alert-info">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Beim ersten Aufruf dieser Seite ein Refresh durchführen! Ansonsten kann Zeile nicht upgedated werden..
+        ACHTUNG: Das Datum wird nur abgespeichert falls ein Kürzel dazu eingetragen wird!
+      </div>
+      <table class="table table-striped table-bordered data_table" cellspacing="0" width="100%">
         <thead>
         <tr>
           <th rowspan="2">Editieren</th>
@@ -55,39 +60,6 @@
 <script>
 
     $(document).ready ( function(){
-        $('#iosignalenginfo_table').DataTable({
-            "scrollX": true,
-            fixedColumns:   {
-                leftColumns: 1,
-                rightColumns: 1
-            },
-            'createdRow': function(row, data, dataIndex){
-                $('td:eq(3)', row).css('min-width', '580px');
-                $('td:eq(6)', row).css('min-width', '580px');
-                $('td:eq(9)', row).css('min-width', '580px');
-                $('td:eq(12)', row).css('min-width', '580px');
-                $('td:eq(15)', row).css('min-width', '580px');
-                $('td:eq(18)', row).css('min-width', '580px');
-            },
-            "pageLength": 10,
-            "language": {
-                "decimal":        "",
-                "emptyTable":     "Keine Einträge gefunden",
-                "info":           "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
-                "infoEmpty":      "Zeige 0 bis 0 von 0 Einträgen",
-                "infoFiltered":   "(gefiltert aus total _MAX_ Einträgen)",
-                "lengthMenu":     "Zeige _MENU_ Einträge",
-                "loadingRecords": "Lade Daten",
-                "processing":     "Verarbeite...",
-                "search":         "Suche",
-                "zeroRecords":    "0 Einträge",
-                "paginate": {
-                    "first":      "Erster",
-                    "last":       "Letzter",
-                    "next":       "Nächste",
-                    "previous":   "Vorherige"
-                }
-            }});
 
         // Disable all input fields and add 'edit'-button, except for first line.
         <% @iosignalenginfos.each_with_index do |iosignalenginfo, i| %>

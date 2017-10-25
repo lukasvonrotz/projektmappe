@@ -3,9 +3,9 @@
 <br>
 <div id="content">
   <% if @iosignals.length == 0 %>
-      Keine Signale für diese Vesrion vorhanden
+      Keine Signale für diese Version vorhanden
   <% else %>
-    <div class="row">
+    <div class="row visible-lg">
       <div class="col-lg-2"><strong>Tagname</strong></div>
       <div class="col-lg-1"><strong>Signaltest Feld</strong></div>
       <div class="col-lg-1"><strong>Signaltest Software</strong></div>
@@ -46,10 +46,10 @@
         $('.inputdetection').bind('input', function() {
             var d = new Date();
             var year = d.getFullYear();
-            var month = d.getMonth()+1;
-            var day = d.getDate();
-            var hour = d.getHours();
-            var minute = d.getMinutes();
+            var month = ("0" + (d.getMonth()+1)).slice(-2);
+            var day = ("0" + (d.getDate())).slice(-2);
+            var hour = ("0" + (d.getHours())).slice(-2);
+            var minute = ("0" + (d.getMinutes()+1)).slice(-2);
             var current_date = "" + day + "/" + month + "/" + year + " " + hour + ":" + minute;
             $(".iosignalibninfo" + this.id + "_date").val(current_date);
         });

@@ -1,46 +1,66 @@
 <%= form_for [iosignal, iosignalibninfo] do |iosignalibninfo| %>
     <div class="row" style="margin-bottom: 10px;">
       <div class="col-lg-2">
+        <strong class="hidden-lg">Tagname<br></strong>
         <%= iosignaltagname %></br>
+        <strong class="hidden-lg"><br></strong>
       </div>
       <div class="col-lg-1">
+        <strong class="hidden-lg">Signaltest Feld<br></strong>
         <%= iosignalibninfo.text_field :signaltest_feld,
                                          :class => "form-control iosignalibninfo_fld iosignalibninfo" + iosignalibninfoid.to_s + "_fld" %>
+        <strong class="hidden-lg"><br></strong>
       </div>
       <div class="col-lg-1">
+        <strong class="hidden-lg">Signaltest SW<br></strong>
         <%= iosignalibninfo.text_field :signaltest_sw,
                                        :class => "form-control iosignalibninfo_fld iosignalibninfo" + iosignalibninfoid.to_s + "_fld" %>
+        <strong class="hidden-lg"><br></strong>
       </div>
       <div class="col-lg-1">
+        <strong class="hidden-lg">Signaltest HMI<br></strong>
         <%= iosignalibninfo.text_field :signaltest_hmi,
                                        :class => "form-control iosignalibninfo_fld iosignalibninfo" + iosignalibninfoid.to_s + "_fld" %>
+        <strong class="hidden-lg"><br></strong>
       </div>
       <div class="col-lg-1">
+        <strong class="hidden-lg">Signaltest Event<br></strong>
         <%= iosignalibninfo.text_field :signaltest_event,
                                        :class => "form-control iosignalibninfo_fld iosignalibninfo" + iosignalibninfoid.to_s + "_fld" %>
+        <strong class="hidden-lg"><br></strong>
       </div>
       <div class="col-lg-2">
         <% if !iogignalibninfodate.nil? %>
+            <strong class="hidden-lg">Signaltest OK Datum<br></strong>
          <%= iosignalibninfo.text_field :signaltest_ok_datum,
             :value => iogignalibninfodate.try(:strftime,'%d/%m/%Y %H:%M'),
                                         :class => "form-control iosignalibninfo_fld iosignalibninfo" + iosignalibninfoid.to_s + "_fld" %>
+            <strong class="hidden-lg"><br></strong>
         <% else %>
+            <strong class="hidden-lg">Signaltest OK Datum<br></strong>
           <%= iosignalibninfo.text_field :signaltest_ok_datum,
                                          :class => "form-control iosignalibninfo_fld iosignalibninfo" + iosignalibninfoid.to_s + "_fld iosignalibninfo" + iosignalibninfoid.to_s + "_date" %>
+            <strong class="hidden-lg"><br></strong>
         <% end %>
       </div>
       <div class="col-lg-1">
+        <strong class="hidden-lg">Signaltest Ok wer<br></strong>
         <%= iosignalibninfo.text_field :signaltest_ok_wer,
                                        :id => "" + iosignalibninfoid.to_s,
                                        :class => "form-control iosignalibninfo_fld iosignalibninfo" + iosignalibninfoid.to_s + "_fld inputdetection" %>
+        <strong class="hidden-lg"><br></strong>
       </div>
       <div class="col-lg-1">
+        <strong class="hidden-lg">Signaltest Bemerkungen<br></strong>
         <%= iosignalibninfo.text_field :bemerkungen,
                                        :class => "form-control iosignalibninfo_fld iosignalibninfo" + iosignalibninfoid.to_s + "_fld" %>
+        <strong class="hidden-lg"><br></strong>
       </div>
       <div class="col-lg-1">
+        <strong class="hidden-lg">Signaltest TODO<br></strong>
         <%= iosignalibninfo.text_field :todo,
                                        :class => "form-control iosignalibninfo_fld iosignalibninfo" + iosignalibninfoid.to_s + "_fld" %>
+        <strong class="hidden-lg"><br></strong>
       </div>
       <div class="col-lg-1" style="line-height: 30px;">
         <a class="btn btn-sm btn-info iosignalibninfo_edit iosignalibninfo<%=iosignalibninfoid.to_s%>_edit"
@@ -48,6 +68,7 @@
         <%= iosignalibninfo.submit 'Update',
                                      class: "btn btn-sm btn-success iosignalibninfo_fld iosignalibninfo" + iosignalibninfoid.to_s + "_fld",
                                      data: { disable_with: "Verarbeite..." }  %>
+        <strong class="hidden-lg"><br><br><br><br></strong>
       </div>
     </div>
 <% end %>
