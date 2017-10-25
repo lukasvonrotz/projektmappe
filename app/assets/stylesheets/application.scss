@@ -79,6 +79,15 @@ a.text-link {
   color: #006DB6 !important;
 }
 
+a.tooltip-text {
+  color: black !important;
+}
+a.tooltip-text:hover {
+  color: black !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 
 // page-specific-styling
 // wire_wiresuppliers

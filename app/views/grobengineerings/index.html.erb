@@ -21,9 +21,9 @@
           <a href="<%= grobengineering_extended_path(@subsubproject.subproject.project.id, @subsubproject.subproject.id, @subsubproject.id) %>" class="btn btn-info">Erweiterte Ansicht</a>
           <br><br><br>
           <div id="content">
-            <table id="grobengineerigns_table" class="table table-striped" cellspacing="0" width="100%">
+            <table class="table table-striped table-bordered data_table" cellspacing="0" width="100%">
               <thead>
-              <tr style="background-color: white;">
+              <tr>
                 <th rowspan="2">ID</th>
                 <th rowspan="2">Offertposition</th>
                 <th rowspan="2">Teilanlage</th>
@@ -66,43 +66,43 @@
               <% @grobengineerings.each_with_index do |grobengineering, i| %>
                   <tr>
                     <td><%= grobengineering.id %></td>
-                    <td><a href="#" data-toggle="tooltip" title="<%=grobengineering.offertposition.name%>"><%= truncate(grobengineering.offertposition.name, :length => 40) %></td>
-                    <td><%= truncate((grobengineering.subsystem.nil? ? '' : grobengineering.subsystem.name), :length => 40) %></td>
-                    <td><%= truncate(grobengineering.beschreibung, :length => 40) %></td>
-                    <td><%= truncate(grobengineering.kommentar, :length => 40) %></td>
-                    <td><%= truncate(grobengineering.device_import, :length => 40) %></td>
-                    <td><%= truncate(grobengineering.device.definition, :length => 40) %></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.offertposition.name%>"><%= truncate(grobengineering.offertposition.name, :length => 40) %></a></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.subsystem.nil? ? '' : grobengineering.subsystem.name%>"><%= truncate((grobengineering.subsystem.nil? ? '' : grobengineering.subsystem.name), :length => 40) %></a></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.beschreibung%>"><%= truncate(grobengineering.beschreibung, :length => 40) %></a></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.kommentar%>"><%= truncate(grobengineering.kommentar, :length => 40) %></a></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.device_import%>"><%= truncate(grobengineering.device_import, :length => 40) %></a></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.device.definition%>"><%= truncate(grobengineering.device.definition, :length => 40) %></a></td>
                     <td><%= grobengineering.device_anzahl %></td>
                     <td>
                       <ul>
                         <% grobengineering.iosignals.each do |iosignal| %>
-                          <li><%= truncate(iosignal.tagname, :length => 40) %> </li>
+                          <li><a class="tooltip-text" data-toggle="tooltip" title="<%=iosignal.tagname%>"><%= truncate(iosignal.tagname, :length => 40) %></a></li>
                         <% end %>
                       </ul>
                     </td>
-                    <td><%= truncate((grobengineering.schaltschrank_preisberechnung.nil? ? '' : grobengineering.schaltschrank_preisberechnung.name), :length => 40) %></td>
-                    <td><%= truncate((grobengineering.iogroup.nil? ? '' : grobengineering.iogroup.switchgearcombination.name), :length => 40) %></td>
-                    <td><%= truncate((grobengineering.iogroup.nil? ? '' : grobengineering.iogroup.name), :length => 40) %></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=(grobengineering.schaltschrank_preisberechnung.nil? ? '' : grobengineering.schaltschrank_preisberechnung.name)%>"><%= truncate((grobengineering.schaltschrank_preisberechnung.nil? ? '' : grobengineering.schaltschrank_preisberechnung.name), :length => 40) %></a></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=(grobengineering.iogroup.nil? ? '' : grobengineering.iogroup.switchgearcombination.name)%>"><%= truncate((grobengineering.iogroup.nil? ? '' : grobengineering.iogroup.switchgearcombination.name), :length => 40) %></a></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=(grobengineering.iogroup.nil? ? '' : grobengineering.iogroup.name)%>"><%= truncate((grobengineering.iogroup.nil? ? '' : grobengineering.iogroup.name), :length => 40) %></a></td>
                     <td><%= grobengineering.tag_anlage %></td>
                     <td><%= grobengineering.tag_objekt %></td>
                     <td><%= grobengineering.tag_nummer %></td>
-                    <td><%= truncate(grobengineering.brake, :length => 40) %></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.brake%>"><%= truncate(grobengineering.brake, :length => 40) %></a></td>
                     <% if @subsubproject.subproject.max_zeichen_klartext_grobeng.to_i < grobengineering.klartext.length.to_i %>
-                        <td class="danger"><%= truncate(grobengineering.klartext, :length => 40) %></td>
+                        <td class="danger"><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.klartext%>"><%= truncate(grobengineering.klartext, :length => 40) %></a></td>
                     <% else %>
-                        <td><%= truncate(grobengineering.klartext, :length => 40) %></td>
+                        <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.klartext%>"><%= truncate(grobengineering.klartext, :length => 40) %></a></td>
                     <% end %>
-                    <td><%= truncate(grobengineering.bemerkung, :length => 40) %></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.bemerkung%>"><%= truncate(grobengineering.bemerkung, :length => 40) %></a></td>
                     <td><%= grobengineering.funktion_sw %></td>
-                    <td><%= truncate((grobengineering.switchgear_motorenabgang.nil? ? '' : grobengineering.switchgear_motorenabgang.kennung), :length => 40) %></td>
-                    <td><%= truncate((grobengineering.fu_typ.nil? ? '' : grobengineering.fu_typ.kennung), :length => 40) %></td>
-                    <td><%= truncate((grobengineering.wire_spez1.nil? ? '' : grobengineering.wire_spez1.kabeltyp), :length => 40) %></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=(grobengineering.switchgear_motorenabgang.nil? ? '' : grobengineering.switchgear_motorenabgang.kennung)%>"><%= truncate((grobengineering.switchgear_motorenabgang.nil? ? '' : grobengineering.switchgear_motorenabgang.kennung), :length => 40) %></a></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=(grobengineering.fu_typ.nil? ? '' : grobengineering.fu_typ.kennung)%>"><%= truncate((grobengineering.fu_typ.nil? ? '' : grobengineering.fu_typ.kennung), :length => 40) %></a></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=(grobengineering.wire_spez1.nil? ? '' : grobengineering.wire_spez1.kabeltyp)%>"><%= truncate((grobengineering.wire_spez1.nil? ? '' : grobengineering.wire_spez1.kabeltyp), :length => 40) %></a></td>
                     <td><%= grobengineering.kabel_spez1_laenge %></td>
-                    <td><%= truncate((grobengineering.wire_spez2.nil? ? '' : grobengineering.wire_spez2.kabeltyp), :length => 40) %></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=(grobengineering.wire_spez2.nil? ? '' : grobengineering.wire_spez2.kabeltyp)%>"><%= truncate((grobengineering.wire_spez2.nil? ? '' : grobengineering.wire_spez2.kabeltyp), :length => 40) %></a></td>
                     <td><%= grobengineering.kabel_spez2_laenge %></td>
-                    <td><%= truncate((grobengineering.wire_spez3.nil? ? '' : grobengineering.wire_spez3.kabeltyp), :length => 40) %></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=(grobengineering.wire_spez3.nil? ? '' : grobengineering.wire_spez3.kabeltyp)%>"><%= truncate((grobengineering.wire_spez3.nil? ? '' : grobengineering.wire_spez3.kabeltyp), :length => 40) %></a></td>
                     <td><%= grobengineering.kabel_spez3_laenge %></td>
-                    <td><%= truncate(grobengineering.lieferant, :length => 40) %></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.lieferant%>"><%= truncate(grobengineering.lieferant, :length => 40) %></a></td>
                     <td><%= grobengineering.spannung %></td>
                     <td><%= grobengineering.leistung %></td>
                     <td><%= grobengineering.strom %></td>
@@ -128,78 +128,6 @@
           <%= render 'layouts/popups' %>
           <%= render 'layouts/loading', :message => "Lade..." %>
 
-          <script>
-            $( document ).ready(function() {
-                $('#grobengineerigns_table').DataTable({
-                    scrollX: true,
-                    fixedColumns: {
-                        leftColumns: 1,
-                        rightColumns: 1
-                    },
-                    'createdRow': function (row, data, dataIndex) {
-                        //min-width for offertposition column
-                        $('td:eq(1)', row).css('min-width', '300px');
-                        //min-width for teilanlage column
-                        $('td:eq(2)', row).css('min-width', '300px');
-                        //min-width for beschreibung column
-                        $('td:eq(3)', row).css('min-width', '300px');
-                        //min-width for kommentar column
-                        $('td:eq(4)', row).css('min-width', '300px');
-                        //min-width for geraet_import column
-                        $('td:eq(5)', row).css('min-width', '300px');
-                        //min-width for gerät column
-                        $('td:eq(6)', row).css('min-width', '300px');
-                        //min-width for signale column
-                        $('td:eq(8)', row).css('min-width', '300px');
-                        //min-width for schaltschrank column
-                        $('td:eq(9)', row).css('min-width', '300px');
-                        //min-width for cluster column
-                        $('td:eq(10)', row).css('min-width', '300px');
-                        //min-width for io-gruppe column
-                        $('td:eq(11)', row).css('min-width', '300px');
-                        //min-width for brake column
-                        $('td:eq(15)', row).css('min-width', '300px');
-                        //min-width for klartext column
-                        $('td:eq(16)', row).css('min-width', '300px');
-                        //min-width for bemerkung column
-                        $('td:eq(17)', row).css('min-width', '300px');
-                        //min-width for motorenabgang column
-                        $('td:eq(19)', row).css('min-width', '300px');
-                        //min-width for fu-typ column
-                        $('td:eq(20)', row).css('min-width', '300px');
-                        //min-width for kabelspez1 column
-                        $('td:eq(21)', row).css('min-width', '300px');
-                        //min-width for kabelspez2 column
-                        $('td:eq(23)', row).css('min-width', '300px');
-                        //min-width for kabelspez3 column
-                        $('td:eq(25)', row).css('min-width', '300px');
-                        //min-width for lieferant column
-                        $('td:eq(27)', row).css('min-width', '300px');
-                        //min-width for actions column
-                        $('td:eq(32)', row).css('min-width', '380px');
-                    },
-                    "pageLength": 10,
-                    "language": {
-                        "decimal": "",
-                        "emptyTable": "Keine Einträge gefunden",
-                        "info": "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
-                        "infoEmpty": "Zeige 0 bis 0 von 0 Einträgen",
-                        "infoFiltered": "(gefiltert aus total _MAX_ Einträgen)",
-                        "lengthMenu": "Zeige _MENU_ Einträge",
-                        "loadingRecords": "Lade Daten",
-                        "processing": "Verarbeite...",
-                        "search": "Suche",
-                        "zeroRecords": "0 Einträge",
-                        "paginate": {
-                            "first": "Erster",
-                            "last": "Letzter",
-                            "next": "Nächste",
-                            "previous": "Vorherige"
-                        }
-                    }
-                });
-            });
-          </script>
       <% else %>
           <div class="alert alert-danger">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
