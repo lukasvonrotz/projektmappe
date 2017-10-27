@@ -5,6 +5,16 @@
       <%= customer.text_field :name, :class => "form-control",
                              placeholder: 'Name von Kunde eingeben' %>
     </div>
+    <div class="field form-group">
+      <%= customer.label :kundennummer_neu, 'Name' %>
+      <%= customer.text_field :kundennummer_neu, :class => "form-control",
+                              placeholder: 'Neue Kundennummer von Kunde eingeben' %>
+    </div>
+    <div class="field form-group">
+      <%= customer.label :kundennummer_alt, 'Name' %>
+      <%= customer.text_field :kundennummer_alt, :class => "form-control",
+                              placeholder: 'Alte Kundennummer von Kunde eingeben' %>
+    </div>
 
     <div class="actions form-group">
       <% if context %>

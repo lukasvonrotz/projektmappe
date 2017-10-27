@@ -16,6 +16,8 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
+      <th>Kundennummer neu</th>
+      <th>Kundennummer alt</th>
       <th>Aktionen</th>
     </tr>
     </thead>
@@ -24,7 +26,8 @@
         <tr>
           <td><%= customer.id %></td>
           <td><%= customer.name %></td>
-
+          <td><%= customer.kundennummer_neu %></td>
+          <td><%= customer.kundennummer_alt %></td>
           <td>
             <a href="<%= customer_path(customer.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
             <a href="<%= edit_customer_path(customer.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
