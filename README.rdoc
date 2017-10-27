@@ -13,7 +13,6 @@ This is a rails application, with bootstrap, devise and I18n.
   * cd projektmappe
   * gem install bundler
   * bundle install
-  * bundle update
 
 == Installation on Ubuntu
 
@@ -23,7 +22,6 @@ This is a rails application, with bootstrap, devise and I18n.
   * cd projektmappe
   * gem install bundler
   * bundle install
-  * bundle update
 
 == Setup database
 
