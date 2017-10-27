@@ -2,7 +2,7 @@ class Supplier < ApplicationRecord
 
   require 'csv'
 
-  has_many :supplier_suppliertypes, dependent: :delete_all
+  has_many :supplier_suppliertypes, dependent: :destroy
   has_many :suppliertypes, :through => :supplier_suppliertypes
 
   has_many :wire_suppliers, dependent: :destroy
