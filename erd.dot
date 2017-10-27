@@ -26,6 +26,7 @@ m_Assembly [label = <{<table border="0" align="center" cellspacing="0.5" cellpad
   <tr><td align="left" width="130" port="di">di <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
   <tr><td align="left" width="130" port="do">do <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
   <tr><td align="left" width="130" port="inkr">inkr <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="kanal_startnummer">kanal_startnummer <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
   <tr><td align="left" width="130" port="kennung">kennung <font face="Arial Italic" color="grey60">string U</font></td></tr>
   <tr><td align="left" width="130" port="rabatt">rabatt <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="sai">sai <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
@@ -107,12 +108,19 @@ m_Drive [label = <{<table border="0" align="center" cellspacing="0.5" cellpaddin
   <tr><td align="left" width="130" port="artikelnr">artikelnr <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="bezeichnung">bezeichnung <font face="Arial Italic" color="grey60">text</font></td></tr>
   <tr><td align="left" width="130" port="bg">bg <font face="Arial Italic" color="grey60">string</font></td></tr>
-  <tr><td align="left" width="130" port="brutto">brutto <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="in">in <font face="Arial Italic" color="grey60">text</font></td></tr>
   <tr><td align="left" width="130" port="kennung">kennung <font face="Arial Italic" color="grey60">string U</font></td></tr>
   <tr><td align="left" width="130" port="pn">pn <font face="Arial Italic" color="grey60">text</font></td></tr>
-  <tr><td align="left" width="130" port="rabatt">rabatt <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="un">un <font face="Arial Italic" color="grey60">text</font></td></tr>
+</table>
+}>];
+m_DriveSupplier [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">DriveSupplier</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="brutto">brutto <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
+  <tr><td align="left" width="130" port="rabatt">rabatt <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
 </table>
 }>];
 m_ElectricalInstallation [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -120,10 +128,17 @@ m_ElectricalInstallation [label = <{<table border="0" align="center" cellspacing
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
-  <tr><td align="left" width="130" port="brutto">brutto <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="einheit">einheit <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="kennung">kennung <font face="Arial Italic" color="grey60">text U</font></td></tr>
   <tr><td align="left" width="130" port="leistung">leistung <font face="Arial Italic" color="grey60">text</font></td></tr>
+</table>
+}>];
+m_ElectricalInstallationSupplier [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">ElectricalInstallationSupplier</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="brutto">brutto <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="rabatt">rabatt <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
 </table>
 }>];
@@ -134,21 +149,23 @@ m_Grobengineering [label = <{<table border="0" align="center" cellspacing="0.5" 
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="bemerkung">bemerkung <font face="Arial Italic" color="grey60">text</font></td></tr>
   <tr><td align="left" width="130" port="beschreibung">beschreibung <font face="Arial Italic" color="grey60">text</font></td></tr>
-  <tr><td align="left" width="130" port="bezeichnung">bezeichnung <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="brake">brake <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="device_anzahl">device_anzahl <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
   <tr><td align="left" width="130" port="device_import">device_import <font face="Arial Italic" color="grey60">text</font></td></tr>
   <tr><td align="left" width="130" port="funktion_sw">funktion_sw <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="kabel_spez1_laenge">kabel_spez1_laenge <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="kabel_spez2_laenge">kabel_spez2_laenge <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="kabel_spez3_laenge">kabel_spez3_laenge <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
+  <tr><td align="left" width="130" port="klartext">klartext <font face="Arial Italic" color="grey60">text</font></td></tr>
   <tr><td align="left" width="130" port="kommentar">kommentar <font face="Arial Italic" color="grey60">text</font></td></tr>
   <tr><td align="left" width="130" port="leistung">leistung <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="lieferant">lieferant <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="sicherheitszone">sicherheitszone <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="spannung">spannung <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="strom">strom <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
-  <tr><td align="left" width="130" port="tagname">tagname <font face="Arial Italic" color="grey60">string</font></td></tr>
-  <tr><td align="left" width="130" port="tagnr">tagnr <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="tag_anlage">tag_anlage <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="tag_nummer">tag_nummer <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="tag_objekt">tag_objekt <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="update_necessary">update_necessary <font face="Arial Italic" color="grey60">boolean</font></td></tr>
 </table>
 }>];
@@ -172,11 +189,22 @@ m_Info [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding
   <tr><td align="left" width="130" port="querverweis">querverweis <font face="Arial Italic" color="grey60">text</font></td></tr>
 </table>
 }>];
+m_Iochannel [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Iochannel</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="address_suffix">address_suffix <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="channeltype">channeltype <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="kanalnummer">kanalnummer <font face="Arial Italic" color="grey60">integer ∗ U</font></td></tr>
+</table>
+}>];
 m_Iogroup [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
   <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Iogroup</font></td></tr>
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="address_prefix">address_prefix <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string U</font></td></tr>
   <tr><td align="left" width="130" port="profibus_address">profibus_address <font face="Arial Italic" color="grey60">string</font></td></tr>
 </table>
@@ -188,6 +216,86 @@ m_Iogroupcomponent [label = <{<table border="0" align="center" cellspacing="0.5"
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
   <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
   <tr><td align="left" width="130" port="steckplatznummer">steckplatznummer <font face="Arial Italic" color="grey60">integer ∗ U</font></td></tr>
+</table>
+}>];
+m_Iosignal [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Iosignal</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="ai">ai <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="ao">ao <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="bus">bus <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="di">di <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="do">do <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="ex">ex <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="info1">info1 <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="info2">info2 <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="info3">info3 <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="info4">info4 <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="info5">info5 <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="inkr">inkr <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="pendenz">pendenz <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="safety">safety <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="sicherheitsgruppe">sicherheitsgruppe <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="signal_ana_range_decimals">signal_ana_range_decimals <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="signal_ana_range_max">signal_ana_range_max <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
+  <tr><td align="left" width="130" port="signal_ana_range_min">signal_ana_range_min <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
+  <tr><td align="left" width="130" port="signal_ana_range_unit">signal_ana_range_unit <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="signal_beschreibung">signal_beschreibung <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="signal_dig_aktiv_text">signal_dig_aktiv_text <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="signal_phys">signal_phys <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="ssi">ssi <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="sw_datentyp">sw_datentyp <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="sw_event_message">sw_event_message <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="sw_event_normal_state">sw_event_normal_state <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="sw_event_prio">sw_event_prio <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="sw_info1">sw_info1 <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="sw_info2">sw_info2 <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="sw_info3">sw_info3 <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="sw_trend">sw_trend <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="tagname_suffix">tagname_suffix <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="z">z <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+</table>
+}>];
+m_Iosignalenginfo [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Iosignalenginfo</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="frage">frage <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="frage_antwort">frage_antwort <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="frage_antwort_datum">frage_antwort_datum <font face="Arial Italic" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="frage_antwort_wer">frage_antwort_wer <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="frage_datum">frage_datum <font face="Arial Italic" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="frage_wer">frage_wer <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="pendenz">pendenz <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="pendenz_antwort">pendenz_antwort <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="pendenz_antwort_datum">pendenz_antwort_datum <font face="Arial Italic" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="pendenz_antwort_wer">pendenz_antwort_wer <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="pendenz_datum">pendenz_datum <font face="Arial Italic" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="pendenz_wer">pendenz_wer <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="sw_instruction">sw_instruction <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="sw_instruction_antwort">sw_instruction_antwort <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="sw_instruction_antwort_datum">sw_instruction_antwort_datum <font face="Arial Italic" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="sw_instruction_antwort_wer">sw_instruction_antwort_wer <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="sw_instruction_datum">sw_instruction_datum <font face="Arial Italic" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="sw_instruction_wer">sw_instruction_wer <font face="Arial Italic" color="grey60">string</font></td></tr>
+</table>
+}>];
+m_Iosignalibninfo [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">Iosignalibninfo</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="bemerkungen">bemerkungen <font face="Arial Italic" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="signaltest_event">signaltest_event <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="signaltest_feld">signaltest_feld <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="signaltest_hmi">signaltest_hmi <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="signaltest_ok_datum">signaltest_ok_datum <font face="Arial Italic" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="signaltest_ok_wer">signaltest_ok_wer <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="signaltest_sw">signaltest_sw <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="todo">todo <font face="Arial Italic" color="grey60">text</font></td></tr>
 </table>
 }>];
 m_Iotype [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -235,7 +343,7 @@ m_Offertposition [label = <{<table border="0" align="center" cellspacing="0.5" c
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
-  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string U</font></td></tr>
 </table>
 }>];
 m_Project [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -255,7 +363,15 @@ m_Subproject [label = <{<table border="0" align="center" cellspacing="0.5" cellp
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="info1_text">info1_text <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="info2_text">info2_text <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="info3_text">info3_text <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="info4_text">info4_text <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="info5_text">info5_text <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="max_zeichen_klartext_grobeng">max_zeichen_klartext_grobeng <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="max_zeichen_klartext_signal">max_zeichen_klartext_signal <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
   <tr><td align="left" width="130" port="name">name <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="trennzeichen">trennzeichen <font face="Arial Italic" color="grey60">string</font></td></tr>
 </table>
 }>];
 m_SubprojectUser [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -336,12 +452,19 @@ m_Switchgear [label = <{<table border="0" align="center" cellspacing="0.5" cellp
 </table>
 |
 <table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
-  <tr><td align="left" width="130" port="brutto">brutto <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
-  <tr><td align="left" width="130" port="kennung">kennung <font face="Arial Italic" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="kennung">kennung <font face="Arial Italic" color="grey60">string U</font></td></tr>
   <tr><td align="left" width="130" port="leistung">leistung <font face="Arial Italic" color="grey60">text</font></td></tr>
   <tr><td align="left" width="130" port="maxstrom">maxstrom <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
-  <tr><td align="left" width="130" port="rabatt">rabatt <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
   <tr><td align="left" width="130" port="typ">typ <font face="Arial Italic" color="grey60">integer ∗</font></td></tr>
+</table>
+}>];
+m_SwitchgearSupplier [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial Bold" point-size="11">SwitchgearSupplier</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="brutto">brutto <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
+  <tr><td align="left" width="130" port="rabatt">rabatt <font face="Arial Italic" color="grey60">float ∗</font></td></tr>
 </table>
 }>];
 m_Switchgearcombination [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
@@ -444,6 +567,7 @@ m_Wirecaptionprice [label = <{<table border="0" align="center" cellspacing="0.5"
   m_Wire -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Wire -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Wire -> m_Grobengineering [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Grobengineering -> m_Iosignal [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Assembly -> m_Iogroupcomponent [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Customer -> m_Subproject [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Switchgear -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "2"];
@@ -453,11 +577,21 @@ m_Wirecaptionprice [label = <{<table border="0" align="center" cellspacing="0.5"
   m_ElectricalInstallation -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_ElectricalInstallation -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_ElectricalInstallation -> m_Device [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Drive -> m_DriveSupplier [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Drive -> m_Supplier [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "1", constraint = "false"];
+  m_Supplier -> m_DriveSupplier [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_ElectricalInstallation -> m_ElectricalInstallationSupplier [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_ElectricalInstallation -> m_Supplier [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"];
+  m_Supplier -> m_ElectricalInstallationSupplier [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Subproject -> m_History [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Subproject -> m_Info [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Iogroupcomponent -> m_Iochannel [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Iochannel -> m_Iosignal [arrowhead = "none", arrowtail = "none", weight = "2"];
   m_Switchgearcombination -> m_Iogroup [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Iotype -> m_Iogroup [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Iogroup -> m_Iogroupcomponent [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Iosignal -> m_Iosignalenginfo [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Iosignal -> m_Iosignalibninfo [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Offer -> m_OfferOffertposition [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Offer -> m_Offertposition [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"];
   m_Subsubproject -> m_Offer [arrowhead = "normal", arrowtail = "none", weight = "2"];
@@ -470,13 +604,19 @@ m_Wirecaptionprice [label = <{<table border="0" align="center" cellspacing="0.5"
   m_Subproject -> m_Subsubproject [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Supplier -> m_Subsubproject [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Supplier -> m_Subsubproject [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Supplier -> m_Subsubproject [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Supplier -> m_Subsubproject [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Supplier -> m_Subsubproject [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Subsystem -> m_Unit [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Supplier -> m_SupplierSuppliertype [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Supplier -> m_Suppliertype [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"];
   m_Supplier -> m_WireSupplier [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Supplier -> m_Wire [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"];
   m_Supplier -> m_Wirecaptionprice [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Supplier -> m_SwitchgearSupplier [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Supplier -> m_Switchgear [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"];
   m_Suppliertype -> m_SupplierSuppliertype [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Switchgear -> m_SwitchgearSupplier [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Switchgear -> m_Switchgearcombination [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Switchgearcombination -> m_Switchgearconnection [arrowhead = "normal", arrowtail = "none", weight = "2"];
   m_Switchgearcombination -> m_Switchgearconnection [arrowhead = "normal", arrowtail = "none", weight = "2"];
