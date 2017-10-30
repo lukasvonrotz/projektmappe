@@ -1,6 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   # def new
@@ -44,9 +44,33 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:anzahl_eintraege_assemblies,
+                                                              :anzahl_eintraege_customers,
+                                                              :anzahl_eintraege_devices,
+                                                              :anzahl_eintraege_drives,
+                                                              :anzahl_eintraege_elinst,
+                                                              :anzahl_eintraege_grobengineerings,
+                                                              :anzahl_eintraege_iogroups,
+                                                              :anzahl_eintraege_iosignals,
+                                                              :anzahl_eintraege_subprojects,
+                                                              :anzahl_eintraege_switchgears,
+                                                              :anzahl_eintraege_switchgearcombinations,
+                                                              :anzahl_eintraege_wires,
+                                                              :sortierung_assemblies,
+                                                              :sortierung_customers,
+                                                              :sortierung_devices,
+                                                              :sortierung_drives,
+                                                              :sortierung_elinst,
+                                                              :sortierung_grobengineerings,
+                                                              :sortierung_iogroups,
+                                                              :sortierung_iosignals,
+                                                              :sortierung_subprojects,
+                                                              :sortierung_switchgears,
+                                                              :sortierung_switchgearcombinations,
+                                                              :sortierung_wires
+    ])
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)

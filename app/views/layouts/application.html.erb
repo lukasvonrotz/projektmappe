@@ -36,6 +36,47 @@
     </div>
     <footer style="height: 100px; background-color: white; margin-top: 50px;"></footer>
 
+    <% number_entries = 50 %>
+    <% column_to_sort = 0 %>
+    <% case controller_name %>
+      <% when "assemblies" %>
+        <% number_entries = current_user.anzahl_eintraege_assemblies %>
+        <% column_to_sort = current_user.sortierung_assemblies %>
+      <% when "customers" %>
+          <% number_entries = current_user.anzahl_eintraege_customers %>
+          <% column_to_sort = current_user.sortierung_customers %>
+      <% when "devices" %>
+          <% number_entries = current_user.anzahl_eintraege_devices %>
+          <% column_to_sort = current_user.sortierung_devices %>
+      <% when "drives" %>
+          <% number_entries = current_user.anzahl_eintraege_drives %>
+          <% column_to_sort = current_user.sortierung_drives %>
+      <% when "electrical_installations" %>
+          <% number_entries = current_user.anzahl_eintraege_elinst %>
+          <% column_to_sort = current_user.sortierung_elinst %>
+      <% when "grobengineerings" %>
+          <% number_entries = current_user.anzahl_eintraege_grobengineerings %>
+          <% column_to_sort = current_user.sortierung_grobengineerings %>
+      <% when "iogroups" %>
+          <% number_entries = current_user.anzahl_eintraege_iogroups %>
+          <% column_to_sort = current_user.sortierung_iogroups %>
+      <% when "iosignals" %>
+          <% number_entries = current_user.anzahl_eintraege_iosignals %>
+          <% column_to_sort = current_user.sortierung_iosignals %>
+      <% when "subprojects" %>
+          <% number_entries = current_user.anzahl_eintraege_subprojects %>
+          <% column_to_sort = current_user.sortierung_subprojects %>
+      <% when "switchgears" %>
+          <% number_entries = current_user.anzahl_eintraege_switchgears %>
+          <% column_to_sort = current_user.sortierung_switchgears %>
+      <% when "switchgearcombinations" %>
+          <% number_entries = current_user.anzahl_eintraege_switchgearcombinations %>
+          <% column_to_sort = current_user.sortierung_switchgearcombinations %>
+      <% when "wires" %>
+          <% number_entries = current_user.anzahl_eintraege_wires %>
+          <% column_to_sort = current_user.sortierung_wires %>
+    <% end %>
+
 
     <script>
       $(document).ready(function() {
@@ -46,7 +87,8 @@
                 leftColumns: 1,
                 rightColumns: 1
             },
-            pageLength: 10,
+            pageLength: <%= number_entries %>,
+            order: [[ <%= column_to_sort %>, "asc" ]],
             language: {
                 decimal:        "",
                 emptyTable:     "Keine Einträge gefunden",
