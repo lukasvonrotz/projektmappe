@@ -6,6 +6,11 @@
                              placeholder: 'Kennnug für FU eingeben' %>
     </div>
     <div class="field form-group">
+      <%= drive.label :hersteller, 'Hersteller' %>
+      <%= drive.text_field :hersteller, :class => "form-control",
+                           placeholder: 'Hersteller für FU eingeben' %>
+    </div>
+    <div class="field form-group">
         <%= drive.label :artikelnr, 'Artikel-Nr.' %>
         <%= drive.text_field :artikelnr, :class => "form-control",
                                 placeholder: 'Artikelnummer für FU eingeben' %>

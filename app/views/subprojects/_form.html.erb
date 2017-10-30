@@ -5,6 +5,11 @@
       <%= project_subproject.text_field :name, :class => "form-control",
                                         placeholder: 'Name für Projekt eingeben' %>
     </div>
+    <div class="field form-group">
+      <%= project_subproject.label :projektnummer_prola, 'Projektnummer Prola' %>
+      <%= project_subproject.text_field :projektnummer_prola, :class => "form-control",
+                                        placeholder: 'Projektnummer Prola eingeben' %>
+    </div>
 
     <div class="field form-group">
       <%= project_subproject.label :customer, 'Kunde' %>

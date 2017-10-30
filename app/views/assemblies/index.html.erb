@@ -153,6 +153,7 @@
         <tr>
           <th>ID</th>
           <th>Kennung</th>
+          <th>Hersteller</th>
           <th>Artikel-Nr.</th>
           <th>Bezeichnung</th>
           <th>Kanäle Total</th>
@@ -180,6 +181,7 @@
             <tr>
               <td><%= assembly.id %></td>
               <td><a href="<%= assembly_path(assembly.id) %>"><%= assembly.kennung %></a></td>
+              <td><%= assembly.hersteller %></td>
               <td><%= assembly.artikelnr %></td>
               <td><%= truncate(assembly.bezeichnung, :length => 50) %></td>
               <td><%= assembly.kanaele_total %></td>

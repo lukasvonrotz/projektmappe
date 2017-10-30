@@ -6,6 +6,11 @@
                              placeholder: 'Kennnug für Baugruppe eingeben' %>
     </div>
     <div class="field form-group">
+      <%= assembly.label :hersteller, 'Hersteller' %>
+      <%= assembly.text_field :hersteller, :class => "form-control",
+                              placeholder: 'Hersteller für Baugruppe eingeben' %>
+    </div>
+    <div class="field form-group">
         <%= assembly.label :artikelnr, 'Artikel-Nr.' %>
         <%= assembly.text_field :artikelnr, :class => "form-control",
                                 placeholder: 'Artikelnummer für Baugruppe eingeben' %>

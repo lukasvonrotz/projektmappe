@@ -8,6 +8,7 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
+      <th>Projektnummer Prola</th>
       <th>Kunde</th>
       <th>Trennzeichen</th>
       <th>Max. Zeichen für Klartext in Grobengineering</th>
@@ -27,6 +28,7 @@
         <tr>
           <td><%= subproject.id %></td>
           <td><a href="<%= project_subproject_path(@project.id, subproject.id) %>"><%= subproject.name %></a></td>
+          <td><%= subproject.projektnummer_prola %></td>
           <td><%= subproject.customer.name %></td>
           <td><%= subproject.trennzeichen %></td>
           <td><%= subproject.max_zeichen_klartext_grobeng %></td>
