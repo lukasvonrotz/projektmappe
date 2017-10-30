@@ -20,29 +20,29 @@
     </div>
     <div class="field form-group">
       <%= subsubproject.label :wiresupplier, 'Kabellieferant' %>
-      <%= subsubproject.collection_select :wiresupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'}),:id,:name,
+      <%= subsubproject.collection_select :wiresupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabel'}).sort_by {|obj| obj.name},:id,:name,
 
                                                   {:selected => wiresupplierid}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
       <%= subsubproject.label :wirecaptionsupplier, 'Kabelbeschriftungslieferant' %>
-      <%= subsubproject.collection_select :wirecaptionsupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}),:id,:name,
+      <%= subsubproject.collection_select :wirecaptionsupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Kabelbeschriftung'}).sort_by {|obj| obj.name},:id,:name,
 
                                           {:selected => wirecaptionsupplierid}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
       <%= subsubproject.label :electricalinstallationsupplier, 'Elektroinstallationslieferant' %>
-      <%= subsubproject.collection_select :electricalinstallationsupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Elektroinstallation'}),:id,:name,
+      <%= subsubproject.collection_select :electricalinstallationsupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Elektroinstallation'}).sort_by {|obj| obj.name},:id,:name,
                                           {:selected => electricalinstallationsupplierid}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
       <%= subsubproject.label :drivesupplier, 'FU-Lieferant' %>
-      <%= subsubproject.collection_select :drivesupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'FU'}),:id,:name,
+      <%= subsubproject.collection_select :drivesupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'FU'}).sort_by {|obj| obj.name},:id,:name,
                                           {:selected => drivesupplierid}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
       <%= subsubproject.label :switchgearsupplier, 'Schaltanlagenbau-Lieferant' %>
-      <%= subsubproject.collection_select :switchgearsupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Schaltanlagenbau'}),:id,:name,
+      <%= subsubproject.collection_select :switchgearsupplier_id, Supplier.joins(:suppliertypes).includes(:suppliertypes).where(:suppliertypes => {:name => 'Schaltanlagenbau'}).sort_by {|obj| obj.name},:id,:name,
                                           {:selected => switchgearsupplierid}, {class:"form-control"} %>
     </div>
 

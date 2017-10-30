@@ -270,7 +270,7 @@
         <br>
         <div class="field form-group">
           <%= device.label :switchgear_einbau, 'Schaltanlage Einbau' %>
-          <%= device.collection_select :switchgear_einbau_id, Switchgear.all,:id,:kennung,
+          <%= device.collection_select :switchgear_einbau_id, Switchgear.all.sort_by {|obj| obj.kennung},:id,:kennung,
                                                      {:selected => switchgear_einbau_id, :include_blank => ''}, {class:"form-control"} %>
         </div>
         <div class="field form-group">
@@ -284,7 +284,7 @@
         <br>
         <div class="field form-group">
           <%= device.label :wire_steuerung, 'Kabel Steuerung' %>
-          <%= device.collection_select :wire_steuerung_id, Wire.all,:id,:kabeltyp,
+          <%= device.collection_select :wire_steuerung_id, Wire.all.sort_by {|obj| obj.kabeltyp},:id,:kabeltyp,
                                        {:selected => wire_steuerung_id, :include_blank => ''}, {class:"form-control"} %>
         </div>
         <div class="field form-group">
@@ -296,7 +296,7 @@
         <br><br>
         <div class="field form-group">
           <%= device.label :wire_speisung, 'Kabel Speisung' %>
-          <%= device.collection_select :wire_speisung_id, Wire.all,:id,:kabeltyp,
+          <%= device.collection_select :wire_speisung_id, Wire.all.sort_by {|obj| obj.kabeltyp},:id,:kabeltyp,
                                        {:selected => wire_speisung_id, :include_blank => ''}, {class:"form-control"} %>
         </div>
         <div class="field form-group">
@@ -308,7 +308,7 @@
         <br><br>
         <div class="field form-group">
           <%= device.label :wire_potausgleich, 'Kabel Pot.-Ausgleich' %>
-          <%= device.collection_select :wire_potausgleich_id, Wire.all,:id,:kabeltyp,
+          <%= device.collection_select :wire_potausgleich_id, Wire.all.sort_by {|obj| obj.kabeltyp},:id,:kabeltyp,
                                        {:selected => wire_potausgleich_id, :include_blank => ''}, {class:"form-control"} %>
         </div>
         <div class="field form-group">
@@ -320,7 +320,7 @@
         <br><br>
         <div class="field form-group">
           <%= device.label :elinst_trasse, 'Installation Trasse' %>
-          <%= device.collection_select :elinst_trasse_id, ElectricalInstallation.all,:id,:kennung,
+          <%= device.collection_select :elinst_trasse_id, ElectricalInstallation.all.sort_by {|obj| obj.kennung},:id,:kennung,
                                        {:selected => elinst_trasse_id, :include_blank => ''}, {class:"form-control"} %>
         </div>
         <div class="field form-group">
@@ -332,7 +332,7 @@
         <br><br>
         <div class="field form-group">
           <%= device.label :elinst_rohr, 'Installation Rohr' %>
-          <%= device.collection_select :elinst_rohr_id, ElectricalInstallation.all,:id,:kennung,
+          <%= device.collection_select :elinst_rohr_id, ElectricalInstallation.all.sort_by {|obj| obj.kennung},:id,:kennung,
                                        {:selected => elinst_rohr_id, :include_blank => ''}, {class:"form-control"} %>
         </div>
         <div class="field form-group">
@@ -344,7 +344,7 @@
         <br><br>
         <div class="field form-group">
           <%= device.label :elinst_geraete, 'Installation Geräte' %>
-          <%= device.collection_select :elinst_geraete_id, ElectricalInstallation.all,:id,:kennung,
+          <%= device.collection_select :elinst_geraete_id, ElectricalInstallation.all.sort_by {|obj| obj.kennung},:id,:kennung,
                                        {:selected => elinst_geraete_id, :include_blank => ''}, {class:"form-control"} %>
         </div>
         <div class="field form-group">

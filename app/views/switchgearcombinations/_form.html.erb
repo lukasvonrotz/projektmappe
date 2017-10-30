@@ -7,7 +7,7 @@
     </div>
     <div class="field form-group">
       <%= switchgearcombination.label :switchgear, 'Typ' %>
-      <%= switchgearcombination.collection_select :switchgear_id, Switchgear.where(:typ => 1),:id,:kennung,
+      <%= switchgearcombination.collection_select :switchgear_id, Switchgear.where(:typ => 1).sort_by {|obj| obj.kennung},:id,:kennung,
 
                                     {:selected => switchgearid}, {class:"form-control"} %>
     </div>

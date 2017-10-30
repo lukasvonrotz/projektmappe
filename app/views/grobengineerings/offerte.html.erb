@@ -108,7 +108,7 @@
     <br>
     <a href="<%= new_project_subproject_subsubproject_offer_path %>" class="btn btn-success">Offerte speichern</a><br><br>
     <h2>Bestehende Offerten</h2>
-    <table class="table table-striped table-bordered data_table" cellspacing="0" width="100%">
+    <table class="table table-striped table-bordered data_table_tab" cellspacing="0" width="100%">
       <thead>
       <tr>
         <th>Datum</th>
@@ -145,11 +145,37 @@
 
 <%= render 'layouts/loading', :message => "Lade Offerte..." %>
 <%= render 'layouts/popups' %>
+</br></br>
+<%= link_to "Zurück zu Projekt", project_subproject_path(@subsubproject.subproject.project.id, @subsubproject.subproject.id) %>
 
 <script>
+    $(document).ready(function() {
+        $('.data_table_tab').DataTable({
+            scrollX:        true,
+            scrollCollapse: true,
+            pageLength: 10,
+            language: {
+                decimal:        "",
+                emptyTable:     "Keine Einträge gefunden",
+                info:           "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
+                infoEmpty:      "Zeige 0 bis 0 von 0 Einträgen",
+                infoFiltered:   "(gefiltert aus total _MAX_ Einträgen)",
+                lengthMenu:     "Zeige _MENU_ Einträge",
+                loadingRecords: "Lade Daten",
+                processing:     "Verarbeite...",
+                search:         "Suche",
+                zeroRecords:    "0 Einträge",
+                paginate: {
+                    first:      "Erster",
+                    last:       "Letzter",
+                    next:       "Nächste",
+                    previous:   "Vorherige"
+                }
+            }});
+    });
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        $('.data_table').DataTable().columns.adjust();
-        $('.data_table').DataTable().columns.adjust();
+        $('.data_table_tab').DataTable().columns.adjust();
+        $('.data_table_tab').DataTable().columns.adjust();
     });
 </script>
 

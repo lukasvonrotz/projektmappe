@@ -48,17 +48,17 @@
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Aufbau
                 <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li class="<%= 'active' if current_page? (iogroups_path) %>">
-                  <%= link_to "IO-Gruppen", iogroups_path %>
-                </li>
-                <li class="<%= 'active' if current_page? (iotypes_path) %>">
-                  <%= link_to "IO-Gruppentypen", iotypes_path %>
-                </li>
                 <li class="<%= 'active' if current_page? (switchgearcombinations_path) %>">
                   <%= link_to "Schaltgerätekombinationen", switchgearcombinations_path %>
                 </li>
                 <li class="<%= 'active' if current_page? (switchgearconnections_path) %>">
                   <%= link_to "Schaltgeräte-Verbindungen", switchgearconnections_path %>
+                </li>
+                <li class="<%= 'active' if current_page? (iotypes_path) %>">
+                  <%= link_to "IO-Gruppentypen", iotypes_path %>
+                </li>
+                <li class="<%= 'active' if current_page? (iogroups_path) %>">
+                  <%= link_to "IO-Gruppen", iogroups_path %>
                 </li>
               </ul>
             </li>

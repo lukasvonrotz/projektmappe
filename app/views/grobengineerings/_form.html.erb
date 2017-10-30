@@ -2,12 +2,12 @@
 
     <div class="field form-group">
       <%= grobengineering.label :offertposition, 'Offertposition' %>
-      <%= grobengineering.collection_select :offertposition_id, Subsubproject.find(subsubprojectid).offertpositions,:id,:name,
+      <%= grobengineering.collection_select :offertposition_id, Subsubproject.find(subsubprojectid).offertpositions.sort_by {|obj| obj.name},:id,:name,
                                             {:selected => offertpositionid}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :subsystem, 'Teilanlage' %>
-      <%= grobengineering.collection_select :subsystem_id, Subsystem.where(:project_id => projectid),:id,:name,
+      <%= grobengineering.collection_select :subsystem_id, Subsystem.where(:project_id => projectid).sort_by {|obj| obj.name},:id,:name,
                                                   {:selected => subsystemid, :include_blank => ''}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
@@ -24,7 +24,7 @@
     </div>
     <div class="field form-group">
       <%= grobengineering.label :device, 'Gerät' %>
-      <%= grobengineering.collection_select :device_id, Device.all,:id,:definition,
+      <%= grobengineering.collection_select :device_id, Device.all.sort_by {|obj| obj.definition},:id,:definition,
                                     {:selected => deviceid}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
@@ -37,7 +37,7 @@
     </div>
     <div class="field form-group">
       <%= grobengineering.label :iogroup, 'IO-Gruppe' %>
-      <%= grobengineering.collection_select :iogroup_id, Iogroup.all,:id,:name,
+      <%= grobengineering.collection_select :iogroup_id, Iogroup.all.sort_by {|obj| obj.name},:id,:name,
                                             {:selected => iogroupid, :include_blank => ''}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
@@ -70,23 +70,23 @@
     </div>
     <div class="field form-group">
       <%= grobengineering.label :schaltschrank_preisberechnung, 'Schaltschrank für Preisberechnung' %>
-      <%= grobengineering.collection_select :schaltschrank_preisberechnung_id, Switchgearcombination.all,:id,:name,
+      <%= grobengineering.collection_select :schaltschrank_preisberechnung_id, Switchgearcombination.all.sort_by {|obj| obj.name},:id,:name,
                                             {:selected => schaltschrankpreisberechnungid, :include_blank => ''}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :switchgear_motorenabgang, 'Schaltanlage Motorenabgang' %>
-      <%= grobengineering.collection_select :switchgear_motorenabgang_id, Switchgear.all,:id,:kennung,
+      <%= grobengineering.collection_select :switchgear_motorenabgang_id, Switchgear.all.sort_by {|obj| obj.kennung},:id,:kennung,
                                             {:selected => motorenabgangid, :include_blank => ''}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :fu_typ, 'FU-Typ' %>
-      <%= grobengineering.collection_select :fu_typ_id, Drive.all,:id,:kennung,
+      <%= grobengineering.collection_select :fu_typ_id, Drive.all.sort_by {|obj| obj.kennung},:id,:kennung,
 
                                             {:selected => futypid, :include_blank => ''}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
       <%= grobengineering.label :wire_spez1, 'Kabel Spezifisch 1' %>
-      <%= grobengineering.collection_select :wire_spez1_id, Wire.all,:id,:kabeltyp,
+      <%= grobengineering.collection_select :wire_spez1_id, Wire.all.sort_by {|obj| obj.kabeltyp},:id,:kabeltyp,
 
                                             {:selected => wirespez1id, :include_blank => ''}, {class:"form-control"} %>
     </div>
@@ -96,7 +96,7 @@
     </div>
     <div class="field form-group">
       <%= grobengineering.label :wire_spez2, 'Kabel Spezifisch 2' %>
-      <%= grobengineering.collection_select :wire_spez2_id, Wire.all,:id,:kabeltyp,
+      <%= grobengineering.collection_select :wire_spez2_id, Wire.all.sort_by {|obj| obj.kabeltyp},:id,:kabeltyp,
 
                                             {:selected => wirespez2id, :include_blank => ''}, {class:"form-control"} %>
     </div>
@@ -106,7 +106,7 @@
     </div>
     <div class="field form-group">
       <%= grobengineering.label :wire_spez3, 'Kabel Spezifisch 3' %>
-      <%= grobengineering.collection_select :wire_spez3_id, Wire.all,:id,:kabeltyp,
+      <%= grobengineering.collection_select :wire_spez3_id, Wire.all.sort_by {|obj| obj.kabeltyp},:id,:kabeltyp,
 
                                             {:selected => wirespez3id, :include_blank => ''}, {class:"form-control"} %>
     </div>

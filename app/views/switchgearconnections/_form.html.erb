@@ -7,13 +7,13 @@
     </div>
     <div class="field form-group">
       <%= switchgearconnection.label :topswitchgear, 'Über-Knoten' %>
-      <%= switchgearconnection.collection_select :topswitchgear_id, Switchgearcombination.all,:id,:name,
+      <%= switchgearconnection.collection_select :topswitchgear_id, Switchgearcombination.all.sort_by {|obj| obj.name},:id,:name,
 
                                                   {:selected => topswitchgearid}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
       <%= switchgearconnection.label :bottomswitchgear, 'Unter-Knoten' %>
-      <%= switchgearconnection.collection_select :bottomswitchgear_id, Switchgearcombination.all,:id,:name,
+      <%= switchgearconnection.collection_select :bottomswitchgear_id, Switchgearcombination.all.sort_by {|obj| obj.name},:id,:name,
 
                                                  {:selected => bottomswitchgearid}, {class:"form-control"} %>
     </div>

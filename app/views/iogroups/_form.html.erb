@@ -12,13 +12,13 @@
     </div>
     <div class="field form-group">
       <%= iogroup.label :iotype, 'IO-Gruppentyp' %>
-      <%= iogroup.collection_select :iotype_id, Iotype.all,:id,:name,
+      <%= iogroup.collection_select :iotype_id, Iotype.all.sort_by {|obj| obj.name},:id,:name,
 
                                                {:selected => iotypeid}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
       <%= iogroup.label :switchgearcombination, 'Schaltgerätekombination' %>
-      <%= iogroup.collection_select :switchgearcombination_id, Switchgearcombination.all,:id,:name,
+      <%= iogroup.collection_select :switchgearcombination_id, Switchgearcombination.all.sort_by {|obj| obj.name},:id,:name,
 
                                     {:selected => switchgearcombinationid}, {class:"form-control"} %>
     </div>
