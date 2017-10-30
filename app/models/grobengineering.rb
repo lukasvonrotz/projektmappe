@@ -72,7 +72,7 @@ class Grobengineering < ApplicationRecord
 
   # CSV Export
   def self.to_csv
-    attributes = %w{beschreibung kommentar device_import device_anzahl update_necessary tagnr tagname bezeichnung bemerkung funktion_sw kabel_spez1_laenge kabel_spez2_laenge kabel_spez3_laenge sicherheitszone lieferant spannung leistung strom created_at updated_at subsubproject_id device_id subsystem_id iogroup_id switchgear_motorenabgang_id fu_typ_id wire_spez1_id wire_spez2_id wire_spez3_id offertposition_id}
+    attributes = %w{beschreibung kommentar device_import device_anzahl update_necessary klartext bemerkung funktion_sw kabel_spez1_laenge kabel_spez2_laenge kabel_spez3_laenge sicherheitszone lieferant spannung leistung strom created_at updated_at subsubproject_id device_id subsystem_id iogroup_id switchgear_motorenabgang_id fu_typ_id wire_spez1_id wire_spez2_id wire_spez3_id offertposition_id schaltschrank_preisberechnung_id tag_anlage tag_objekt tag_nummer}
 
     CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|
       csv << attributes
