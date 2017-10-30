@@ -12,12 +12,14 @@
       </div>
   <% end %><br>
   <% if @allPricesEntered == 0 && @captionPricesEntered == 0 %>
-    Preise anzeigen für:
+    Preise anzeigen für:</br></br>
+    <label for="select_wiresupplier">Kabellieferant</label>
     <select class="form-control" id="select_wiresupplier">
       <% @wiresuppliers.each do |wiresupplier| %>
           <option value="<%= wiresupplier.id %>"><%= wiresupplier.name %></option>
       <% end %>
     </select><br>
+    <label for="select_wirecaptionsupplier">Kabelbeschriftungslieferant</label>
     <select class="form-control" id="select_wirecaptionsupplier">
       <% @wirecaptionsuppliers.each do |wirecaptionsupplier| %>
           <option value="<%= wirecaptionsupplier.id %>"><%= wirecaptionsupplier.name %></option>
