@@ -7,7 +7,9 @@
 <% end %>
 
 <% if Suppliertype.any? %>
-  <%= render 'form', :supplier => @supplier, :context => true  %>
+  <%= render 'form', :supplier => @supplier,
+             :supplierid => @supplier.id,
+             :context => true  %>
 <% else %>
     <div class="alert alert-danger">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

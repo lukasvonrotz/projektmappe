@@ -6,12 +6,24 @@
                              placeholder: 'Name von Lieferant eingeben' %>
     </div>
 
-    <div class="field form-group">
-      <%= supplier.label :suppliertype_ids, 'Typ' %></br>
-      <%= supplier.select :suppliertype_ids,
-                         Suppliertype.all.map { |u| [u.name, u.id] },
-                         { include_blank: true }, { class: 'chosen-select', multiple: 'true' } %>
-    </div>
+    <% if !Subsubproject.where(:wiresupplier_id => supplierid).any? and
+        !Subsubproject.where(:wirecaptionsupplier_id => supplierid).any? and
+        !Subsubproject.where(:electricalinstallationsupplier_id => supplierid).any? and
+        !Subsubproject.where(:drivesupplier_id => supplierid).any? and
+        !Subsubproject.where(:switchgearsupplier_id => supplierid).any?
+    %>
+        <div class="field form-group">
+          <%= supplier.label :suppliertype_ids, 'Typ' %></br>
+          <%= supplier.select :suppliertype_ids,
+                              Suppliertype.all.map { |u| [u.name, u.id] },
+                              { include_blank: true }, { class: 'chosen-select',
+                                                         multiple: 'true'} %>
+        </div>
+    <% else %>
+        <div class="alert alert-warning">
+          Lieferantentyp kann nicht geändert werden, da dieser Lieferant bereits auf Versionen verknüpft ist.
+        </div>
+    <% end %>
 
 
     <div class="actions form-group">

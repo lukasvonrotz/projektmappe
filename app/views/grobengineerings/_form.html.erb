@@ -11,6 +11,11 @@
                                                   {:selected => subsystemid, :include_blank => ''}, {class:"form-control"} %>
     </div>
     <div class="field form-group">
+      <%= grobengineering.label :unit, 'Unit' %>
+      <%= grobengineering.collection_select :unit_id, Unit.all.sort_by {|obj| obj.name},:id,:name,
+                                            {:selected => unitid, :include_blank => ''}, {class:"form-control"} %>
+    </div>
+    <div class="field form-group">
       <%= grobengineering.label :beschreibung, 'Beschreibung' %>
       <%= grobengineering.text_field :beschreibung, :class => "form-control" %>
     </div>
@@ -123,6 +128,18 @@
       <%= grobengineering.text_field :lieferant, :class => "form-control" %>
     </div>
     <div class="field form-group">
+      <%= grobengineering.label :hwdevice_typenr_int, 'Gerät Typ-Nr' %>
+      <%= grobengineering.text_field :hwdevice_typenr_int, :class => "form-control", :required => true %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :hwdevice_manufact, 'Gerät Hersteller' %>
+      <%= grobengineering.text_field :hwdevice_manufact, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :hwdevice_typecode, 'Gerät Typ' %>
+      <%= grobengineering.text_field :hwdevice_typecode, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
       <%= grobengineering.label :spannung, 'Spannung [V]' %>
       <%= grobengineering.text_field :spannung, :class => "form-control", :required => true %>
     </div>
@@ -133,6 +150,66 @@
     <div class="field form-group">
       <%= grobengineering.label :strom, 'Strom [A]' %>
       <%= grobengineering.text_field :strom, :class => "form-control", :required => true %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :motor_rpm, 'Motor Drehzahl' %>
+      <%= grobengineering.text_field :motor_rpm, :class => "form-control", :required => true %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :motor_cosphi, 'Motor cosPhi' %>
+      <%= grobengineering.text_field :motor_cosphi, :class => "form-control", :required => true %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :motor_contype, 'Motor Anschluss' %>
+      <%= grobengineering.text_field :motor_contype, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :motor_encoder_fc, 'Motor Drehzahlgeber FU' %>
+      <%= grobengineering.text_field :motor_encoder_fc, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :hwdevice_location, 'Standort' %>
+      <%= grobengineering.text_field :hwdevice_location, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :hwdevice_inst_phase, 'Montagephase' %>
+      <%= grobengineering.text_field :hwdevice_inst_phase, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :bmk_plant, 'BMK_Anlage' %>
+      <%= grobengineering.text_field :bmk_plant, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :bmk_location, 'BMK_Ort' %>
+      <%= grobengineering.text_field :bmk_location, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :bmk_number, 'BMK_Nummer' %>
+      <%= grobengineering.text_field :bmk_number, :class => "form-control" %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :status_lettering, 'Status Beschriftungsschild' %>
+      <%= grobengineering.select :status_lettering, [['kein Schild nötig', 0],
+                                                               ['Schild nötig', 1],
+                                                               ['Text OK', 2],
+                                                               ['Bestellen', 3],
+                                                               ['Bestellt', 4],
+                                                               ['Montiert', 5],
+                                                               ['Neu Bestellen', 13]],
+                                 {}, { :class => "form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :status_electric_diag, 'Status Elektroschema' %>
+      <%= grobengineering.select :status_electric_diag, [['kein Schema', 0],
+                                                               ['integrieren', 1],
+                                                               ['integriert', 2],
+                                                               ['updaten', 11],
+                                                               ['update OK', 12]],
+                                 {}, { :class => "form-control"} %>
+    </div>
+    <div class="field form-group">
+      <%= grobengineering.label :history, 'History' %>
+      <%= grobengineering.text_area :history, :class => "form-control" %>
     </div>
 
     <%= grobengineering.hidden_field :subsubproject_id, :value => subsubprojectid %>

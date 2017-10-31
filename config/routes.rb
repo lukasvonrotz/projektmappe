@@ -132,7 +132,7 @@ Rails.application.routes.draw do
         to: "offers#csvexport", as: :csvexport, via: [:get]
 
   match "/settings", to: "settings#index", as: :settings, via: [:get]
-  match "/settings/csvexport_all_tables", to: "settings#csvexport_all_tables", as: :csvexport_all_tables, via: [:get]
+  match "/settings/csvexport_all_tables/:subsubproject_id", to: "settings#csvexport_all_tables", as: :csvexport_all_tables, via: [:get]
 
   # generate / destroy channels per iogroup / iogroupcomponent
   match "/iogroups/:iogroup_id/generate_iogroup_channels",

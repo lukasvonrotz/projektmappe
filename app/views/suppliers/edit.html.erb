@@ -6,7 +6,9 @@
     </div>
 <% end %>
 
-<%= render 'form', :supplier => @supplier, :context => false  %>
+<%= render 'form', :supplier => @supplier,
+           :supplierid => @supplier.id,
+           :context => false  %>
 <%= link_to "Zurück zu Lieferantenübersicht", suppliers_path %>
 
 <%= render 'layouts/loading', :message => "Lade..." %>

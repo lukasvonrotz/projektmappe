@@ -27,6 +27,7 @@
                 <th rowspan="2">ID</th>
                 <th rowspan="2">Offertposition</th>
                 <th rowspan="2">Teilanlage</th>
+                <th rowspan="2">Unit</th>
                 <th rowspan="2">Beschreibung</th>
                 <th rowspan="2">Kommentar</th>
                 <th rowspan="2">Gerät Import</th>
@@ -41,15 +42,32 @@
                 <th rowspan="2">Tag-Nummer</th>
                 <th rowspan="2">Brake</th>
                 <th rowspan="2">Klartext</th>
-                <th rowspan="2">Bemerkung</th>
+                <th rowspan="2">SW Bemerkung</th>
                 <th rowspan="2">Funktion SW [h]</th>
                 <th rowspan="2">Schaltanlagen Motorenabgang</th>
                 <th rowspan="2">FU-Typ</th>
                 <th colspan="6">Kabel Spezifisch</th>
                 <th rowspan="2">Lieferant</th>
+                <th rowspan="2">Sicherheitszone</th>
+                <th rowspan="2">Gerät Hersteller</th>
+                <th rowspan="2">Gerät Typ</th>
+                <th rowspan="2">Gerät Typ-Nr</th>
+                <th rowspan="2">Gerät Link Datenblatt</th>
                 <th rowspan="2">Spannung [V]</th>
                 <th rowspan="2">Leistung [kW]</th>
                 <th rowspan="2">Strom [A]</th>
+                <th rowspan="2">Motor Drehzahl</th>
+                <th rowspan="2">Motor cosPhi</th>
+                <th rowspan="2">Motor Anschluss</th>
+                <th rowspan="2">Motor Drehzahlgeber FU</th>
+                <th rowspan="2">Standort</th>
+                <th rowspan="2">Montagephase</th>
+                <th rowspan="2">BMK_Anlage</th>
+                <th rowspan="2">BMK_Ort</th>
+                <th rowspan="2">BMK_Nummer</th>
+                <th rowspan="2">Status Beschriftungsschild</th>
+                <th rowspan="2">Status Elektroschema</th>
+                <th rowspan="2">History</th>
                 <th rowspan="2">Strom Total [A]</th>
                 <th rowspan="2">Aktionen</th>
               </tr>
@@ -68,6 +86,7 @@
                     <td><%= grobengineering.id %></td>
                     <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.offertposition.name%>"><%= truncate(grobengineering.offertposition.name, :length => 40) %></a></td>
                     <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.subsystem.nil? ? '' : grobengineering.subsystem.name%>"><%= truncate((grobengineering.subsystem.nil? ? '' : grobengineering.subsystem.name), :length => 40) %></a></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.unit.nil? ? '' : grobengineering.unit.name%>"><%= truncate((grobengineering.unit.nil? ? '' : grobengineering.unit.name), :length => 40) %></a></td>
                     <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.beschreibung%>"><%= truncate(grobengineering.beschreibung, :length => 40) %></a></td>
                     <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.kommentar%>"><%= truncate(grobengineering.kommentar, :length => 40) %></a></td>
                     <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.device_import%>"><%= truncate(grobengineering.device_import, :length => 40) %></a></td>
@@ -103,9 +122,60 @@
                     <td><a class="tooltip-text" data-toggle="tooltip" title="<%=(grobengineering.wire_spez3.nil? ? '' : grobengineering.wire_spez3.kabeltyp)%>"><%= truncate((grobengineering.wire_spez3.nil? ? '' : grobengineering.wire_spez3.kabeltyp), :length => 40) %></a></td>
                     <td><%= grobengineering.kabel_spez3_laenge %></td>
                     <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.lieferant%>"><%= truncate(grobengineering.lieferant, :length => 40) %></a></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.sicherheitszone%>"><%= truncate(grobengineering.sicherheitszone, :length => 40) %></a></td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.hwdevice_manufact%>"><%= truncate(grobengineering.hwdevice_manufact, :length => 40) %></a></td>
+                    <td><%= grobengineering.hwdevice_typenr_int %></td>
+                    <td><%= grobengineering.hwdevice_typecode %></td>
+                    <td><%= grobengineering.hwdevice_linkdatasheet %></td>
                     <td><%= grobengineering.spannung %></td>
                     <td><%= grobengineering.leistung %></td>
                     <td><%= grobengineering.strom %></td>
+                    <td><%= grobengineering.motor_rpm %></td>
+                    <td><%= grobengineering.motor_cosphi %></td>
+                    <td><%= grobengineering.motor_contype%></td>
+                    <td><%= grobengineering.motor_encoder_fc %></td>
+                    <td><%= grobengineering.hwdevice_location %></td>
+                    <td><%= grobengineering.hwdevice_inst_phase %></td>
+                    <td><%= grobengineering.bmk_plant %></td>
+                    <td><%= grobengineering.bmk_location %></td>
+                    <td><%= grobengineering.bmk_number %></td>
+                    <td>
+                      <% case grobengineering.status_lettering %>
+                        <% when 0 %>
+                            Kein Schild nötig
+                        <% when 1 %>
+                            Schild nötig
+                        <% when 2 %>
+                            Text OK
+                        <% when 3 %>
+                            Bestellen
+                        <% when 4 %>
+                            bestellt
+                        <% when 5 %>
+                            montiert
+                        <% when 13 %>
+                            Neu bestellen
+                        <% else %>
+                            Status undefiniert
+                      <% end %>
+                    </td>
+                    <td>
+                      <% case grobengineering.status_electric_diag %>
+                      <% when 0 %>
+                          kein Schema
+                      <% when 1 %>
+                          integrieren
+                      <% when 2 %>
+                          integriert
+                      <% when 11 %>
+                          updaten
+                      <% when 12 %>
+                          update ok
+                      <% else %>
+                          Status undefiniert
+                      <% end %>
+                    </td>
+                    <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.history%>"><%= truncate(grobengineering.history, :length => 40) %></a></td>
                     <td><%= grobengineering.strom_total %></td>
                     <td>
                       <a href="<%= project_subproject_subsubproject_grobengineering_path(@project.id, @subproject.id, @subsubproject.id, grobengineering.id) %>" class="btn btn-xs btn-default btn-index">Info</a>

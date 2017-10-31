@@ -9,6 +9,7 @@ class Grobengineering < ApplicationRecord
   validates :subsubproject, :presence => true
 
   belongs_to :subsystem, optional: true
+  belongs_to :unit, optional: true
   belongs_to :iogroup, optional: true
 
   belongs_to :device
@@ -32,6 +33,11 @@ class Grobengineering < ApplicationRecord
   validates :kabel_spez1_laenge, presence:true, numericality: {only_float: true}
   validates :kabel_spez2_laenge, presence:true, numericality: {only_float: true}
   validates :kabel_spez3_laenge, presence:true, numericality: {only_float: true}
+  validates :hwdevice_typenr, presence:true, numericality: {only_integer: true}
+  validates :motor_rpm, presence:true, numericality: {only_float: true}
+  validates :motor_cosphi, presence:true, numericality: {only_float: true}
+  validates :status_lettering, presence:true, numericality: {only_integer: true}
+  validates :status_electric_diag, presence:true, numericality: {only_integer: true}
 
   has_many :iosignals, dependent: :destroy
 
@@ -72,7 +78,7 @@ class Grobengineering < ApplicationRecord
 
   # CSV Export
   def self.to_csv
-    attributes = %w{beschreibung kommentar device_import device_anzahl update_necessary klartext bemerkung funktion_sw kabel_spez1_laenge kabel_spez2_laenge kabel_spez3_laenge sicherheitszone lieferant spannung leistung strom created_at updated_at subsubproject_id device_id subsystem_id iogroup_id switchgear_motorenabgang_id fu_typ_id wire_spez1_id wire_spez2_id wire_spez3_id offertposition_id schaltschrank_preisberechnung_id tag_anlage tag_objekt tag_nummer}
+    attributes = %w{beschreibung kommentar device_import device_anzahl update_necessary klartext bemerkung funktion_sw kabel_spez1_laenge kabel_spez2_laenge kabel_spez3_laenge sicherheitszone lieferant spannung leistung strom created_at updated_at subsubproject_id device_id subsystem_id iogroup_id switchgear_motorenabgang_id fu_typ_id wire_spez1_id wire_spez2_id wire_spez3_id offertposition_id schaltschrank_preisberechnung_id tag_anlage tag_objekt tag_nummer brake unit_id hwdevice_manufact hwdevice_typecode hwdevice_linkdatasheet motor_rpm motor_cosphi motor_contype motor_encoder_fc hwdevice_location hwdevice_inst_phase bmk_plant bmk_location bmk_number status_lettering status_electric_diag history hwdevice_typenr_int }
 
     CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|
       csv << attributes

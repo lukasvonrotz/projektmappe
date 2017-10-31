@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030114621) do
+ActiveRecord::Schema.define(version: 20171031110237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,23 @@ ActiveRecord::Schema.define(version: 20171030114621) do
     t.string   "tag_objekt"
     t.string   "tag_nummer"
     t.string   "brake"
+    t.integer  "unit_id"
+    t.string   "hwdevice_manufact"
+    t.string   "hwdevice_typecode"
+    t.string   "hwdevice_linkdatasheet"
+    t.float    "motor_rpm",                        default: 0.0, null: false
+    t.float    "motor_cosphi",                     default: 0.0, null: false
+    t.string   "motor_contype"
+    t.string   "motor_encoder_fc"
+    t.string   "hwdevice_location"
+    t.string   "hwdevice_inst_phase"
+    t.string   "bmk_plant"
+    t.string   "bmk_location"
+    t.string   "bmk_number"
+    t.integer  "status_lettering",                 default: 0,   null: false
+    t.integer  "status_electric_diag",             default: 0,   null: false
+    t.text     "history"
+    t.integer  "hwdevice_typenr_int",              default: 0,   null: false
     t.index ["device_id"], name: "index_grobengineerings_on_device_id", using: :btree
     t.index ["fu_typ_id"], name: "index_grobengineerings_on_fu_typ_id", using: :btree
     t.index ["iogroup_id"], name: "index_grobengineerings_on_iogroup_id", using: :btree
@@ -200,6 +217,7 @@ ActiveRecord::Schema.define(version: 20171030114621) do
     t.index ["subsubproject_id"], name: "index_grobengineerings_on_subsubproject_id", using: :btree
     t.index ["subsystem_id"], name: "index_grobengineerings_on_subsystem_id", using: :btree
     t.index ["switchgear_motorenabgang_id"], name: "index_grobengineerings_on_switchgear_motorenabgang_id", using: :btree
+    t.index ["unit_id"], name: "index_grobengineerings_on_unit_id", using: :btree
     t.index ["wire_spez1_id"], name: "index_grobengineerings_on_wire_spez1_id", using: :btree
     t.index ["wire_spez2_id"], name: "index_grobengineerings_on_wire_spez2_id", using: :btree
     t.index ["wire_spez3_id"], name: "index_grobengineerings_on_wire_spez3_id", using: :btree
@@ -663,6 +681,7 @@ ActiveRecord::Schema.define(version: 20171030114621) do
   add_foreign_key "grobengineerings", "subsystems"
   add_foreign_key "grobengineerings", "switchgearcombinations", column: "schaltschrank_preisberechnung_id"
   add_foreign_key "grobengineerings", "switchgears", column: "switchgear_motorenabgang_id"
+  add_foreign_key "grobengineerings", "units"
   add_foreign_key "grobengineerings", "wires", column: "wire_spez1_id"
   add_foreign_key "grobengineerings", "wires", column: "wire_spez2_id"
   add_foreign_key "grobengineerings", "wires", column: "wire_spez3_id"

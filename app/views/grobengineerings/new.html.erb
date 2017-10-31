@@ -15,6 +15,7 @@
       <% deviceid = @grobengineering.device_id.nil? ? Device.first.id : @grobengineering.device_id %>
       <% schaltschrankpreisberechnungid = @grobengineering.schaltschrank_preisberechnung_id.nil? ? '' : @grobengineering.schaltschrank_preisberechnung_id %>
       <% subsystemid = @grobengineering.subsystem_id.nil? ? '' : @grobengineering.subsystem_id %>
+      <% unitid = @grobengineering.unit_id.nil? ? '' : @grobengineering.unit_id %>
       <% iogroupid = @grobengineering.iogroup_id.nil? ? '' : @grobengineering.iogroup_id %>
       <% motorenabgangid = @grobengineering.switchgear_motorenabgang_id.nil? ? '' : @grobengineering.switchgear_motorenabgang_id %>
       <% futypid = @grobengineering.fu_typ_id.nil? ? '' : @grobengineering.fu_typ_id %>
@@ -29,6 +30,7 @@
                  :deviceid => deviceid,
                  :schaltschrankpreisberechnungid => schaltschrankpreisberechnungid,
                  :subsystemid => subsystemid,
+                 :unitid => unitid,
                  :iogroupid => iogroupid,
                  :motorenabgangid => motorenabgangid,
                  :futypid => futypid,
