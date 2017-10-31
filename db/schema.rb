@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031110237) do
+ActiveRecord::Schema.define(version: 20171031124740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,7 +208,7 @@ ActiveRecord::Schema.define(version: 20171031110237) do
     t.integer  "status_lettering",                 default: 0,   null: false
     t.integer  "status_electric_diag",             default: 0,   null: false
     t.text     "history"
-    t.integer  "hwdevice_typenr_int",              default: 0,   null: false
+    t.string   "hwdevice_typenr_int",              default: "0", null: false
     t.index ["device_id"], name: "index_grobengineerings_on_device_id", using: :btree
     t.index ["fu_typ_id"], name: "index_grobengineerings_on_fu_typ_id", using: :btree
     t.index ["iogroup_id"], name: "index_grobengineerings_on_iogroup_id", using: :btree

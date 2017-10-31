@@ -33,7 +33,6 @@ class Grobengineering < ApplicationRecord
   validates :kabel_spez1_laenge, presence:true, numericality: {only_float: true}
   validates :kabel_spez2_laenge, presence:true, numericality: {only_float: true}
   validates :kabel_spez3_laenge, presence:true, numericality: {only_float: true}
-  validates :hwdevice_typenr, presence:true, numericality: {only_integer: true}
   validates :motor_rpm, presence:true, numericality: {only_float: true}
   validates :motor_cosphi, presence:true, numericality: {only_float: true}
   validates :status_lettering, presence:true, numericality: {only_integer: true}
