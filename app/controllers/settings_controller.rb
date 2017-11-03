@@ -17,11 +17,12 @@ class SettingsController < ApplicationController
     @iogroups = Iogroup.all.sort_by {|obj| obj.name}
     @switchgearcombinations = Switchgearcombination.all.sort_by {|obj| obj.name}
     @offertpositions = Offertposition.where(:subsubproject_id => params[:subsubproject_id]).sort_by {|obj| obj.name}
-    @subsystems = Subsystem.all.sort_by {|obj| obj.name}
     @subsubproject = Subsubproject.find(params[:subsubproject_id])
     @subsubprojects = @subsubproject.subproject.subsubprojects.sort_by {|obj| obj.name}
+    @subsystems = Subsystem.all.sort_by {|obj| obj.name}
+    @units = Unit.all.sort_by {|obj| obj.name}
 
-    CSV.open("export_all_tables#{Time.now.strftime("%Y-%m-%d-%H-%M")}.csv", "wb", {:headers => true, :encoding => "utf-8", :col_sep => ";"}) do |csv|
+    CSV.open("export_all_tables#{Time.now.strftime("%Y-%m-%d-%H-%M")}.csv", "wb", {:headers => true, :encoding => "iso-8859-1", :col_sep => ";"}) do |csv|
       csv << ['Geraetetypen', '']
       @devices.each do |entry| csv << [entry.id, entry.definition] end
       csv << ['SPS-Modultypen', '']
@@ -44,6 +45,8 @@ class SettingsController < ApplicationController
       @offertpositions.each do |entry| csv << [entry.id, entry.name] end
       csv << ['Teilanlagen', '']
       @subsystems.each do |entry| csv << [entry.id, entry.name] end
+      csv << ['TeilanlagenUnits', '']
+      @units.each do |entry| csv << [entry.id, entry.name] end
       csv << ['Projektversionen', '']
       @subsubprojects.each do |entry| csv << [entry.id, entry.name] end
     end

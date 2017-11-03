@@ -1,7 +1,7 @@
 class CreateDevices < ActiveRecord::Migration[5.0]
   def change
     create_table :devices do |t|
-      t.text :definition
+      t.string :definition
       t.float :eng_admin, :default => 0, null: false
       t.float :eng_steuerkonzept, :default => 0, null: false
       t.float :eng_ioliste, :default => 0, null: false

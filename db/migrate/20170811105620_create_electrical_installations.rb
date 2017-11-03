@@ -1,7 +1,7 @@
 class CreateElectricalInstallations < ActiveRecord::Migration[5.0]
   def change
     create_table :electrical_installations do |t|
-      t.text :kennung
+      t.string :kennung
       t.text :leistung
       t.string :einheit
 

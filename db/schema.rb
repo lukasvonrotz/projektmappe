@@ -12,31 +12,28 @@
 
 ActiveRecord::Schema.define(version: 20171031124740) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "assemblies", force: :cascade do |t|
     t.string   "kennung"
     t.string   "artikelnr"
-    t.text     "bezeichnung"
-    t.integer  "di",                default: 0,   null: false
-    t.integer  "do",                default: 0,   null: false
-    t.integer  "ai",                default: 0,   null: false
-    t.integer  "ao",                default: 0,   null: false
-    t.integer  "z",                 default: 0,   null: false
-    t.integer  "inkr",              default: 0,   null: false
-    t.integer  "ssi",               default: 0,   null: false
-    t.integer  "sdi",               default: 0,   null: false
-    t.integer  "sdo",               default: 0,   null: false
-    t.integer  "sai",               default: 0,   null: false
-    t.integer  "sao",               default: 0,   null: false
-    t.float    "brutto_eur",        default: 0.0, null: false
-    t.float    "rabatt",            default: 0.0, null: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.integer  "kanal_startnummer", default: 1,   null: false
+    t.text     "bezeichnung",       limit: 2147483647
+    t.integer  "di",                                   default: 0,   null: false
+    t.integer  "do",                                   default: 0,   null: false
+    t.integer  "ai",                                   default: 0,   null: false
+    t.integer  "ao",                                   default: 0,   null: false
+    t.integer  "z",                                    default: 0,   null: false
+    t.integer  "inkr",                                 default: 0,   null: false
+    t.integer  "ssi",                                  default: 0,   null: false
+    t.integer  "sdi",                                  default: 0,   null: false
+    t.integer  "sdo",                                  default: 0,   null: false
+    t.integer  "sai",                                  default: 0,   null: false
+    t.integer  "sao",                                  default: 0,   null: false
+    t.float    "brutto_eur",                           default: 0.0, null: false
+    t.float    "rabatt",                               default: 0.0, null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.integer  "kanal_startnummer",                    default: 1,   null: false
     t.string   "hersteller"
-    t.index ["kennung"], name: "assemblies_kennung_unique", unique: true, using: :btree
+    t.index ["kennung"], name: "assemblies_kennung_unique", unique: true
   end
 
   create_table "customers", force: :cascade do |t|
@@ -48,7 +45,7 @@ ActiveRecord::Schema.define(version: 20171031124740) do
   end
 
   create_table "devices", force: :cascade do |t|
-    t.text     "definition"
+    t.string   "definition"
     t.float    "eng_admin",                 default: 0.0, null: false
     t.float    "eng_steuerkonzept",         default: 0.0, null: false
     t.float    "eng_ioliste",               default: 0.0, null: false
@@ -105,14 +102,14 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.integer  "elinst_trasse_id"
     t.integer  "elinst_rohr_id"
     t.integer  "elinst_geraete_id"
-    t.index ["definition"], name: "devices_definition_unique", unique: true, using: :btree
-    t.index ["elinst_geraete_id"], name: "index_devices_on_elinst_geraete_id", using: :btree
-    t.index ["elinst_rohr_id"], name: "index_devices_on_elinst_rohr_id", using: :btree
-    t.index ["elinst_trasse_id"], name: "index_devices_on_elinst_trasse_id", using: :btree
-    t.index ["switchgear_einbau_id"], name: "index_devices_on_switchgear_einbau_id", using: :btree
-    t.index ["wire_potausgleich_id"], name: "index_devices_on_wire_potausgleich_id", using: :btree
-    t.index ["wire_speisung_id"], name: "index_devices_on_wire_speisung_id", using: :btree
-    t.index ["wire_steuerung_id"], name: "index_devices_on_wire_steuerung_id", using: :btree
+    t.index ["definition"], name: "devices_definition_unique", unique: true
+    t.index ["elinst_geraete_id"], name: "index_devices_on_elinst_geraete_id"
+    t.index ["elinst_rohr_id"], name: "index_devices_on_elinst_rohr_id"
+    t.index ["elinst_trasse_id"], name: "index_devices_on_elinst_trasse_id"
+    t.index ["switchgear_einbau_id"], name: "index_devices_on_switchgear_einbau_id"
+    t.index ["wire_potausgleich_id"], name: "index_devices_on_wire_potausgleich_id"
+    t.index ["wire_speisung_id"], name: "index_devices_on_wire_speisung_id"
+    t.index ["wire_steuerung_id"], name: "index_devices_on_wire_steuerung_id"
   end
 
   create_table "drive_suppliers", force: :cascade do |t|
@@ -122,21 +119,21 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.float    "rabatt",      default: 0.0, null: false
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-    t.index ["drive_id", "supplier_id"], name: "drive_supplier_unique", unique: true, using: :btree
+    t.index ["drive_id", "supplier_id"], name: "drive_supplier_unique", unique: true
   end
 
   create_table "drives", force: :cascade do |t|
     t.string   "kennung"
     t.string   "artikelnr"
-    t.text     "bezeichnung"
-    t.text     "un"
-    t.text     "in"
-    t.text     "pn"
+    t.text     "bezeichnung", limit: 2147483647
+    t.text     "un",          limit: 2147483647
+    t.text     "in",          limit: 2147483647
+    t.text     "pn",          limit: 2147483647
     t.string   "bg"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "hersteller"
-    t.index ["kennung"], name: "drives_kennung_unique", unique: true, using: :btree
+    t.index ["kennung"], name: "drives_kennung_unique", unique: true
   end
 
   create_table "electrical_installation_suppliers", force: :cascade do |t|
@@ -146,39 +143,39 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.float    "rabatt",                     default: 0.0, null: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-    t.index ["electrical_installation_id", "supplier_id"], name: "electrical_installation_supplier_unique", unique: true, using: :btree
+    t.index ["electrical_installation_id", "supplier_id"], name: "electrical_installation_supplier_unique", unique: true
   end
 
   create_table "electrical_installations", force: :cascade do |t|
-    t.text     "kennung"
-    t.text     "leistung"
+    t.string   "kennung"
+    t.text     "leistung",   limit: 2147483647
     t.string   "einheit"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["kennung"], name: "electrical_installations_kennung_unique", unique: true, using: :btree
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["kennung"], name: "electrical_installations_kennung_unique", unique: true
   end
 
   create_table "grobengineerings", force: :cascade do |t|
-    t.text     "beschreibung"
-    t.text     "kommentar"
-    t.text     "device_import"
-    t.integer  "device_anzahl",                    default: 1,   null: false
+    t.text     "beschreibung",                     limit: 2147483647
+    t.text     "kommentar",                        limit: 2147483647
+    t.text     "device_import",                    limit: 2147483647
+    t.integer  "device_anzahl",                                       default: 1,   null: false
     t.boolean  "update_necessary"
-    t.text     "klartext"
-    t.text     "bemerkung"
-    t.float    "funktion_sw",                      default: 0.0, null: false
-    t.float    "kabel_spez1_laenge",               default: 0.0, null: false
-    t.float    "kabel_spez2_laenge",               default: 0.0, null: false
-    t.float    "kabel_spez3_laenge",               default: 0.0, null: false
+    t.text     "klartext",                         limit: 2147483647
+    t.text     "bemerkung",                        limit: 2147483647
+    t.float    "funktion_sw",                                         default: 0.0, null: false
+    t.float    "kabel_spez1_laenge",                                  default: 0.0, null: false
+    t.float    "kabel_spez2_laenge",                                  default: 0.0, null: false
+    t.float    "kabel_spez3_laenge",                                  default: 0.0, null: false
     t.string   "sicherheitszone"
     t.string   "lieferant"
-    t.float    "spannung",                         default: 0.0, null: false
-    t.float    "leistung",                         default: 0.0, null: false
-    t.float    "strom",                            default: 0.0, null: false
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.integer  "subsubproject_id",                               null: false
-    t.integer  "device_id",                                      null: false
+    t.float    "spannung",                                            default: 0.0, null: false
+    t.float    "leistung",                                            default: 0.0, null: false
+    t.float    "strom",                                               default: 0.0, null: false
+    t.datetime "created_at",                                                        null: false
+    t.datetime "updated_at",                                                        null: false
+    t.integer  "subsubproject_id",                                                  null: false
+    t.integer  "device_id",                                                         null: false
     t.integer  "subsystem_id"
     t.integer  "iogroup_id"
     t.integer  "switchgear_motorenabgang_id"
@@ -186,7 +183,7 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.integer  "wire_spez1_id"
     t.integer  "wire_spez2_id"
     t.integer  "wire_spez3_id"
-    t.integer  "offertposition_id",                              null: false
+    t.integer  "offertposition_id",                                                 null: false
     t.integer  "schaltschrank_preisberechnung_id"
     t.string   "tag_anlage"
     t.string   "tag_objekt"
@@ -196,8 +193,8 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.string   "hwdevice_manufact"
     t.string   "hwdevice_typecode"
     t.string   "hwdevice_linkdatasheet"
-    t.float    "motor_rpm",                        default: 0.0, null: false
-    t.float    "motor_cosphi",                     default: 0.0, null: false
+    t.float    "motor_rpm",                                           default: 0.0, null: false
+    t.float    "motor_cosphi",                                        default: 0.0, null: false
     t.string   "motor_contype"
     t.string   "motor_encoder_fc"
     t.string   "hwdevice_location"
@@ -205,42 +202,42 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.string   "bmk_plant"
     t.string   "bmk_location"
     t.string   "bmk_number"
-    t.integer  "status_lettering",                 default: 0,   null: false
-    t.integer  "status_electric_diag",             default: 0,   null: false
-    t.text     "history"
-    t.string   "hwdevice_typenr_int",              default: "0", null: false
-    t.index ["device_id"], name: "index_grobengineerings_on_device_id", using: :btree
-    t.index ["fu_typ_id"], name: "index_grobengineerings_on_fu_typ_id", using: :btree
-    t.index ["iogroup_id"], name: "index_grobengineerings_on_iogroup_id", using: :btree
-    t.index ["offertposition_id"], name: "index_grobengineerings_on_offertposition_id", using: :btree
-    t.index ["schaltschrank_preisberechnung_id"], name: "index_grobengineerings_on_schaltschrank_preisberechnung_id", using: :btree
-    t.index ["subsubproject_id"], name: "index_grobengineerings_on_subsubproject_id", using: :btree
-    t.index ["subsystem_id"], name: "index_grobengineerings_on_subsystem_id", using: :btree
-    t.index ["switchgear_motorenabgang_id"], name: "index_grobengineerings_on_switchgear_motorenabgang_id", using: :btree
-    t.index ["unit_id"], name: "index_grobengineerings_on_unit_id", using: :btree
-    t.index ["wire_spez1_id"], name: "index_grobengineerings_on_wire_spez1_id", using: :btree
-    t.index ["wire_spez2_id"], name: "index_grobengineerings_on_wire_spez2_id", using: :btree
-    t.index ["wire_spez3_id"], name: "index_grobengineerings_on_wire_spez3_id", using: :btree
+    t.integer  "status_lettering",                                    default: 0,   null: false
+    t.integer  "status_electric_diag",                                default: 0,   null: false
+    t.text     "history",                          limit: 2147483647
+    t.string   "hwdevice_typenr_int"
+    t.index ["device_id"], name: "index_grobengineerings_on_device_id"
+    t.index ["fu_typ_id"], name: "index_grobengineerings_on_fu_typ_id"
+    t.index ["iogroup_id"], name: "index_grobengineerings_on_iogroup_id"
+    t.index ["offertposition_id"], name: "index_grobengineerings_on_offertposition_id"
+    t.index ["schaltschrank_preisberechnung_id"], name: "index_grobengineerings_on_schaltschrank_preisberechnung_id"
+    t.index ["subsubproject_id"], name: "index_grobengineerings_on_subsubproject_id"
+    t.index ["subsystem_id"], name: "index_grobengineerings_on_subsystem_id"
+    t.index ["switchgear_motorenabgang_id"], name: "index_grobengineerings_on_switchgear_motorenabgang_id"
+    t.index ["unit_id"], name: "index_grobengineerings_on_unit_id"
+    t.index ["wire_spez1_id"], name: "index_grobengineerings_on_wire_spez1_id"
+    t.index ["wire_spez2_id"], name: "index_grobengineerings_on_wire_spez2_id"
+    t.index ["wire_spez3_id"], name: "index_grobengineerings_on_wire_spez3_id"
   end
 
   create_table "histories", force: :cascade do |t|
     t.datetime "datum"
-    t.text     "ereignis"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "subproject_id", null: false
-    t.index ["subproject_id"], name: "index_histories_on_subproject_id", using: :btree
+    t.text     "ereignis",      limit: 2147483647
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "subproject_id",                    null: false
+    t.index ["subproject_id"], name: "index_histories_on_subproject_id"
   end
 
   create_table "infos", force: :cascade do |t|
     t.datetime "datum"
-    t.text     "quelle"
-    t.text     "info"
-    t.text     "querverweis"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "subproject_id", null: false
-    t.index ["subproject_id"], name: "index_infos_on_subproject_id", using: :btree
+    t.text     "quelle",        limit: 2147483647
+    t.text     "info",          limit: 2147483647
+    t.text     "querverweis",   limit: 2147483647
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "subproject_id",                    null: false
+    t.index ["subproject_id"], name: "index_infos_on_subproject_id"
   end
 
   create_table "iochannels", force: :cascade do |t|
@@ -250,8 +247,8 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.integer  "iogroupcomponent_id",             null: false
-    t.index ["iogroupcomponent_id"], name: "index_iochannels_on_iogroupcomponent_id", using: :btree
-    t.index ["kanalnummer", "channeltype", "iogroupcomponent_id"], name: "kanalnummer_typ_iogroupcomponent_uniqueness", unique: true, using: :btree
+    t.index ["iogroupcomponent_id"], name: "index_iochannels_on_iogroupcomponent_id"
+    t.index ["kanalnummer", "channeltype", "iogroupcomponent_id"], name: "kanalnummer_typ_iogroupcomponent_uniqueness", unique: true
   end
 
   create_table "iogroupcomponents", force: :cascade do |t|
@@ -261,9 +258,9 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.datetime "updated_at",                   null: false
     t.integer  "assembly_id",                  null: false
     t.integer  "iogroup_id",                   null: false
-    t.index ["assembly_id"], name: "index_iogroupcomponents_on_assembly_id", using: :btree
-    t.index ["iogroup_id", "steckplatznummer"], name: "iogroup_steckplatz_unique", unique: true, using: :btree
-    t.index ["iogroup_id"], name: "index_iogroupcomponents_on_iogroup_id", using: :btree
+    t.index ["assembly_id"], name: "index_iogroupcomponents_on_assembly_id"
+    t.index ["iogroup_id", "steckplatznummer"], name: "iogroup_steckplatz_unique", unique: true
+    t.index ["iogroup_id"], name: "index_iogroupcomponents_on_iogroup_id"
   end
 
   create_table "iogroups", force: :cascade do |t|
@@ -274,34 +271,34 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.integer  "switchgearcombination_id", null: false
     t.integer  "iotype_id",                null: false
     t.string   "address_prefix"
-    t.index ["iotype_id"], name: "index_iogroups_on_iotype_id", using: :btree
-    t.index ["name", "switchgearcombination_id"], name: "name_switchgearcombination_uniqueness", unique: true, using: :btree
-    t.index ["switchgearcombination_id"], name: "index_iogroups_on_switchgearcombination_id", using: :btree
+    t.index ["iotype_id"], name: "index_iogroups_on_iotype_id"
+    t.index ["name", "switchgearcombination_id"], name: "name_switchgearcombination_uniqueness", unique: true
+    t.index ["switchgearcombination_id"], name: "index_iogroups_on_switchgearcombination_id"
   end
 
   create_table "iosignalenginfos", force: :cascade do |t|
-    t.text     "pendenz"
+    t.text     "pendenz",                      limit: 2147483647
     t.datetime "pendenz_datum"
     t.string   "pendenz_wer"
-    t.text     "pendenz_antwort"
+    t.text     "pendenz_antwort",              limit: 2147483647
     t.datetime "pendenz_antwort_datum"
     t.string   "pendenz_antwort_wer"
-    t.text     "frage"
+    t.text     "frage",                        limit: 2147483647
     t.datetime "frage_datum"
     t.string   "frage_wer"
-    t.text     "frage_antwort"
+    t.text     "frage_antwort",                limit: 2147483647
     t.datetime "frage_antwort_datum"
     t.string   "frage_antwort_wer"
-    t.text     "sw_instruction"
+    t.text     "sw_instruction",               limit: 2147483647
     t.datetime "sw_instruction_datum"
     t.string   "sw_instruction_wer"
-    t.text     "sw_instruction_antwort"
+    t.text     "sw_instruction_antwort",       limit: 2147483647
     t.datetime "sw_instruction_antwort_datum"
     t.string   "sw_instruction_antwort_wer"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.integer  "iosignal_id",                  null: false
-    t.index ["iosignal_id"], name: "index_iosignalenginfos_on_iosignal_id", using: :btree
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.integer  "iosignal_id",                                     null: false
+    t.index ["iosignal_id"], name: "index_iosignalenginfos_on_iosignal_id"
   end
 
   create_table "iosignalibninfos", force: :cascade do |t|
@@ -311,34 +308,34 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.string   "signaltest_event"
     t.datetime "signaltest_ok_datum"
     t.string   "signaltest_ok_wer"
-    t.text     "bemerkungen"
-    t.text     "todo"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.integer  "iosignal_id",         null: false
-    t.index ["iosignal_id"], name: "index_iosignalibninfos_on_iosignal_id", using: :btree
+    t.text     "bemerkungen",         limit: 2147483647
+    t.text     "todo",                limit: 2147483647
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "iosignal_id",                            null: false
+    t.index ["iosignal_id"], name: "index_iosignalibninfos_on_iosignal_id"
   end
 
   create_table "iosignals", force: :cascade do |t|
     t.string   "tagname_suffix"
     t.string   "pendenz"
-    t.text     "signal_beschreibung"
+    t.text     "signal_beschreibung",       limit: 2147483647
     t.string   "signal_phys"
     t.string   "signal_dig_aktiv_text"
-    t.float    "signal_ana_range_min",      default: 0.0, null: false
-    t.float    "signal_ana_range_max",      default: 0.0, null: false
-    t.integer  "signal_ana_range_decimals", default: 0,   null: false
-    t.string   "signal_ana_range_unit",     default: ""
-    t.integer  "bus",                       default: 0,   null: false
-    t.integer  "di",                        default: 0,   null: false
-    t.integer  "do",                        default: 0,   null: false
-    t.integer  "ai",                        default: 0,   null: false
-    t.integer  "ao",                        default: 0,   null: false
-    t.integer  "z",                         default: 0,   null: false
-    t.integer  "inkr",                      default: 0,   null: false
-    t.integer  "ssi",                       default: 0,   null: false
-    t.integer  "safety",                    default: 0,   null: false
-    t.integer  "ex",                        default: 0,   null: false
+    t.float    "signal_ana_range_min",                         default: 0.0, null: false
+    t.float    "signal_ana_range_max",                         default: 0.0, null: false
+    t.integer  "signal_ana_range_decimals",                    default: 0,   null: false
+    t.string   "signal_ana_range_unit",                        default: ""
+    t.integer  "bus",                                          default: 0,   null: false
+    t.integer  "di",                                           default: 0,   null: false
+    t.integer  "do",                                           default: 0,   null: false
+    t.integer  "ai",                                           default: 0,   null: false
+    t.integer  "ao",                                           default: 0,   null: false
+    t.integer  "z",                                            default: 0,   null: false
+    t.integer  "inkr",                                         default: 0,   null: false
+    t.integer  "ssi",                                          default: 0,   null: false
+    t.integer  "safety",                                       default: 0,   null: false
+    t.integer  "ex",                                           default: 0,   null: false
     t.string   "sicherheitsgruppe"
     t.string   "info1"
     t.string   "info2"
@@ -354,18 +351,18 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.string   "sw_info2"
     t.string   "sw_info3"
     t.integer  "iochannel_id"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.integer  "grobengineering_id",                      null: false
-    t.index ["grobengineering_id"], name: "index_iosignals_on_grobengineering_id", using: :btree
-    t.index ["iochannel_id"], name: "index_iosignals_on_iochannel_id", using: :btree
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+    t.integer  "grobengineering_id",                                         null: false
+    t.index ["grobengineering_id"], name: "index_iosignals_on_grobengineering_id"
+    t.index ["iochannel_id"], name: "index_iosignals_on_iochannel_id"
   end
 
   create_table "iotypes", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "iotypes_name_unique", unique: true, using: :btree
+    t.index ["name"], name: "iotypes_name_unique", unique: true
   end
 
   create_table "offer_offertpositions", force: :cascade do |t|
@@ -389,18 +386,18 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.float    "elinst_total_netto",   default: 0.0, null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.index ["offer_id", "offertposition_id"], name: "offer_offertposition_unique", unique: true, using: :btree
+    t.index ["offer_id", "offertposition_id"], name: "offer_offertposition_unique", unique: true
   end
 
   create_table "offers", force: :cascade do |t|
     t.datetime "datum"
-    t.text     "beschreibung"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "subsubproject_id", null: false
-    t.integer  "user_id",          null: false
-    t.index ["subsubproject_id"], name: "index_offers_on_subsubproject_id", using: :btree
-    t.index ["user_id"], name: "index_offers_on_user_id", using: :btree
+    t.text     "beschreibung",     limit: 2147483647
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "subsubproject_id",                    null: false
+    t.integer  "user_id",                             null: false
+    t.index ["subsubproject_id"], name: "index_offers_on_subsubproject_id"
+    t.index ["user_id"], name: "index_offers_on_user_id"
   end
 
   create_table "offertpositions", force: :cascade do |t|
@@ -408,8 +405,8 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "subsubproject_id", null: false
-    t.index ["name", "subsubproject_id"], name: "name_subsubproject_uniqueness", unique: true, using: :btree
-    t.index ["subsubproject_id"], name: "index_offertpositions_on_subsubproject_id", using: :btree
+    t.index ["name", "subsubproject_id"], name: "name_subsubproject_uniqueness", unique: true
+    t.index ["subsubproject_id"], name: "index_offertpositions_on_subsubproject_id"
   end
 
   create_table "project_users", force: :cascade do |t|
@@ -417,7 +414,7 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.integer  "user_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["project_id", "user_id"], name: "by_project_and_user", unique: true, using: :btree
+    t.index ["project_id", "user_id"], name: "by_project_and_user", unique: true
   end
 
   create_table "projects", force: :cascade do |t|
@@ -431,7 +428,7 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.integer  "user_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["subproject_id", "user_id"], name: "subproject_users_unique", unique: true, using: :btree
+    t.index ["subproject_id", "user_id"], name: "subproject_users_unique", unique: true
   end
 
   create_table "subprojects", force: :cascade do |t|
@@ -449,8 +446,8 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.string   "info4_text",                   default: "Freie Beschreibung 4"
     t.string   "info5_text",                   default: "Freie Beschreibung 5"
     t.string   "projektnummer_prola"
-    t.index ["customer_id"], name: "index_subprojects_on_customer_id", using: :btree
-    t.index ["project_id"], name: "index_subprojects_on_project_id", using: :btree
+    t.index ["customer_id"], name: "index_subprojects_on_customer_id"
+    t.index ["project_id"], name: "index_subprojects_on_project_id"
   end
 
   create_table "subsubprojects", force: :cascade do |t|
@@ -496,12 +493,12 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.integer  "electricalinstallationsupplier_id",                 null: false
     t.integer  "drivesupplier_id",                                  null: false
     t.integer  "switchgearsupplier_id",                             null: false
-    t.index ["drivesupplier_id"], name: "index_subsubprojects_on_drivesupplier_id", using: :btree
-    t.index ["electricalinstallationsupplier_id"], name: "index_subsubprojects_on_electricalinstallationsupplier_id", using: :btree
-    t.index ["subproject_id"], name: "index_subsubprojects_on_subproject_id", using: :btree
-    t.index ["switchgearsupplier_id"], name: "index_subsubprojects_on_switchgearsupplier_id", using: :btree
-    t.index ["wirecaptionsupplier_id"], name: "index_subsubprojects_on_wirecaptionsupplier_id", using: :btree
-    t.index ["wiresupplier_id"], name: "index_subsubprojects_on_wiresupplier_id", using: :btree
+    t.index ["drivesupplier_id"], name: "index_subsubprojects_on_drivesupplier_id"
+    t.index ["electricalinstallationsupplier_id"], name: "index_subsubprojects_on_electricalinstallationsupplier_id"
+    t.index ["subproject_id"], name: "index_subsubprojects_on_subproject_id"
+    t.index ["switchgearsupplier_id"], name: "index_subsubprojects_on_switchgearsupplier_id"
+    t.index ["wirecaptionsupplier_id"], name: "index_subsubprojects_on_wirecaptionsupplier_id"
+    t.index ["wiresupplier_id"], name: "index_subsubprojects_on_wiresupplier_id"
   end
 
   create_table "subsystems", force: :cascade do |t|
@@ -509,7 +506,7 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "project_id", null: false
-    t.index ["project_id"], name: "index_subsystems_on_project_id", using: :btree
+    t.index ["project_id"], name: "index_subsystems_on_project_id"
   end
 
   create_table "supplier_suppliertypes", force: :cascade do |t|
@@ -517,14 +514,14 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.integer  "suppliertype_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["supplier_id", "suppliertype_id"], name: "supplier_suppliertype_unique", unique: true, using: :btree
+    t.index ["supplier_id", "suppliertype_id"], name: "supplier_suppliertype_unique", unique: true
   end
 
   create_table "suppliers", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "suppliers_name_unique", unique: true, using: :btree
+    t.index ["name"], name: "suppliers_name_unique", unique: true
   end
 
   create_table "suppliertypes", force: :cascade do |t|
@@ -540,7 +537,7 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.float    "rabatt",        default: 0.0, null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.index ["switchgear_id", "supplier_id"], name: "switchgear_supplier_unique", unique: true, using: :btree
+    t.index ["switchgear_id", "supplier_id"], name: "switchgear_supplier_unique", unique: true
   end
 
   create_table "switchgearcombinations", force: :cascade do |t|
@@ -554,8 +551,8 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.integer  "switchgear_id",                    null: false
-    t.index ["name"], name: "switchgearcombinations_name_unique", unique: true, using: :btree
-    t.index ["switchgear_id"], name: "index_switchgearcombinations_on_switchgear_id", using: :btree
+    t.index ["name"], name: "switchgearcombinations_name_unique", unique: true
+    t.index ["switchgear_id"], name: "index_switchgearcombinations_on_switchgear_id"
   end
 
   create_table "switchgearconnections", force: :cascade do |t|
@@ -564,19 +561,19 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.datetime "updated_at",                      null: false
     t.integer  "topswitchgear_id",                null: false
     t.integer  "bottomswitchgear_id",             null: false
-    t.index ["bottomswitchgear_id"], name: "index_switchgearconnections_on_bottomswitchgear_id", using: :btree
-    t.index ["topswitchgear_id", "bottomswitchgear_id"], name: "switchgearconnections_uniqueness", unique: true, using: :btree
-    t.index ["topswitchgear_id"], name: "index_switchgearconnections_on_topswitchgear_id", using: :btree
+    t.index ["bottomswitchgear_id"], name: "index_switchgearconnections_on_bottomswitchgear_id"
+    t.index ["topswitchgear_id", "bottomswitchgear_id"], name: "switchgearconnections_uniqueness", unique: true
+    t.index ["topswitchgear_id"], name: "index_switchgearconnections_on_topswitchgear_id"
   end
 
   create_table "switchgears", force: :cascade do |t|
     t.string   "kennung"
-    t.text     "leistung"
-    t.float    "maxstrom",   default: 0.0, null: false
-    t.integer  "typ",        default: 0,   null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.index ["kennung"], name: "switchgears_kennung_unique", unique: true, using: :btree
+    t.text     "leistung",   limit: 2147483647
+    t.float    "maxstrom",                      default: 0.0, null: false
+    t.integer  "typ",                           default: 0,   null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.index ["kennung"], name: "switchgears_kennung_unique", unique: true
   end
 
   create_table "units", force: :cascade do |t|
@@ -584,7 +581,7 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "subsystem_id", null: false
-    t.index ["subsystem_id"], name: "index_units_on_subsystem_id", using: :btree
+    t.index ["subsystem_id"], name: "index_units_on_subsystem_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -628,8 +625,8 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.integer  "sortierung_switchgears",                  default: 0,  null: false
     t.integer  "sortierung_switchgearcombinations",       default: 0,  null: false
     t.integer  "sortierung_wires",                        default: 0,  null: false
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "wire_suppliers", force: :cascade do |t|
@@ -644,7 +641,7 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.float    "installationrohr",              default: 0.0, null: false
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
-    t.index ["wire_id", "supplier_id"], name: "wire_supplier_unique", unique: true, using: :btree
+    t.index ["wire_id", "supplier_id"], name: "wire_supplier_unique", unique: true
   end
 
   create_table "wirecaptionprices", force: :cascade do |t|
@@ -653,8 +650,8 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.integer  "supplier_id",                                null: false
-    t.index ["supplier_id"], name: "index_wirecaptionprices_on_supplier_id", using: :btree
-    t.index ["supplier_id"], name: "wirecaptionprices_supplier_unique", unique: true, using: :btree
+    t.index ["supplier_id"], name: "index_wirecaptionprices_on_supplier_id"
+    t.index ["supplier_id"], name: "wirecaptionprices_supplier_unique", unique: true
   end
 
   create_table "wires", force: :cascade do |t|
@@ -663,7 +660,7 @@ ActiveRecord::Schema.define(version: 20171031124740) do
     t.string   "kabeltyp"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
-    t.index ["kabeltyp"], name: "wires_kabeltyp_unique", unique: true, using: :btree
+    t.index ["kabeltyp"], name: "wires_kabeltyp_unique", unique: true
   end
 
   add_foreign_key "devices", "electrical_installations", column: "elinst_geraete_id"

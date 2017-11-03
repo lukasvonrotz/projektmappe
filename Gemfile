@@ -49,6 +49,9 @@ group :development do
 end
 
 gem 'pg'
+# MSSQL adapter
+gem 'tiny_tds', '>=0'
+gem 'activerecord-sqlserver-adapter', '~> 5.0.7'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

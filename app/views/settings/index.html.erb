@@ -33,6 +33,7 @@
     });
     //change href based on dropdown selection
     $('#select_subsubproject').change(function() {
+        $('#link').attr("href", '/settings/csvexport_all_tables/' + $("#select_subproject").val());
         $('#link').attr("href", '/settings/csvexport_all_tables/' + $("#select_subsubproject").val());
     });
 </script>
