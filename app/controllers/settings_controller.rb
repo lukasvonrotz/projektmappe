@@ -19,8 +19,8 @@ class SettingsController < ApplicationController
     @offertpositions = Offertposition.where(:subsubproject_id => params[:subsubproject_id]).sort_by {|obj| obj.name}
     @subsubproject = Subsubproject.find(params[:subsubproject_id])
     @subsubprojects = @subsubproject.subproject.subsubprojects.sort_by {|obj| obj.name}
-    @subsystems = Subsystem.all.sort_by {|obj| obj.name}
-    @units = Unit.all.sort_by {|obj| obj.name}
+    @subsystems = @subsubproject.subproject.project.subsystems.all.sort_by {|obj| obj.name}
+    @units = Unit.where(:subsystem_id => @subsystems.pluck(:id)).sort_by  {|obj| obj.name}
 
     CSV.open("export_all_tables#{Time.now.strftime("%Y-%m-%d-%H-%M")}.csv", "wb", {:headers => true, :encoding => "iso-8859-1", :col_sep => ";"}) do |csv|
       csv << ['Geraetetypen', '']
