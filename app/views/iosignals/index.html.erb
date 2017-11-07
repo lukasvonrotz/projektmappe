@@ -88,17 +88,15 @@
           <td><%= iosignal.sw_info1 %></td>
           <td><%= iosignal.sw_info2 %></td>
           <td><%= iosignal.sw_info3 %></td>
-          <td style="display:inline-block; width: 0; overflow:hidden;">
-            <div style="display:inline-block; width: 100px; overflow:hidden;">
-              <a href="<%= project_subproject_subsubproject_iosignal_path(@project.id, @subproject.id, @subsubproject.id, iosignal.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
-              <a href="<%= edit_project_subproject_subsubproject_iosignal_path(@project.id, @subproject.id, @subsubproject.id, iosignal.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
-              <button type="button" class="btn btn-xs btn-danger btn-index"
-                      data-toggle="modal" data-target="#popup_sure_delete"
-                      data-itemid="<%= iosignal.id %>"
-                      data-model="iosignals">
-                Signal löschen
-              </button>
-            </div>
+          <td>
+            <a href="<%= project_subproject_subsubproject_iosignal_path(@project.id, @subproject.id, @subsubproject.id, iosignal.id) %>" class="btn btn-xs btn-default btn-index">Info</a>
+            <a href="<%= edit_project_subproject_subsubproject_iosignal_path(@project.id, @subproject.id, @subsubproject.id, iosignal.id) %>" class="btn btn-xs btn-info btn-index">Bearbeiten</a>
+            <button type="button" class="btn btn-xs btn-danger btn-index"
+                    data-toggle="modal" data-target="#popup_sure_delete"
+                    data-itemid="<%= iosignal.id %>"
+                    data-model="iosignals">
+              Signal löschen
+            </button>
           </td>
         </tr>
     <% end %>
