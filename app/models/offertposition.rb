@@ -17,7 +17,7 @@ class Offertposition < ApplicationRecord
   def self.to_csv
     attributes = column_names
 
-    CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|
+    CSV.generate(headers: true, col_sep: ";", encoding: "iso-8859-1") do |csv|
       csv << attributes
 
       all.order(:id).each do |entry|

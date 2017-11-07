@@ -107,7 +107,7 @@ class OffersController < ApplicationController
 
 
 
-    CSV.open("offerte#{Time.now.strftime("%Y-%m-%d-%H-%M")}.csv", "wb", {:headers => true, :encoding => "utf-8", :col_sep => ";"}) do |csv|
+    CSV.open("offerte#{Time.now.strftime("%Y-%m-%d-%H-%M")}.csv", "wb", {:headers => true, :encoding => "iso-8859-1", :col_sep => ";"}) do |csv|
       csv << ['Offertposition', 'Geraeteanzahl',
               'Eng Elektroplanung', 'Eng Planung/SW', 'Eng IBN/Bauleitung',
               'SPS Total Brutto', 'SPS Total Netto',

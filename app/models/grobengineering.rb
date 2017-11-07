@@ -53,7 +53,7 @@ class Grobengineering < ApplicationRecord
   def self.import(file, subsubprojectid)
     records_to_save = []
     begin
-      CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
+      CSV.foreach(file.path, :col_sep => (";"), :encoding => 'iso-8859-1', headers: :first_row, header_converters: :symbol) do |row|
         new_record = row.to_hash.except(:id)
         new_record[:subsubproject_id] = subsubprojectid
         if Grobengineering.new(new_record).valid? &&
@@ -79,7 +79,7 @@ class Grobengineering < ApplicationRecord
   def self.to_csv
     attributes = %w{beschreibung kommentar device_import device_anzahl update_necessary klartext bemerkung funktion_sw kabel_spez1_laenge kabel_spez2_laenge kabel_spez3_laenge sicherheitszone lieferant spannung leistung strom created_at updated_at subsubproject_id device_id subsystem_id iogroup_id switchgear_motorenabgang_id fu_typ_id wire_spez1_id wire_spez2_id wire_spez3_id offertposition_id schaltschrank_preisberechnung_id tag_anlage tag_objekt tag_nummer brake unit_id hwdevice_manufact hwdevice_typecode hwdevice_linkdatasheet motor_rpm motor_cosphi motor_contype motor_encoder_fc hwdevice_location hwdevice_inst_phase bmk_plant bmk_location bmk_number status_lettering status_electric_diag history hwdevice_typenr_int }
 
-    CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|
+    CSV.generate(headers: true, col_sep: ";", encoding: "iso-8859-1") do |csv|
       csv << attributes
 
       all.order(:id).each do |entry|

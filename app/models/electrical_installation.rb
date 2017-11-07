@@ -40,7 +40,7 @@ class ElectricalInstallation < ApplicationRecord
   def self.to_csv
     attributes = column_names
 
-    CSV.generate(headers: true, col_sep: ";", encoding: "utf-8") do |csv|
+    CSV.generate(headers: true, col_sep: ";", encoding: "iso-8859-1") do |csv|
       csv << attributes
 
       all.order(:id).each do |entry|
@@ -54,7 +54,7 @@ class ElectricalInstallation < ApplicationRecord
     records_to_save = []
     records_to_update = []
     begin
-      CSV.foreach(file.path, :col_sep => (";"), :encoding => 'utf-8', headers: :first_row, header_converters: :symbol) do |row|
+      CSV.foreach(file.path, :col_sep => (";"), :encoding => 'iso-8859-1', headers: :first_row, header_converters: :symbol) do |row|
         new_record = row.to_hash.except(:id)
         if ElectricalInstallation.where(:kennung => new_record[:kennung]).any?
           # if this device already exists, only update existing entry

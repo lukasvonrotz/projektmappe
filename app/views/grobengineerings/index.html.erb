@@ -106,7 +106,7 @@
                     <td><%= grobengineering.tag_objekt %></td>
                     <td><%= grobengineering.tag_nummer %></td>
                     <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.brake%>"><%= truncate(grobengineering.brake, :length => 40) %></a></td>
-                    <% if @subsubproject.subproject.max_zeichen_klartext_grobeng.to_i < grobengineering.klartext.length.to_i %>
+                    <% if @subsubproject.subproject.max_zeichen_klartext_grobeng.to_i < (grobengineering.klartext.nil? ? 0 : grobengineering.klartext.length.to_i) %>
                         <td class="danger"><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.klartext%>"><%= truncate(grobengineering.klartext, :length => 40) %></a></td>
                     <% else %>
                         <td><a class="tooltip-text" data-toggle="tooltip" title="<%=grobengineering.klartext%>"><%= truncate(grobengineering.klartext, :length => 40) %></a></td>
