@@ -213,27 +213,72 @@ class Assembly < ApplicationRecord
 
 
   def self.validateEntries
-    Assembly.where(["kennung = ?", "PB-Stecker"]).any? &&
-    Assembly.where(["kennung = ?", "ET200SP 08DI"]).any? &&
-    Assembly.where(["kennung = ?", "ET200SP 16DI"]).any? &&
-    Assembly.where(["kennung = ?", "ET200SP 08DO"]).any? &&
-    Assembly.where(["kennung = ?", "ET200SP 16DO"]).any? &&
-    Assembly.where(["kennung = ?", "ET200SP 02AI"]).any? &&
-    Assembly.where(["kennung = ?", "ET200SP 02AO"]).any? &&
-    Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).any? &&
-    Assembly.where(["kennung = ?", "ET200SP Enc SSI"]).any? &&
-    Assembly.where(["kennung = ?", "ET200SP Base mit U-Vers"]).any? &&
-    Assembly.where(["kennung = ?", "ET200SP Base"]).any? &&
-    Assembly.where(["kennung = ?", "PNOZmulti"]).any? &&
-    Assembly.where(["kennung = ?", "PNOZmulti Chipcard"]).any? &&
-    Assembly.where(["kennung = ?", "PNOZmulti Klemm"]).any? &&
-    Assembly.where(["kennung = ?", "PNOZmulti SL"]).any? &&
-    Assembly.where(["kennung = ?", "PNOZmulti SL Klemm"]).any? &&
-    Assembly.where(["kennung = ?", "PNOZmulti PB"]).any? &&
-    Assembly.where(["kennung = ?", "PNOZmulti 08DI"]).any? &&
-    Assembly.where(["kennung = ?", "PNOZmulti 04DO"]).any? &&
-    Assembly.where(["kennung = ?", "PNOZmulti 01AI"]).any? &&
-    Assembly.where(["kennung = ?", "PNOZmulti 01AO"]).any?
+    retVal = ""
+    if Assembly.where(["kennung = ?", "PB-Stecker"]).empty?
+      return "PB-Stecker"
+    end
+    if Assembly.where(["kennung = ?", "ET200SP 08DI"]).empty?
+      return "ET200SP 08DI"
+    end
+    if Assembly.where(["kennung = ?", "ET200SP 16DI"]).empty?
+      return "ET200SP 16DI"
+    end
+    if Assembly.where(["kennung = ?", "ET200SP 08DO"]).empty?
+      return "ET200SP 08DO"
+    end
+    if Assembly.where(["kennung = ?", "ET200SP 16DO"]).empty?
+      return "ET200SP 16DO"
+    end
+    if Assembly.where(["kennung = ?", "ET200SP 02AI"]).empty?
+      return "ET200SP 02AI"
+    end
+    if Assembly.where(["kennung = ?", "ET200SP 02AO"]).empty?
+      return "ET200SP 02AO"
+    end
+    if Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).empty?
+      return "ET200SP Enc INKR"
+    end
+    if Assembly.where(["kennung = ?", "ET200SP Enc INKR"]).empty?
+      return "ET200SP Enc INKR"
+    end
+    if Assembly.where(["kennung = ?", "ET200SP Base mit U-Vers"]).empty?
+      return "ET200SP Base mit U-Vers"
+    end
+    if Assembly.where(["kennung = ?", "ET200SP Base"]).empty?
+      return "ET200SP Base"
+    end
+    if Assembly.where(["kennung = ?", "PNOZmulti"]).empty?
+      return "PNOZmulti"
+    end
+    if Assembly.where(["kennung = ?", "PNOZmulti Chipcard"]).empty?
+      return "PNOZmulti Chipcard"
+    end
+    if Assembly.where(["kennung = ?", "PNOZmulti Klemm"]).empty?
+      return "PNOZmulti Klemm"
+    end
+    if Assembly.where(["kennung = ?", "PNOZmulti SL"]).empty?
+      return "PNOZmulti SL"
+    end
+    if Assembly.where(["kennung = ?", "PNOZmulti SL Klemm"]).empty?
+      return "PNOZmulti SL Klemm"
+    end
+    if Assembly.where(["kennung = ?", "PNOZmulti PB"]).empty?
+      return "PNOZmulti PB"
+    end
+    if Assembly.where(["kennung = ?", "PNOZmulti 08DI"]).empty?
+      return "PNOZmulti 08DI"
+    end
+    if Assembly.where(["kennung = ?", "PNOZmulti 04DO"]).empty?
+      return "PNOZmulti 04DO"
+    end
+    if Assembly.where(["kennung = ?", "PNOZmulti 01AI"]).empty?
+      return "PNOZmulti 01AI"
+    end
+    if Assembly.where(["kennung = ?", "PNOZmulti 01AO"]).empty?
+      return "PNOZmulti 01AO"
+    end
+
+    retVal
   end
 
 
@@ -290,6 +335,7 @@ class Assembly < ApplicationRecord
     bruttoChf = (self.preisPbStecker(eurokurs) + self.preisPbBaugruppe(eurokurs))/
         @@ao_anz_bg + ((self.preisIoBaugruppe(eurokurs, 'ET200SP 02AO')+((self.preisBaseUvers(eurokurs)+self.preisBase(eurokurs))/2))/
         (self.anzahlKanaeleBaugruppe('ET200SP 02AO')-(@@ao_reserve*self.anzahlKanaeleBaugruppe('ET200SP 02AO'))))
+
     return bruttoChf
   end
   def self.ao_netto_chf(eurokurs)

@@ -11,7 +11,8 @@
     </div>
 <% end %><br>
 
-<% if Assembly.validateEntries %>
+<% err1 = Assembly.validateEntries %>
+
   Eurokurs:<br>
   <input type="number" name="eurokurs" value="1.2" class="form-control" id="eurokurs"><br>
   <button id="updatePrices" class="btn btn-success">Preise aktualisieren</button>
@@ -19,8 +20,15 @@
 
   <div id="content" class="table-responsive">
     <% if Assembly.any? %>
-      <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-        <thead>
+
+      <% if !err1.blank? %>
+          <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            Preise pro konnten nicht berechnet werden! Bitte prüfen, ob IO-Baugruppe "<%= err1 %>" in der Datenbank existiert
+          </div>
+      <%else %>
+        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+          <thead>
           <tr>
             <th>Kennung</th>
             <th>Kanäle</th>
@@ -31,8 +39,8 @@
             <th>Anzahl Baugruppen</th>
             <th>Reserve</th>
           </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
           <tr>
             <td>DI</td>
             <td>1</td>
@@ -143,10 +151,10 @@
             <td></td>
             <td><%= Assembly.sao_reserve %></td>
           </tr>
-        <tbody>
-      </table>
+          <tbody>
+        </table>
+      <% end %>
       <br><br><br><br><br>
-
 
       <table id="assembly_table" class="table table-striped table-bordered data_table" cellspacing="0" width="100%">
         <thead>
@@ -285,33 +293,3 @@
           return parseFloat(value - (value * rabatt)).toFixed(2);
       }
   </script>
-<% else %>
-    <div class="alert alert-danger">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      Bitte prüfen, ob folgende IO-Baugruppen in Datenbank mit folgender Kennung existieren:
-      <ul>
-        <li>PB-Stecker</li>
-        <li>ET200SP PB</li>
-        <li>ET200SP 08DI</li>
-        <li>ET200SP 16DI</li>
-        <li>ET200SP 08DO</li>
-        <li>ET200SP 16DO</li>
-        <li>ET200SP 02AI</li>
-        <li>ET200SP 02AO</li>
-        <li>ET200SP Enc INKR</li>
-        <li>ET200SP Enc SSI</li>
-        <li>ET200SP Base mit U-Vers</li>
-        <li>ET200SP Base</li>
-        <li>PNOZmulti</li>
-        <li>PNOZmulti Chipcard</li>
-        <li>PNOZmulti Klemm</li>
-        <li>PNOZmulti SL</li>
-        <li>PNOZmulti SL Klemm</li>
-        <li>PNOZmulti PB</li>
-        <li>PNOZmulti 08DI</li>
-        <li>PNOZmulti 04DO</li>
-        <li>PNOZmulti 01AI</li>
-        <li>PNOZmulti 01AO</li>
-      </ul>
-    </div>
-<% end %>
